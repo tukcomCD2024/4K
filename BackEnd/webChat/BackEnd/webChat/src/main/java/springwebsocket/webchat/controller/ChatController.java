@@ -27,9 +27,4 @@ public class ChatController {
     public List<ChatRoom> findAllRooms() {
         return service.findAllRoom();
     }
-
-    @PostMapping("/delete")
-    public String deleteRoom(@RequestParam String roomId) {
-        return service.delete(roomId);
-    }
 }

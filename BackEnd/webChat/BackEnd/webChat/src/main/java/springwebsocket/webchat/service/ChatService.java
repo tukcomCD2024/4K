@@ -48,11 +48,6 @@ public class ChatService {
         return room;
     }
 
-    public String delete(String roomId) {
-        chatRooms.remove(roomId);
-        return "OK";
-    }
-
     public <T> void sendMessage(WebSocketSession session, T message) {
         try {
             session.sendMessage(new TextMessage(mapper.writeValueAsString(message)));
