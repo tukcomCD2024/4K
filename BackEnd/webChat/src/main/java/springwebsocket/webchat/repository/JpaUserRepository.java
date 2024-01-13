@@ -42,6 +42,9 @@ public class JpaUserRepository implements UserRepository{
 
     @Override
     public void delete(Long id) {
-        em.remove(id);
+        User user = em.find(User.class,id);
+        if (user != null) {
+            em.remove(user);
+        }
     }
 }
