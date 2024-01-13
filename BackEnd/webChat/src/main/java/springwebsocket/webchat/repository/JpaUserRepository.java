@@ -31,7 +31,7 @@ public class JpaUserRepository implements UserRepository{
         User findUser = em.find(User.class, userId);
         findUser.setEmail(updateParam.getEmail());
         findUser.setPassword(updateParam.getPassword());
-        findUser.setSender(updateParam.getName());
+        findUser.setName(updateParam.getName());
     }
 
     @Override
