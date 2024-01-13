@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import springwebsocket.webchat.dao.User;
+import springwebsocket.webchat.dto.UserUpdateDto;
+
+import static org.assertj.core.api.Assertions.*;
 
 
 @Slf4j
@@ -27,7 +30,25 @@ class JpaUserRepositoryTest {
 
         //then
         User findUser = userRepository.findById(user.getId()).get();
-        Assertions.assertThat(findUser).isEqualTo(saveUser);
+        assertThat(findUser).isEqualTo(saveUser);
+    }
+
+    @Test
+    void updateUser() {
+        //given
+        User user = new User("user1@naver.com", "1234", "user1");
+        User saveUser = userRepository.save(user);
+        Long userId = saveUser.getId();
+
+        //when
+        UserUpdateDto updateParam = new UserUpdateDto("user2@naver.com", "1234", "user2");
+        userRepository.update(userId, updateParam);
+
+        //then
+        User findUser = userRepository.findById(userId).get();
+        assertThat(findUser.getEmail()).isEqualTo(updateParam.getEmail());
+        assertThat(findUser.getPassword()).isEqualTo(updateParam.getPassword());
+        assertThat(findUser.getName()).isEqualTo(updateParam.getName());
     }
 
 }
