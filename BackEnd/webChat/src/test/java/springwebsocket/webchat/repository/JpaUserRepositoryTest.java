@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import springwebsocket.webchat.dao.User;
 import springwebsocket.webchat.dto.UserUpdateDto;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.*;
 
 
@@ -49,6 +51,21 @@ class JpaUserRepositoryTest {
         assertThat(findUser.getEmail()).isEqualTo(updateParam.getEmail());
         assertThat(findUser.getPassword()).isEqualTo(updateParam.getPassword());
         assertThat(findUser.getName()).isEqualTo(updateParam.getName());
+
     }
 
+    @Test
+    void delete() {
+        //given
+        User user = new User("user1@naver.com", "1234", "user1");
+        User saveUser = userRepository.save(user);
+        Long userId = saveUser.getId();
+
+        //when
+        userRepository.delete(userId);
+
+        //then
+        assertThat(userRepository.findById(userId)).isEmpty();
+
+    }
 }
