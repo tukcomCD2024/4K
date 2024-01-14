@@ -1,0 +1,81 @@
+import pandas as pd
+import os
+import json
+
+folder_path = [
+    r'C:\Users\edcrf\OneDrive\바탕 화면\경상도 1인 TR\TL_02. 경상도_01. 1인발화 따라말하기',
+    r'C:\Users\edcrf\OneDrive\바탕 화면\경상도 질문에 답 TR\TL_02. 경상도_02. 1인발화 질문에답하기',
+    r'C:\Users\edcrf\OneDrive\바탕 화면\경상도 2인 TR\TL_02. 경상도_03. 2인발화'    
+]
+
+file_content = []
+
+for path  in folder_path:
+    # print(f'현재 작업 중인 경로: {path}')
+    
+    file_list = os.listdir(path)
+
+    for file_name in file_list:
+        file_path = os.path.join(path, file_name)
+
+        try:
+            with open(file_path, "r", encoding="utf-8") as file:
+                content = file.read()
+                json_content = json.loads(content)
+                file_content.append(json_content)
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON in file {file_path}: {e}")
+
+dialect_list = []
+
+for i in range(0, len(file_content)):
+    dialect_list.append(file_content[i]['transcription']['segments'])
+
+result_segments = []
+
+for dialect_segment in dialect_list:
+  for segment in dialect_segment:
+    try:
+        if 'standard' in segment and segment['standard'] and segment['dialect'] and segment['standard'] != segment['dialect']:
+            result_segments.append(segment)
+    except KeyError:
+        print(f"'standard' key not found in segment of file {file_path}")
+
+dia = []
+pro = []
+sta = []
+
+for segment in result_segments:
+  dia.append(segment.get('dialect', ''))
+  pro.append(segment.get('pronunciation', ''))
+  sta.append(segment.get('standard', ''))
+  
+sentence_list = []
+
+for i in range(0, len(file_content)):
+    sentence_list.extend(file_content[i]['transcription']['sentences'])
+# extend 함수는 리스트에 다른 리스트의 모든 요소를 추가
+# 이렇게 하면 sentence_list는 더 이상 리스트의 리스트가 아니라 하나의 리스트로 구성
+
+di = []
+pr = []
+st = []
+
+for sentence_segment in sentence_list:
+    di.append(sentence_segment.get('dialect', ''))
+    pr.append(sentence_segment.get('pronunciation', ''))
+    st.append(sentence_segment.get('standard', ''))
+
+## data 전처리해서 방언-표준어 문장과 단어들을 csv 파일로 저장
+
+# 단어
+word_data = {'Dialect': dia, 'Pronunciation': pro, 'Standard': sta}
+word_df = pd.DataFrame(word_data)
+
+# 문장
+sentence_data = {'Dialect': di, 'Pronunciation': pr, 'Standard': st}
+sentence_df = pd.DataFrame(sentence_data)
+
+# csv 파일 저장
+word_df.to_csv(r'C:\Users\edcrf\word_data.csv', index=False)
+sentence_df.to_csv(r'C:\Users\edcrf\sentence_data.csv', index=False)
