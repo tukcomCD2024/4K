@@ -1,12 +1,12 @@
 package springwebsocket.webchat.repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import springwebsocket.webchat.dao.User;
 import springwebsocket.webchat.dto.UserUpdateDto;
 
+import javax.persistence.EntityManager;
 import java.util.Optional;
 
 @Transactional  // Jpa에서 데이터의 변경이 있을 경우 Transactional 을 써야함

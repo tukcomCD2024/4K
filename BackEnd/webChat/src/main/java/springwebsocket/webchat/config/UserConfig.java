@@ -1,12 +1,13 @@
 package springwebsocket.webchat.config;
 
-import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springwebsocket.webchat.repository.JpaUserRepository;
 import springwebsocket.webchat.repository.UserRepository;
 import springwebsocket.webchat.service.UserService;
 import springwebsocket.webchat.service.UserServiceV1;
+
+import javax.persistence.EntityManager;
 
 @Configuration
 public class UserConfig {
