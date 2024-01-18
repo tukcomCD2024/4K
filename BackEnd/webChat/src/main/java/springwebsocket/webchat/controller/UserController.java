@@ -34,7 +34,7 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PostMapping("delete")
+    @PostMapping("/delete")
     public void delete(Long id) {
         userService.delete(id);
     }
