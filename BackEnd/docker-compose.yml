@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  database:
+    container_name: mysql_db
+    image: mysql
+    environment:
+      MYSQL_DATABASE: JPA
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3305:3306"
+    command: ["--character-set-server=utf8mb4","--collation-server=utf8mb4_unicode_ci"]
+
+    networks:
+      - my_network
+
+  application:
+    container_name: docker-compose-test
+    restart: on-failure
+    image: kangjiseok/example:latest
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/JPA?characterEncoding=UTF-8&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "1234"
+    depends_on:
+      - database
+    networks:
+      - my_network
+
+networks:
+  my_network:
