@@ -9,7 +9,7 @@ services:
       MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: 1234
     ports:
-      - "3305:3306"
+      - "3306:3306"
     command: ["--character-set-server=utf8mb4","--collation-server=utf8mb4_unicode_ci"]
 
     networks:
@@ -18,7 +18,7 @@ services:
   application:
     container_name: docker-compose-test
     restart: on-failure
-    image: kangjiseok/example:latest
+    image: kangjiseok/springboot-webchat:latest
     ports:
       - "8080:8080"
     environment:
