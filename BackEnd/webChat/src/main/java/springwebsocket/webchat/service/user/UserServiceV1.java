@@ -1,4 +1,4 @@
-package springwebsocket.webchat.service;
+package springwebsocket.webchat.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

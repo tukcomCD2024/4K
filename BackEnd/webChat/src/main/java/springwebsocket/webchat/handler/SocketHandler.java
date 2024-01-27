@@ -8,6 +8,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+//webRTC 예제
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 

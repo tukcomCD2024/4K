@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import springwebsocket.webchat.dto.ChatRoom;
-import springwebsocket.webchat.service.ChatService;
+import springwebsocket.webchat.service.chat.ChatService;
 
 import java.util.List;
 

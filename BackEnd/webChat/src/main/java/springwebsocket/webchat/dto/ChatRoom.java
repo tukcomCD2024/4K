@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.socket.WebSocketSession;
 import springwebsocket.webchat.dao.ChatDAO;
-import springwebsocket.webchat.service.ChatService;
+import springwebsocket.webchat.service.chat.ChatService;
 
 import java.util.HashSet;
 import java.util.Set;

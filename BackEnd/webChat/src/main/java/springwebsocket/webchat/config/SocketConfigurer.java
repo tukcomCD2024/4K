@@ -7,6 +7,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 import springwebsocket.webchat.handler.SocketHandler;
 
 
+// webRTC 예제 config
 @Configuration
 @EnableWebSocket
 public class SocketConfigurer implements WebSocketConfigurer {
