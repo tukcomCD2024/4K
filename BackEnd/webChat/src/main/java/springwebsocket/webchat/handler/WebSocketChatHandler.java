@@ -9,10 +9,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import springwebsocket.webchat.dao.ChatDAO;
 import springwebsocket.webchat.dto.ChatRoom;
-import springwebsocket.webchat.service.ChatService;
-
-import java.util.ArrayList;
-import java.util.List;
+import springwebsocket.webchat.service.chat.ChatService;
 
 @Slf4j
 @Component

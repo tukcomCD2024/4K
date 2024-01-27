@@ -1,4 +1,4 @@
-package springwebsocket.webchat.service;
+package springwebsocket.webchat.service.chat;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

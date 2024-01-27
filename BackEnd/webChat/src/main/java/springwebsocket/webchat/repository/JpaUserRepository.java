@@ -1,6 +1,8 @@
 package springwebsocket.webchat.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Query;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,4 +49,26 @@ public class JpaUserRepository implements UserRepository{
             em.remove(user);
         }
     }
+
+    @Override
+    public Optional<User> findByLoginEmail(String loginEmail) {
+        log.info("findByLoginEmail 왔음");
+
+        // JPQL을 사용하여 이메일 주소로 사용자를 찾음
+        String jpql = "SELECT u FROM User u WHERE u.email = :loginEmail";
+        Query query = em.createQuery(jpql, User.class);
+        query.setParameter("loginEmail", loginEmail);
+
+        try {
+            User user = (User) query.getSingleResult();
+            log.info("user = {}", user.getClass());
+            return Optional.ofNullable(user);
+        } catch (NoResultException e) {
+            // 결과가 없을 경우 NoResultException이 발생하므로 이를 잡아서 빈 Optional 반환
+            return Optional.empty();
+        }
+    }
+
+
+
 }

@@ -1,4 +1,4 @@
-package springwebsocket.webchat.service;
+package springwebsocket.webchat.service.user;
 
 import springwebsocket.webchat.dao.User;
 import springwebsocket.webchat.dto.UserUpdateDto;

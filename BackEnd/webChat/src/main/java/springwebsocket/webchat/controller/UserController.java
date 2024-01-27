@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springwebsocket.webchat.dao.User;
 import springwebsocket.webchat.dto.UserUpdateDto;
-import springwebsocket.webchat.service.UserServiceV1;
+import springwebsocket.webchat.service.login.loginService;
+import springwebsocket.webchat.service.user.UserServiceV1;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserServiceV1 userService;
+    private final loginService loginService;
 
     @PostMapping("/save")
     public User save(User user) {
@@ -37,5 +39,10 @@ public class UserController {
     @PostMapping("/delete")
     public void delete(Long id) {
         userService.delete(id);
+    }
+
+    @PostMapping("/login")
+    public String login(String loginEmail, String password) {
+        return loginService.login(loginEmail, password);
     }
 }
