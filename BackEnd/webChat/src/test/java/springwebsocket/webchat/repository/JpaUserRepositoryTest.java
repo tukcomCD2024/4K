@@ -68,4 +68,29 @@ class JpaUserRepositoryTest {
         assertThat(userRepository.findById(userId)).isEmpty();
 
     }
+
+    // 이메일 존재하는 경우
+    @Test
+    void findByLoginEmail_WhenUserExists_ShouldReturnUser() {
+        // given
+        User user = new User("test@example.com", "password", "Test User");
+        userRepository.save(user);
+
+        // when
+        Optional<User> result = userRepository.findByLoginEmail("test@example.com");
+
+        // then
+        assertThat(result).isPresent();
+        assertThat(result.get().getEmail()).isEqualTo("test@example.com");
+    }
+
+    // 이메일 존재하지 않은경우
+    @Test
+    void findByLoginEmail_WhenUserDoesNotExist_ShouldReturnEmptyOptional() {
+        // when
+        Optional<User> result = userRepository.findByLoginEmail("nonexistent@example.com");
+
+        // then
+        assertThat(result).isEmpty();
+    }
 }
