@@ -1,0 +1,27 @@
+package springwebsocket.webchat.repository;
+
+import springwebsocket.webchat.entity.Friendship;
+
+import java.util.List;
+
+public interface FriendshipRepository {
+
+    // 친구 요청 보내기
+    void sendFriendRequest(Long userId, Long friendId);
+
+    // 친구 요청 수락
+    void acceptFriendRequest(Long userId, Long friendId);
+
+    // 친구 요청 거절
+    void rejectFriendRequest(Long userId, Long friendId);
+
+    // 나에게 온 친구 요청 목록 조회
+    List<Friendship> getIncomingFriendRequests(Long userId);
+
+    // 내가 보낸 친구 요청 목록 조회
+    List<Friendship> getOutgoingFriendRequests(Long userId);
+
+    // 서로 친구인 친구 목록 조회
+    List<Friendship> getMutualFriends(Long userId);
+
+}
