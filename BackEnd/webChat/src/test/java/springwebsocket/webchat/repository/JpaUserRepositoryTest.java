@@ -18,7 +18,7 @@ class JpaUserRepositoryTest {
 
 
     @Autowired
-    UserRepository userRepository;
+    MemberRepository userRepository;
 
     @Test
     void save() {

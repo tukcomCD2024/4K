@@ -13,7 +13,7 @@ public class Friendship {
         ACCEPTED,   // 친구 요청 수락됨
         REJECTED,   // 친구 요청 거절됨
         FRIENDS,    // 서로 친구
-        // 추가적인 상태들을 필요에 따라 정의할 수 있음
+        RECEIVED    // 친구 요청 왔음
     }
 
 

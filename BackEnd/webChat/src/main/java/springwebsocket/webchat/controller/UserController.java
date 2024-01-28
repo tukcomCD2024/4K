@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.dto.UserUpdateDto;
 import springwebsocket.webchat.service.login.loginService;
-import springwebsocket.webchat.service.user.UserServiceV1;
+import springwebsocket.webchat.service.user.MemberServiceV1;
 
 import java.util.Optional;
 
@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserServiceV1 userService;
+    private final MemberServiceV1 userService;
     private final loginService loginService;
 
     @PostMapping("/save")
