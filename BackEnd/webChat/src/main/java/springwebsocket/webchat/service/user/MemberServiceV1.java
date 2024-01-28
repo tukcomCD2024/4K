@@ -4,33 +4,33 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.dto.UserUpdateDto;
-import springwebsocket.webchat.repository.UserRepository;
+import springwebsocket.webchat.repository.MemberRepository;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceV1 implements UserService{
+public class MemberServiceV1 implements MemberService {
 
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public Member save(Member user) {
-        return userRepository.save(user);
+        return memberRepository.save(user);
     }
 
     @Override
     public void update(Long userId, UserUpdateDto updateParam) {
-        userRepository.update(userId, updateParam);
+        memberRepository.update(userId, updateParam);
     }
 
     @Override
     public Optional<Member> findById(Long id) {
-        return userRepository.findById(id);
+        return memberRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
-        userRepository.delete(id);
+        memberRepository.delete(id);
     }
 }

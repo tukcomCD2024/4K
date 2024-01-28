@@ -3,14 +3,15 @@ package springwebsocket.webchat.service.friend;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import springwebsocket.webchat.entity.Friendship;
-import springwebsocket.webchat.entity.Member;
+import springwebsocket.webchat.repository.FriendshipRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class FriendshipServiceV1 implements FriendshipService{
+
+    private final FriendshipRepository friendshipRepository;
 
 
     @Override

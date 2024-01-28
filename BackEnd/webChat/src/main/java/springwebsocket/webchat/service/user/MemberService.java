@@ -5,7 +5,7 @@ import springwebsocket.webchat.dto.UserUpdateDto;
 
 import java.util.Optional;
 
-public interface UserService {
+public interface MemberService {
 
     Member save(Member user);
 

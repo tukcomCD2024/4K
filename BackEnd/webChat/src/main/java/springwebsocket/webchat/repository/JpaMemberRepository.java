@@ -14,11 +14,11 @@ import java.util.Optional;
 @Transactional  // Jpa에서 데이터의 변경이 있을 경우 Transactional 을 써야함
 @Repository
 @Slf4j
-public class JpaUserRepository implements UserRepository{
+public class JpaMemberRepository implements MemberRepository {
 
     private EntityManager em;
 
-    public JpaUserRepository(EntityManager em) {
+    public JpaMemberRepository(EntityManager em) {
         this.em = em;
     }
 
