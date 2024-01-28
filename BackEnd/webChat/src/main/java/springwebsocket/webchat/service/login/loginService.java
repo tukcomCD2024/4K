@@ -17,10 +17,10 @@ public class loginService {
                 .orElse(null);
 
         if (user == null) {
-            return "로그인 실패";
+            return "fail";
         }
         else{
-            return "로그인 성공";
+            return "success";
         }
     }
 
