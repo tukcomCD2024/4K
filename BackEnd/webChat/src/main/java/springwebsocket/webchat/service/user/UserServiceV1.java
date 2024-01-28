@@ -2,7 +2,7 @@ package springwebsocket.webchat.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import springwebsocket.webchat.dao.User;
+import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.dto.UserUpdateDto;
 import springwebsocket.webchat.repository.UserRepository;
 
@@ -15,7 +15,7 @@ public class UserServiceV1 implements UserService{
     private final UserRepository userRepository;
 
     @Override
-    public User save(User user) {
+    public Member save(Member user) {
         return userRepository.save(user);
     }
 
@@ -25,7 +25,7 @@ public class UserServiceV1 implements UserService{
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<Member> findById(Long id) {
         return userRepository.findById(id);
     }
 

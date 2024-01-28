@@ -1,4 +1,4 @@
-package springwebsocket.webchat.dao;
+package springwebsocket.webchat.entity;
 
 import lombok.Builder;
 import lombok.Data;

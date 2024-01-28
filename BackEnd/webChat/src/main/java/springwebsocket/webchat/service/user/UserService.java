@@ -1,17 +1,17 @@
 package springwebsocket.webchat.service.user;
 
-import springwebsocket.webchat.dao.User;
+import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.dto.UserUpdateDto;
 
 import java.util.Optional;
 
 public interface UserService {
 
-    User save(User user);
+    Member save(Member user);
 
     void update(Long userId, UserUpdateDto updateParam);
 
-    Optional<User> findById(Long id);
+    Optional<Member> findById(Long id);
 
     void delete(Long id);
 

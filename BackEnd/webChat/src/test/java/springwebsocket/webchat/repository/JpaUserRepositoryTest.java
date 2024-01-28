@@ -1,11 +1,10 @@
 package springwebsocket.webchat.repository;
 
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import springwebsocket.webchat.dao.User;
+import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.dto.UserUpdateDto;
 
 import java.util.Optional;
@@ -24,22 +23,22 @@ class JpaUserRepositoryTest {
     @Test
     void save() {
         //given
-        User user = new User("asdf@naver.com", "1234", "강지석");
+        Member user = new Member("asdf@naver.com", "1234", "강지석");
 
         //when
-        User saveUser = userRepository.save(user);
+        Member saveUser = userRepository.save(user);
 
 
         //then
-        User findUser = userRepository.findById(user.getId()).get();
+        Member findUser = userRepository.findById(user.getId()).get();
         assertThat(findUser).isEqualTo(saveUser);
     }
 
     @Test
     void updateUser() {
         //given
-        User user = new User("user1@naver.com", "1234", "user1");
-        User saveUser = userRepository.save(user);
+        Member user = new Member("user1@naver.com", "1234", "user1");
+        Member saveUser = userRepository.save(user);
         Long userId = saveUser.getId();
 
         //when
@@ -47,7 +46,7 @@ class JpaUserRepositoryTest {
         userRepository.update(userId, updateParam);
 
         //then
-        User findUser = userRepository.findById(userId).get();
+        Member findUser = userRepository.findById(userId).get();
         assertThat(findUser.getEmail()).isEqualTo(updateParam.getEmail());
         assertThat(findUser.getPassword()).isEqualTo(updateParam.getPassword());
         assertThat(findUser.getName()).isEqualTo(updateParam.getName());
@@ -57,8 +56,8 @@ class JpaUserRepositoryTest {
     @Test
     void delete() {
         //given
-        User user = new User("user1@naver.com", "1234", "user1");
-        User saveUser = userRepository.save(user);
+        Member user = new Member("user1@naver.com", "1234", "user1");
+        Member saveUser = userRepository.save(user);
         Long userId = saveUser.getId();
 
         //when
@@ -73,11 +72,11 @@ class JpaUserRepositoryTest {
     @Test
     void findByLoginEmail_WhenUserExists_ShouldReturnUser() {
         // given
-        User user = new User("test@example.com", "password", "Test User");
+        Member user = new Member("test@example.com", "password", "Test User");
         userRepository.save(user);
 
         // when
-        Optional<User> result = userRepository.findByLoginEmail("test@example.com");
+        Optional<Member> result = userRepository.findByLoginEmail("test@example.com");
 
         // then
         assertThat(result).isPresent();
@@ -88,7 +87,7 @@ class JpaUserRepositoryTest {
     @Test
     void findByLoginEmail_WhenUserDoesNotExist_ShouldReturnEmptyOptional() {
         // when
-        Optional<User> result = userRepository.findByLoginEmail("nonexistent@example.com");
+        Optional<Member> result = userRepository.findByLoginEmail("nonexistent@example.com");
 
         // then
         assertThat(result).isEmpty();

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
-import springwebsocket.webchat.dao.ChatDAO;
+import springwebsocket.webchat.entity.ChatDAO;
 import springwebsocket.webchat.dto.ChatRoom;
 import springwebsocket.webchat.service.chat.ChatService;
 
