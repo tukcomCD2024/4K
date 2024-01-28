@@ -6,7 +6,7 @@ import jakarta.persistence.Query;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import springwebsocket.webchat.dao.User;
+import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.dto.UserUpdateDto;
 
 import java.util.Optional;
@@ -23,44 +23,44 @@ public class JpaUserRepository implements UserRepository{
     }
 
     @Override
-    public User save(User user) {
+    public Member save(Member user) {
         em.persist(user);
         return user;
     }
 
     @Override
     public void update(Long userId, UserUpdateDto updateParam) {
-        User findUser = em.find(User.class, userId);
+        Member findUser = em.find(Member.class, userId);
         findUser.setEmail(updateParam.getEmail());
         findUser.setPassword(updateParam.getPassword());
         findUser.setName(updateParam.getName());
     }
 
     @Override
-    public Optional<User> findById(Long id) {
-        User user = em.find(User.class, id);
+    public Optional<Member> findById(Long id) {
+        Member user = em.find(Member.class, id);
         return Optional.ofNullable(user);
     }
 
     @Override
     public void delete(Long id) {
-        User user = em.find(User.class,id);
+        Member user = em.find(Member.class,id);
         if (user != null) {
             em.remove(user);
         }
     }
 
     @Override
-    public Optional<User> findByLoginEmail(String loginEmail) {
+    public Optional<Member> findByLoginEmail(String loginEmail) {
         log.info("findByLoginEmail 왔음");
 
         // JPQL을 사용하여 이메일 주소로 사용자를 찾음
-        String jpql = "SELECT u FROM User u WHERE u.email = :loginEmail";
-        Query query = em.createQuery(jpql, User.class);
+        String jpql = "SELECT u FROM Member u WHERE u.email = :loginEmail";
+        Query query = em.createQuery(jpql, Member.class);
         query.setParameter("loginEmail", loginEmail);
 
         try {
-            User user = (User) query.getSingleResult();
+            Member user = (Member) query.getSingleResult();
             log.info("user = {}", user.getClass());
             return Optional.ofNullable(user);
         } catch (NoResultException e) {

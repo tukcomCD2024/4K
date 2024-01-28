@@ -2,7 +2,7 @@ package springwebsocket.webchat.service.login;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import springwebsocket.webchat.dao.User;
+import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.repository.UserRepository;
 
 @Service
@@ -12,7 +12,7 @@ public class loginService {
     private final UserRepository repository;
 
     public String login(String loginEmail, String password) {
-        User user = repository.findByLoginEmail(loginEmail)
+        Member user = repository.findByLoginEmail(loginEmail)
                 .filter(m -> m.getPassword().equals(password))
                 .orElse(null);
 

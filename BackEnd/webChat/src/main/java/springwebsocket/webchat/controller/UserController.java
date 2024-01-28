@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import springwebsocket.webchat.dao.User;
+import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.dto.UserUpdateDto;
 import springwebsocket.webchat.service.login.loginService;
 import springwebsocket.webchat.service.user.UserServiceV1;
@@ -22,7 +22,7 @@ public class UserController {
     private final loginService loginService;
 
     @PostMapping("/save")
-    public User save(User user) {
+    public Member save(Member user) {
         return userService.save(user);
     }
 
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/find")
-    public Optional<User> findById(Long id) {
+    public Optional<Member> findById(Long id) {
         return userService.findById(id);
     }
 

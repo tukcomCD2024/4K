@@ -1,4 +1,4 @@
-package springwebsocket.webchat.dao;
+package springwebsocket.webchat.entity;
 
 
 import jakarta.persistence.Entity;
@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class User {
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,10 @@ public class User {
     private String password;
     private String name;
 
-    public User() {
+    public Member() {
     }
 
-    public User(String email, String password, String name) {
+    public Member(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
