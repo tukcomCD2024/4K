@@ -61,7 +61,7 @@ public class JpaFriendshipRepository implements FriendshipRepository {
             // Friendship 엔터티의 상태를 FRIENDS로 update.
             friendship.setStatus(Friendship.FriendshipStatus.FRIENDS);
             // 업데이트된 Friendship 엔터티를 저장.
-            friendshipRepository.save(friendship);
+//            friendshipRepository.save(friendship);
         });
 
     }
