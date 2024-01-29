@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">front-end_android</string>
+
+    <string name="sign_in">
+        Sign in
+    </string>
+
+    <string name="if_you_don_">
+        If you don\'t have an account register
+    </string>
+
+    <string name="you_can_sig">
+        You can
+    </string>
+
+    <string name="sign_up">
+        Sign up here !
+    </string>
+
+    <string name="header_labe">
+        E-mail
+    </string>
+
+    <string name="place_holde">
+        Enter your email
+    </string>
+
+    <string name="header_labe2">
+        Password
+    </string>
+
+    <string name="place_holde2">
+        Enter your password
+    </string>
+
+    <string name="forgot_pass">
+        Forgot Password?
+    </string>
+
+    <string name="login">
+        Sign in
+    </string>
+
+    <string name="or_continue">
+        or continue with
+    </string>
+
+
+
+
+</resources>
