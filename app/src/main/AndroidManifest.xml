@@ -15,14 +15,15 @@
         <activity
             android:name=".SignUp"
             android:exported="false" />
-
+        <!--
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/input" />
+        -->
 
         <activity
             android:name=".Login"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
