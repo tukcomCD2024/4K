@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Frontend_android"
         tools:targetApi="31">
+        <activity
+            android:name=".SignUp"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/input" />
