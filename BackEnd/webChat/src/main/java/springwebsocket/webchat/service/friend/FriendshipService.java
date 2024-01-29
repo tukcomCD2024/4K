@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface FriendshipService {
 
     // 친구 요청 보내기
-    void sendFriendRequest(Long userId, Long friendId);
+    void sendFriendRequest(String userEmail, String friendEmail);
 
     // 친구 요청 수락
     void acceptFriendRequest(Long userId, Long friendId);
