@@ -129,4 +129,45 @@ class JpaFriendshipRepositoryTest {
                 .extracting(Member::getId)
                 .containsExactlyInAnyOrder(receiver1.getId(),receiver2.getId());
     }
+
+    @Test
+    @Transactional
+    void findByUserIdAndStatusOrFriendIdAndStatus() {
+        // given
+        Member sender = new Member("sender@naver.com", "1234", "sender");
+        Member receiver1 = new Member("receiver1@naver.com", "1234", "receiver1");
+        Member receiver2 = new Member("receiver2@naver.com", "1234", "receiver2");
+
+        // 멤버 save
+        Member senderMember = memberRepository.save(sender);
+        Member receiverMember1 = memberRepository.save(receiver1);
+        Member receiverMember2 = memberRepository.save(receiver2);
+
+        //친구 요청
+        friendshipRepository.sendFriendRequest(sender.getId(), receiver1.getEmail());
+        friendshipRepository.sendFriendRequest(receiver2.getId(), sender.getEmail());
+        //친구 수락
+        friendshipRepository.acceptFriendRequestById(sender.getId(), receiver1.getEmail());
+        friendshipRepository.acceptFriendRequestById(receiver2.getId(), sender.getEmail());
+
+//        //둘 다 친구 확인
+//        Optional<Friendship> byUserIdAndFriendId = springDataJpaFriendshipRepository.findByUserIdAndFriendId(sender,receiver1);
+//
+//        log.info("byUserIdAndFriendId ={}",byUserIdAndFriendId.get().getStatus());
+
+        // when
+
+        List<Long> friendList = friendshipRepository.findByUserIdAndStatusOrFriendIdAndStatus(sender.getId());
+
+        // then
+        log.info("senderMember={}", senderMember.getId());
+        log.info("receiver1={}",receiverMember1.getId());
+        log.info("receiver2={}",receiverMember2.getId());
+        log.info("friendList[0] ={}",friendList.get(0));
+        log.info("friendList[1] ={}",friendList.get(1));
+
+        assertThat(friendList).hasSize(2);
+        assertThat(friendList)
+                .containsExactlyInAnyOrder(receiver1.getId(),receiver2.getId());
+    }
 }
