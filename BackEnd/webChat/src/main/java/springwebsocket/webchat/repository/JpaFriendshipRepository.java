@@ -74,8 +74,9 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public List<Friendship> findByFriendIdAndStatus(Long id) {
-        return friendshipRepository.findByFriendIdAndStatus(id, Friendship.FriendshipStatus.PENDING);
+    public List<Member> findByFriendIdAndStatus(Long id) {
+        Optional<Member> userMember = memberRepository.findById(id);
+        return friendshipRepository.findByFriendIdAndStatus(userMember.get(), Friendship.FriendshipStatus.PENDING);
     }
 
     @Override
