@@ -20,10 +20,7 @@ public interface FriendshipRepository{
     // 나에게 온 친구 요청 목록 조회
     List<Member> findByFriendIdAndStatus(Long id);
 
-    // 내가 보낸 친구 요청 목록 조회
-    Optional<Friendship> findByUserIdAndStatus(Long userId, Friendship.FriendshipStatus status);
-
     // 서로 친구인 친구 목록 조회
-    Optional<Friendship> findByUserIdAndStatusOrFriendIdAndStatus(Long userId, Friendship.FriendshipStatus status1, Long friendId, Friendship.FriendshipStatus status2);
+    List<Member> findByUserIdAndStatusOrFriendIdAndStatus(Long userId);
 
 }
