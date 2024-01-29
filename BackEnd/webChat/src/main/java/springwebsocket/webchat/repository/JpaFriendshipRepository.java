@@ -12,6 +12,8 @@ import springwebsocket.webchat.repository.springdata.SpringDataJpaMemberReposito
 import java.util.List;
 import java.util.Optional;
 
+import static springwebsocket.webchat.entity.Friendship.FriendshipStatus.FRIENDS;
+
 @Transactional
 @Repository
 @RequiredArgsConstructor
@@ -60,7 +62,7 @@ public class JpaFriendshipRepository implements FriendshipRepository {
 
         existingFriendship.ifPresent(friendship -> {
             // Friendship 엔터티의 상태를 FRIENDS로 update.
-            friendship.setStatus(Friendship.FriendshipStatus.FRIENDS);
+            friendship.setStatus(FRIENDS);
             // 업데이트된 Friendship 엔터티를 저장.
 //            friendshipRepository.save(friendship);
         });
@@ -80,12 +82,7 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public Optional<Friendship> findByUserIdAndStatus(Long userId, Friendship.FriendshipStatus status) {
-        return null;
-    }
-
-    @Override
-    public Optional<Friendship> findByUserIdAndStatusOrFriendIdAndStatus(Long userId, Friendship.FriendshipStatus status1, Long friendId, Friendship.FriendshipStatus status2) {
-        return null;
+    public List<Member> findByUserIdAndStatusOrFriendIdAndStatus(Long userId) {
+        return friendshipRepository.findByUserIdOrFriendIdAndStatus(userId, userId, FRIENDS);
     }
 }
