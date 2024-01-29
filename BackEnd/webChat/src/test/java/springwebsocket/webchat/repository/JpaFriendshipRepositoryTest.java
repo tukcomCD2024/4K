@@ -63,5 +63,6 @@ class JpaFriendshipRepositoryTest {
 
         //then
         assertThat(friendship).isNull();
+
     }
 }
