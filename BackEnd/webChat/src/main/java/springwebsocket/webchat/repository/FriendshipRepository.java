@@ -1,6 +1,7 @@
 package springwebsocket.webchat.repository;
 
 import springwebsocket.webchat.entity.Friendship;
+import springwebsocket.webchat.entity.Member;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,7 @@ public interface FriendshipRepository{
     void rejectFriendRequestById(Long id);
 
     // 나에게 온 친구 요청 목록 조회
-    List<Friendship> findByFriendIdAndStatus(Long id);
+    List<Member> findByFriendIdAndStatus(Long id);
 
     // 내가 보낸 친구 요청 목록 조회
     Optional<Friendship> findByUserIdAndStatus(Long userId, Friendship.FriendshipStatus status);
