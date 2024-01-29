@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface FriendshipRepository{
 
     // 친구 요청 보내기
-    Friendship sendFriendRequest(Long senderId, Long receiverId);
+    Friendship sendFriendRequest(String senderEmail, String receiverEmail);
 
     // 친구 요청 수락
     void acceptFriendRequestById(Long id);
@@ -16,7 +16,7 @@ public interface FriendshipRepository{
     // 친구 요청 거절
     void rejectFriendRequestById(Long id);
 
-    // 나에게 온 친구 요청 목록 조회
+    // 나에게 온 친구 요청  목록 조회
     Optional<Friendship> findByFriendIdAndStatus(Long userId, Friendship.FriendshipStatus status);
 
     // 내가 보낸 친구 요청 목록 조회
