@@ -1,11 +1,9 @@
 package springwebsocket.webchat.repository;
 
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.transaction.annotation.Transactional;
 import springwebsocket.webchat.entity.Friendship;
 import springwebsocket.webchat.entity.Member;
@@ -14,9 +12,6 @@ import springwebsocket.webchat.repository.springdata.SpringDataJpaFriendshipRepo
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static springwebsocket.webchat.entity.Friendship.FriendshipStatus.FRIENDS;
 import static springwebsocket.webchat.entity.Friendship.FriendshipStatus.PENDING;
 
 
@@ -45,7 +40,7 @@ class JpaFriendshipRepositoryTest {
         memberRepository.save(sender);
         memberRepository.save(receiver);
 
-        Friendship friendship = friendshipRepository.sendFriendRequest(sender.getEmail(), receiver.getEmail());
+        Friendship friendship = friendshipRepository.sendFriendRequest(sender.getId(), receiver.getEmail());
 
 
 
@@ -66,7 +61,7 @@ class JpaFriendshipRepositoryTest {
         // when
         memberRepository.save(sender);
 
-        Friendship friendship = friendshipRepository.sendFriendRequest(sender.getEmail(), receiver.getEmail());
+        Friendship friendship = friendshipRepository.sendFriendRequest(sender.getId(), receiver.getEmail());
 
         //then
         assertThat(friendship).isNull();
@@ -81,10 +76,10 @@ class JpaFriendshipRepositoryTest {
         Member receiver = new Member("receiver@naver.com", "1234", "receiver");
         memberRepository.save(sender);
         memberRepository.save(receiver);
-        Friendship friendship = friendshipRepository.sendFriendRequest(sender.getEmail(), receiver.getEmail());
+        Friendship friendship = friendshipRepository.sendFriendRequest(sender.getId(), receiver.getEmail());
 
         // when
-        friendshipRepository.acceptFriendRequestById(sender.getEmail(), receiver.getEmail());
+        friendshipRepository.acceptFriendRequestById(sender.getId(), receiver.getEmail());
 
         // then
         Optional<Friendship> byUserIdAndFriendId = springDataJpaFriendshipRepository.findByUserIdAndFriendId(sender,receiver);

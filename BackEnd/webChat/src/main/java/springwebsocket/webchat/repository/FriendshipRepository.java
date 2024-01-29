@@ -8,16 +8,16 @@ import java.util.Optional;
 public interface FriendshipRepository{
 
     // 친구 요청 보내기
-    Friendship sendFriendRequest(String senderEmail, String receiverEmail);
+    Friendship sendFriendRequest(Long senderId, String receiverEmail);
 
     // 친구 요청 수락
-    void acceptFriendRequestById(String senderEmail, String receiverEmail);
+    void acceptFriendRequestById(Long senderId, String receiverEmail);
 
     // 친구 요청 거절
     void rejectFriendRequestById(Long id);
 
-    // 나에게 온 친구 요청  목록 조회
-    Optional<Friendship> findByFriendIdAndStatus(Long userId, Friendship.FriendshipStatus status);
+    // 나에게 온 친구 요청 목록 조회
+    Optional<Friendship> findByFriendIdAndStatus(Long userId);
 
     // 내가 보낸 친구 요청 목록 조회
     Optional<Friendship> findByUserIdAndStatus(Long userId, Friendship.FriendshipStatus status);

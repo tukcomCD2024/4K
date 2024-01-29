@@ -11,7 +11,6 @@ public class Friendship {
     public enum FriendshipStatus {
         PENDING,    // 친구 요청
         ACCEPTED,   // 친구 요청 수락됨
-        REJECTED,   // 친구 요청 거절됨
         FRIENDS,    // 서로 친구
     }
 

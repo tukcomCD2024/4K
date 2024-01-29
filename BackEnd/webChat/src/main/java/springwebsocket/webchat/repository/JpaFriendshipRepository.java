@@ -21,9 +21,9 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     private final SpringDataJpaMemberRepository memberRepository;
 
     @Override
-    public Friendship sendFriendRequest(String senderEmail, String receiverEmail) {
+    public Friendship sendFriendRequest(Long senderId, String receiverEmail) {
 
-        Optional<Member> senderMember = memberRepository.findByEmail(senderEmail);
+        Optional<Member> senderMember = memberRepository.findById(senderId);
         Optional<Member> receiverMember = memberRepository.findByEmail(receiverEmail);
 
         if (receiverMember.isPresent()) {
@@ -45,9 +45,9 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public void acceptFriendRequestById(String senderEmail, String receiverEmail) {
+    public void acceptFriendRequestById(Long senderId, String receiverEmail) {
 
-        Optional<Member> senderMember = memberRepository.findByEmail(senderEmail);
+        Optional<Member> senderMember = memberRepository.findById(senderId);
         Optional<Member> receiverMember = memberRepository.findByEmail(receiverEmail);
 
 
@@ -73,7 +73,7 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public Optional<Friendship> findByFriendIdAndStatus(Long userId, Friendship.FriendshipStatus status) {
+    public Optional<Friendship> findByFriendIdAndStatus(Long userId) {
         return null;
     }
 
