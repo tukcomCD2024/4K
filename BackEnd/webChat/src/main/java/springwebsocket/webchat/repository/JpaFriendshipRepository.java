@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class JpaFriendshipRepository implements FriendshipRepository{
+public class JpaFriendshipRepository implements FriendshipRepository {
 
     private final SpringDataJpaFriendshipRepository friendshipRepository;
     private final SpringDataJpaMemberRepository memberRepository;
@@ -38,17 +38,34 @@ public class JpaFriendshipRepository implements FriendshipRepository{
             friendshipRepository.save(friendship);
 
             return friendship;
-        }
-        else {
+        } else {
             return null;
         }
 
     }
 
     @Override
-    public void acceptFriendRequestById(Long id) {
+    public void acceptFriendRequestById(String senderEmail, String receiverEmail) {
+
+        Optional<Member> senderMember = memberRepository.findByEmail(senderEmail);
+        Optional<Member> receiverMember = memberRepository.findByEmail(receiverEmail);
+
+
+        Member sender = senderMember.get();
+        Member receiver = receiverMember.get();
+
+        // 기존의 Friendship 엔터티를 찾는다.
+        Optional<Friendship> existingFriendship = friendshipRepository.findByUserIdAndFriendId(sender, receiver);
+
+        existingFriendship.ifPresent(friendship -> {
+            // Friendship 엔터티의 상태를 FRIENDS로 update.
+            friendship.setStatus(Friendship.FriendshipStatus.FRIENDS);
+            // 업데이트된 Friendship 엔터티를 저장.
+            friendshipRepository.save(friendship);
+        });
 
     }
+
 
     @Override
     public void rejectFriendRequestById(Long id) {

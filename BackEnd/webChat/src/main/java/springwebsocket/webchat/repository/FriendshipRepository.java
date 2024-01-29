@@ -11,7 +11,7 @@ public interface FriendshipRepository{
     Friendship sendFriendRequest(String senderEmail, String receiverEmail);
 
     // 친구 요청 수락
-    void acceptFriendRequestById(Long id);
+    void acceptFriendRequestById(String senderEmail, String receiverEmail);
 
     // 친구 요청 거절
     void rejectFriendRequestById(Long id);
