@@ -9,6 +9,8 @@ import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.repository.springdata.SpringDataJpaFriendshipRepository;
 import springwebsocket.webchat.repository.springdata.SpringDataJpaMemberRepository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,7 +84,15 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public List<Member> findByUserIdAndStatusOrFriendIdAndStatus(Long userId) {
-        return friendshipRepository.findByUserIdOrFriendIdAndStatus(userId, userId, FRIENDS);
+    public List<Long> findByUserIdAndStatusOrFriendIdAndStatus(Long userId) {
+
+        List<Long> friendList = new ArrayList<>();
+
+        Optional<Member> userMember = memberRepository.findById(userId);
+        friendList.addAll(friendshipRepository.findFriendshipByUserIdAndStatus(userMember.get(), FRIENDS));
+        friendList.addAll(friendshipRepository.findFriendshipsByFriendIdAndStatus(userMember.get(), FRIENDS));
+
+        return friendList;
+
     }
 }
