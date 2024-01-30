@@ -6,75 +6,66 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
+    let sampleLabel = UILabel()
+    let Text1 = UILabel()
+    let Text2 = UILabel()
+    let email = UILabel()
+    let input_email = UITextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        let sampleLabel: UILabel = {
-            let label = UILabel()
-            label.text = "스토리보드 없이 구현한 ViewController"
-            label.font = .preferredFont(forTextStyle: .title3)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        let Text1: UILabel = {
-            let label = UILabel()
-            label.text = "Sign in"
-            label.font = .preferredFont(forTextStyle: .title1)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        let Text2: UILabel = {
-            let label = UILabel()
-            label.text = "If you don't have an account register \nYou can Sign up here!"
-            label.font = .preferredFont(forTextStyle: .body)
-            label.numberOfLines = 2
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        let email: UILabel = {
-            let label = UILabel()
-            label.text = "E-mail"
-            label.font = .preferredFont(forTextStyle: .body)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        let input_email: UITextField = {
-            let input = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 0))
-            input.text = "ddd"
-            input.borderStyle = .roundedRect
-            input.backgroundColor = .black
-            return input
-        }()
-        
+        setUpValue()
+        setUpView()
+        setConstraints()
+    }
+    func setUpValue() {
         view.backgroundColor = .white
+        
+        sampleLabel.text = "스토리보드 없이 구현한 ViewController"
+        sampleLabel.font = .preferredFont(forTextStyle: .title3)
+        
+        Text1.text = "Sign in"
+        Text1.font = .preferredFont(forTextStyle: .title1)
+        
+        Text2.text = "If you don't have an account register \nYou can Sign up here!"
+        Text2.font = .preferredFont(forTextStyle: .body)
+        Text2.numberOfLines = 2
+        
+        email.text = "E-mail"
+        email.font = .preferredFont(forTextStyle: .body)
+    }
+    
+    func setUpView() {
         view.addSubview(sampleLabel)
         view.addSubview(Text1)
         view.addSubview(Text2)
         view.addSubview(email)
         view.addSubview(input_email)
-        
-        sampleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        sampleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        Text1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-        Text1.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
-        
-        Text2.leadingAnchor.constraint(equalTo: Text1.leadingAnchor).isActive = true
-        Text2.topAnchor.constraint(equalTo: Text1.bottomAnchor, constant: 10).isActive = true
-        
-        email.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        email.topAnchor.constraint(equalTo: Text2.bottomAnchor, constant: 100).isActive = true
-        
     }
     
-
+    func setConstraints(){
+        sampleLabel.snp.makeConstraints{make in make.center.equalToSuperview()}
+        
+        Text1.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.leading.equalToSuperview().offset(30)
+        }
+        
+        Text2.snp.makeConstraints { make in
+            make.top.equalTo(Text1.snp.bottom)
+            make.leading.equalTo(Text1.snp.leading)
+        }
+        
+        email.snp.makeConstraints { make in
+            make.top.equalTo(Text2.snp.bottom).offset(100)
+            make.leading.equalTo(Text1.snp.leading)
+        }
+    }
 }
 
 // canvas 이용하기
