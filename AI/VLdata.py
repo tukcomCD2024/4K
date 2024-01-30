@@ -41,24 +41,31 @@ for i in range(0, len(train_file_content)):
     train_dialect_list.append(train_file_content[i]['transcription']['segments'])
 
 train_result_segments = []
+all_standard_segments = []
 
 for dialect_segment in train_dialect_list:
-  for segment in dialect_segment:
-    try:
-        if 'standard' in segment and segment['standard'] and segment['dialect'] and segment['standard'] != segment['dialect']:
-            train_result_segments.append(segment)
-    except KeyError:
-        print(f"'standard' key not found in segment of file {train_file_path}")
+    for segment in dialect_segment:
+        try:
+            if 'standard' in segment and segment['standard'] and segment['dialect'] and segment['standard'] != segment['dialect']:
+                train_result_segments.append(segment)
+            else: 
+                all_standard_segments.append(segment)
+        except KeyError:
+            print(f"'standard' key not found in segment of file {train_file_path}")
 
 TL_dia = []
 TL_pro = []
 TL_sta = []
+all_word = []
 
 for segment in train_result_segments:
-  TL_dia.append(segment.get('dialect', ''))
-  TL_pro.append(segment.get('pronunciation', ''))
-  TL_sta.append(segment.get('standard', ''))
-  
+    TL_dia.append(segment.get('dialect', ''))
+    TL_pro.append(segment.get('pronunciation', ''))
+    TL_sta.append(segment.get('standard', ''))
+
+for segment in all_standard_segments:
+    all_word.append(segment.get('dialect', ''))
+
 train_sentence_list = []
 
 for i in range(0, len(train_file_content)):
@@ -80,6 +87,10 @@ for sentence_segment in train_sentence_list:
 # 단어
 TL_word_data = {'Dialect': TL_dia, 'Pronunciation': TL_pro, 'Standard': TL_sta}
 TL_word_df = pd.DataFrame(TL_word_data)
+
+standard_all_word = {'Standard': all_word}
+standard_word_df = pd.DataFrame(standard_all_word)
+standard_word_df.to_csv(r'C:\Users\edcrf\all_standard_data.csv', index=False)
 
 # 문장
 TL_sentence_data = {'Dialect': TL_di, 'Pronunciation': TL_pr, 'Standard': TL_st}
