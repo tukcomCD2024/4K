@@ -3,6 +3,7 @@ package springwebsocket.webchat.service.friend;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import springwebsocket.webchat.entity.Friendship;
+import springwebsocket.webchat.entity.Member;
 import springwebsocket.webchat.repository.FriendshipRepository;
 
 import java.util.List;
@@ -13,34 +14,28 @@ public class FriendshipServiceV1 implements FriendshipService{
 
     private final FriendshipRepository friendshipRepository;
 
-
     @Override
-    public void sendFriendRequest(String userEmail, String friendEmail) {
-
+    public Friendship sendFriendRequest(Long senderId, String receiverEmail) {
+        return friendshipRepository.sendFriendRequest(senderId, receiverEmail);
     }
 
     @Override
-    public void acceptFriendRequest(Long userId, Long friendId) {
-
+    public void acceptFriendRequestById(Long senderId, String receiverEmail) {
+        friendshipRepository.acceptFriendRequestById(senderId, receiverEmail);
     }
 
     @Override
-    public void rejectFriendRequest(Long userId, Long friendId) {
-
+    public void rejectFriendRequestById(Long id, String Email) {
+        friendshipRepository.rejectFriendRequestById(id, Email);
     }
 
     @Override
-    public List<Friendship> getIncomingFriendRequests(Long userId) {
-        return null;
+    public List<Member> findByFriendIdAndStatus(Long id) {
+        return friendshipRepository.findByFriendIdAndStatus(id);
     }
 
     @Override
-    public List<Friendship> getOutgoingFriendRequests(Long userId) {
-        return null;
-    }
-
-    @Override
-    public List<Friendship> getMutualFriends(Long userId) {
-        return null;
+    public List<Long> findByUserIdAndStatusOrFriendIdAndStatus(Long userId) {
+        return friendshipRepository.findByUserIdAndStatusOrFriendIdAndStatus(userId);
     }
 }

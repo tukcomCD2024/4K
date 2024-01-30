@@ -9,22 +9,19 @@ import java.util.Optional;
 public interface FriendshipService {
 
     // 친구 요청 보내기
-    void sendFriendRequest(String userEmail, String friendEmail);
+    Friendship sendFriendRequest(Long senderId, String receiverEmail);
 
     // 친구 요청 수락
-    void acceptFriendRequest(Long userId, Long friendId);
+    void acceptFriendRequestById(Long senderId, String receiverEmail);
 
     // 친구 요청 거절
-    void rejectFriendRequest(Long userId, Long friendId);
+    void rejectFriendRequestById(Long id, String Email);
 
     // 나에게 온 친구 요청 목록 조회
-    List<Friendship> getIncomingFriendRequests(Long userId);
-
-    // 내가 보낸 친구 요청 목록 조회
-    List<Friendship> getOutgoingFriendRequests(Long userId);
+    List<Member> findByFriendIdAndStatus(Long id);
 
     // 서로 친구인 친구 목록 조회
-    List<Friendship> getMutualFriends(Long userId);
+    List<Long> findByUserIdAndStatusOrFriendIdAndStatus(Long userId);
 
 }
 
