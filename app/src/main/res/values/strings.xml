@@ -59,5 +59,16 @@
         My Info
     </string>
 
+    <string name="add_to_friends">
+        Add to friends
+    </string>
+
+    <string name="recent_call_title">
+        Recent Calls
+    </string>
+
+    <string name="my_info_title">
+        My Info
+    </string>
 
 </resources>

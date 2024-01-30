@@ -3,12 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyInfoFragment">
+    tools:context=".RecentCallsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginTop="42dp"
+        android:layout_height="56dp">
+
+        <TextView
+            android:id="@+id/large_title"
+            android:layout_width="347dp"
+            android:layout_height="41dp"
+            android:text="@string/my_info_title"
+            android:textAppearance="@style/recent_call_title"
+            android:lineSpacingExtra="-5sp"
+            android:gravity="top"
+            android:layout_marginStart="46dp"
+            />
+        <!--
+        Font family: Nunito
+        Line height: 41sp
+        (identical to box height)
+        -->
+
+    </RelativeLayout>
+
 
 </FrameLayout>
