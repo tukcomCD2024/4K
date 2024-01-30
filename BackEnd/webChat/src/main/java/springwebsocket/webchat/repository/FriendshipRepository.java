@@ -15,7 +15,7 @@ public interface FriendshipRepository{
     void acceptFriendRequestById(Long senderId, String receiverEmail);
 
     // 친구 요청 거절
-    void rejectFriendRequestById(Long id);
+    void rejectFriendRequestById(Long id, String Email);
 
     // 나에게 온 친구 요청 목록 조회
     List<Member> findByFriendIdAndStatus(Long id);
