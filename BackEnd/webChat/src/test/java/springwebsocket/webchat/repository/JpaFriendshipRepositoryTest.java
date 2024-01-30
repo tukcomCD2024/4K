@@ -1,6 +1,7 @@
 package springwebsocket.webchat.repository;
 
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -169,5 +170,28 @@ class JpaFriendshipRepositoryTest {
         assertThat(friendList).hasSize(2);
         assertThat(friendList)
                 .containsExactlyInAnyOrder(receiver1.getId(),receiver2.getId());
+    }
+
+
+    @Test
+    @Transactional
+    void rejectFriendRequestById() {
+        //given
+        Member sender = new Member("sender@naver.com", "1234", "sender");
+        Member receiver1 = new Member("receiver1@naver.com", "1234", "receiver1");
+
+        Member senderMember = memberRepository.save(sender);
+        Member receiverMember1 = memberRepository.save(receiver1);
+        //친구 요청
+        friendshipRepository.sendFriendRequest(sender.getId(), receiver1.getEmail());
+
+        //when
+        friendshipRepository.rejectFriendRequestById(sender.getId(), receiverMember1.getEmail());
+
+        //then
+        List<Friendship> allFriendships = springDataJpaFriendshipRepository.findAll();
+        Optional<Friendship> foundFriendship = springDataJpaFriendshipRepository.findByUserIdAndFriendId(senderMember, receiverMember1);
+
+        assertThat(foundFriendship).isEmpty();
     }
 }
