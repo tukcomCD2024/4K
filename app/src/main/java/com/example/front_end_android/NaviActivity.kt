@@ -22,7 +22,7 @@ class NaviActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        setFragment(TAG_RECENT_CALLS, RecentCallsFragment())
+        setFragment(TAG_FRIENDS_LIST, FriendsFragment())
 
         binding.navigationView.setOnItemSelectedListener { item ->
             when(item.itemId) {
