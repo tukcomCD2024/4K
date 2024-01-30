@@ -15,6 +15,7 @@
         <activity
             android:name=".SignUp"
             android:exported="false" />
+<<<<<<< HEAD
 
         <!--
     <meta-data
@@ -30,6 +31,22 @@
         android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
+=======
+        <!--
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/input" />
+        -->
+
+        <activity
+            android:name=".Login"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+>>>>>>> 8ef123dc3ac03e12a9acc5faddcbd5f101cfd8cb
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
