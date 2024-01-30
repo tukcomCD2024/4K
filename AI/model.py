@@ -3,7 +3,7 @@ import numpy as np
 
 # 백슬래쉬(\)가 유닡코드 이스케이프로 해석되려고 하기 때문에 문제가 발생할 수 있음
 # 때문에 문자열 앞에 'r'을 추가하여 이스케이프 문자를 무시하도록 함
-TL_setence_path = r'C:\Users\edcrf\sentence_dataTL.csv'
+TL_sentence_path = r'C:\Users\edcrf\sentence_dataTL.csv'
 VL_sentence_path = r'C:\Users\edcrf\sentence_dataVL.csv'
 TL_word_path = r'C:\Users\edcrf\word_dataTL.csv'
 VL_word_path = r'C:\Users\edcrf\word_dataVL.csv'
@@ -39,7 +39,7 @@ for i in TL_sentence_data['Dialect']:
     preprocessed_dialect.append(result_dialect)
 
 for i in TL_sentence_data['Standard']:
-    toknized_standard = mecab.morphs(i)
+    tokenized_standard = mecab.morphs(i)
     result_standard = []
 
     for token in tokenized_standard:
