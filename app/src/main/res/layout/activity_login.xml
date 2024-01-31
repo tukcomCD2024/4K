@@ -88,7 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:id="@+id/header"
             android:layout_width="358dp"
             android:layout_height="22dp">
@@ -97,6 +97,7 @@
                 android:id="@+id/header_labe"
                 android:layout_width="42dp"
                 android:layout_height="22dp"
+                android:layout_marginStart="20dp"
                 android:gravity="top"
                 android:lineSpacingExtra="3sp"
                 android:text="@string/header_labe"
@@ -111,11 +112,13 @@
 
         </RelativeLayout>
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:id="@+id/input"
             android:layout_width="358dp"
             android:layout_height="46dp"
             android:layout_marginTop="28dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/input"
             android:clipToOutline="true">
 
@@ -124,6 +127,7 @@
                 android:layout_width="326dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:gravity="top"
                 android:hint="@string/place_holde"
                 android:lineSpacingExtra="3sp"
@@ -162,6 +166,7 @@
                 android:id="@+id/header_labe2"
                 android:layout_width="66dp"
                 android:layout_height="22dp"
+                android:layout_marginStart="20dp"
                 android:gravity="top"
                 android:lineSpacingExtra="3sp"
                 android:text="@string/header_labe2"
@@ -182,6 +187,8 @@
             android:layout_width="358dp"
             android:layout_height="46dp"
             android:layout_marginTop="28dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/input"
             android:clipToOutline="true">
 
@@ -190,6 +197,7 @@
                 android:layout_width="326dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:gravity="top"
                 android:hint="@string/place_holde2"
                 android:lineSpacingExtra="3sp"
@@ -209,11 +217,12 @@
 
     <TextView
         android:id="@+id/forgot_pass"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="428dp"
+        android:layout_marginEnd="20dp"
         android:gravity="right|top"
         android:lineSpacingExtra="3sp"
         android:text="@string/forgot_pass"
@@ -226,11 +235,13 @@
 
     <RelativeLayout
         android:id="@+id/group_14"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="488dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

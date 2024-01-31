@@ -8,12 +8,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_marginTop="42dp"
-        android:layout_height="56dp">
+        android:layout_height="60dp">
 
         <TextView
             android:id="@+id/large_title"
             android:layout_width="347dp"
-            android:layout_height="41dp"
+            android:layout_height="45dp"
             android:text="@string/recent_call_title"
             android:textAppearance="@style/recent_call_title"
             android:lineSpacingExtra="-5sp"

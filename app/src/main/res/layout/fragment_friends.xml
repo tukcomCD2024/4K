@@ -6,7 +6,6 @@
     tools:context=".FriendsFragment">
 
     <RelativeLayout
-        android:id="@+id/topnavigati"
         android:layout_width="match_parent"
         android:layout_height="42dp">
         <RelativeLayout
