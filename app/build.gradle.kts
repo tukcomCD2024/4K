@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android") version "1.5.21"
+    kotlin("android.extensions") version "1.1.0"
 }
 
 android {
