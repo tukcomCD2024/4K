@@ -71,4 +71,8 @@
         My Info
     </string>
 
+    <string name="back_friend_list">
+        Friend List
+    </string>
+
 </resources>

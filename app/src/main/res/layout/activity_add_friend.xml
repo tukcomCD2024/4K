@@ -11,8 +11,41 @@
         android:layout_height="42dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="42dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="20dp"
+                android:src="@drawable/chevron_left"
+                android:gravity="right|center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/left_title"
+                android:layout_width="91dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/back_friend_list"
+                android:textAppearance="@style/back_friend_list"
+                android:lineSpacingExtra="-1sp"
+                android:gravity="center_vertical"
+                />
+            <!--
+            Font family: Nunito
+            Line height: 22sp
+            (identical to box height)
+            -->
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
