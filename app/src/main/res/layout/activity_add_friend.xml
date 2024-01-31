@@ -21,7 +21,7 @@
 
             <ImageView
                 android:layout_width="12dp"
-                android:layout_height="20dp"
+                android:layout_height="18dp"
                 android:src="@drawable/chevron_left"
                 android:gravity="right|center_vertical"
                 android:layout_centerVertical="true"
@@ -32,8 +32,8 @@
                 android:id="@+id/left_title"
                 android:layout_width="91dp"
                 android:layout_height="22dp"
-                android:layout_marginStart="12dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginStart="13dp"
                 android:text="@string/back_friend_list"
                 android:textAppearance="@style/back_friend_list"
                 android:lineSpacingExtra="-1sp"
@@ -44,6 +44,77 @@
             Line height: 22sp
             (identical to box height)
             -->
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="141dp"
+        android:layout_marginTop="42dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <TextView
+                android:id="@+id/large_title"
+                android:layout_width="361dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/add_friend_large_title"
+                android:textAppearance="@style/add_friend_large_title"
+                android:lineSpacingExtra="0sp"
+                android:translationY="-0.04sp"
+                android:gravity="center_horizontal|top"
+                />
+            <!--
+            Font family: Nunito
+            Line height: 41sp
+            (identical to box height)
+            translationY compensates for the line height adjustment of text
+            -->
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="93dp"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/searchfield">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/friendsearch"
+                android:background="@android:color/transparent"/>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="25dp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="5dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/microphone" />
 
         </RelativeLayout>
 

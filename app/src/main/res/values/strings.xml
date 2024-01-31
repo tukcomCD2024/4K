@@ -75,4 +75,9 @@
         Friend List
     </string>
 
+    <string name="add_friend_large_title">
+        Add as username
+    </string>
+
+
 </resources>
