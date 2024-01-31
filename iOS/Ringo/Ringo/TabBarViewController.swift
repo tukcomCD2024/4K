@@ -6,16 +6,26 @@
 //
 
 import UIKit
+import SnapKit
 
 class TabBarViewController: UITabBarController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let contactsVC = ContactsViewController()
+        let contactsVC = UINavigationController(rootViewController: ContactsViewController())
         let recentsVC = RecentsViewController()
-        let AccountVC = AccountViewController()
+        let accountVC = AccountViewController()
         
+        contactsVC.title = "Contacts"
+        recentsVC.title = "Recents"
+        accountVC.title = "Account"
+        
+        contactsVC.tabBarItem.image = UIImage(systemName: "person.3")
+        recentsVC.tabBarItem.image = UIImage(systemName: "clock")
+        accountVC.tabBarItem.image = UIImage(systemName: "person.text.rectangle")
+        
+        setViewControllers([contactsVC,recentsVC,accountVC], animated: true)
     }
     
 }
