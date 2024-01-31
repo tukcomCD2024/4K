@@ -79,5 +79,9 @@
         Add as username
     </string>
 
+    <string name="user_name_hint">
+        username#0000
+    </string>
+
 
 </resources>
