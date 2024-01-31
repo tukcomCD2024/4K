@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     let google = UIButton()
     let apple = UIButton()
     let facebook = UIButton()
+    let error = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,7 @@ class ViewController: UIViewController {
         view.addSubview(google)
         view.addSubview(apple)
         view.addSubview(facebook)
+        view.addSubview(error)
     }
     
     func setUpValue() {
@@ -105,6 +107,13 @@ class ViewController: UIViewController {
         input_passwd.isSecureTextEntry = true
         input_passwd.rightView = showBtn
         input_passwd.rightViewMode = .always
+        
+//        error.layer.isHidden = true
+        error.setTitle(" Incorrect password. Please check your password.", for: .normal)
+        error.setTitleColor(.red, for: .normal)
+        error.titleLabel?.font = .systemFont(ofSize: 13)
+        error.setImage(UIImage(systemName: "info.circle"), for: .normal)
+        error.tintColor = .red
  
         forgotPwBtn.setTitle("Forgot Password?", for: .normal)
         forgotPwBtn.setTitleColor(.systemBlue, for: .normal)
@@ -172,13 +181,18 @@ class ViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
         }
         
-        forgotPwBtn.snp.makeConstraints { make in
+        error.snp.makeConstraints { make in
             make.top.equalTo(input_passwd.snp.bottom).offset(10)
+            make.leading.equalTo(input_passwd.snp.leading)
+        }
+        
+        forgotPwBtn.snp.makeConstraints { make in
+            make.top.equalTo(error.snp.bottom).offset(10)
             make.trailing.equalTo(input_passwd.snp.trailing)
         }
         
         signinBtn.snp.makeConstraints { make in
-            make.top.equalTo(forgotPwBtn.snp.bottom).offset(35)
+            make.top.equalTo(input_passwd.snp.bottom).offset(90)
             make.leading.equalTo(input_passwd.snp.leading)
             make.trailing.equalTo(input_passwd.snp.trailing)
         }
