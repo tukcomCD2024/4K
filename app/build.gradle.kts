@@ -1,6 +1,6 @@
 plugins {
-    kotlin("android") version "1.5.21"
-    kotlin("android.extensions") version "1.1.0"
+    kotlin("android") version "1.9.22"
+    //kotlin("android.extensions") version "1.1.0"
 }
 
 android {
