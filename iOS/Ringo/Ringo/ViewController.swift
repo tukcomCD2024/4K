@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         signupBtn.setTitle("Sign up here!", for: .normal)
         signupBtn.setTitleColor(.systemBlue, for: .normal)
         signupBtn.titleLabel?.font = .systemFont(ofSize: 18)
+        signupBtn.setTitleColor(.systemBlue.withAlphaComponent(0.5), for: .highlighted)
         
         email.text = "E-mail"
         email.font = .preferredFont(forTextStyle: .body)
@@ -108,6 +109,7 @@ class ViewController: UIViewController {
         forgotPwBtn.setTitle("Forgot Password?", for: .normal)
         forgotPwBtn.setTitleColor(.systemBlue, for: .normal)
         forgotPwBtn.titleLabel?.font = .systemFont(ofSize: 13)
+        forgotPwBtn.setTitleColor(.systemBlue.withAlphaComponent(0.5), for: .highlighted)
         
         signinBtn.configuration = button_filled
         signinBtn.configuration?.buttonSize = .large
@@ -128,9 +130,8 @@ class ViewController: UIViewController {
     }
     
     func setConstraints(){
-        
         Text1.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(30)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.leading.equalToSuperview().offset(30)
         }
         
@@ -183,7 +184,7 @@ class ViewController: UIViewController {
         }
         
         Text4.snp.makeConstraints { make in
-            make.top.equalTo(signinBtn.snp.bottom).offset(150)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-110)
             make.centerX.equalToSuperview()
         }
         
@@ -221,7 +222,7 @@ struct ViewControllerRepresentable: UIViewControllerRepresentable {
 @available(iOS 13.0.0, *)
 struct ViewPreview: PreviewProvider {
     static var previews: some View {
-        ViewControllerRepresentable()
+        ViewControllerRepresentable().edgesIgnoringSafeArea(.all)
     }
 }
 
