@@ -25,7 +25,8 @@ class ViewController: UIViewController {
     let google = UIButton()
     let apple = UIButton()
     let facebook = UIButton()
-    let error = UIButton()
+    let error = UIButton(type: .custom)
+    let stackView = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,16 +43,17 @@ class ViewController: UIViewController {
         view.addSubview(signupBtn)
         view.addSubview(email)
         view.addSubview(input_email)
-        view.addSubview(passwd)
-        view.addSubview(input_passwd)
-        view.addSubview(showBtn)
         view.addSubview(forgotPwBtn)
         view.addSubview(signinBtn)
         view.addSubview(Text4)
         view.addSubview(google)
         view.addSubview(apple)
         view.addSubview(facebook)
-        view.addSubview(error)
+        
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(passwd)
+        stackView.addArrangedSubview(input_passwd)
+        stackView.addArrangedSubview(error)
     }
     
     func setUpValue() {
@@ -83,6 +85,11 @@ class ViewController: UIViewController {
         input_email.layer.cornerRadius = 5
         input_email.keyboardType = .emailAddress
         
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 10
+        
         passwd.text = "Password"
         passwd.font = .preferredFont(forTextStyle: .body)
         
@@ -113,6 +120,7 @@ class ViewController: UIViewController {
         error.setTitleColor(.red, for: .normal)
         error.titleLabel?.font = .systemFont(ofSize: 13)
         error.setImage(UIImage(systemName: "info.circle"), for: .normal)
+        error.setImage(UIImage(systemName: "info.circle"), for: .highlighted)
         error.tintColor = .red
  
         forgotPwBtn.setTitle("Forgot Password?", for: .normal)
@@ -170,31 +178,21 @@ class ViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
         }
         
-        passwd.snp.makeConstraints { make in
+        stackView.snp.makeConstraints { make in
             make.top.equalTo(input_email.snp.bottom).offset(20)
             make.leading.equalTo(email.snp.leading)
+            make.trailing.equalTo(input_email.snp.trailing)
         }
-        
-        input_passwd.snp.makeConstraints { make in
-            make.top.equalTo(passwd.snp.bottom).offset(10)
-            make.leading.equalTo(passwd.snp.leading)
-            make.trailing.equalToSuperview().offset(-20)
-        }
-        
-        error.snp.makeConstraints { make in
-            make.top.equalTo(input_passwd.snp.bottom).offset(10)
-            make.leading.equalTo(input_passwd.snp.leading)
-        }
-        
+     
         forgotPwBtn.snp.makeConstraints { make in
-            make.top.equalTo(error.snp.bottom).offset(10)
-            make.trailing.equalTo(input_passwd.snp.trailing)
+            make.top.equalTo(stackView.snp.bottom).offset(10)
+            make.trailing.equalTo(stackView.snp.trailing)
         }
         
         signinBtn.snp.makeConstraints { make in
             make.top.equalTo(input_passwd.snp.bottom).offset(90)
-            make.leading.equalTo(input_passwd.snp.leading)
-            make.trailing.equalTo(input_passwd.snp.trailing)
+            make.leading.equalTo(stackView.snp.leading)
+            make.trailing.equalTo(stackView.snp.trailing)
         }
         
         Text4.snp.makeConstraints { make in
