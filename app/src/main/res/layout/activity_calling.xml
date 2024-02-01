@@ -129,6 +129,71 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <RelativeLayout
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
+
+            <TextView
+                android:layout_width="74dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@android:color/transparent"
+                android:text="@string/mute"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:background="@android:color/transparent">
+
+            <TextView
+                android:layout_width="74dp"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="@string/speaker"
+                android:layout_centerInParent="true"
+                android:background="@android:color/transparent"
+                android:textColor="@color/black"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:background="@android:color/transparent">
+
+            <TextView
+                android:layout_width="74dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@android:color/transparent"
+                android:text="@string/translate"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/exit_call_background"
         android:layout_width="74dp"

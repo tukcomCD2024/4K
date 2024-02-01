@@ -91,4 +91,16 @@
         Nickname 2
     </string>
 
+    <string name="mute">
+        mute
+    </string>
+
+    <string name="speaker">
+        speaker
+    </string>
+
+    <string name="translate">
+        translate
+    </string>
+
 </resources>
