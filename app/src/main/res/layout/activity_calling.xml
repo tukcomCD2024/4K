@@ -7,66 +7,68 @@
     android:background="@drawable/calling_background"
     tools:context=".Calling">
 
-    <RelativeLayout
-        android:id="@+id/mute_background"
-        android:layout_width="74dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="74dp"
+        android:orientation="horizontal"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
-        android:background="@drawable/mute2"
+        android:gravity="center"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/mute_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/mute"
-            android:background="@android:color/transparent"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
+        <!-- 첫 번째 아이콘 -->
+        <RelativeLayout
+            android:id="@+id/mute_background"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:background="@drawable/mute2">
 
-    <RelativeLayout
-        android:id="@+id/speaker_background"
-        android:layout_width="74dp"
-        android:layout_height="74dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
-        android:layout_marginStart="100dp"
-        android:background="@drawable/mute2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/mute_img"
+                android:layout_width="29dp"
+                android:layout_height="34dp"
+                android:src="@drawable/mute"
+                android:background="@android:color/transparent"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/speaker_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/mute"
-            android:background="@android:color/transparent"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
+        <!-- 두 번째 아이콘 -->
+        <RelativeLayout
+            android:id="@+id/speaker_background"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/mute2">
 
-    <RelativeLayout
-        android:id="@+id/translate_background"
-        android:layout_width="74dp"
-        android:layout_height="74dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
-        android:layout_marginStart="200dp"
-        android:background="@drawable/mute2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/speaker_img"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:src="@drawable/speaker"
+                android:background="@android:color/transparent"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/translate_img"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/translate"
-            android:background="@android:color/transparent"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
+    <!-- 세 번째 아이콘 -->
+        <RelativeLayout
+            android:id="@+id/translate_background"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/mute2">
+
+            <ImageView
+                android:id="@+id/translate_img"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/translate"
+                android:background="@android:color/transparent"
+             android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

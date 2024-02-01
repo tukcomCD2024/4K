@@ -8,4 +8,5 @@
     <color name="calling_background1">#5D727E</color>
     <color name="calling_background2">#112B4A</color>
     <color name="calling_background3">#0D2445</color>
+    <color name="exit_call_red">#0D2445</color>
 </resources>
