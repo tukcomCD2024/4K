@@ -66,7 +66,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="74dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/transparent"
@@ -79,116 +79,108 @@
 
         <!-- 첫 번째 아이콘 -->
         <RelativeLayout
-            android:id="@+id/mute_background"
+            android:id="@+id/mute_container"
             android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:background="@drawable/mute2">
+            android:layout_height="100dp"
+            android:background="@android:color/transparent">
 
-            <ImageView
-                android:id="@+id/mute_img"
-                android:layout_width="29dp"
-                android:layout_height="34dp"
-                android:layout_centerInParent="true"
+            <RelativeLayout
+                android:id="@+id/mute_background"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/mute2">
+
+                <ImageView
+                    android:id="@+id/mute_img"
+                    android:layout_width="29dp"
+                    android:layout_height="34dp"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/mute" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mute_background"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/mute" />
+                android:text="@string/mute"/>
+
         </RelativeLayout>
 
         <!-- 두 번째 아이콘 -->
         <RelativeLayout
-            android:id="@+id/speaker_background"
+            android:id="@+id/speaker_container"
             android:layout_width="74dp"
-            android:layout_height="74dp"
+            android:layout_height="100dp"
             android:layout_marginStart="40dp"
-            android:background="@drawable/mute2">
+            android:background="@android:color/transparent">
 
-            <ImageView
-                android:id="@+id/speaker_img"
-                android:layout_width="36dp"
-                android:layout_height="26dp"
-                android:layout_centerInParent="true"
+            <RelativeLayout
+                android:id="@+id/speaker_background"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/mute2">
+
+                <ImageView
+                    android:id="@+id/speaker_img"
+                    android:layout_width="36dp"
+                    android:layout_height="26dp"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/speaker" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/speaker_background"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/speaker" />
+                android:text="@string/speaker"/>
+
         </RelativeLayout>
 
         <!-- 세 번째 아이콘 -->
         <RelativeLayout
-            android:id="@+id/translate_background"
+            android:id="@+id/translate_container"
             android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginStart="40dp"
-            android:background="@drawable/mute2">
-
-            <ImageView
-                android:id="@+id/translate_img"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_centerInParent="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/translate" />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <RelativeLayout
-            android:layout_width="74dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent">
-
-            <TextView
-                android:layout_width="74dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@android:color/transparent"
-                android:text="@string/mute"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="74dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginStart="40dp"
             android:background="@android:color/transparent">
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/translate_background"
                 android:layout_width="74dp"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="@string/speaker"
-                android:layout_centerInParent="true"
-                android:background="@android:color/transparent"
-                android:textColor="@color/black"/>
+                android:layout_height="74dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/mute2">
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/translate_img"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/translate" />
 
-        <RelativeLayout
-            android:layout_width="74dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:background="@android:color/transparent">
+            </RelativeLayout>
 
             <TextView
-                android:layout_width="74dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_below="@id/translate_background"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/transparent"
-                android:text="@string/translate"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:text="@string/translate"/>
 
         </RelativeLayout>
 
