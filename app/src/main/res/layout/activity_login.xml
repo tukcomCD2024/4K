@@ -59,7 +59,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/sign_up"
+        android:id="@+id/go_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_alignParentStart="true"

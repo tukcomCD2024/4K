@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Calling"
+            android:exported="false" />
+        <activity
             android:name=".AddFriend"
             android:exported="true" />
         <activity
