@@ -29,10 +29,12 @@
             
             <TextView
                 android:id="@+id/nickname1"
-                android:layout_width="104dp"
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 android:text="@string/nickname1"
-                android:textAppearance="@style/nickname"
+                android:background="@android:color/transparent"
                 android:layout_centerInParent="true"/>
 
         </RelativeLayout>
@@ -49,10 +51,12 @@
 
             <TextView
                 android:id="@+id/nickname2"
-                android:layout_width="104dp"
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 android:text="@string/nickname2"
-                android:textAppearance="@style/nickname"
+                android:background="@android:color/transparent"
                 android:layout_centerInParent="true"/>
 
         </RelativeLayout>
