@@ -83,5 +83,12 @@
         username#0000
     </string>
 
+    <string name="nickname1">
+        Nickname 1
+    </string>
+
+    <string name="nickname2">
+        Nickname 2
+    </string>
 
 </resources>
