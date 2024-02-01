@@ -237,7 +237,7 @@ struct ViewPreview: PreviewProvider {
         ViewControllerRepresentable().edgesIgnoringSafeArea(.all)
     }
 }
-
+// hexcode로 색 지정하기
 extension UIColor {
     
     convenience init(hexCode: String, alpha: CGFloat = 1.0) {

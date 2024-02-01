@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603122B6AC07D002F4B33 /* TabBarViewController.swift */; };
+		945603152B6AC22A002F4B33 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603142B6AC22A002F4B33 /* ContactsViewController.swift */; };
+		945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603162B6AC2D3002F4B33 /* RecentsViewController.swift */; };
+		945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603182B6AC365002F4B33 /* AccountViewController.swift */; };
+		9456031B2B6BD40B002F4B33 /* ContactsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9456031A2B6BD40B002F4B33 /* ContactsNavigationController.swift */; };
+		9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */; };
 		945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97A2B67E1CD00396E4E /* AppDelegate.swift */; };
 		945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */; };
 		945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97E2B67E1CD00396E4E /* ViewController.swift */; };
@@ -17,6 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		945603122B6AC07D002F4B33 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		945603142B6AC22A002F4B33 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		945603162B6AC2D3002F4B33 /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
+		945603182B6AC365002F4B33 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		9456031A2B6BD40B002F4B33 /* ContactsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsNavigationController.swift; sourceTree = "<group>"; };
+		9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestViewController.swift; sourceTree = "<group>"; };
 		945CF9772B67E1CD00396E4E /* Ringo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ringo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		945CF97A2B67E1CD00396E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +73,12 @@
 				945CF97A2B67E1CD00396E4E /* AppDelegate.swift */,
 				945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */,
 				945CF97E2B67E1CD00396E4E /* ViewController.swift */,
+				945603122B6AC07D002F4B33 /* TabBarViewController.swift */,
+				9456031A2B6BD40B002F4B33 /* ContactsNavigationController.swift */,
+				945603142B6AC22A002F4B33 /* ContactsViewController.swift */,
+				9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */,
+				945603162B6AC2D3002F4B33 /* RecentsViewController.swift */,
+				945603182B6AC365002F4B33 /* AccountViewController.swift */,
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
 				945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */,
 				945CF9882B67E1CE00396E4E /* Info.plist */,
@@ -145,9 +163,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9456031B2B6BD40B002F4B33 /* ContactsNavigationController.swift in Sources */,
+				945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */,
 				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
+				945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */,
 				945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */,
+				945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */,
 				945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */,
+				945603152B6AC22A002F4B33 /* ContactsViewController.swift in Sources */,
+				9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
