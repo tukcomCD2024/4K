@@ -5,4 +5,7 @@
     <color name="Gold">#FFFFD700</color>
     <color name="blue_click">#007AFF</color>
     <color name="gray_click">#3C3C43</color>
+    <color name="calling_background1">#5D727E</color>
+    <color name="calling_background2">#112B4A</color>
+    <color name="calling_background3">#0D2445</color>
 </resources>
