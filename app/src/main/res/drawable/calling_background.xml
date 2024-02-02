@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:startColor="@color/calling_background1"
+        android:endColor="@color/calling_background3"
+        android:angle="315">     <!-- 끝 색상 -->
+    </gradient>   <!-- 시작 색상 -->
+</shape>

@@ -6,38 +6,31 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat"
+        android:theme="@style/Theme.Frontend_android"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".Calling"
+            android:exported="true" />
+        <activity
+            android:name=".AddFriend"
+            android:exported="true" />
+        <activity
+            android:name=".NaviActivity"
+            android:exported="true" />
         <activity
             android:name=".SignUp"
             android:exported="false" />
-<<<<<<< HEAD
-
-        <!--
-    <meta-data
-        android:name="com.google.android.actions"
-        android:resource="@xml/input" />
-    -->
-
-    <activity
-        android:name=".Login"
-        android:exported="true" />
-    <activity
-        android:name=".MainActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-=======
         <!--
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/input" />
         -->
-
         <activity
             android:name=".Login"
             android:exported="true" />
@@ -46,7 +39,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
->>>>>>> 8ef123dc3ac03e12a9acc5faddcbd5f101cfd8cb
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>

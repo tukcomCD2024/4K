@@ -59,7 +59,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/sign_up"
+        android:id="@+id/go_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_alignParentStart="true"
@@ -88,7 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:id="@+id/header"
             android:layout_width="358dp"
             android:layout_height="22dp">
@@ -97,6 +97,7 @@
                 android:id="@+id/header_labe"
                 android:layout_width="42dp"
                 android:layout_height="22dp"
+                android:layout_marginStart="20dp"
                 android:gravity="top"
                 android:lineSpacingExtra="3sp"
                 android:text="@string/header_labe"
@@ -111,11 +112,13 @@
 
         </RelativeLayout>
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:id="@+id/input"
             android:layout_width="358dp"
             android:layout_height="46dp"
             android:layout_marginTop="28dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/input"
             android:clipToOutline="true">
 
@@ -124,11 +127,12 @@
                 android:layout_width="326dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
-                android:gravity="top"
+                android:layout_marginEnd="16dp"
                 android:hint="@string/place_holde"
                 android:lineSpacingExtra="3sp"
                 android:textAppearance="@style/place_holde"
-                android:translationY="-1.45sp" />
+                android:translationY="-1.45sp"
+                android:background="@android:color/transparent"/>
             <!--
             Font family: Nunito
             Line height: 22sp
@@ -146,14 +150,14 @@
         android:id="@+id/text_field2"
         android:layout_width="358dp"
         android:layout_height="74dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="342dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:id="@+id/header2"
             android:layout_width="358dp"
             android:layout_height="22dp">
@@ -162,6 +166,7 @@
                 android:id="@+id/header_labe2"
                 android:layout_width="66dp"
                 android:layout_height="22dp"
+                android:layout_marginStart="20dp"
                 android:gravity="top"
                 android:lineSpacingExtra="3sp"
                 android:text="@string/header_labe2"
@@ -182,6 +187,8 @@
             android:layout_width="358dp"
             android:layout_height="46dp"
             android:layout_marginTop="28dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/input"
             android:clipToOutline="true">
 
@@ -190,11 +197,12 @@
                 android:layout_width="326dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
-                android:gravity="top"
+                android:layout_marginEnd="16dp"
                 android:hint="@string/place_holde2"
                 android:lineSpacingExtra="3sp"
                 android:textAppearance="@style/place_holde2"
-                android:translationY="-1.45sp" />
+                android:translationY="-1.45sp"
+                android:background="@android:color/transparent"/>
             <!--
             Font family: Nunito
             Line height: 22sp
@@ -209,11 +217,12 @@
 
     <TextView
         android:id="@+id/forgot_pass"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="428dp"
+        android:layout_marginEnd="20dp"
         android:gravity="right|top"
         android:lineSpacingExtra="3sp"
         android:text="@string/forgot_pass"
@@ -221,15 +230,18 @@
         android:translationY="-1.45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlHardcoded" />
 
     <RelativeLayout
         android:id="@+id/group_14"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="488dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -241,7 +253,7 @@
             android:text="@string/login"
             android:textAppearance="@string/login"
             android:textColor="@color/white"
-            android:textSize="16sp"></android.widget.Button>
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
