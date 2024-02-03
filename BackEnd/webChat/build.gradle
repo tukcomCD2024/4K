@@ -45,6 +45,9 @@ dependencies {
 
     //firebase 추가
     implementation 'com.google.firebase:firebase-admin:9.2.0'
+
+    // FCM 을 위한 Redis setting
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
 
 tasks.named('test') {
