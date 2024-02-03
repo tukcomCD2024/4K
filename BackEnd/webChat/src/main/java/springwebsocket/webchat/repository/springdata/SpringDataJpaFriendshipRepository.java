@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface SpringDataJpaFriendshipRepository extends JpaRepository<Friendship, Long> {
     Optional<Friendship> findByUserIdAndFriendId(Member sender, Member receiver);
 
+    Optional<Friendship> findByFriendIdAndUserId(Member sender, Member receiver);
+
     @Query("SELECT f.userId FROM Friendship f WHERE f.friendId = :friendId AND f.status = :status")
     List<Member> findByFriendIdAndStatus(@Param("friendId") Member friend, @Param("status") Friendship.FriendshipStatus status);
 
