@@ -60,7 +60,7 @@ public class JpaFriendshipRepository implements FriendshipRepository {
         Member receiver = receiverMember.get();
 
         // 기존의 Friendship 엔터티를 찾는다.
-        Optional<Friendship> existingFriendship = friendshipRepository.findByUserIdAndFriendId(sender, receiver);
+        Optional<Friendship> existingFriendship = friendshipRepository.findByFriendIdAndUserId(sender, receiver);
 
         existingFriendship.ifPresent(friendship -> {
             // Friendship 엔터티의 상태를 FRIENDS로 update.
@@ -79,7 +79,7 @@ public class JpaFriendshipRepository implements FriendshipRepository {
         Optional<Member> memberYou = memberRepository.findByEmail(Email);
 
         // 기존의 Friendship 엔터티를 찾는다.
-        Optional<Friendship> existingFriendship = friendshipRepository.findByUserIdAndFriendId(memberMe.get(), memberYou.get());
+        Optional<Friendship> existingFriendship = friendshipRepository.findByFriendIdAndUserId(memberMe.get(), memberYou.get());
 
         existingFriendship.ifPresent(friendship ->{
             // Friendship 엔터티를 삭제
