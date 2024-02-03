@@ -135,9 +135,9 @@ class JpaFriendshipRepositoryTest {
     @Transactional
     void findByUserIdAndStatusOrFriendIdAndStatus() {
         // given
-        Member sender = new Member("sender@naver.com", "1234", "sender");
-        Member receiver1 = new Member("receiver1@naver.com", "1234", "receiver1");
-        Member receiver2 = new Member("receiver2@naver.com", "1234", "receiver2");
+        Member sender = new Member("sender3@naver.com", "1234", "sender");
+        Member receiver1 = new Member("receiver4@naver.com", "1234", "receiver1");
+        Member receiver2 = new Member("receiver5@naver.com", "1234", "receiver2");
 
         // 멤버 save
         Member senderMember = memberRepository.save(sender);
@@ -148,8 +148,8 @@ class JpaFriendshipRepositoryTest {
         friendshipRepository.sendFriendRequest(sender.getId(), receiver1.getEmail());
         friendshipRepository.sendFriendRequest(receiver2.getId(), sender.getEmail());
         //친구 수락
-        friendshipRepository.acceptFriendRequestById(sender.getId(), receiver1.getEmail());
-        friendshipRepository.acceptFriendRequestById(receiver2.getId(), sender.getEmail());
+        friendshipRepository.acceptFriendRequestById(sender.getId(), receiver2.getEmail());
+        friendshipRepository.acceptFriendRequestById(receiver1.getId(), sender.getEmail());
 
 //        //둘 다 친구 확인
 //        Optional<Friendship> byUserIdAndFriendId = springDataJpaFriendshipRepository.findByUserIdAndFriendId(sender,receiver1);
@@ -158,18 +158,12 @@ class JpaFriendshipRepositoryTest {
 
         // when
 
-        List<Long> friendList = friendshipRepository.findByUserIdAndStatusOrFriendIdAndStatus(sender.getId());
+        List<String> friendList = friendshipRepository.findByUserIdAndStatusOrFriendIdAndStatus(sender.getId());
 
-        // then
-        log.info("senderMember={}", senderMember.getId());
-        log.info("receiver1={}",receiverMember1.getId());
-        log.info("receiver2={}",receiverMember2.getId());
-        log.info("friendList[0] ={}",friendList.get(0));
-        log.info("friendList[1] ={}",friendList.get(1));
 
         assertThat(friendList).hasSize(2);
         assertThat(friendList)
-                .containsExactlyInAnyOrder(receiver1.getId(),receiver2.getId());
+                .containsExactlyInAnyOrder("receiver4@naver.com", "receiver5@naver.com");
     }
 
 
