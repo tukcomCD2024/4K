@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ContactsNavigationController: UINavigationController {
     
     override func viewDidLoad() {
@@ -26,23 +27,14 @@ class ContactsNavigationController: UINavigationController {
     */
 
 }
-// canvas 이용하기
-import SwiftUI
 
-struct ContactsNavigationControllerRepresentable: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> ContactsNavigationController {
-        return ContactsNavigationController()
-    }
-    
-    func updateUIViewController(_ uiViewController: ContactsNavigationController, context: Context) {
-    }
-    
-    typealias UIViewControllerType = ContactsNavigationController
-    
-}
+// MARK: canvas 이용하기
+import SwiftUI
 @available(iOS 13.0.0, *)
-struct ContactsNavigationViewPreview: PreviewProvider {
+struct ContactsNavigationControllerPreView: PreviewProvider {
     static var previews: some View {
-        ContactsNavigationControllerRepresentable().edgesIgnoringSafeArea(.all)
+    // 사용할 뷰 컨트롤러를 넣어주세요
+        ContactsViewController()
+            .toPreview()
     }
 }
