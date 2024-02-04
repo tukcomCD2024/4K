@@ -4,8 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import springwebsocket.webchat.entity.Member;
-import springwebsocket.webchat.dto.UserUpdateDto;
+import springwebsocket.webchat.member.entity.Member;
+import springwebsocket.webchat.member.dto.MemberUpdataDto;
+import springwebsocket.webchat.member.repository.MemberRepository;
 
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ class JpaUserRepositoryTest {
         Long userId = saveUser.getId();
 
         //when
-        UserUpdateDto updateParam = new UserUpdateDto("user2@naver.com", "1234", "user2");
+        MemberUpdataDto updateParam = new MemberUpdataDto("user2@naver.com", "1234", "user2");
         userRepository.update(userId, updateParam);
 
         //then
