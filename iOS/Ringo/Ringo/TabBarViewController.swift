@@ -15,8 +15,7 @@ class TabBarViewController: UITabBarController{
         
         tabBar.backgroundColor = .init(white: 1, alpha: 0.8)
         
-//        let contactsVC = UINavigationController(rootViewController: ContactsViewController())
-        let contactsVC = ContactsNavigationController()
+        let contactsVC = UINavigationController(rootViewController: ContactsViewController())
         let recentsVC = RecentsViewController()
         let accountVC = AccountViewController()
         

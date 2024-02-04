@@ -19,6 +19,7 @@ class ContactsTableViewCell: UITableViewCell {
     let call = UIButton()
     let info = UIButton()
     let paddingView = UIView()
+    let paddingView2 = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,6 +37,7 @@ class ContactsTableViewCell: UITableViewCell {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(paddingView)
         stackView.addArrangedSubview(moreStackView)
+        moreStackView.addArrangedSubview(paddingView2)
         moreStackView.addArrangedSubview(call)
     }
     
@@ -60,9 +62,11 @@ class ContactsTableViewCell: UITableViewCell {
         
         moreStackView.backgroundColor = .systemGray6
         moreStackView.axis = .horizontal
-        moreStackView.alignment = .center
-        moreStackView.distribution = .equalSpacing
+        moreStackView.alignment = .fill
+        moreStackView.distribution = .fill
         moreStackView.addBorders(edges: [.top], color: .systemGray4, thickness: 1)
+        moreStackView.layoutMargins = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+        moreStackView.isLayoutMarginsRelativeArrangement = true
     }
     
     private func setConstraints() {
@@ -85,8 +89,7 @@ class ContactsTableViewCell: UITableViewCell {
             make.trailing.equalTo(contentView.safeAreaLayoutGuide)
         }
         call.snp.makeConstraints { make in
-            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(330)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-30)
+            make.leading.equalTo(contentView.snp.leading).offset(330)
         }
     }
     
@@ -98,17 +101,7 @@ class ContactsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         moreStackView.isHidden = !selected
-        
-//        invalidateIntrinsicContentSize()
-        // Configure the view for the selected state
     }
-
-//    override func prepareForReuse() {
-//        invalidateIntrinsicContentSize()
-//        super.prepareForReuse()
-//        self.setNeedsLayout()
-//        self.layoutIfNeeded()
-//    }
 }
 
 // MARK: - stackview border
