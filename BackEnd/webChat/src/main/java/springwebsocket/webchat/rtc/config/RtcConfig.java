@@ -1,4 +1,4 @@
-package springwebsocket.webchat.config;
+package springwebsocket.webchat.rtc.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
