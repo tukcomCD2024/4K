@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
 		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
+		94470A902B710CE500F0A942 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8F2B710CE500F0A942 /* WebRTC */; };
 		945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603122B6AC07D002F4B33 /* TabBarViewController.swift */; };
 		945603152B6AC22A002F4B33 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603142B6AC22A002F4B33 /* ContactsViewController.swift */; };
 		945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603162B6AC2D3002F4B33 /* RecentsViewController.swift */; };
@@ -49,6 +50,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				945CF9902B69341800396E4E /* SnapKit in Frameworks */,
+				94470A902B710CE500F0A942 /* WebRTC in Frameworks */,
 				94470A8A2B71050700F0A942 /* Alamofire in Frameworks */,
 				94470A8D2B710A3100F0A942 /* Starscream in Frameworks */,
 			);
@@ -114,6 +116,7 @@
 				945CF98F2B69341800396E4E /* SnapKit */,
 				94470A892B71050700F0A942 /* Alamofire */,
 				94470A8C2B710A3100F0A942 /* Starscream */,
+				94470A8F2B710CE500F0A942 /* WebRTC */,
 			);
 			productName = Ringo;
 			productReference = 945CF9772B67E1CD00396E4E /* Ringo.app */;
@@ -147,6 +150,7 @@
 				945CF98E2B69341800396E4E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				94470A882B71050700F0A942 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				94470A8B2B710A3100F0A942 /* XCRemoteSwiftPackageReference "Starscream" */,
+				94470A8E2B710CE500F0A942 /* XCRemoteSwiftPackageReference "WebRTC" */,
 			);
 			productRefGroup = 945CF9782B67E1CD00396E4E /* Products */;
 			projectDirPath = "";
@@ -415,6 +419,14 @@
 				minimumVersion = 4.0.6;
 			};
 		};
+		94470A8E2B710CE500F0A942 /* XCRemoteSwiftPackageReference "WebRTC" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stasel/WebRTC.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 120.0.0;
+			};
+		};
 		945CF98E2B69341800396E4E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -435,6 +447,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 94470A8B2B710A3100F0A942 /* XCRemoteSwiftPackageReference "Starscream" */;
 			productName = Starscream;
+		};
+		94470A8F2B710CE500F0A942 /* WebRTC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94470A8E2B710CE500F0A942 /* XCRemoteSwiftPackageReference "WebRTC" */;
+			productName = WebRTC;
 		};
 		945CF98F2B69341800396E4E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
