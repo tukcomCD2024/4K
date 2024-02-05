@@ -217,7 +217,7 @@ class ViewController: UIViewController {
     }
 }
 
-// MARK: canvas 이용하기
+// MARK: - canvas 이용하기
 import SwiftUI
 @available(iOS 13.0.0, *)
 struct ViewPreview: PreviewProvider {
@@ -225,7 +225,7 @@ struct ViewPreview: PreviewProvider {
         ViewController().toPreview()
     }
 }
-// hexcode로 색 지정하기
+// MARK: -  hexcode로 색 지정하기
 extension UIColor {
     
     convenience init(hexCode: String, alpha: CGFloat = 1.0) {
