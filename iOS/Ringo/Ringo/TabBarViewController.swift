@@ -15,8 +15,7 @@ class TabBarViewController: UITabBarController{
         
         tabBar.backgroundColor = .init(white: 1, alpha: 0.8)
         
-//        let contactsVC = UINavigationController(rootViewController: ContactsViewController())
-        let contactsVC = ContactsNavigationController()
+        let contactsVC = UINavigationController(rootViewController: ContactsViewController())
         let recentsVC = RecentsViewController()
         let accountVC = AccountViewController()
         
@@ -28,23 +27,13 @@ class TabBarViewController: UITabBarController{
     }
 }
 
-// canvas 이용하기
+// MARK: canvas 이용하기
 import SwiftUI
-
-struct TabBarViewControllerRepresentable: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> TabBarViewController {
-        return TabBarViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: TabBarViewController, context: Context) {
-    }
-    
-    typealias UIViewControllerType = TabBarViewController
-    
-}
 @available(iOS 13.0.0, *)
-struct TabBarViewPreview: PreviewProvider {
+struct TabBarViewControllerPreView: PreviewProvider {
     static var previews: some View {
-        TabBarViewControllerRepresentable().edgesIgnoringSafeArea(.all)
+    // 사용할 뷰 컨트롤러를 넣어주세요
+        TabBarViewController()
+            .toPreview()
     }
 }

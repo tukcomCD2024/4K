@@ -13,13 +13,14 @@
 		945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603182B6AC365002F4B33 /* AccountViewController.swift */; };
 		9456031B2B6BD40B002F4B33 /* ContactsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9456031A2B6BD40B002F4B33 /* ContactsNavigationController.swift */; };
 		9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */; };
+		945603212B6D2F06002F4B33 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603202B6D2F06002F4B33 /* Canvas.swift */; };
+		945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */; };
 		945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97A2B67E1CD00396E4E /* AppDelegate.swift */; };
 		945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */; };
 		945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97E2B67E1CD00396E4E /* ViewController.swift */; };
 		945CF9842B67E1CE00396E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 945CF9832B67E1CE00396E4E /* Assets.xcassets */; };
 		945CF9872B67E1CE00396E4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */; };
 		945CF9902B69341800396E4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 945CF98F2B69341800396E4E /* SnapKit */; };
-		945CF9922B69341800396E4E /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 945CF9912B69341800396E4E /* SnapKit-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		945603182B6AC365002F4B33 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		9456031A2B6BD40B002F4B33 /* ContactsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsNavigationController.swift; sourceTree = "<group>"; };
 		9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestViewController.swift; sourceTree = "<group>"; };
+		945603202B6D2F06002F4B33 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		945CF9772B67E1CD00396E4E /* Ringo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ringo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		945CF97A2B67E1CD00396E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +47,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				945CF9902B69341800396E4E /* SnapKit in Frameworks */,
-				945CF9922B69341800396E4E /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +77,8 @@
 				945CF97E2B67E1CD00396E4E /* ViewController.swift */,
 				945603122B6AC07D002F4B33 /* TabBarViewController.swift */,
 				9456031A2B6BD40B002F4B33 /* ContactsNavigationController.swift */,
+				945603202B6D2F06002F4B33 /* Canvas.swift */,
+				945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */,
 				945603142B6AC22A002F4B33 /* ContactsViewController.swift */,
 				9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */,
 				945603162B6AC2D3002F4B33 /* RecentsViewController.swift */,
@@ -104,7 +108,6 @@
 			name = Ringo;
 			packageProductDependencies = (
 				945CF98F2B69341800396E4E /* SnapKit */,
-				945CF9912B69341800396E4E /* SnapKit-Dynamic */,
 			);
 			productName = Ringo;
 			productReference = 945CF9772B67E1CD00396E4E /* Ringo.app */;
@@ -164,11 +167,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9456031B2B6BD40B002F4B33 /* ContactsNavigationController.swift in Sources */,
+				945603212B6D2F06002F4B33 /* Canvas.swift in Sources */,
 				945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */,
 				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
 				945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */,
 				945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */,
 				945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */,
+				945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */,
 				945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */,
 				945603152B6AC22A002F4B33 /* ContactsViewController.swift in Sources */,
 				9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */,
@@ -241,7 +246,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -298,7 +303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -315,6 +320,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L2MRZPUQGZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ringo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -326,7 +332,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.icloud.vmak0314.Ringo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tukcomCD2024.Ringo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -341,6 +347,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L2MRZPUQGZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ringo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -352,7 +359,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.icloud.vmak0314.Ringo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tukcomCD2024.Ringo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -399,11 +406,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 945CF98E2B69341800396E4E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		945CF9912B69341800396E4E /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 945CF98E2B69341800396E4E /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
