@@ -84,7 +84,7 @@ extension ContactsViewController: UITableViewDelegate {
     }
 
 }
-// MARK: - UITableView
+// MARK: - UITableViewDataSource
 
 extension ContactsViewController: UITableViewDataSource {
     
