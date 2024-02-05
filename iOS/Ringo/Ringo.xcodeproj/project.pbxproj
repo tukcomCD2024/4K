@@ -10,6 +10,7 @@
 		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
 		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
 		94470A902B710CE500F0A942 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8F2B710CE500F0A942 /* WebRTC */; };
+		94470A932B7163E900F0A942 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94470A922B7163E900F0A942 /* Model.swift */; };
 		945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603122B6AC07D002F4B33 /* TabBarViewController.swift */; };
 		945603152B6AC22A002F4B33 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603142B6AC22A002F4B33 /* ContactsViewController.swift */; };
 		945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603162B6AC2D3002F4B33 /* RecentsViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		94470A922B7163E900F0A942 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		945603122B6AC07D002F4B33 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		945603142B6AC22A002F4B33 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		945603162B6AC2D3002F4B33 /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				945CF97A2B67E1CD00396E4E /* AppDelegate.swift */,
 				945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */,
 				945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */,
+				94470A922B7163E900F0A942 /* Model.swift */,
 				945603202B6D2F06002F4B33 /* Canvas.swift */,
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
 				945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */,
@@ -191,6 +194,7 @@
 				945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */,
 				945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */,
 				945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */,
+				94470A932B7163E900F0A942 /* Model.swift in Sources */,
 				945603152B6AC22A002F4B33 /* ContactsViewController.swift in Sources */,
 				9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */,
 			);
