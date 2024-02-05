@@ -8,35 +8,17 @@
 import UIKit
 import SnapKit
 
-class ContactsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ContactsViewController: UIViewController {
     
     let contactsTableViewCell = ContactsTableViewCell.identifier
     
     let randomNames = ["민준", "서준", "예준", "도윤", "시우", "주원", "하준", "지호", "지후", "준서", "준우", "현우", "도현", "지훈", "건우", "우진", "선우", "서진", "민재", "현준", "연우", "유준", "정우", "승우", "승현", "시윤", "준혁", "은우", "지환", "승민", "지우", "유찬", "윤우", "민성", "준영", "시후", "진우", "지수", "서연", "서윤", "지우", "서현", "민서", "하은", "하윤", "윤서", "지유", "지민", "채원", "지윤", "은서", "수아", "다은", "예은", "지아", "수빈", "소율", "예린", "예원", "지원", "소윤", "지안", "하린", "시은", "유진", "채은"]
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return randomNames.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: contactsTableViewCell, for: indexPath) as! ContactsTableViewCell
-        
-        cell.name.text = randomNames[indexPath.row]
-        cell.selectionStyle = .none
-                
-        return cell
-    }
-    
 
     let searchController = UISearchController()
     var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-        
-//        navigationItem.largeTitleDisplayMode = .inline
         
         //navigation
         self.navigationItem.title = "Contacts"
@@ -70,7 +52,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
 
 // MARK: - UITableViewDelegate
 
-extension ContactsViewController {
+extension ContactsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let cell = tableView.cellForRow(at: indexPath) as! ContactsTableViewCell
@@ -100,12 +82,24 @@ extension ContactsViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        
-//        tableView.deselectRow(at: indexPath, animated: false)
-//    }
 
+}
+// MARK: - UITableView
+
+extension ContactsViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return randomNames.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: contactsTableViewCell, for: indexPath) as! ContactsTableViewCell
+        
+        cell.name.text = randomNames[indexPath.row]
+        cell.selectionStyle = .none
+                
+        return cell
+    }
 }
 // MARK: - canvas 이용하기
 import SwiftUI
