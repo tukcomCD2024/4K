@@ -123,7 +123,7 @@
             android:clipToOutline="true">
 
             <EditText
-                android:id="@+id/place_holde"
+                android:id="@+id/email_edt"
                 android:layout_width="326dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
@@ -193,7 +193,7 @@
             android:clipToOutline="true">
 
             <EditText
-                android:id="@+id/place_holde2"
+                android:id="@+id/password_edt"
                 android:layout_width="326dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
@@ -247,6 +247,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.widget.Button
+            android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_2"
