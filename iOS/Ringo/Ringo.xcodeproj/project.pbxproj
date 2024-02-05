@@ -14,7 +14,6 @@
 		945603152B6AC22A002F4B33 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603142B6AC22A002F4B33 /* ContactsViewController.swift */; };
 		945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603162B6AC2D3002F4B33 /* RecentsViewController.swift */; };
 		945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603182B6AC365002F4B33 /* AccountViewController.swift */; };
-		9456031B2B6BD40B002F4B33 /* ContactsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9456031A2B6BD40B002F4B33 /* ContactsNavigationController.swift */; };
 		9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */; };
 		945603212B6D2F06002F4B33 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603202B6D2F06002F4B33 /* Canvas.swift */; };
 		945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */; };
@@ -31,7 +30,6 @@
 		945603142B6AC22A002F4B33 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		945603162B6AC2D3002F4B33 /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
 		945603182B6AC365002F4B33 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		9456031A2B6BD40B002F4B33 /* ContactsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsNavigationController.swift; sourceTree = "<group>"; };
 		9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestViewController.swift; sourceTree = "<group>"; };
 		945603202B6D2F06002F4B33 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
 		945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				94470A912B71157C00F0A942 /* Screens */,
 				945CF97A2B67E1CD00396E4E /* AppDelegate.swift */,
 				945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */,
-				9456031A2B6BD40B002F4B33 /* ContactsNavigationController.swift */,
 				945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */,
 				945603202B6D2F06002F4B33 /* Canvas.swift */,
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
@@ -186,7 +183,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9456031B2B6BD40B002F4B33 /* ContactsNavigationController.swift in Sources */,
 				945603212B6D2F06002F4B33 /* Canvas.swift in Sources */,
 				945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */,
 				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
