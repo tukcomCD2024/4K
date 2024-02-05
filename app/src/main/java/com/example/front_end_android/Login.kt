@@ -3,6 +3,7 @@ package com.example.front_end_android
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.front_end_android.databinding.ActivityLoginBinding
 import com.google.gson.JsonObject
@@ -20,14 +21,6 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Retrofit 객체 생성
-        val retrofit = Retrofit.Builder()
-            .baseUrl("172.30.1.28:8080/") // 서버의 기본 URL을 지정
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        // RetrofitService 인터페이스 구현체 생성
-        val service = retrofit.create(RetrofitService::class.java)
-
         binding.goSignUp.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
@@ -44,6 +37,15 @@ class Login : AppCompatActivity() {
                 Toast.makeText(this@Login, "아디비번입력", Toast.LENGTH_SHORT).show()
 
             }else{
+
+                // Retrofit 객체 생성
+                val retrofit = Retrofit.Builder()
+                    .baseUrl("http://172.30.1.28:8080/") // 서버의 기본 URL을 지정
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                // RetrofitService 인터페이스 구현체 생성
+                val service = retrofit.create(RetrofitService::class.java)
+
                 // POST 요청 보내기
                 val callLogin = service.loginRetrofit(loginemail, loginpassword)
 
@@ -66,10 +68,10 @@ class Login : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                        Toast.makeText(this@Login, "2번에러", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@Login, "${t.message}", Toast.LENGTH_SHORT).show()
                         // 요청 실패 처리
                         // 예외 상황을 처리
-                        //println("Request failed: ${t.message}")
+                        Log.e("Faillogin", "Request failed: ${t.message}", t)
                     }
                 })
             }
