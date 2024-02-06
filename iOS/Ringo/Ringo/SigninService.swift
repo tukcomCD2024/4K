@@ -17,14 +17,14 @@ class SigninSercive {
     
     func login(email: String, password: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://APIConstants.loginURL/post" //통신할 API 주소
+        let url = "http://192.168.0.7:7080/member/login" //통신할 API 주소
         
         //HTTP Headers : 요청 헤더
         let header : HTTPHeaders = ["Content-Type" : "application/json"]
         
         //요청 바디
         let body : Parameters = [
-            "email" : email,
+            "loginEmail" : email,
             "password" : password
         ]
         
@@ -54,6 +54,7 @@ class SigninSercive {
         }
     }
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        print(statusCode)
         switch statusCode {
         case ..<300 : return isVaildData(data: data)
         case 400..<500 : return .pathErr
@@ -63,8 +64,10 @@ class SigninSercive {
     }
     //통신이 성공하고 원하는 데이터가 올바르게 들어왔을때 처리하는 함수
     private func isVaildData(data: Data) -> NetworkResult<Any> {
-        let decoder = JSONDecoder() //서버에서 준 데이터를 Codable을 채택
-        guard let decodedData = try? decoder.decode(SigninDataResponse.self, from: data)
+        let decodedata = String(data: data, encoding: .utf8)
+        print(decodedata! as Any)
+//        let decoder = JSONDecoder() //서버에서 준 데이터를 Codable을 채택
+        guard let decodedData = /*try? decoder.decode(SigninDataResponse.self, from: data)*/ decodedata
         //데이터가 변환이 되게끔 Response 모델 구조체로 데이터를 변환해서 넣고, 그 데이터를 NetworkResult Success 파라미터로 전달
         else { return .pathErr }
         
