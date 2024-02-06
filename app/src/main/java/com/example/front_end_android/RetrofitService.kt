@@ -9,8 +9,13 @@ import retrofit2.http.POST
 
 interface RetrofitService {
 
+    @FormUrlEncoded
     @POST("member/login")
-    fun loginRetrofit(@Body body: JsonObject): Call<String>
+    fun loginRetrofit(
+        @Field("loginEmail") loginEmail: String,
+        @Field("password") password: String
+    ): Call<Any>
+
     @FormUrlEncoded
     @POST("member/save")
     fun setUser(@Field("email") email: String,

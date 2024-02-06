@@ -39,28 +39,25 @@ class Login : AppCompatActivity() {
             var loginemail = binding.emailEdt.text.toString()
             var loginpassword = binding.passwordEdt.text.toString()
 
-            val jsonObject = JsonObject()
-            jsonObject.addProperty("loginEmail", "arrisung@naver.com")
-            jsonObject.addProperty("password", "1234")
-            //jsonObject.addProperty("loginEmail", loginemail)
-            //jsonObject.addProperty("password", loginpassword)
-            val call = service.loginRetrofit(jsonObject)
+            val call = service.loginRetrofit(loginemail, loginpassword)
 
-            call.enqueue(object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+            call.enqueue(object : Callback<Any> {
+                override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.isSuccessful) {
                         val jsonResponse = response.body()
                         Log.d("YMC", "onResponse 성공: $jsonResponse")
 
-                        val intent = Intent(this@Login, NaviActivity::class.java)
-                        startActivity(intent)
+                        if(jsonResponse=="success"){
+                            val intent = Intent(this@Login, NaviActivity::class.java)
+                            startActivity(intent)
+                        }
 
                     } else {
                         Log.d("YMC", "onResponse 실패")
                     }
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<Any>, t: Throwable) {
                     Log.d("YMC", "onFailure 에러: ${t.message}")
                 }
             })
