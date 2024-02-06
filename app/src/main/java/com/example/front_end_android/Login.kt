@@ -29,7 +29,7 @@ class Login : AppCompatActivity() {
 
         val gson = GsonBuilder().setLenient().create()
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.219.108:8080/")
+            .baseUrl("http://192.168.219.105:8080/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
         val service = retrofit.create(RetrofitService::class.java);
