@@ -24,25 +24,27 @@ class ConnectionViewController: UIViewController {
     }
     
     func setUpView() {
+        view.layer.addSublayer(gradientLayer)
         view.addSubview(collectionView)
-//        view.layer.addSublayer(gradientLayer)
     }
 
     func setUpValue() {
         view.backgroundColor = .clear
-//        gradientLayer.frame = view.bounds
-//        gradientLayer.colors = [UIColor.systemRed,UICol or.systemPink,UIColor.systemPurple]
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [
+            UIColor.systemRed.cgColor,
+            UIColor.systemPink.cgColor,
+            UIColor.systemPurple.cgColor
+        ]
+        
         collectionView.register(ConnectionCollectionViewCell.self, forCellWithReuseIdentifier: connectionCollectionViewCell)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .yellow
+        collectionView.backgroundColor = .clear
     }
     
     func setConstraints() {
         collectionView.snp.makeConstraints { make in
-//            make.top.equalTo(view.safeAreaLayoutGuide)
-//            make.leading.equalTo(view.safeAreaLayoutGuide)
-//            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.7)
             make.edges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.65)
         }
@@ -114,6 +116,7 @@ extension ConnectionViewController: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: 40, left: 40, bottom: 40, right: 40)
     }
 }
+
 // MARK: - canvas 이용하기
 import SwiftUI
 @available(iOS 13.0.0, *)
