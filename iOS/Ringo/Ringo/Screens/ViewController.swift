@@ -84,6 +84,7 @@ class ViewController: UIViewController {
         input_email.layer.borderColor = UIColor(hexCode: "E2E8F0").cgColor
         input_email.layer.cornerRadius = 5
         input_email.keyboardType = .emailAddress
+        input_email.autocapitalizationType = .none
         
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -114,6 +115,7 @@ class ViewController: UIViewController {
         input_passwd.isSecureTextEntry = true
         input_passwd.rightView = showBtn
         input_passwd.rightViewMode = .always
+        input_passwd.autocapitalizationType = .none
         
         error.layer.isHidden = true
         error.setTitle(" Incorrect password. Please check your password.", for: .normal)
