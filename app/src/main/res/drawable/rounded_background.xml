@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#00FF00" /> <!-- 초록색 배경 -->
+    <corners android:radius="20dp" /> <!-- 70dp의 반지름을 갖는 둥근 모서리 -->
+</shape>
