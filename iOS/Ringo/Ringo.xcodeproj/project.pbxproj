@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940C25642B73D20900E069D0 /* ConnectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */; };
 		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
 		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
 		94470A902B710CE500F0A942 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8F2B710CE500F0A942 /* WebRTC */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		94470A962B717DC300F0A942 /* ConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewController.swift; sourceTree = "<group>"; };
 		945603122B6AC07D002F4B33 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		945603142B6AC22A002F4B33 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				94470A912B71157C00F0A942 /* Screens */,
 				945CF97A2B67E1CD00396E4E /* AppDelegate.swift */,
 				945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */,
+				940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */,
 				945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */,
 				94470A962B717DC300F0A942 /* ConnectionViewController.swift */,
 				945603202B6D2F06002F4B33 /* Canvas.swift */,
@@ -190,6 +193,7 @@
 				94470A972B717DC300F0A942 /* ConnectionViewController.swift in Sources */,
 				945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */,
 				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
+				940C25642B73D20900E069D0 /* ConnectionCollectionViewCell.swift in Sources */,
 				945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */,
 				945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */,
 				945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */,
