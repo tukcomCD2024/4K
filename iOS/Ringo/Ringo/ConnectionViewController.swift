@@ -13,6 +13,13 @@ class ConnectionViewController: UIViewController {
     let connectionCollectionViewCell = ConnectionCollectionViewCell.identifier
     let gradientLayer = CAGradientLayer()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let vStack = UIStackView()
+    let hStack1 = UIStackView()
+    let hStack2 = UIStackView()
+    let muteBtn = UIButton()
+    let speakerBtn = UIButton()
+    let translateBtn = UIButton()
+    let hangUpBtn = UIButton()
     
     let randomNames = ["민준", "서준"]
     
@@ -26,6 +33,13 @@ class ConnectionViewController: UIViewController {
     func setUpView() {
         view.layer.addSublayer(gradientLayer)
         view.addSubview(collectionView)
+        view.addSubview(vStack)
+        vStack.addArrangedSubview(hStack1)
+        vStack.addArrangedSubview(hStack2)
+        hStack1.addArrangedSubview(muteBtn)
+        hStack1.addArrangedSubview(speakerBtn)
+        hStack1.addArrangedSubview(translateBtn)
+        hStack2.addArrangedSubview(hangUpBtn)
     }
 
     func setUpValue() {
@@ -46,6 +60,59 @@ class ConnectionViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .clear
+        
+        vStack.layoutMargins = UIEdgeInsets(top: 30, left: 40, bottom: 30, right: 40)
+        vStack.isLayoutMarginsRelativeArrangement = true
+        vStack.axis = .vertical
+        vStack.alignment = .center
+        vStack.distribution = .fillEqually
+        vStack.spacing = 40
+        
+        hStack1.axis = .horizontal
+        hStack1.alignment = .center
+        hStack1.distribution = .equalCentering
+        
+        let imageSize = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 25))
+        
+        muteBtn.backgroundColor = .white.withAlphaComponent(0.16)
+        muteBtn.tintColor = .white
+        muteBtn.configuration = .plain()
+        muteBtn.setImage(UIImage(systemName: "mic.slash.fill",withConfiguration: imageSize), for: .normal)
+        muteBtn.clipsToBounds = true
+        muteBtn.invalidateIntrinsicContentSize()
+        muteBtn.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 25, bottom: 25, trailing: 25)
+        muteBtn.layer.cornerRadius = 40
+        
+        speakerBtn.backgroundColor = .white.withAlphaComponent(0.16)
+        speakerBtn.tintColor = .white
+        speakerBtn.configuration = .plain()
+        speakerBtn.setImage(UIImage(systemName: "speaker.wave.3.fill",withConfiguration: imageSize), for: .normal)
+        speakerBtn.clipsToBounds = true
+        speakerBtn.invalidateIntrinsicContentSize()
+        speakerBtn.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 15, bottom: 25, trailing: 15)
+        speakerBtn.layer.cornerRadius = 40
+        
+        translateBtn.backgroundColor = .white.withAlphaComponent(0.16)
+        translateBtn.tintColor = .white
+        translateBtn.configuration = .plain()
+        translateBtn.setImage(UIImage(systemName: "character.book.closed.fill",withConfiguration: imageSize), for: .normal)
+        translateBtn.clipsToBounds = true
+        translateBtn.invalidateIntrinsicContentSize()
+        translateBtn.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 23, bottom: 25, trailing: 23)
+        translateBtn.layer.cornerRadius = 40
+        
+        hStack2.axis = .horizontal
+        hStack2.alignment = .center
+        hStack2.distribution = .equalCentering
+        
+        hangUpBtn.backgroundColor = .systemRed
+        hangUpBtn.tintColor = .white
+        hangUpBtn.configuration = .plain()
+        hangUpBtn.setImage(UIImage(systemName: "phone.down.fill",withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 30))), for: .normal)
+        hangUpBtn.clipsToBounds = true
+        hangUpBtn.invalidateIntrinsicContentSize()
+        hangUpBtn.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 16, bottom: 25, trailing: 16)
+        hangUpBtn.layer.cornerRadius = 40
     }
     
     func setConstraints() {
@@ -53,14 +120,23 @@ class ConnectionViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.65)
         }
+        vStack.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+        }
+        hStack1.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(vStack.layoutMarginsGuide)
+        }
+        
     }
 
 }
-
+//MARK: - CollectionViewDelegate
 extension ConnectionViewController: UICollectionViewDelegate {
     
 }
-
+//MARK: - CollectionViewDataSource
 extension ConnectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -96,7 +172,7 @@ extension ConnectionViewController: UICollectionViewDataSource {
     }
 }
 
-// cell layout
+//MARK: - cell layout
 extension ConnectionViewController: UICollectionViewDelegateFlowLayout {
 
     // 위 아래 간격
