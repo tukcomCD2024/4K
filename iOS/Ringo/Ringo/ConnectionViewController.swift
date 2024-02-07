@@ -117,7 +117,8 @@ class ConnectionViewController: UIViewController {
     
     func setConstraints() {
         collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.65)
         }
         vStack.snp.makeConstraints { make in
