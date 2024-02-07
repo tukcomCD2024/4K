@@ -33,11 +33,15 @@ class ConnectionCollectionViewCell: UICollectionViewCell {
     
     func setUpValue() {
         nameLabel.text = "name"
+        nameLabel.textColor = .white
         nameLabel.font = .preferredFont(forTextStyle: .title2)
         nameLabel.textAlignment = .center
         nameLabel.backgroundColor = .black.withAlphaComponent(0.5)
         nameLabel.layer.cornerRadius = 15
         nameLabel.clipsToBounds = true
+
+//        nameLabel.layer.borderColor = UIColor.systemGreen.cgColor
+//        nameLabel.layer.borderWidth = 2
     }
     
     func setConstraints() {

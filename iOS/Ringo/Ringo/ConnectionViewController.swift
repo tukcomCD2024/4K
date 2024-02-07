@@ -31,10 +31,15 @@ class ConnectionViewController: UIViewController {
     func setUpValue() {
         view.backgroundColor = .clear
         gradientLayer.frame = view.bounds
+        gradientLayer.type = .radial
+        gradientLayer.startPoint = CGPoint(x: -0.3, y: -0.15)
+        gradientLayer.endPoint = CGPoint(x: 2.0, y: 1.0)
+        gradientLayer.locations = [0,0.1,0.8,1]
         gradientLayer.colors = [
-            UIColor.systemRed.cgColor,
-            UIColor.systemPink.cgColor,
-            UIColor.systemPurple.cgColor
+            CGColor(red: 111/255.0, green: 122/255.0, blue: 130/255.0, alpha: 1),
+            CGColor(red: 93/255.0, green: 114/255.0, blue: 126/255.0, alpha: 1),
+            CGColor(red: 17/255.0, green: 43/255.0, blue: 74/255.0, alpha: 1),
+            CGColor(red: 13/255.0, green: 36/255.0, blue: 69/255.0, alpha: 1)
         ]
         
         collectionView.register(ConnectionCollectionViewCell.self, forCellWithReuseIdentifier: connectionCollectionViewCell)
