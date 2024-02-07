@@ -13,6 +13,8 @@ class TabBarViewController: UITabBarController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .systemBackground
+        
         tabBar.backgroundColor = .init(white: 1, alpha: 0.8)
         
         let contactsVC = UINavigationController(rootViewController: ContactsViewController())
@@ -22,6 +24,8 @@ class TabBarViewController: UITabBarController{
         contactsVC.tabBarItem = UITabBarItem(title: "Contacts", image: UIImage(systemName: "person.3"), tag: 1)
         recentsVC.tabBarItem = UITabBarItem(title: "Recents", image: UIImage(systemName: "clock"), tag: 2)
         accountVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(systemName: "person.text.rectangle"), tag: 3)
+
+        contactsVC.navigationBar.backgroundColor = .systemBackground
         
         setViewControllers([contactsVC,recentsVC,accountVC], animated: false)
     }

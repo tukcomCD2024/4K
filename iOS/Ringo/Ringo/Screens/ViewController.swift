@@ -84,6 +84,7 @@ class ViewController: UIViewController {
         input_email.layer.borderColor = UIColor(hexCode: "E2E8F0").cgColor
         input_email.layer.cornerRadius = 5
         input_email.keyboardType = .emailAddress
+        input_email.autocapitalizationType = .none
         
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -114,8 +115,9 @@ class ViewController: UIViewController {
         input_passwd.isSecureTextEntry = true
         input_passwd.rightView = showBtn
         input_passwd.rightViewMode = .always
+        input_passwd.autocapitalizationType = .none
         
-//        error.layer.isHidden = true
+        error.layer.isHidden = true
         error.setTitle(" Incorrect password. Please check your password.", for: .normal)
         error.setTitleColor(.red, for: .normal)
         error.titleLabel?.font = .systemFont(ofSize: 13)
@@ -136,7 +138,9 @@ class ViewController: UIViewController {
         signinBtn.layer.shadowOpacity = 0.5
         signinBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
         signinBtn.layer.masksToBounds = false
-        
+        signinBtn.addTarget(self, action: #selector(onPressSignin(_:)), for: .touchUpInside)
+//        signinBtn.addAction(UIAction{_ in self.login()}, for: .touchUpInside)
+    
         Text4.text = "or continue with"
         Text4.font = .preferredFont(forTextStyle: .body)
         Text4.textColor = .lightGray
@@ -215,6 +219,9 @@ class ViewController: UIViewController {
             make.trailing.equalTo(apple.snp.leading).offset(-20)
         }
     }
+    @objc func onPressSignin(_ sender: UIButton) {
+        login()
+    }
 }
 
 // MARK: - canvas 이용하기
@@ -244,5 +251,54 @@ extension UIColor {
                   green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
                   blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
                   alpha: alpha)
+    }
+}
+// MARK: -  Sign in
+extension ViewController {
+    
+    func login() {
+            
+        guard let email = input_email.text else { return }
+        guard let passward = input_passwd.text else { return }
+        
+        SigninSercive.shared.login(email: email, password: passward) { response in
+            switch response {
+            case .success(let data):
+                    
+                guard let data = data as? String else { return }
+                if data == "success"{
+//                    UserDefaults.standard.set(data.data?.jwtToken, forKey: "jwtToken")
+                    let nav = UINavigationController()
+                    nav.modalPresentationStyle = .fullScreen
+                    nav.navigationBar.barTintColor = .white
+//                  nav.navigationBar.tintColor = UIColor(w: 42)
+                        
+                    //네비게이션 중복 수정 1/31
+                    nav.navigationBar.isHidden = true
+                        
+                    let controller = TabBarViewController()
+                    nav.viewControllers = [controller]
+                    self.present(nav, animated: true, completion: nil)
+                    print(data)
+                } else {
+                    let alert = UIAlertController(title: data, message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+            //            alert.addAction(UIAlertAction(title: "DEFAULT", style: .default, handler: nil))
+            //            alert.addAction(UIAlertAction(title: "DESTRUCTIVE", style: .destructive, handler: nil))
+                        
+                    self.present(alert, animated: true, completion: nil)
+                    print(data)
+                    }
+                    
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
 }
