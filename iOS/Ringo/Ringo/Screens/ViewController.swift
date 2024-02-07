@@ -268,9 +268,9 @@ extension ViewController {
                     let nav = UINavigationController()
                     nav.modalPresentationStyle = .fullScreen
                     nav.navigationBar.barTintColor = .white
-//                        nav.navigationBar.tintColor = UIColor(w: 42)
+//                  nav.navigationBar.tintColor = UIColor(w: 42)
                         
-                       //MARK: - 네비게이션 중복 수정 1/31
+                    //네비게이션 중복 수정 1/31
                     nav.navigationBar.isHidden = true
                         
                     let controller = TabBarViewController()
