@@ -14,10 +14,3 @@ data class User(
     @SerializedName("firebaseToken")
     var firebaseToken: String
 )
-
-data class LoginRequest(
-    @SerializedName("loginEmail")
-    var loginEmail: String,
-    @SerializedName("password")
-    var password: String
-)
