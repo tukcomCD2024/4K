@@ -28,7 +28,3 @@ data class member_login(
     @SerializedName("password")
     var password: String
 )
-
-data class member_login_response(
-    val login_response: String
-)
