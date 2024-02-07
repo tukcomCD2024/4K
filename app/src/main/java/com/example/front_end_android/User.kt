@@ -7,8 +7,6 @@ data class User(
     var id: Long,
     @SerializedName("email")
     var email: String,
-    @SerializedName("loginEmail")
-    var loginEmail: String,
     @SerializedName("password")
     var password: String,
     @SerializedName("name")
@@ -17,13 +15,31 @@ data class User(
     var firebaseToken: String
 )
 
-data class loginPost(
+data class LoginRequest(
     @SerializedName("loginEmail")
     var loginEmail: String,
     @SerializedName("password")
     var password: String
 )
 
-data class loginResponse(
-    var responselogin: String
+data class member_login(
+    @SerializedName("loginEmail")
+    var loginEmail: String,
+    @SerializedName("password")
+    var password: String
+)
+
+data class member_login_response(
+    val login_response: String
+)
+
+data class UserModel(
+    @SerializedName("id")
+    var id: Long,
+    @SerializedName("email")
+    var email: String,
+    @SerializedName("password")
+    var password: String,
+    @SerializedName("name")
+    var name: String
 )

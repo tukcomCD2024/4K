@@ -1,13 +1,25 @@
 package com.example.front_end_android
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.example.front_end_android.databinding.FragmentFriendsBinding
+import com.google.gson.GsonBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,6 +67,50 @@ class FriendsFragment : Fragment() {
 
         }
 
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.219.105:8080/")
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build();
+        val service = retrofit.create(RetrofitService::class.java);
+        val call = service.myFriendsRetrofit(1)
+
+        val friends_scrollView = binding.friendsScrollview
+        val friends_scrollView_Linear = binding.frinedsScrollviewLinear
+
+        val textLayoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        call.enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                if (response.isSuccessful) {
+                    val friendsList: List<*>? = response.body() as? List<*>
+                    Log.d("YMC", "onResponse 성공: $friendsList")//*
+
+                    if (friendsList != null) {
+
+                        for (item in friendsList) {
+                            val textView = TextView(requireContext())
+                            textView.layoutParams = textLayoutParams
+                            textView.text = item.toString()
+                            textView.gravity = Gravity.CENTER_VERTICAL
+                            textView.setBackgroundColor(Color.WHITE)
+                            friends_scrollView_Linear.addView(textView)
+                        }
+                    }
+
+                } else {
+                    Log.d("YMC", "onResponse 실패")
+                }
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                Log.d("YMC", "onFailure 에러: ${t.message}")//*
+            }
+        })
+
         return binding.root
         //return inflater.inflate(R.layout.fragment_friends, container, false)
     }
@@ -78,4 +134,10 @@ class FriendsFragment : Fragment() {
                 }
             }
     }
+
+    private fun Int.dpToPx(): Int {
+        val scale = resources.displayMetrics.density
+        return (this * scale + 0.5f).toInt()
+    }
+
 }
