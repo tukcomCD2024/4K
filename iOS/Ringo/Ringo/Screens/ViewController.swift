@@ -232,7 +232,7 @@ struct ViewPreview: PreviewProvider {
         ViewController().toPreview()
     }
 }
-// MARK: - hexcode로 색 지정하기
+// MARK: -  hexcode로 색 지정하기
 extension UIColor {
     
     convenience init(hexCode: String, alpha: CGFloat = 1.0) {
@@ -253,6 +253,7 @@ extension UIColor {
                   alpha: alpha)
     }
 }
+// MARK: -  Sign in
 extension ViewController {
     
     func login() {
