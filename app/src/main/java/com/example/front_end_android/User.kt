@@ -21,10 +21,3 @@ data class LoginRequest(
     @SerializedName("password")
     var password: String
 )
-
-data class member_login(
-    @SerializedName("loginEmail")
-    var loginEmail: String,
-    @SerializedName("password")
-    var password: String
-)
