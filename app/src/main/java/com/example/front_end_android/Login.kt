@@ -45,7 +45,7 @@ class Login : AppCompatActivity() {
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.isSuccessful) {
                         val jsonResponse = response.body()
-                        Log.d("YMC", "onResponse 성공: $jsonResponse")
+                        Log.d("YMC", "onResponse 성공: $jsonResponse")//*
 
                         if(jsonResponse=="success"){
                             val intent = Intent(this@Login, NaviActivity::class.java)
@@ -53,12 +53,12 @@ class Login : AppCompatActivity() {
                         }
 
                     } else {
-                        Log.d("YMC", "onResponse 실패")
+                        Log.d("YMC", "onResponse 실패")//*
                     }
                 }
 
                 override fun onFailure(call: Call<Any>, t: Throwable) {
-                    Log.d("YMC", "onFailure 에러: ${t.message}")
+                    Log.d("YMC", "onFailure 에러: ${t.message}")//*
                 }
             })
 
