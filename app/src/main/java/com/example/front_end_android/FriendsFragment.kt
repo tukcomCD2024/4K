@@ -87,137 +87,120 @@ class FriendsFragment : Fragment() {
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
 
-        val emailList = listOf(
-            "agrfwref@naver.com",
-            "bob@example.com",
-            "cathy@example.com",
-            "abcdefg@naver.com"
-            // 이메일 주소들을 추가하세요...
-        )
-        val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-        for (letter in alphabet) {
-            val groupLayout = LinearLayout(requireContext())
-            groupLayout.orientation = LinearLayout.VERTICAL
-
-            val headerTextView = TextView(requireContext())
-            headerTextView.text = letter.toString()
-            headerTextView.textSize = 20f
-
-            val header_params = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            header_params.topMargin = 60 // 위쪽 간격 설정
-            headerTextView.layoutParams = header_params
-            groupLayout.addView(headerTextView)
-
-            val header_lineView = View(requireContext())
-            val header_line_params = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                1
-            )
-            header_line_params.topMargin = 30
-            header_lineView.layoutParams = header_line_params
-            header_lineView.setBackgroundColor(Color.GRAY)
-            groupLayout.addView(header_lineView)
-
-            for (email in emailList) {
-                if (email.startsWith(letter, ignoreCase = true)) {
-                    val emailTextView = TextView(requireContext())
-                    emailTextView.text = email
-                    emailTextView.setTextColor(Color.BLACK)
-                    emailTextView.textSize = 20f
-
-                    val email_params = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    email_params.topMargin = 30 // 위쪽 간격 설정
-                    emailTextView.layoutParams = email_params
-                    groupLayout.addView(emailTextView)
-
-                    val email_lineView = View(requireContext())
-                    val email_line_params = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        1
-                    )
-                    email_line_params.topMargin = 30
-                    email_lineView.layoutParams = email_line_params
-                    email_lineView.setBackgroundColor(Color.GRAY)
-                    groupLayout.addView(email_lineView)
-
-                    val containerLayout = RelativeLayout(requireContext())
-                    containerLayout.setBackgroundColor(Color.parseColor("#E2E8F0"))
-
-                    val container_layoutParams = RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.MATCH_PARENT, // 너비를 매칭하도록 설정
-                        140
-                    )
-                    containerLayout.layoutParams = container_layoutParams
-
-                    containerLayout.visibility = View.GONE // 초기에는 숨김 상태로 설정
-                    groupLayout.addView(containerLayout)
-
-                    emailTextView.setOnClickListener {
-                        // 클릭 시 컨테이너의 가시성을 토글
-                        containerLayout.visibility = if (containerLayout.visibility == View.VISIBLE) {
-                            View.GONE
-                        } else {
-                            View.VISIBLE
-                        }
-                    }
-
-                    val container_lineView = View(requireContext())
-                    val container_line_params = RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.MATCH_PARENT,
-                        1
-                    )
-
-                    container_line_params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM) // 콘테이너 아래에 추가되도록 설정
-                    container_lineView.layoutParams = container_line_params
-                    container_lineView.setBackgroundColor(Color.GRAY)
-                    containerLayout.addView(container_lineView)
-
-                    val imageView = ImageView(requireContext())
-                    imageView.setImageResource(R.drawable.baseline_call_24) // 이미지 리소스 설정
-                    imageView.background = ContextCompat.getDrawable(requireContext(), R.drawable.rounded_background) // 배경 설정
-
-                    val image_params = RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    image_params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT) // 오른쪽 끝에 배치되도록 설정
-                    image_params.addRule(RelativeLayout.CENTER_VERTICAL)// 위아래 중앙 배치
-                    imageView.layoutParams = image_params
-                    imageView.setOnClickListener {
-                        val intent = Intent(requireActivity(), Calling::class.java)
-                        startActivity(intent)
-                    }
-                    containerLayout.addView(imageView)
-
-                }
-            }
-
-            friends_scrollView_Linear.addView(groupLayout)
-        }
-
         call.enqueue(object : Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 if (response.isSuccessful) {
                     val friendsList: List<*>? = response.body() as? List<*>
                     Log.d("YMC", "onResponse 성공: $friendsList")//*
 
-                    if (friendsList != null) {
+                    val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-                        for (item in friendsList) {
-                            val textView = TextView(requireContext())
-                            textView.layoutParams = textLayoutParams
-                            textView.text = item.toString()
-                            textView.gravity = Gravity.CENTER_VERTICAL
-                            textView.setBackgroundColor(Color.WHITE)
-                            friends_scrollView_Linear.addView(textView)
+                    for (letter in alphabet) {
+                        val groupLayout = LinearLayout(requireContext())
+                        groupLayout.orientation = LinearLayout.VERTICAL
+
+                        val headerTextView = TextView(requireContext())
+                        headerTextView.text = letter.toString()
+                        headerTextView.textSize = 20f
+
+                        val header_params = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+                        header_params.topMargin = 60 // 위쪽 간격 설정
+                        headerTextView.layoutParams = header_params
+                        groupLayout.addView(headerTextView)
+
+                        val header_lineView = View(requireContext())
+                        val header_line_params = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            1
+                        )
+                        header_line_params.topMargin = 30
+                        header_lineView.layoutParams = header_line_params
+                        header_lineView.setBackgroundColor(Color.GRAY)
+                        groupLayout.addView(header_lineView)
+
+                        if (friendsList != null) {
+                            for (email in friendsList) {
+                                if (email is String && email.startsWith(letter, ignoreCase = true)) {
+                                    val emailTextView = TextView(requireContext())
+                                    emailTextView.text = email
+                                    emailTextView.setTextColor(Color.BLACK)
+                                    emailTextView.textSize = 20f
+
+                                    val email_params = LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                    )
+                                    email_params.topMargin = 30 // 위쪽 간격 설정
+                                    emailTextView.layoutParams = email_params
+                                    groupLayout.addView(emailTextView)
+
+                                    val email_lineView = View(requireContext())
+                                    val email_line_params = LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        1
+                                    )
+                                    email_line_params.topMargin = 30
+                                    email_lineView.layoutParams = email_line_params
+                                    email_lineView.setBackgroundColor(Color.GRAY)
+                                    groupLayout.addView(email_lineView)
+
+                                    val containerLayout = RelativeLayout(requireContext())
+                                    containerLayout.setBackgroundColor(Color.parseColor("#E2E8F0"))
+
+                                    val container_layoutParams = RelativeLayout.LayoutParams(
+                                        RelativeLayout.LayoutParams.MATCH_PARENT, // 너비를 매칭하도록 설정
+                                        140
+                                    )
+                                    containerLayout.layoutParams = container_layoutParams
+
+                                    containerLayout.visibility = View.GONE // 초기에는 숨김 상태로 설정
+                                    groupLayout.addView(containerLayout)
+
+                                    emailTextView.setOnClickListener {
+                                        // 클릭 시 컨테이너의 가시성을 토글
+                                        containerLayout.visibility = if (containerLayout.visibility == View.VISIBLE) {
+                                            View.GONE
+                                        } else {
+                                            View.VISIBLE
+                                        }
+                                    }
+
+                                    val container_lineView = View(requireContext())
+                                    val container_line_params = RelativeLayout.LayoutParams(
+                                        RelativeLayout.LayoutParams.MATCH_PARENT,
+                                        1
+                                    )
+
+                                    container_line_params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM) // 콘테이너 아래에 추가되도록 설정
+                                    container_lineView.layoutParams = container_line_params
+                                    container_lineView.setBackgroundColor(Color.GRAY)
+                                    containerLayout.addView(container_lineView)
+
+                                    val imageView = ImageView(requireContext())
+                                    imageView.setImageResource(R.drawable.baseline_call_24) // 이미지 리소스 설정
+                                    imageView.background = ContextCompat.getDrawable(requireContext(), R.drawable.rounded_background) // 배경 설정
+
+                                    val image_params = RelativeLayout.LayoutParams(
+                                        RelativeLayout.LayoutParams.WRAP_CONTENT,
+                                        RelativeLayout.LayoutParams.WRAP_CONTENT
+                                    )
+                                    image_params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT) // 오른쪽 끝에 배치되도록 설정
+                                    image_params.addRule(RelativeLayout.CENTER_VERTICAL)// 위아래 중앙 배치
+                                    imageView.layoutParams = image_params
+                                    imageView.setOnClickListener {
+                                        val intent = Intent(requireActivity(), Calling::class.java)
+                                        startActivity(intent)
+                                    }
+                                    containerLayout.addView(imageView)
+
+                                }
+                            }
                         }
+
+                        friends_scrollView_Linear.addView(groupLayout)
                     }
 
                 } else {
