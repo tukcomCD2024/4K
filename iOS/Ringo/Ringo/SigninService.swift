@@ -54,7 +54,6 @@ class SigninSercive {
         }
     }
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
-        print(statusCode)
         switch statusCode {
         case ..<300 : return isVaildData(data: data)
         case 400..<500 : return .pathErr

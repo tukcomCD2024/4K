@@ -279,7 +279,6 @@ extension ViewController {
                     let controller = TabBarViewController()
                     nav.viewControllers = [controller]
                     self.present(nav, animated: true, completion: nil)
-                    print(data)
                 } else {
                     let alert = UIAlertController(title: data, message: "", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
