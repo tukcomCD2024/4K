@@ -12,7 +12,7 @@ class ContactsViewController: UIViewController {
     
     let contactsTableViewCell = ContactsTableViewCell.identifier
     
-    let randomNames = ["민준", "서준", "예준", "도윤", "시우", "주원", "하준", "지호", "지후", "준서", "준우", "현우", "도현", "지훈", "건우", "우진", "선우", "서진", "민재", "현준", "연우", "유준", "정우", "승우", "승현", "시윤", "준혁", "은우", "지환", "승민", "지우", "유찬", "윤우", "민성", "준영", "시후", "진우", "지수", "서연", "서윤", "지우", "서현", "민서", "하은", "하윤", "윤서", "지유", "지민", "채원", "지윤", "은서", "수아", "다은", "예은", "지아", "수빈", "소율", "예린", "예원", "지원", "소윤", "지안", "하린", "시은", "유진", "채은"]
+    var randomNames = [String]()
 
     let searchController = UISearchController()
     var tableView: UITableView!
@@ -32,10 +32,11 @@ class ContactsViewController: UIViewController {
         tableView.register(ContactsTableViewCell.self, forCellReuseIdentifier: contactsTableViewCell)
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(tableView)
         
         setConstraints()
+        
+        loadFriends()
     }
     
     func setConstraints(){
@@ -101,6 +102,38 @@ extension ContactsViewController: UITableViewDataSource {
         return cell
     }
 }
+// MARK: -  Sign in
+extension ContactsViewController {
+    
+    func loadFriends() {
+        //id 3인 유저의 친구목록
+        FriendService.shared.loadFriendsList(userId: 3) { response in
+            switch response {
+            case .success(let data):
+                    
+                guard let data = data as? [String] else { return }
+                if !data.isEmpty {
+                    self.randomNames = data
+                    self.tableView.reloadData()
+                } else {
+                    let alert = UIAlertController(title: "친구가 없습니다", message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    }
+                    
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+}
+
 // MARK: - canvas 이용하기
 import SwiftUI
 @available(iOS 13.0.0, *)
