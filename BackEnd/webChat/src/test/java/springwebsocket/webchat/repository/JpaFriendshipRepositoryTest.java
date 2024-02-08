@@ -133,7 +133,7 @@ class JpaFriendshipRepositoryTest {
     }
 
     @Test
-    @Transactional
+//    @Transactional
     void findByUserIdAndStatusOrFriendIdAndStatus() {
         // given
         Member sender = new Member("sender3@naver.com", "1234", "sender");
