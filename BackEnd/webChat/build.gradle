@@ -45,6 +45,9 @@ dependencies {
 
     //firebase 추가
     implementation 'com.google.firebase:firebase-admin:9.2.0'
+
+    //validation 유효성 검사
+//    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
