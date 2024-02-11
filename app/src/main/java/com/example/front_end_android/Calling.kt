@@ -12,7 +12,7 @@ class Calling : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCallingBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_calling)
+        setContentView(binding.root)
 
         binding.buttonTest.setOnClickListener {
             binding.callingPeople1.visibility = View.VISIBLE
