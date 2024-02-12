@@ -19,11 +19,13 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.front_end_android.databinding.FragmentFriendsBinding
 import com.google.gson.GsonBuilder
+import com.permissionx.guolindev.PermissionX
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import android.Manifest
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -191,8 +193,19 @@ class FriendsFragment : Fragment() {
                                     image_params.addRule(RelativeLayout.CENTER_VERTICAL)// 위아래 중앙 배치
                                     imageView.layoutParams = image_params
                                     imageView.setOnClickListener {
-                                        val intent = Intent(requireActivity(), Calling::class.java)
-                                        startActivity(intent)
+
+                                        PermissionX.init(requireActivity())
+                                            .permissions(
+                                                Manifest.permission.RECORD_AUDIO,
+                                                Manifest.permission.CAMERA
+                                            ).request{ allGranted, _ ,_ ->
+                                                if (allGranted){
+                                                    val intent = Intent(requireActivity(), Calling::class.java)
+                                                    startActivity(intent)
+                                                } else {
+                                                    Toast.makeText(requireContext(),"you should accept all permissions",Toast.LENGTH_LONG).show()
+                                                }
+                                            }
                                     }
                                     containerLayout.addView(imageView)
 
