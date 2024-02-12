@@ -32,10 +32,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             finish()
         }
 
-        userName = "seongmin"//실제로는 intent로 유저 이름을 받아야함
-
-
-
     }
 
     private fun init(){
