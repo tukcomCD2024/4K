@@ -73,11 +73,11 @@ class FriendsFragment : Fragment() {
 
         val gson = GsonBuilder().setLenient().create()
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.219.105:8080/")
+            .baseUrl("http://192.168.219.105:8080/")//실제로는 aws url이 들어가야함
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
         val service = retrofit.create(RetrofitService::class.java);
-        val call = service.myFriendsRetrofit(1)
+        val call = service.myFriendsRetrofit(1)//실제로는 intent하여 받은 user id가 들어가야함
 
         val friends_scrollView = binding.friendsScrollview
         val friends_scrollView_Linear = binding.frinedsScrollviewLinear
