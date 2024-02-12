@@ -56,14 +56,11 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             }
         })
 
-        runOnUiThread {
-            socketRepository?.sendMessageToSocket(
-                MessageModel("start_call",userName,targetName,null
-                ))
-        }
-
         binding.apply {
             binding.buttonTest.setOnClickListener {
+                socketRepository?.sendMessageToSocket(
+                    MessageModel("start_call",userName,userName,null
+                    ))
             }
         }
     }
@@ -86,11 +83,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                             rtcClient?.startLocalVideo(localView)
                             rtcClient?.call(targetName)
                         }
-
-
                     }
-
                 }
+
             }
         }
     }

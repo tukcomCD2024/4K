@@ -116,19 +116,18 @@ class RTCClient(
             override fun onCreateSuccess(desc: SessionDescription?) {
                 peerConnection?.setLocalDescription(object : SdpObserver{
                     override fun onCreateSuccess(p0: SessionDescription?) {
+                    }
+
+                    override fun onSetSuccess() {
                         val offer = hashMapOf(
                             "sdp" to desc?.description,
                             "type" to desc?.type
                         )
-
                         socketRepository.sendMessageToSocket(
                             MessageModel(
                                 "create_offer", username, target, offer
                             )
                         )
-                    }
-
-                    override fun onSetSuccess() {
                     }
 
                     override fun onCreateFailure(p0: String?) {
