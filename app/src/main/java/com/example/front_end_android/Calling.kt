@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.front_end_android.databinding.ActivityCallingBinding
+import com.example.front_end_android.models.IceCandidateModel
 import com.example.front_end_android.models.MessageModel
 import com.example.front_end_android.util.NewMessageInterface
 import com.example.front_end_android.util.PeerConnectionObserver
+import com.google.gson.Gson
 import org.webrtc.IceCandidate
 import org.webrtc.MediaStream
 import org.webrtc.PeerConnection
@@ -18,10 +20,11 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
     private lateinit var binding:ActivityCallingBinding
     private var userName:String? = null
-    private var targetName:String? = null
+    private var targetName:String = ""
     private val TAG = "CallActivity"
     private var socketRepository:SocketRepository?=null
     private var rtcClient : RTCClient?=null
+    private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +53,22 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         rtcClient = RTCClient(application, userName!!, socketRepository!!, object : PeerConnectionObserver(){
             override fun onIceCandidate(p0: IceCandidate?) {
                 super.onIceCandidate(p0)
+                rtcClient?.addIceCandidate(p0)
+                val candidate = hashMapOf(
+                    "sdpMid" to p0?.sdpMid,
+                    "sdpMLineIndex" to p0?.sdpMLineIndex,
+                    "sdpCandidate" to p0?.sdp
+                )
+
+                socketRepository?.sendMessageToSocket(
+                    MessageModel("ice_candidate",userName,targetName,candidate)
+                )
             }
 
             override fun onAddStream(p0: MediaStream?) {
                 super.onAddStream(p0)
+                p0?.videoTracks?.get(0)?.addSink(binding.remoteView)
+                Log.d(TAG, "onAddStream: $p0")
             }
         })
 
@@ -115,10 +130,22 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         )
                         rtcClient?.onRemoteSessionReceived(session)
                         rtcClient?.answer(message.name!!)
+                        targetName = message.name!!
                     }
                     binding.rejectButton.setOnClickListener {
                         setIncomingCallLayoutGone()
                     }
+                    binding.remoteViewLoading.visibility = View.GONE
+                }
+            }
+            "ice_candidate"->{
+                try {
+                    val receivingCandidate = gson.fromJson(gson.toJson(message.data),
+                        IceCandidateModel::class.java)
+                    rtcClient?.addIceCandidate(IceCandidate(receivingCandidate.sdpMid,
+                        Math.toIntExact(receivingCandidate.sdpMLineIndex.toLong()),receivingCandidate.sdpCandidate))
+                }catch (e:Exception){
+                    e.printStackTrace()
                 }
             }
         }

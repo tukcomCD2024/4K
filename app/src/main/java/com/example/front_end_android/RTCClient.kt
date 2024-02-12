@@ -8,6 +8,7 @@ import org.webrtc.CameraVideoCapturer
 import org.webrtc.DefaultVideoDecoderFactory
 import org.webrtc.DefaultVideoEncoderFactory
 import org.webrtc.EglBase
+import org.webrtc.IceCandidate
 import org.webrtc.MediaConstraints
 import org.webrtc.PeerConnection
 import org.webrtc.PeerConnectionFactory
@@ -210,5 +211,9 @@ class RTCClient(
             }
 
         }, constraints)
+    }
+
+    fun addIceCandidate(p0: IceCandidate?) {
+        peerConnection?.addIceCandidate(p0)
     }
 }
