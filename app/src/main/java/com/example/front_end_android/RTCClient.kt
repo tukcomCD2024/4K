@@ -33,14 +33,18 @@ class RTCClient(
     private val eglContext = EglBase.create()
     private val peerConnectionFactory by lazy { createPeerConnectionFactory() }
     private val iceServer = listOf(
-        PeerConnection.IceServer.builder("stun:iphone-stun.strato-iphone.de:3478").createIceServer()
+        PeerConnection.IceServer.builder("stun:iphone-stun.strato-iphone.de:3478").createIceServer(),
+        PeerConnection.IceServer("stun:openrelay.metered.ca:80"),
+        PeerConnection.IceServer("turn:openrelay.metered.ca:80","openrelayproject","openrelayproject"),
+        PeerConnection.IceServer("turn:openrelay.metered.ca:443","openrelayproject","openrelayproject"),
+        PeerConnection.IceServer("turn:openrelay.metered.ca:443?transport=tcp","openrelayproject","openrelayproject"),
         )
     private val peerConnection by lazy { createPeerConnection(observer) }
     private val localVideoSource by lazy { peerConnectionFactory.createVideoSource(false) }
     private val localAudioSource by lazy { peerConnectionFactory.createAudioSource(MediaConstraints()) }
-    //private var videoCapturer: CameraVideoCapturer? = null
-    //private var localAudioTrack: AudioTrack? = null
-    //private var localVideoTrack: VideoTrack? = null
+    private var videoCapturer: CameraVideoCapturer? = null
+    private var localAudioTrack: AudioTrack? = null
+    private var localVideoTrack: VideoTrack? = null
 
     private fun initPeerConnectionFactory(application: Application){
         val peerConnectionOption = PeerConnectionFactory.InitializationOptions.builder(application)
@@ -57,7 +61,9 @@ class RTCClient(
                 DefaultVideoEncoderFactory(
                     eglContext.eglBaseContext,
                     true,
-                    true))
+                    true
+                )
+            )
             .setVideoDecoderFactory(DefaultVideoDecoderFactory(eglContext.eglBaseContext))
             .setOptions(PeerConnectionFactory.Options().apply {
                 disableEncryption = true
@@ -80,15 +86,15 @@ class RTCClient(
     fun startLocalVideo(surface: SurfaceViewRenderer) {
         val surfaceTextureHelper =
             SurfaceTextureHelper.create(Thread.currentThread().name, eglContext.eglBaseContext)
-        val videoCapturer = getVideoCapturer(application)
-        videoCapturer.initialize(
+        videoCapturer = getVideoCapturer(application)
+        videoCapturer?.initialize(
             surfaceTextureHelper,
             surface.context, localVideoSource.capturerObserver
         )
-        videoCapturer.startCapture(320, 240, 30)
-        val localVideoTrack = peerConnectionFactory.createVideoTrack("local_track", localVideoSource)
+        videoCapturer?.startCapture(320, 240, 30)
+        localVideoTrack = peerConnectionFactory.createVideoTrack("local_track", localVideoSource)
         localVideoTrack?.addSink(surface)
-        val localAudioTrack =
+        localAudioTrack =
             peerConnectionFactory.createAudioTrack("local_track_audio", localAudioSource)
         val localStream = peerConnectionFactory.createLocalMediaStream("local_stream")
         localStream.addTrack(localAudioTrack)
@@ -98,7 +104,7 @@ class RTCClient(
 
     }
 
-    private fun getVideoCapturer(application: Application): VideoCapturer  {
+    private fun getVideoCapturer(application: Application): CameraVideoCapturer {
         return Camera2Enumerator(application).run {
             deviceNames.find {
                 isFrontFacing(it)
@@ -215,5 +221,21 @@ class RTCClient(
 
     fun addIceCandidate(p0: IceCandidate?) {
         peerConnection?.addIceCandidate(p0)
+    }
+
+    fun switchCamera() {
+        videoCapturer?.switchCamera(null)
+    }
+
+    fun toggleAudio(mute: Boolean) {
+        localAudioTrack?.setEnabled(mute)
+    }
+
+    fun toggleCamera(cameraPause: Boolean) {
+        localVideoTrack?.setEnabled(cameraPause)
+    }
+
+    fun endCall() {
+        peerConnection?.close()
     }
 }

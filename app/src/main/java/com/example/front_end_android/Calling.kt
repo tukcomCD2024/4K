@@ -21,10 +21,14 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private lateinit var binding:ActivityCallingBinding
     private var userName:String? = null
     private var targetName:String = ""
-    private val TAG = "CallActivity"
+    private val TAG = "CallingActivity"
     private var socketRepository:SocketRepository?=null
     private var rtcClient : RTCClient?=null
     private val gson = Gson()
+    private var isMute = false
+    private var isCameraPause = false
+    private val rtcAudioManager by lazy { RTCAudioManager.create(this) }
+    private var isSpeakerMode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +81,18 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 socketRepository?.sendMessageToSocket(
                     MessageModel("start_call",userName,targetName,null
                     ))
+
+                switchCameraButton.setOnClickListener {
+                    rtcClient?.switchCamera()
+                }
+
+                micButton.setOnClickListener {
+                    if(isMute){
+                        isMute = false
+                    }else{
+                        isMute = true
+                    }
+                }
             }
         }
     }
