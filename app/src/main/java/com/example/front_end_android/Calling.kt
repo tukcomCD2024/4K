@@ -89,9 +89,23 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 micButton.setOnClickListener {
                     if(isMute){
                         isMute = false
+                        micButton.setImageResource(R.drawable.ic_baseline_mic_off_24)
                     }else{
                         isMute = true
+                        micButton.setImageResource(R.drawable.ic_baseline_mic_24)
                     }
+                    rtcClient?.toggleAudio(isMute)
+                }
+
+                videoButton.setOnClickListener {
+                    if (isCameraPause){
+                        isCameraPause = false
+                        videoButton.setImageResource(R.drawable.ic_baseline_videocam_off_24)
+                    }else{
+                        isCameraPause = true
+                        videoButton.setImageResource(R.drawable.ic_baseline_videocam_24)
+                    }
+                    rtcClient?.toggleCamera(isCameraPause)
                 }
             }
         }
