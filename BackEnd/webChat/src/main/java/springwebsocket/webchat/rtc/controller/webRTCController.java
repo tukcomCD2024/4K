@@ -12,7 +12,7 @@ public class webRTCController {
 
     @GetMapping
     public String rtcRoom() {
-        return "webRTC";
+        return "/webRTC.html";
     }
 
 }
