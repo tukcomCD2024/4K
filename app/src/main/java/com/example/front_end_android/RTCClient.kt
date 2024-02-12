@@ -1,6 +1,7 @@
 package com.example.front_end_android
 
 import android.app.Application
+import com.example.front_end_android.models.MessageModel
 import org.webrtc.AudioTrack
 import org.webrtc.Camera2Enumerator
 import org.webrtc.CameraVideoCapturer
@@ -10,8 +11,11 @@ import org.webrtc.EglBase
 import org.webrtc.MediaConstraints
 import org.webrtc.PeerConnection
 import org.webrtc.PeerConnectionFactory
+import org.webrtc.SdpObserver
+import org.webrtc.SessionDescription
 import org.webrtc.SurfaceTextureHelper
 import org.webrtc.SurfaceViewRenderer
+import org.webrtc.VideoCapturer
 import org.webrtc.VideoTrack
 
 class RTCClient(
@@ -93,7 +97,7 @@ class RTCClient(
 
     }
 
-    private fun getVideoCapturer(application: Application): CameraVideoCapturer {
+    private fun getVideoCapturer(application: Application): CameraVideoCapturer  {
         return Camera2Enumerator(application).run {
             deviceNames.find {
                 isFrontFacing(it)
@@ -102,5 +106,49 @@ class RTCClient(
             } ?: throw
             IllegalStateException()
         }
+    }
+
+    fun call(target: String?) {
+        val mediaConstraints = MediaConstraints()
+        mediaConstraints.mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"))
+
+        peerConnection?.createOffer(object : SdpObserver{
+            override fun onCreateSuccess(desc: SessionDescription?) {
+                peerConnection?.setLocalDescription(object : SdpObserver{
+                    override fun onCreateSuccess(p0: SessionDescription?) {
+                        val offer = hashMapOf(
+                            "sdp" to desc?.description,
+                            "type" to desc?.type
+                        )
+
+                        socketRepository.sendMessageToSocket(
+                            MessageModel(
+                                "create_offer", username, target, offer
+                            )
+                        )
+                    }
+
+                    override fun onSetSuccess() {
+                    }
+
+                    override fun onCreateFailure(p0: String?) {
+                    }
+
+                    override fun onSetFailure(p0: String?) {
+                    }
+
+                }, desc)
+            }
+
+            override fun onSetSuccess() {
+            }
+
+            override fun onCreateFailure(p0: String?) {
+            }
+
+            override fun onSetFailure(p0: String?) {
+            }
+
+        }, mediaConstraints)
     }
 }

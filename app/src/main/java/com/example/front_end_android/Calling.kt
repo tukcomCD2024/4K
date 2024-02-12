@@ -28,17 +28,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         setContentView(binding.root)
         init()
 
-        //테스트 버튼
-        binding.buttonTest.setOnClickListener {
-            /*
-            binding.callingPeople1.visibility = View.VISIBLE
-            binding.callingPeople2.visibility = View.VISIBLE
-            binding.nickname1.visibility = View.VISIBLE
-            binding.nickname2.visibility = View.VISIBLE
-            binding.callingPeopleInit.visibility = View.GONE
-            binding.nicknameInit.visibility = View.GONE*/
-        }
-
         binding.nicknameInit.setOnClickListener {
             binding.callingPeopleContainer.visibility = View.GONE
             binding.linearLayout.visibility = View.GONE
@@ -67,14 +56,42 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             }
         })
 
-        binding.apply {
+        runOnUiThread {
             socketRepository?.sendMessageToSocket(
                 MessageModel("start_call",userName,targetName,null
                 ))
         }
+
+        binding.apply {
+            binding.buttonTest.setOnClickListener {
+            }
+        }
     }
 
     override fun onNewMessage(message: MessageModel) {
+        Log.d(TAG,"onNewMessage: $message")
+        when(message.type) {
+            "call_response" -> {
+                if (message.data == "user is not online") {
+                    //user is not reachable
+                    runOnUiThread {
+                        Toast.makeText(this, "user is not reachable", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    //we are ready for call, we started a call
+                    runOnUiThread {
+                        binding.apply {
+                            rtcClient?.initializeSurfaceView(localView)
+                            rtcClient?.initializeSurfaceView(remoteView)
+                            rtcClient?.startLocalVideo(localView)
+                            rtcClient?.call(targetName)
+                        }
 
+
+                    }
+
+                }
+            }
+        }
     }
 }

@@ -25,7 +25,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_height="160dp"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:background="@drawable/calling_people_background">
             
             <TextView
@@ -35,7 +35,6 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:text="@string/nickname1"
-                android:visibility="invisible"
                 android:background="@android:color/transparent"
                 android:layout_centerInParent="true"/>
 
@@ -69,7 +68,7 @@
             android:layout_marginEnd="40dp"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:layout_below="@id/calling_people1"
             android:background="@drawable/calling_people_background">
 
@@ -79,7 +78,6 @@
                 android:layout_height="24dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:visibility="invisible"
                 android:text="@string/nickname2"
                 android:background="@android:color/transparent"
                 android:layout_centerInParent="true"/>
@@ -335,7 +333,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="50dp"
         android:text="통화 참가 ui 테스트"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
