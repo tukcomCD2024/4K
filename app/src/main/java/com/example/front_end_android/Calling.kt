@@ -10,6 +10,7 @@ import com.example.front_end_android.models.IceCandidateModel
 import com.example.front_end_android.models.MessageModel
 import com.example.front_end_android.util.NewMessageInterface
 import com.example.front_end_android.util.PeerConnectionObserver
+import com.example.front_end_android.util.RTCAudioManager
 import com.google.gson.Gson
 import org.webrtc.IceCandidate
 import org.webrtc.MediaStream
@@ -106,6 +107,20 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         videoButton.setImageResource(R.drawable.ic_baseline_videocam_24)
                     }
                     rtcClient?.toggleCamera(isCameraPause)
+                }
+
+                audioOutputButton.setOnClickListener {
+                    if (isSpeakerMode){
+                        isSpeakerMode = false
+                        audioOutputButton.setImageResource(R.drawable.ic_baseline_hearing_24)
+                        rtcAudioManager.setDefaultAudioDevice(RTCAudioManager.AudioDevice.EARPIECE)
+                    }else{
+                        isSpeakerMode = true
+                        audioOutputButton.setImageResource(R.drawable.ic_baseline_speaker_up_24)
+                        rtcAudioManager.setDefaultAudioDevice(RTCAudioManager.AudioDevice.SPEAKER_PHONE)
+
+                    }
+
                 }
             }
         }
