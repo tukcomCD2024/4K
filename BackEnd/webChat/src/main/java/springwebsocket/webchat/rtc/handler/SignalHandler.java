@@ -101,8 +101,9 @@ public class SignalHandler extends TextWebSocketHandler {
     private void handleStartCall(WebSocketSession session, JSONObject data) throws IOException {
         String target = data.getString("target");
         Optional<User> userToCall = findUser(target);
+        log.info("UserToCall={}",userToCall.get().getName());
         if (userToCall != null) {
-            sendMessage(userToCall.get().getSession(), "call_response", "user is ready for call");
+            sendMessage(session, "call_response", "user is ready for call");
         } else {
             sendMessage(session, "call_response", "user is not online");
         }
@@ -111,9 +112,11 @@ public class SignalHandler extends TextWebSocketHandler {
     private void handleCreateOffer(WebSocketSession session, JSONObject data) throws IOException {
         String target = data.getString("target");
         Optional<User> userToReceiveOffer = findUser(target);
+        log.info("data={}",data.toString());
         if (userToReceiveOffer != null) {
             JSONObject offerData = data.getJSONObject("data");
             sendMessage(userToReceiveOffer.get().getSession(), "offer_received", data.getString("name"), offerData.getString("sdp"));
+            log.info("sdp = {}",offerData.getString("sdp"));
         }
     }
 
@@ -165,10 +168,14 @@ public class SignalHandler extends TextWebSocketHandler {
         JSONObject message = new JSONObject();
         message.put("type", messageType);
         JSONObject data = new JSONObject();
-        data.put("name", name);
-        data.put("data", new JSONObject().put("sdp", sdp));
-        message.put("data", data);
+        message.put("name", name);
+        //data.put("data", new JSONObject().put("sdp", sdp));
+        //message.put("data",new JSONObject().put("sdp", sdp));
+        //message.put("data", data);
+        JSONObject sdp1 = new JSONObject();
+        message.put("data", sdp);
         session.sendMessage(new TextMessage(message.toString()));
+        log.info("data={}",message.toString());
     }
 
     private void sendMessage(WebSocketSession session, String messageType, String name, JSONObject candidateData) throws IOException {
@@ -176,8 +183,8 @@ public class SignalHandler extends TextWebSocketHandler {
         message.put("type", messageType);
         JSONObject data = new JSONObject();
         data.put("name", name);
-        data.put("data", candidateData);
-        message.put("data", data);
+        //data.put("data", candidateData);
+        message.put("data", candidateData);
         session.sendMessage(new TextMessage(message.toString()));
     }
 
