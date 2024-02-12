@@ -236,7 +236,7 @@ class FriendsFragment : Fragment() {
                     if (allGranted){
                         startActivity(
                             Intent(requireActivity(),Calling::class.java)
-                                .putExtra("username","seongmin")
+                                .putExtra("username","1")
                         )
                     } else {
                         Toast.makeText(requireContext(),"you should accept all permissions",Toast.LENGTH_LONG).show()
@@ -252,7 +252,7 @@ class FriendsFragment : Fragment() {
                     if (allGranted){
                         startActivity(
                             Intent(requireActivity(),Calling::class.java)
-                                .putExtra("username","testfriend")
+                                .putExtra("username","2")
                         )
                     } else {
                         Toast.makeText(requireContext(),"you should accept all permissions",Toast.LENGTH_LONG).show()
