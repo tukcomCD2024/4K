@@ -38,9 +38,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         init()
 
         binding.nicknameInit.setOnClickListener {
-            binding.callingPeopleContainer.visibility = View.INVISIBLE
-            binding.linearLayout.visibility = View.INVISIBLE
-            binding.exitCallBackground.visibility = View.INVISIBLE
+            binding.callingPeopleContainer.visibility = View.GONE
+            binding.linearLayout.visibility = View.GONE
+            binding.exitCallBackground.visibility = View.GONE
             binding.callLayout.visibility = View.VISIBLE
         }
 
@@ -53,7 +53,11 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
     private fun init(){
         userName = intent.getStringExtra("username")//실제로는 intent로 유저 이름을 받아야함
-        targetName = "testfriend"//실제로는 intent로 전화를 거는 상대방을 이름을 받아야함
+        if(userName == "testfirend"){
+            targetName = "seongmin"
+        }else{
+            targetName = "testfriend"//실제로는 intent로 전화를 거는 상대방을 이름을 받아야함
+        }
         socketRepository = SocketRepository(this)
         userName?.let { socketRepository?.initSocket(it) }
         rtcClient = RTCClient(application, userName!!, socketRepository!!, object : PeerConnectionObserver(){
@@ -129,7 +133,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 binding.callingPeopleContainer.visibility = View.VISIBLE
                 binding.linearLayout.visibility = View.VISIBLE
                 binding.exitCallBackground.visibility = View.VISIBLE
-                binding.callLayout.visibility = View.INVISIBLE
+                binding.callLayout.visibility = View.GONE
             }
         }
     }
@@ -146,6 +150,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 } else {
                     //we are ready for call, we started a call
                     runOnUiThread {
+
                         binding.apply {
                             rtcClient?.initializeSurfaceView(localView)
                             rtcClient?.initializeSurfaceView(remoteView)
@@ -156,6 +161,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 }
             }
             "answer_received" ->{
+
                 val session = SessionDescription(
                     SessionDescription.Type.ANSWER,
                     message.data.toString()
@@ -184,11 +190,12 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         rtcClient?.onRemoteSessionReceived(session)
                         rtcClient?.answer(message.name!!)
                         targetName = message.name!!
+                        binding.remoteViewLoading.visibility = View.GONE
                     }
+
                     binding.rejectButton.setOnClickListener {
                         setIncomingCallLayoutGone()
                     }
-                    binding.remoteViewLoading.visibility = View.GONE
                 }
             }
             "ice_candidate"->{

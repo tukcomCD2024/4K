@@ -2,22 +2,7 @@ package com.example.front_end_android
 
 import android.app.Application
 import com.example.front_end_android.models.MessageModel
-import org.webrtc.AudioTrack
-import org.webrtc.Camera2Enumerator
-import org.webrtc.CameraVideoCapturer
-import org.webrtc.DefaultVideoDecoderFactory
-import org.webrtc.DefaultVideoEncoderFactory
-import org.webrtc.EglBase
-import org.webrtc.IceCandidate
-import org.webrtc.MediaConstraints
-import org.webrtc.PeerConnection
-import org.webrtc.PeerConnectionFactory
-import org.webrtc.SdpObserver
-import org.webrtc.SessionDescription
-import org.webrtc.SurfaceTextureHelper
-import org.webrtc.SurfaceViewRenderer
-import org.webrtc.VideoCapturer
-import org.webrtc.VideoTrack
+import org.webrtc.*
 
 class RTCClient(
     private val application: Application,
@@ -38,6 +23,7 @@ class RTCClient(
         PeerConnection.IceServer("turn:openrelay.metered.ca:80","openrelayproject","openrelayproject"),
         PeerConnection.IceServer("turn:openrelay.metered.ca:443","openrelayproject","openrelayproject"),
         PeerConnection.IceServer("turn:openrelay.metered.ca:443?transport=tcp","openrelayproject","openrelayproject"),
+
         )
     private val peerConnection by lazy { createPeerConnection(observer) }
     private val localVideoSource by lazy { peerConnectionFactory.createVideoSource(false) }
@@ -55,7 +41,7 @@ class RTCClient(
         PeerConnectionFactory.initialize(peerConnectionOption)
     }
 
-    private fun createPeerConnectionFactory() : PeerConnectionFactory{
+    private fun createPeerConnectionFactory(): PeerConnectionFactory {
         return PeerConnectionFactory.builder()
             .setVideoEncoderFactory(
                 DefaultVideoEncoderFactory(
@@ -119,10 +105,11 @@ class RTCClient(
         val mediaConstraints = MediaConstraints()
         mediaConstraints.mandatory.add(MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"))
 
-        peerConnection?.createOffer(object : SdpObserver{
+        peerConnection?.createOffer(object : SdpObserver {
             override fun onCreateSuccess(desc: SessionDescription?) {
-                peerConnection?.setLocalDescription(object : SdpObserver{
+                peerConnection?.setLocalDescription(object : SdpObserver {
                     override fun onCreateSuccess(p0: SessionDescription?) {
+
                     }
 
                     override fun onSetSuccess() {
@@ -130,6 +117,7 @@ class RTCClient(
                             "sdp" to desc?.description,
                             "type" to desc?.type
                         )
+
                         socketRepository.sendMessageToSocket(
                             MessageModel(
                                 "create_offer", username, target, offer
@@ -144,6 +132,7 @@ class RTCClient(
                     }
 
                 }, desc)
+
             }
 
             override fun onSetSuccess() {
@@ -154,7 +143,6 @@ class RTCClient(
 
             override fun onSetFailure(p0: String?) {
             }
-
         }, mediaConstraints)
     }
 
@@ -186,6 +174,8 @@ class RTCClient(
                 peerConnection?.setLocalDescription(object : SdpObserver {
                     override fun onCreateSuccess(p0: SessionDescription?) {
                     }
+
+
                     override fun onSetSuccess() {
                         val answer = hashMapOf(
                             "sdp" to desc?.description,

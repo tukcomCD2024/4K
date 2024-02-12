@@ -1,10 +1,6 @@
 package com.example.front_end_android.util
 
-import org.webrtc.DataChannel
-import org.webrtc.IceCandidate
-import org.webrtc.MediaStream
-import org.webrtc.PeerConnection
-import org.webrtc.RtpReceiver
+import org.webrtc.*
 
 open class PeerConnectionObserver : PeerConnection.Observer {
     override fun onSignalingChange(p0: PeerConnection.SignalingState?) {
@@ -39,5 +35,4 @@ open class PeerConnectionObserver : PeerConnection.Observer {
 
     override fun onAddTrack(p0: RtpReceiver?, p1: Array<out MediaStream>?) {
     }
-
 }

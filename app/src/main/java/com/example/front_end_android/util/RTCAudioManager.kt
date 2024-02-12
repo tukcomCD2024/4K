@@ -1,6 +1,5 @@
 package com.example.front_end_android.util
 
-
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
