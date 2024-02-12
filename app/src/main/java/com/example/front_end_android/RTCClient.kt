@@ -38,9 +38,9 @@ class RTCClient(
     private val peerConnection by lazy { createPeerConnection(observer) }
     private val localVideoSource by lazy { peerConnectionFactory.createVideoSource(false) }
     private val localAudioSource by lazy { peerConnectionFactory.createAudioSource(MediaConstraints()) }
-    private var videoCapturer: CameraVideoCapturer? = null
-    private var localAudioTrack: AudioTrack? = null
-    private var localVideoTrack: VideoTrack? = null
+    //private var videoCapturer: CameraVideoCapturer? = null
+    //private var localAudioTrack: AudioTrack? = null
+    //private var localVideoTrack: VideoTrack? = null
 
     private fun initPeerConnectionFactory(application: Application){
         val peerConnectionOption = PeerConnectionFactory.InitializationOptions.builder(application)
@@ -80,15 +80,15 @@ class RTCClient(
     fun startLocalVideo(surface: SurfaceViewRenderer) {
         val surfaceTextureHelper =
             SurfaceTextureHelper.create(Thread.currentThread().name, eglContext.eglBaseContext)
-        videoCapturer = getVideoCapturer(application)
-        videoCapturer?.initialize(
+        val videoCapturer = getVideoCapturer(application)
+        videoCapturer.initialize(
             surfaceTextureHelper,
             surface.context, localVideoSource.capturerObserver
         )
-        videoCapturer?.startCapture(320, 240, 30)
-        localVideoTrack = peerConnectionFactory.createVideoTrack("local_track", localVideoSource)
+        videoCapturer.startCapture(320, 240, 30)
+        val localVideoTrack = peerConnectionFactory.createVideoTrack("local_track", localVideoSource)
         localVideoTrack?.addSink(surface)
-        localAudioTrack =
+        val localAudioTrack =
             peerConnectionFactory.createAudioTrack("local_track_audio", localAudioSource)
         val localStream = peerConnectionFactory.createLocalMediaStream("local_stream")
         localStream.addTrack(localAudioTrack)
@@ -98,7 +98,7 @@ class RTCClient(
 
     }
 
-    private fun getVideoCapturer(application: Application): CameraVideoCapturer  {
+    private fun getVideoCapturer(application: Application): VideoCapturer  {
         return Camera2Enumerator(application).run {
             deviceNames.find {
                 isFrontFacing(it)
