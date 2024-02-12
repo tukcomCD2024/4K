@@ -38,13 +38,14 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         init()
 
         binding.nicknameInit.setOnClickListener {
-            binding.callingPeopleContainer.visibility = View.GONE
-            binding.linearLayout.visibility = View.GONE
-            binding.exitCallBackground.visibility = View.GONE
+            binding.callingPeopleContainer.visibility = View.INVISIBLE
+            binding.linearLayout.visibility = View.INVISIBLE
+            binding.exitCallBackground.visibility = View.INVISIBLE
             binding.callLayout.visibility = View.VISIBLE
         }
 
         binding.exitCallBackground.setOnClickListener {
+            rtcClient?.endCall()
             finish()
         }
 
@@ -76,52 +77,59 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 Log.d(TAG, "onAddStream: $p0")
             }
         })
+        rtcAudioManager.setDefaultAudioDevice(RTCAudioManager.AudioDevice.SPEAKER_PHONE)
 
         binding.apply {
             binding.buttonTest.setOnClickListener {
                 socketRepository?.sendMessageToSocket(
                     MessageModel("start_call",userName,targetName,null
                     ))
+            }
+            switchCameraButton.setOnClickListener {
+                rtcClient?.switchCamera()
+            }
 
-                switchCameraButton.setOnClickListener {
-                    rtcClient?.switchCamera()
+            micButton.setOnClickListener {
+                if(isMute){
+                    isMute = false
+                    micButton.setImageResource(R.drawable.ic_baseline_mic_off_24)
+                }else{
+                    isMute = true
+                    micButton.setImageResource(R.drawable.ic_baseline_mic_24)
+                }
+                rtcClient?.toggleAudio(isMute)
+            }
+
+            videoButton.setOnClickListener {
+                if (isCameraPause){
+                    isCameraPause = false
+                    videoButton.setImageResource(R.drawable.ic_baseline_videocam_off_24)
+                }else{
+                    isCameraPause = true
+                    videoButton.setImageResource(R.drawable.ic_baseline_videocam_24)
+                }
+                rtcClient?.toggleCamera(isCameraPause)
+            }
+
+            audioOutputButton.setOnClickListener {
+                if (isSpeakerMode){
+                    isSpeakerMode = false
+                    audioOutputButton.setImageResource(R.drawable.ic_baseline_hearing_24)
+                    rtcAudioManager.setDefaultAudioDevice(RTCAudioManager.AudioDevice.EARPIECE)
+                }else{
+                    isSpeakerMode = true
+                    audioOutputButton.setImageResource(R.drawable.ic_baseline_speaker_up_24)
+                    rtcAudioManager.setDefaultAudioDevice(RTCAudioManager.AudioDevice.SPEAKER_PHONE)
+
                 }
 
-                micButton.setOnClickListener {
-                    if(isMute){
-                        isMute = false
-                        micButton.setImageResource(R.drawable.ic_baseline_mic_off_24)
-                    }else{
-                        isMute = true
-                        micButton.setImageResource(R.drawable.ic_baseline_mic_24)
-                    }
-                    rtcClient?.toggleAudio(isMute)
-                }
+            }
 
-                videoButton.setOnClickListener {
-                    if (isCameraPause){
-                        isCameraPause = false
-                        videoButton.setImageResource(R.drawable.ic_baseline_videocam_off_24)
-                    }else{
-                        isCameraPause = true
-                        videoButton.setImageResource(R.drawable.ic_baseline_videocam_24)
-                    }
-                    rtcClient?.toggleCamera(isCameraPause)
-                }
-
-                audioOutputButton.setOnClickListener {
-                    if (isSpeakerMode){
-                        isSpeakerMode = false
-                        audioOutputButton.setImageResource(R.drawable.ic_baseline_hearing_24)
-                        rtcAudioManager.setDefaultAudioDevice(RTCAudioManager.AudioDevice.EARPIECE)
-                    }else{
-                        isSpeakerMode = true
-                        audioOutputButton.setImageResource(R.drawable.ic_baseline_speaker_up_24)
-                        rtcAudioManager.setDefaultAudioDevice(RTCAudioManager.AudioDevice.SPEAKER_PHONE)
-
-                    }
-
-                }
+            endCallButton.setOnClickListener {
+                binding.callingPeopleContainer.visibility = View.VISIBLE
+                binding.linearLayout.visibility = View.VISIBLE
+                binding.exitCallBackground.visibility = View.VISIBLE
+                binding.callLayout.visibility = View.INVISIBLE
             }
         }
     }
