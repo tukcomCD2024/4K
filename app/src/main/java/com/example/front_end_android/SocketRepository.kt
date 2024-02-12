@@ -26,7 +26,7 @@ class SocketRepository(private val messageInterface: NewMessageInterface) {
     fun initSocket(username:String){
         userName = username
         //uri에는 실제 url 주소가 들어가야함
-        webSocket = object :WebSocketClient(URI("ws://172.30.1.28:3000")){
+        webSocket = object :WebSocketClient(URI("ws://192.168.219.105:3000")){
             override fun onOpen(handshakedata: ServerHandshake?) {
                 sendMessageToSocket(
                     MessageModel(
