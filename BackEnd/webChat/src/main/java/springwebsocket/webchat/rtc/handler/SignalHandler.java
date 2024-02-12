@@ -59,7 +59,7 @@ public class SignalHandler extends TextWebSocketHandler {
             case "store_user":
                 log.info("store_user");
                 handleStoreUser(session, data);
-                log.info("user ={}",users.get(1).getName());
+                log.info("user ={}", users.get(1).getName());
                 break;
             case "start_call":
                 log.info("start_call");
@@ -90,14 +90,15 @@ public class SignalHandler extends TextWebSocketHandler {
             // User already exists
             log.info("user != null");
             sendMessage(session, "user already exists");
-        } else {
-            // Add new user
-            log.info("user == null");
-            addUser(name, session);
-            for (User u : users) {
-                log.info("User: {}", u.getName());
-            }
         }
+
+        // Add new user
+        log.info("user == null");
+        addUser(name, session);
+        for (User u : users) {
+            log.info("User: {}", u.getName());
+        }
+
     }
 
     private void handleStartCall(WebSocketSession session, JSONObject data) throws IOException {
@@ -162,6 +163,7 @@ public class SignalHandler extends TextWebSocketHandler {
     private void sendMessage(WebSocketSession session, String message) throws IOException {
         session.sendMessage(new TextMessage(message));
     }
+
     private void sendMessage(WebSocketSession session, String messageType, String name, String sdp) throws IOException {
         JSONObject message = new JSONObject();
         message.put("type", messageType);
