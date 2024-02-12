@@ -8,6 +8,7 @@ import com.example.front_end_android.databinding.ActivityCallingBinding
 class Calling : AppCompatActivity() {
 
     private lateinit var binding:ActivityCallingBinding
+    private var userName:String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,9 @@ class Calling : AppCompatActivity() {
         binding.exitCallBackground.setOnClickListener {
             finish()
         }
+
+        userName = "seongmin"//실제로는 intent로 유저 이름을 받아야함
+
 
     }
 }
