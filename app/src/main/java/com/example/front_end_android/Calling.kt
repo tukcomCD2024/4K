@@ -142,6 +142,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         Log.d(TAG,"onNewMessage: $message")
         when(message.type) {
             "call_response" -> {
+                Log.d("YMC", "call_response: $message")//*
                 if (message.data == "user is not online") {
                     //user is not reachable
                     runOnUiThread {
@@ -161,7 +162,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 }
             }
             "answer_received" ->{
-
+                Log.d("YMC", "answer_received: $message")//*
                 val session = SessionDescription(
                     SessionDescription.Type.ANSWER,
                     message.data.toString()
@@ -173,6 +174,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             }
             "offer_received" -> {
                 runOnUiThread {
+                    Log.d("YMC", "offer_received: $message")//*
                     setIncomingCallLayoutVisible()
                     binding.incomingNameTV.text = "${message.name.toString()} is calling you"
                     binding.acceptButton.setOnClickListener {
@@ -199,6 +201,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 }
             }
             "ice_candidate"->{
+                Log.d("YMC", "ice_candidate: $message")//*
                 try {
                     val receivingCandidate = gson.fromJson(gson.toJson(message.data),
                         IceCandidateModel::class.java)
