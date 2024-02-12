@@ -226,6 +226,22 @@ class FriendsFragment : Fragment() {
             }
         })
 
+        //테스트 버튼
+        binding.callingtestbtn.setOnClickListener {
+            PermissionX.init(requireActivity())
+                .permissions(
+                    Manifest.permission.RECORD_AUDIO,
+                    Manifest.permission.CAMERA
+                ).request{ allGranted, _ ,_ ->
+                    if (allGranted){
+                        val intent = Intent(requireActivity(), Calling::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(requireContext(),"you should accept all permissions",Toast.LENGTH_LONG).show()
+                    }
+                }
+        }
+
         return binding.root
         //return inflater.inflate(R.layout.fragment_friends, container, false)
     }
