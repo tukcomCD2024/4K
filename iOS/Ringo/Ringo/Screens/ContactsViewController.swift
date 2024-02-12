@@ -98,11 +98,12 @@ extension ContactsViewController: UITableViewDataSource {
         
         cell.name.text = randomNames[indexPath.row]
         cell.selectionStyle = .none
+        cell.delegate = self
                 
         return cell
     }
 }
-// MARK: -  Sign in
+// MARK: -  Load Friends
 extension ContactsViewController {
     
     func loadFriends() {
@@ -134,6 +135,19 @@ extension ContactsViewController {
     }
 }
 
+// MARK: -  Load Friends
+extension ContactsViewController: ContactsTableViewCellDelegate {
+    
+    func pressedButton() {
+        CallService.shared.webRTCClient.offer { (sdp) in
+            CallService.shared.signalClient.send(sdp: sdp)
+        }
+        let connectionVC = ConnectionViewController()
+        connectionVC.modalPresentationStyle = .fullScreen
+        present(connectionVC, animated: true,completion: nil)
+    }
+    
+}
 // MARK: - canvas 이용하기
 import SwiftUI
 @available(iOS 13.0.0, *)
