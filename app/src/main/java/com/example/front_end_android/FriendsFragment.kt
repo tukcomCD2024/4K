@@ -234,8 +234,26 @@ class FriendsFragment : Fragment() {
                     Manifest.permission.CAMERA
                 ).request{ allGranted, _ ,_ ->
                     if (allGranted){
-                        val intent = Intent(requireActivity(), Calling::class.java)
-                        startActivity(intent)
+                        startActivity(
+                            Intent(requireActivity(),Calling::class.java)
+                                .putExtra("username","seongmin")
+                        )
+                    } else {
+                        Toast.makeText(requireContext(),"you should accept all permissions",Toast.LENGTH_LONG).show()
+                    }
+                }
+        }
+        binding.callingtestbtn2.setOnClickListener {
+            PermissionX.init(requireActivity())
+                .permissions(
+                    Manifest.permission.RECORD_AUDIO,
+                    Manifest.permission.CAMERA
+                ).request{ allGranted, _ ,_ ->
+                    if (allGranted){
+                        startActivity(
+                            Intent(requireActivity(),Calling::class.java)
+                                .putExtra("username","testfriend")
+                        )
                     } else {
                         Toast.makeText(requireContext(),"you should accept all permissions",Toast.LENGTH_LONG).show()
                     }

@@ -12,6 +12,7 @@ import com.example.front_end_android.util.PeerConnectionObserver
 import org.webrtc.IceCandidate
 import org.webrtc.MediaStream
 import org.webrtc.PeerConnection
+import org.webrtc.SessionDescription
 
 class Calling : AppCompatActivity(), NewMessageInterface {
 
@@ -42,7 +43,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     }
 
     private fun init(){
-        userName = "seongmin"//실제로는 intent로 유저 이름을 받아야함
+        userName = intent.getStringExtra("username")//실제로는 intent로 유저 이름을 받아야함
         targetName = "testfriend"//실제로는 intent로 전화를 거는 상대방을 이름을 받아야함
         socketRepository = SocketRepository(this)
         userName?.let { socketRepository?.initSocket(it) }
@@ -59,7 +60,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         binding.apply {
             binding.buttonTest.setOnClickListener {
                 socketRepository?.sendMessageToSocket(
-                    MessageModel("start_call",userName,userName,null
+                    MessageModel("start_call",userName,targetName,null
                     ))
             }
         }
@@ -85,8 +86,48 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         }
                     }
                 }
+            }
+            "answer_received" ->{
+                val session = SessionDescription(
+                    SessionDescription.Type.ANSWER,
+                    message.data.toString()
+                )
+                rtcClient?.onRemoteSessionReceived(session)
+                runOnUiThread {
+                    binding.remoteViewLoading.visibility = View.GONE
+                }
+            }
+            "offer_received" -> {
+                runOnUiThread {
+                    setIncomingCallLayoutVisible()
+                    binding.incomingNameTV.text = "${message.name.toString()} is calling you"
+                    binding.acceptButton.setOnClickListener {
+                        setIncomingCallLayoutGone()
 
+                        binding.apply {
+                            rtcClient?.initializeSurfaceView(localView)
+                            rtcClient?.initializeSurfaceView(remoteView)
+                            rtcClient?.startLocalVideo(localView)
+                        }
+                        val session = SessionDescription(
+                            SessionDescription.Type.OFFER,
+                            message.data.toString()
+                        )
+                        rtcClient?.onRemoteSessionReceived(session)
+                        rtcClient?.answer(message.name!!)
+                    }
+                    binding.rejectButton.setOnClickListener {
+                        setIncomingCallLayoutGone()
+                    }
+                }
             }
         }
+    }
+
+    private fun setIncomingCallLayoutGone(){
+        binding.incomingCallLayout.visibility = View.GONE
+    }
+    private fun setIncomingCallLayoutVisible() {
+        binding.incomingCallLayout.visibility = View.VISIBLE
     }
 }
