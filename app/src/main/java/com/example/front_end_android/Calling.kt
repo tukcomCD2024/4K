@@ -28,14 +28,15 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         setContentView(binding.root)
         init()
 
-        //통화 참가 ui 테스트 코드
+        //테스트 버튼
         binding.buttonTest.setOnClickListener {
+            /*
             binding.callingPeople1.visibility = View.VISIBLE
             binding.callingPeople2.visibility = View.VISIBLE
             binding.nickname1.visibility = View.VISIBLE
             binding.nickname2.visibility = View.VISIBLE
             binding.callingPeopleInit.visibility = View.GONE
-            binding.nicknameInit.visibility = View.GONE
+            binding.nicknameInit.visibility = View.GONE*/
         }
 
         binding.nicknameInit.setOnClickListener {
@@ -68,25 +69,12 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
         binding.apply {
             socketRepository?.sendMessageToSocket(
-                MessageModel(
-                "start_call",userName,targetName,null
-            )
-            )
+                MessageModel("start_call",userName,targetName,null
+                ))
         }
     }
 
     override fun onNewMessage(message: MessageModel) {
-        Log.d(TAG, "onNewMessage: $message")
-        when(message.type){
-            "call_response"->{
-                if(message.data == "user is not online"){
-                    runOnUiThread {
-                        Toast.makeText(this,"user is not reachable",Toast.LENGTH_LONG).show()
-                    }
-                }else{
 
-                }
-            }
-        }
     }
 }
