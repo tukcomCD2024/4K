@@ -1,14 +1,11 @@
 package springwebsocket.webchat.rtc.handler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import springwebsocket.webchat.rtc.User;
@@ -25,17 +22,11 @@ public class SignalHandler extends TextWebSocketHandler {
 
     private final List<User> users = new ArrayList<>();
 
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         super.afterConnectionEstablished(session);
         // WebSocket 연결이 수립될 때마다 호출되는 메서드입니다.
-        // 클라이언트에서 전달된 이름을 가져옵니다.
-//        String name = (String) session.getAttributes().get("name");
-        // 새로운 사용자 세션을 users 리스트에 추가합니다.
-//        users.add(new User(name, session));
     }
 
 
@@ -85,15 +76,10 @@ public class SignalHandler extends TextWebSocketHandler {
         String name = data.getString("name");
         Optional<User> user = findUser(name);
         if (user.isPresent()) {
-            // User already exists
-            log.info("user already exists");
             sendMessage(session, "user already exists");
         } else {
             // Add new user
             addUser(name, session);
-            for (User u : users) {
-                log.info("User: {}", u.getName());
-            }
         }
     }
 
@@ -101,7 +87,6 @@ public class SignalHandler extends TextWebSocketHandler {
     private void handleStartCall(WebSocketSession session, JSONObject data) throws IOException {
         String target = data.getString("target");
         Optional<User> userToCall = findUser(target);
-        log.info("UserToCall={}",userToCall.get().getName());
         if (userToCall != null) {
             sendMessage(session, "call_response", "user is ready for call");
         } else {
@@ -112,11 +97,9 @@ public class SignalHandler extends TextWebSocketHandler {
     private void handleCreateOffer(WebSocketSession session, JSONObject data) throws IOException {
         String target = data.getString("target");
         Optional<User> userToReceiveOffer = findUser(target);
-        log.info("data={}",data.toString());
         if (userToReceiveOffer != null) {
             JSONObject offerData = data.getJSONObject("data");
             sendMessage(userToReceiveOffer.get().getSession(), "offer_received", data.getString("name"), offerData.getString("sdp"));
-            log.info("sdp = {}",offerData.getString("sdp"));
         }
     }
 
@@ -167,15 +150,9 @@ public class SignalHandler extends TextWebSocketHandler {
     private void sendMessage(WebSocketSession session, String messageType, String name, String sdp) throws IOException {
         JSONObject message = new JSONObject();
         message.put("type", messageType);
-        JSONObject data = new JSONObject();
         message.put("name", name);
-        //data.put("data", new JSONObject().put("sdp", sdp));
-        //message.put("data",new JSONObject().put("sdp", sdp));
-        //message.put("data", data);
-        JSONObject sdp1 = new JSONObject();
         message.put("data", sdp);
         session.sendMessage(new TextMessage(message.toString()));
-        log.info("data={}",message.toString());
     }
 
     private void sendMessage(WebSocketSession session, String messageType, String name, JSONObject candidateData) throws IOException {
@@ -183,7 +160,6 @@ public class SignalHandler extends TextWebSocketHandler {
         message.put("type", messageType);
         JSONObject data = new JSONObject();
         data.put("name", name);
-        //data.put("data", candidateData);
         message.put("data", candidateData);
         session.sendMessage(new TextMessage(message.toString()));
     }
