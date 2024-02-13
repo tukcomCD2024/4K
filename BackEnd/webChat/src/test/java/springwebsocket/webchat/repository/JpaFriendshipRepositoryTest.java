@@ -1,20 +1,21 @@
 package springwebsocket.webchat.repository;
 
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import springwebsocket.webchat.entity.Friendship;
-import springwebsocket.webchat.entity.Member;
-import springwebsocket.webchat.repository.springdata.SpringDataJpaFriendshipRepository;
+import springwebsocket.webchat.friend.entity.Friendship;
+import springwebsocket.webchat.friend.repository.JpaFriendshipRepository;
+import springwebsocket.webchat.member.entity.Member;
+import springwebsocket.webchat.friend.repository.springdata.SpringDataJpaFriendshipRepository;
+import springwebsocket.webchat.member.repository.MemberRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
-import static springwebsocket.webchat.entity.Friendship.FriendshipStatus.PENDING;
+import static springwebsocket.webchat.friend.entity.Friendship.FriendshipStatus.PENDING;
 
 
 @Slf4j
@@ -132,7 +133,7 @@ class JpaFriendshipRepositoryTest {
     }
 
     @Test
-    @Transactional
+//    @Transactional
     void findByUserIdAndStatusOrFriendIdAndStatus() {
         // given
         Member sender = new Member("sender3@naver.com", "1234", "sender");

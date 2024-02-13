@@ -3,11 +3,12 @@ package springwebsocket.webchat.config;
 import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springwebsocket.webchat.repository.JpaMemberRepository;
-import springwebsocket.webchat.repository.MemberRepository;
-import springwebsocket.webchat.service.login.loginService;
-import springwebsocket.webchat.service.user.MemberService;
-import springwebsocket.webchat.service.user.MemberServiceV1;
+import springwebsocket.webchat.member.repository.JpaMemberRepository;
+import springwebsocket.webchat.member.repository.MemberRepository;
+import springwebsocket.webchat.member.service.MemberService;
+import springwebsocket.webchat.member.service.MemberServiceV1;
+import springwebsocket.webchat.member.service.MemberServiceV2;
+import springwebsocket.webchat.member.service.MemberServiceV3;
 
 
 @Configuration
@@ -20,8 +21,8 @@ public class MemberConfig {
     }
 
     @Bean
-    public MemberService userService() {
-        return new MemberServiceV1(memberRepository());
+    public MemberServiceV3 userService() {
+        return new MemberServiceV2(memberRepository());
     }
 
     @Bean
@@ -29,8 +30,4 @@ public class MemberConfig {
         return new JpaMemberRepository(em);
     }
 
-    @Bean
-    public loginService loginService() {
-        return new loginService(memberRepository());
-    }
 }
