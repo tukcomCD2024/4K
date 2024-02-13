@@ -88,6 +88,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 socketRepository?.sendMessageToSocket(
                     MessageModel("start_call",userName,targetName,null
                     ))
+                binding.buttonTest.visibility = View.GONE
             }
             switchCameraButton.setOnClickListener {
                 rtcClient?.switchCamera()
@@ -178,6 +179,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                     setIncomingCallLayoutVisible()
                     binding.incomingNameTV.text = "${message.name.toString()} is calling you"
                     binding.acceptButton.setOnClickListener {
+                        binding.buttonTest.visibility = View.GONE
                         setIncomingCallLayoutGone()
 
                         binding.apply {
