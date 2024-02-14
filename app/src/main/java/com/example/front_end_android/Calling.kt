@@ -46,6 +46,8 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
         binding.exitCallBackground.setOnClickListener {
             rtcClient?.endCall()
+            socketRepository?.closeWebSocket()
+            Log.d("YMC", "endCall")//*
             finish()
         }
 

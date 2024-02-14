@@ -22,7 +22,7 @@ class SocketRepository(private val messageInterface: NewMessageInterface) {
         //if you are using your phone as emulator your local address, use cmd and then write ipconfig
         // and get your ethernet ipv4 , mine is : "ws://192.168.1.3:3000"
         //but if your websocket is deployed you add your websocket address here
-        webSocket = object :WebSocketClient(URI("ws://192.168.219.106:3000")){
+        webSocket = object :WebSocketClient(URI("ws://192.168.22.238:8080/signal")){
             override fun onOpen(handshakedata: ServerHandshake?) {
                 sendMessageToSocket(
                     MessageModel(
@@ -57,6 +57,17 @@ class SocketRepository(private val messageInterface: NewMessageInterface) {
             webSocket?.send(Gson().toJson(message))
         }catch (e:Exception){
             e.printStackTrace()
+        }
+
+    }
+
+    fun closeWebSocket() {
+        try {
+            webSocket?.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            webSocket = null
         }
     }
 
