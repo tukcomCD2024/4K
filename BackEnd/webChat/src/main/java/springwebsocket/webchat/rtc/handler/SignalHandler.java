@@ -26,6 +26,7 @@ public class SignalHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         super.afterConnectionEstablished(session);
+        log.info("add user Session ={}", session);
         // WebSocket 연결이 수립될 때마다 호출되는 메서드입니다.
     }
 
@@ -35,7 +36,10 @@ public class SignalHandler extends TextWebSocketHandler {
         super.afterConnectionClosed(session, status);
         // WebSocket 연결이 종료될 때 호출되는 메서드입니다.
         // 종료된 세션을 users 리스트에서 제거합니다.
+        log.info("delete user Session ={}", session);
         users.removeIf(user -> user.getSession().equals(session));
+        log.info("users List ={}", users);
+
     }
 
     @Override
