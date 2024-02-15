@@ -326,3 +326,9 @@ extension WebRTCClient: RTCDataChannelDelegate {
         self.delegate?.webRTCClient(self, didReceiveData: buffer.data)
     }
 }
+
+extension WebRTCClient {
+    func endCall() {
+        peerConnection.close()
+    }
+}
