@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     }
     
     func setUpValue() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         let button_plain = UIButton.Configuration.plain()
         let button_filled = UIButton.Configuration.filled()
         
