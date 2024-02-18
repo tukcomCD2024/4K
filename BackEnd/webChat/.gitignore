@@ -40,3 +40,4 @@ out/
 ### SECRET KEY INFO ###
 /src/main/resources/application-SECRET-KEY.properties
 /src/main/resources/firebase/webrtc.json
+/src/main/resources/ssl/keystore.p12
