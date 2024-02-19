@@ -3,12 +3,15 @@ package springwebsocket.webchat.member.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
+import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Transactional  // Jpa에서 데이터의 변경이 있을 경우 Transactional 을 써야함
@@ -16,10 +19,13 @@ import java.util.Optional;
 @Slf4j
 public class JpaMemberRepository implements MemberRepository {
 
-    private EntityManager em;
+    private final EntityManager em;
 
-    public JpaMemberRepository(EntityManager em) {
+    private final SpringDataJpaMemberRepository memberRepository ;
+
+    public JpaMemberRepository(EntityManager em,SpringDataJpaMemberRepository memberRepository) {
         this.em = em;
+        this.memberRepository = memberRepository;
     }
 
     @Override
@@ -52,21 +58,18 @@ public class JpaMemberRepository implements MemberRepository {
 
     @Override
     public Optional<Member> findByLoginEmail(String loginEmail) {
-        log.info("findByLoginEmail 왔음");
-
-        // JPQL을 사용하여 이메일 주소로 사용자를 찾음
-        String jpql = "SELECT u FROM Member u WHERE u.email = :loginEmail";
-        Query query = em.createQuery(jpql, Member.class);
-        query.setParameter("loginEmail", loginEmail);
 
         try {
-            Member user = (Member) query.getSingleResult();
-            log.info("user = {}", user.getClass());
-            return Optional.ofNullable(user);
-        } catch (NoResultException e) {
-            // 결과가 없을 경우 NoResultException이 발생하므로 이를 잡아서 빈 Optional 반환
-            return Optional.empty();
+            return memberRepository.findByEmail(loginEmail);
+        } catch (NoSuchElementException e) {
+            return null;
         }
+
+        // JPQL을 사용하여 이메일 주소로 사용자를 찾음
+//        String jpql = "SELECT u FROM Member u WHERE u.email = :loginEmail";
+//        Query query = em.createQuery(jpql, Member.class);
+//        query.setParameter("loginEmail", loginEmail);
+
     }
 
 

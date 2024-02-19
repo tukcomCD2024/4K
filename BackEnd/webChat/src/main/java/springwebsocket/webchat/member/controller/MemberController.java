@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.exception.EmailDuplicatedException;
 import springwebsocket.webchat.member.service.MemberServiceV1;
+import springwebsocket.webchat.member.service.MemberServiceV2;
 import springwebsocket.webchat.member.service.MemberServiceV3;
 
 import java.util.Optional;
@@ -50,8 +52,8 @@ public class MemberController {
         userService.delete(id);
     }
 
-//    @PostMapping("/login")
-//    public String login(String loginEmail, String password) {
-//        return userService.login(loginEmail, password);
-//    }
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest request) {
+        return userService.login(request.getLoginEmail(), request.getPassword());
+    }
 }

@@ -15,4 +15,6 @@ public interface MemberServiceV3 {
     Optional<Member> findById(Long id);
 
     void delete(Long id);
+
+    String login(String loginEmail, String password);
 }

@@ -23,6 +23,7 @@ public class MemberServiceV2 implements MemberServiceV3 {
     private final MemberRepository memberRepository;
 
 
+
     @Override
     @Transactional
     public UserResponse signUp(SignUpRequest signUpRequest) {
@@ -55,4 +56,16 @@ public class MemberServiceV2 implements MemberServiceV3 {
         memberRepository.delete(id);
     }
 
+    public String login(String loginEmail, String password){
+        Member user = memberRepository.findByLoginEmail(loginEmail)
+                .filter(m -> m.getPassword().equals(password))
+                .orElse(null);
+
+        if (user == null) {
+            return "fail";
+        }
+        else{
+            return "success";
+        }
+    }
 }
