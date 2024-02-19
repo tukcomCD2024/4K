@@ -170,6 +170,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 )
                 rtcClient?.onRemoteSessionReceived(session)
                 runOnUiThread {
+
                     binding.remoteViewLoading.visibility = View.GONE
                 }
             }
