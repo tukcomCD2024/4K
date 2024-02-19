@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import springwebsocket.webchat.friend.entity.Friendship;
 import springwebsocket.webchat.friend.repository.JpaFriendshipRepository;
@@ -20,6 +21,7 @@ import static springwebsocket.webchat.friend.entity.Friendship.FriendshipStatus.
 
 @Slf4j
 @SpringBootTest
+@WebAppConfiguration
 class JpaFriendshipRepositoryTest {
 
     @Autowired
@@ -82,7 +84,7 @@ class JpaFriendshipRepositoryTest {
         Friendship friendship = friendshipRepository.sendFriendRequest(sender.getId(), receiver.getEmail());
 
         // when
-        friendshipRepository.acceptFriendRequestById(sender.getId(), receiver.getEmail());
+        friendshipRepository.acceptFriendRequestById(receiver.getId(), sender.getEmail());
 
         // then
         Optional<Friendship> byUserIdAndFriendId = springDataJpaFriendshipRepository.findByUserIdAndFriendId(sender,receiver);
@@ -133,7 +135,7 @@ class JpaFriendshipRepositoryTest {
     }
 
     @Test
-//    @Transactional
+    @Transactional
     void findByUserIdAndStatusOrFriendIdAndStatus() {
         // given
         Member sender = new Member("sender3@naver.com", "1234", "sender");
@@ -181,7 +183,7 @@ class JpaFriendshipRepositoryTest {
         friendshipRepository.sendFriendRequest(sender.getId(), receiver1.getEmail());
 
         //when
-        friendshipRepository.rejectFriendRequestById(sender.getId(), receiverMember1.getEmail());
+        friendshipRepository.rejectFriendRequestById(receiver1.getId(), sender.getEmail());
 
         //then
         List<Friendship> allFriendships = springDataJpaFriendshipRepository.findAll();
