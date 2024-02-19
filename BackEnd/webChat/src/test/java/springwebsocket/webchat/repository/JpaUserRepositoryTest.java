@@ -3,7 +3,9 @@ package springwebsocket.webchat.repository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.repository.MemberRepository;
@@ -15,9 +17,11 @@ import static org.assertj.core.api.Assertions.*;
 
 @Slf4j
 @SpringBootTest
+@WebAppConfiguration
 class JpaUserRepositoryTest {
 
 
+    @Qualifier("memberRepository")
     @Autowired
     MemberRepository userRepository;
 
