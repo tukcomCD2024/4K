@@ -36,6 +36,10 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         binding = ActivityCallingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        socketRepository?.sendMessageToSocket(
+            MessageModel("start_call",userName,targetName,null
+            ))
+        //binding.buttonTest.visibility = View.GONE
 
         binding.nicknameInit.setOnClickListener {
             binding.callingPeopleContainer.visibility = View.GONE
@@ -46,6 +50,8 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
         binding.exitCallBackground.setOnClickListener {
             rtcClient?.endCall()
+            socketRepository?.closeWebSocket()
+            Log.d("YMC", "endCall")//*
             finish()
         }
 

@@ -2,6 +2,7 @@ package com.example.front_end_android
 
 import android.app.Application
 import com.example.front_end_android.models.MessageModel
+import org.java_websocket.client.WebSocketClient
 import org.webrtc.*
 
 class RTCClient(
