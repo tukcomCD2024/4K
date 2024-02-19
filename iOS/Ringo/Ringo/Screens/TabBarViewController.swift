@@ -20,7 +20,7 @@ class TabBarViewController: UITabBarController{
         
         view.backgroundColor = .systemBackground
         
-        tabBar.backgroundColor = .init(white: 1, alpha: 0.8)
+        tabBar.backgroundColor = .systemGray6
         
         let contactsVC = UINavigationController(rootViewController: ContactsViewController())
         let recentsVC = RecentsViewController()
@@ -96,13 +96,13 @@ extension TabBarViewController: WebRTCClientDelegate {
     }
 }
 
-//// MARK: canvas 이용하기
-//import SwiftUI
-//@available(iOS 13.0.0, *)
-//struct TabBarViewControllerPreView: PreviewProvider {
-//    static var previews: some View {
-//    // 사용할 뷰 컨트롤러를 넣어주세요
-//        TabBarViewController()
-//            .toPreview()
-//    }
-//}
+// MARK: canvas 이용하기
+import SwiftUI
+@available(iOS 13.0.0, *)
+struct TabBarViewControllerPreView: PreviewProvider {
+    static var previews: some View {
+    // 사용할 뷰 컨트롤러를 넣어주세요
+        TabBarViewController()
+            .toPreview()
+    }
+}
