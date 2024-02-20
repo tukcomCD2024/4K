@@ -1,5 +1,6 @@
 package com.example.front_end_android
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -49,6 +50,10 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             socketRepository?.closeWebSocket()
             Log.d("YMC", "endCall")//*
             finish()
+        }
+
+        binding.translateImg.setOnClickListener {
+            binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
         }
 
     }
