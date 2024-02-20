@@ -1,0 +1,9 @@
+{
+	"folders": [
+		{
+			"uri": "vscode-remote://wsl+ubuntu-22.04/home/edcrfv458/model_django/conversion"
+		}
+	],
+	"remoteAuthority": "wsl+Ubuntu-22.04",
+	"settings": {}
+}
