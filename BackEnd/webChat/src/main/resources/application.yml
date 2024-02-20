@@ -9,11 +9,11 @@ springdoc:
     operations-sorter: alpha
 
 #SSL
-server:
-  ssl:
-    key-store: classpath:ssl/keystore.p12
-    key-store-type: PKCS12
-    key-store-password: 1234
+#server:
+#  ssl:
+#    key-store: classpath:ssl/keystore.p12
+#    key-store-type: PKCS12
+#    key-store-password: 1234
 
 #MySQL
 spring:
@@ -29,5 +29,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  naver :
+    client-id : ${naver-id}
+    client-secret : ${naver-secret}
   profiles:
     include: SECRET-KEY

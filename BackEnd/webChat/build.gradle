@@ -52,7 +52,11 @@ dependencies {
     // json
     implementation 'org.json:json:20160810'
 
-    implementation 'com.h2database:h2'
+    //WebClient
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
+
+    //m1 macos를 위한 netty-resolver-dns 종속성을 추가
+    implementation 'io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64'
 }
 
 tasks.named('test') {

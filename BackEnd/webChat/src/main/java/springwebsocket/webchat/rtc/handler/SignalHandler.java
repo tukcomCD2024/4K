@@ -8,6 +8,8 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import springwebsocket.webchat.naver.TranslateResponseDto;
+import springwebsocket.webchat.naver.TranslateService;
 import springwebsocket.webchat.rtc.User;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ public class SignalHandler extends TextWebSocketHandler {
 
     private final List<User> users = new ArrayList<>();
 
+    private final TranslateService translateService;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -70,9 +73,31 @@ public class SignalHandler extends TextWebSocketHandler {
                 log.info("ice_candidate");
                 handleIceCandidate(session, data);
                 break;
+            case "text":
+                log.info("text");
+                handleText(session, data);
+                break;
             default:
                 // 처리되지 않은 유형에 대한 로직을 추가할 수 있습니다.
                 break;
+        }
+    }
+
+    private void handleText(WebSocketSession session, JSONObject data) throws IOException {
+        String target = data.getString("target");
+        Optional<User> userToCall = findUser(target);
+        String message = data.getString("message");
+
+        String srcLang = data.getString("srcLang");
+        String tarLang = data.getString("tarLang");
+        String text = data.getString("text");
+
+        TranslateResponseDto.Result result = translateService.naverPapagoTranslate(srcLang, tarLang, text);
+        if (userToCall != null) {
+            sendMessage(session, "text", result.getTranslatedText());
+            sendMessage(userToCall.get().getSession(), "text", result.getTranslatedText());
+        } else {
+            sendMessage(session, "text", "user is not online");
         }
     }
 
