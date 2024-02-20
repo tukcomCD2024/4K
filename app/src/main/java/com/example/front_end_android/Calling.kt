@@ -31,6 +31,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private var isCameraPause = false
     private val rtcAudioManager by lazy { RTCAudioManager.create(this) }
     private var isSpeakerMode = true
+    private var isTranslateMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +54,15 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         }
 
         binding.translateImg.setOnClickListener {
-            binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
+            if(isTranslateMode == false){
+                isTranslateMode = true
+                binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
+                binding.translateImg.setImageResource(R.drawable.translate_black)
+            }else{
+                isTranslateMode = false
+                binding.translateBackground.setBackgroundResource(R.drawable.mute2)
+                binding.translateImg.setImageResource(R.drawable.translate)
+            }
         }
 
     }
