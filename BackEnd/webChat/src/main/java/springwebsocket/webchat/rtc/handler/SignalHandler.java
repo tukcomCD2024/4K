@@ -86,7 +86,6 @@ public class SignalHandler extends TextWebSocketHandler {
     private void handleText(WebSocketSession session, JSONObject data) throws IOException {
         String target = data.getString("target");
         Optional<User> userToCall = findUser(target);
-        String message = data.getString("message");
 
         String srcLang = data.getString("srcLang");
         String tarLang = data.getString("tarLang");

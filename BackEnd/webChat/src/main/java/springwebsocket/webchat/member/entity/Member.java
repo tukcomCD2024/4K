@@ -20,6 +20,7 @@ public class Member {
     private String password;
     private String name;
     private String firebaseToken;
+    private String language;
     public Member() {
     }
 
