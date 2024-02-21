@@ -100,6 +100,7 @@ class ConnectionViewController: UIViewController {
         translateBtn.invalidateIntrinsicContentSize()
         translateBtn.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 23, bottom: 25, trailing: 23)
         translateBtn.layer.cornerRadius = 40
+        translateBtn.addTarget(self, action: #selector(pressedTransBtn), for: .touchUpInside)
         
         hStack2.axis = .horizontal
         hStack2.alignment = .center
@@ -136,6 +137,12 @@ class ConnectionViewController: UIViewController {
     @objc func hangUpBtnAction() {
         CallService.shared.webRTCClient.endCall()
         dismiss(animated: true)
+    }
+    
+    @objc func pressedTransBtn() {
+        let sttVC = TestSTTViewController()
+        sttVC.modalPresentationStyle = .automatic
+        present(sttVC, animated: true,completion: nil)
     }
 
 }
