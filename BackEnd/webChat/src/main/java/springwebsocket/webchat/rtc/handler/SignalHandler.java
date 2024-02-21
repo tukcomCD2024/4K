@@ -8,6 +8,8 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import springwebsocket.webchat.member.entity.Member;
+import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
 import springwebsocket.webchat.naver.TranslateResponseDto;
 import springwebsocket.webchat.naver.TranslateService;
 import springwebsocket.webchat.rtc.User;
@@ -25,6 +27,8 @@ public class SignalHandler extends TextWebSocketHandler {
     private final List<User> users = new ArrayList<>();
 
     private final TranslateService translateService;
+
+    private final SpringDataJpaMemberRepository memberRepository;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -73,8 +77,8 @@ public class SignalHandler extends TextWebSocketHandler {
                 log.info("ice_candidate");
                 handleIceCandidate(session, data);
                 break;
-            case "text":
-                log.info("text");
+            case "stt_message":
+                log.info("stt_message");
                 handleText(session, data);
                 break;
             default:
@@ -84,17 +88,20 @@ public class SignalHandler extends TextWebSocketHandler {
     }
 
     private void handleText(WebSocketSession session, JSONObject data) throws IOException {
+        String name = data.getString("name");
         String target = data.getString("target");
-        Optional<User> userToCall = findUser(target);
 
-        String srcLang = data.getString("srcLang");
-        String tarLang = data.getString("tarLang");
-        String text = data.getString("text");
+        Optional<User> user = findUser(name);
+        Optional<User> targetUser = findUser(target);
 
-        TranslateResponseDto.Result result = translateService.naverPapagoTranslate(srcLang, tarLang, text);
-        if (userToCall != null) {
-            sendMessage(session, "text", result.getTranslatedText());
-            sendMessage(userToCall.get().getSession(), "text", result.getTranslatedText());
+        String srcLang = user.get().getLanguage();
+        String tarLang = targetUser.get().getLanguage();
+        String textData = data.getString("data");
+
+        TranslateResponseDto.Result result = translateService.naverPapagoTranslate(srcLang, tarLang, textData);
+        if (targetUser != null) {
+            sendMessage(session, "translate_message", result.getTranslatedText());
+            sendMessage(targetUser.get().getSession(), "translate_message", result.getTranslatedText());
         } else {
             sendMessage(session, "text", "user is not online");
         }
@@ -102,12 +109,14 @@ public class SignalHandler extends TextWebSocketHandler {
 
     private void handleStoreUser(WebSocketSession session, JSONObject data) throws IOException {
         String name = data.getString("name");
+        log.info("name ={}", name);
+        Member member = memberRepository.findByEmail(name).get();
         Optional<User> user = findUser(name);
         if (user.isPresent()) {
             sendMessage(session, "user already exists");
         } else {
             // Add new user
-            addUser(name, session);
+            addUser(name, session,member.getLanguage());
         }
     }
 
@@ -160,8 +169,8 @@ public class SignalHandler extends TextWebSocketHandler {
                 .findFirst();
     }
 
-    private void addUser(String name, WebSocketSession session) {
-        users.add(new User(name, session));
+    private void addUser(String name, WebSocketSession session,String language) {
+        users.add(new User(name, session,language));
     }
 
     private void sendMessage(WebSocketSession session, String type, String data) throws IOException {

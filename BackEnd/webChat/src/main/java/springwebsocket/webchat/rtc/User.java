@@ -11,11 +11,13 @@ import org.springframework.web.socket.WebSocketSession;
 public class User {
     private final String name;
 
-    private String language;
+    private final String language;
+
     private final WebSocketSession session;
 
-    public User(String name, WebSocketSession session) {
+    public User(String name, WebSocketSession session,String language) {
         this.name = name;
         this.session = session;
+        this.language = language;
     }
 }

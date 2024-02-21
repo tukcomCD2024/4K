@@ -28,7 +28,7 @@ class JpaUserRepositoryTest {
     @Test
     void save() {
         //given
-        Member user = new Member("asdf@naver.com", "1234", "강지석");
+        Member user = new Member("rkdwlsgur", "1234", "강진혁");
 
         //when
         Member saveUser = userRepository.save(user);
