@@ -21,7 +21,7 @@ class ConnectionViewController: UIViewController {
     let translateBtn = UIButton()
     let hangUpBtn = UIButton()
     
-    let randomNames = ["민준", "서준"]
+    let randomNames = ["example2"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +113,7 @@ class ConnectionViewController: UIViewController {
         hangUpBtn.invalidateIntrinsicContentSize()
         hangUpBtn.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 16, bottom: 25, trailing: 16)
         hangUpBtn.layer.cornerRadius = 40
+        hangUpBtn.addTarget(self, action: #selector(hangUpBtnAction), for: .touchUpInside)
     }
     
     func setConstraints() {
@@ -130,6 +131,11 @@ class ConnectionViewController: UIViewController {
             make.horizontalEdges.equalTo(vStack.layoutMarginsGuide)
         }
         
+    }
+    
+    @objc func hangUpBtnAction() {
+        CallService.shared.webRTCClient.endCall()
+        dismiss(animated: true)
     }
 
 }

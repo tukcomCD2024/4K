@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     }
     
     func setUpValue() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         let button_plain = UIButton.Configuration.plain()
         let button_filled = UIButton.Configuration.filled()
         
@@ -85,6 +85,8 @@ class ViewController: UIViewController {
         input_email.layer.cornerRadius = 5
         input_email.keyboardType = .emailAddress
         input_email.autocapitalizationType = .none
+        input_email.autocorrectionType = .no
+        input_email.spellCheckingType = .no
         
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -116,6 +118,9 @@ class ViewController: UIViewController {
         input_passwd.rightView = showBtn
         input_passwd.rightViewMode = .always
         input_passwd.autocapitalizationType = .none
+        input_passwd.delegate = self
+        input_passwd.autocorrectionType = .no
+        input_passwd.spellCheckingType = .no
         
         error.layer.isHidden = true
         error.setTitle(" Incorrect password. Please check your password.", for: .normal)
@@ -219,6 +224,11 @@ class ViewController: UIViewController {
             make.trailing.equalTo(apple.snp.leading).offset(-20)
         }
     }
+    // 빈 화면 터치 시 키보드 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            view.endEditing(true)
+        }
+    
     @objc func onPressSignin(_ sender: UIButton) {
         login()
     }
@@ -270,9 +280,7 @@ extension ViewController {
 //                    UserDefaults.standard.set(data.data?.jwtToken, forKey: "jwtToken")
                     let nav = UINavigationController()
                     nav.modalPresentationStyle = .fullScreen
-                    nav.navigationBar.barTintColor = .white
-//                  nav.navigationBar.tintColor = UIColor(w: 42)
-                        
+                    
                     //네비게이션 중복 수정 1/31
                     nav.navigationBar.isHidden = true
                         
@@ -299,5 +307,12 @@ extension ViewController {
                 print("networkFail")
             }
         }
+    }
+}
+// MARK: - canvas 이용하기
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

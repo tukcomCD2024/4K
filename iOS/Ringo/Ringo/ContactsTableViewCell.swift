@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol ContactsTableViewCellDelegate: AnyObject {
+    func pressedButton()
+}
+
 class ContactsTableViewCell: UITableViewCell {
     
     static let identifier = "ContactsTableViewCell"
@@ -20,6 +24,8 @@ class ContactsTableViewCell: UITableViewCell {
     let info = UIButton()
     let paddingView = UIView()
     let paddingView2 = UIView()
+    
+    var delegate: ContactsTableViewCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,6 +59,7 @@ class ContactsTableViewCell: UITableViewCell {
         call.configuration = .plain()
         call.configuration?.imagePadding = 10
         call.configuration?.baseForegroundColor = .systemGreen
+        call.addTarget(self, action: #selector(callBtnAction), for: .touchUpInside)
         
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -101,6 +108,10 @@ class ContactsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         moreStackView.isHidden = !selected
+    }
+    
+    @objc func callBtnAction(){
+        delegate?.pressedButton()
     }
 }
 
