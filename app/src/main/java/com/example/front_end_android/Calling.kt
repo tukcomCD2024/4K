@@ -41,6 +41,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private val rtcAudioManager by lazy { RTCAudioManager.create(this) }
     private var isSpeakerMode = true
     private var isTranslateMode = false
+
     private lateinit var speechRecognizer: SpeechRecognizer
     private lateinit var recognitionIntent: Intent
 
@@ -49,14 +50,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         binding = ActivityCallingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
-
-        // RecognizerIntent 생성
-        recognitionIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        recognitionIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)    // 여분의 키
-        recognitionIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR")         // 언어 설정
-        // 새 SpeechRecognizer 를 만드는 팩토리 메서드
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this@Calling)
-        speechRecognizer.setRecognitionListener(recognitionListener)    // 리스너 설정
 
         binding.nicknameInit.setOnClickListener {
             binding.callingPeopleContainer.visibility = View.GONE
@@ -73,6 +66,14 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             Log.d("YMC", "endCall")//*
             finish()
         }
+
+        // RecognizerIntent 생성
+        recognitionIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        recognitionIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)    // 여분의 키
+        recognitionIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR")         // 언어 설정
+        // 새 SpeechRecognizer 를 만드는 팩토리 메서드
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this@Calling)
+        speechRecognizer.setRecognitionListener(recognitionListener)    // 리스너 설정
 
         binding.translateImg.setOnClickListener {
             if(isTranslateMode == false){
@@ -311,6 +312,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> "말하는 시간초과"
                 else -> "알 수 없는 오류임"
             }
+            Toast.makeText(applicationContext, "에러 발생: $message", Toast.LENGTH_SHORT).show()
             //binding.tvState.text = "에러 발생: $message"
             // 에러 발생 시 듣기 재시작
             if(isTranslateMode == true){

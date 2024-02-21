@@ -445,4 +445,5 @@ class RTCAudioManager(context: Context) {
         }
         Log.d(TAG, "defaultAudioDevice: $defaultAudioDevice")
     }
+
 }
