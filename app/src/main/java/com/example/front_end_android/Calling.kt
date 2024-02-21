@@ -54,7 +54,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         recognitionIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         recognitionIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)    // 여분의 키
         recognitionIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR")         // 언어 설정
-
         // 새 SpeechRecognizer 를 만드는 팩토리 메서드
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this@Calling)
         speechRecognizer.setRecognitionListener(recognitionListener)    // 리스너 설정
@@ -69,6 +68,8 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         binding.exitCallBackground.setOnClickListener {
             rtcClient?.endCall()
             socketRepository?.closeWebSocket()
+            isTranslateMode = false
+            stopListening()
             Log.d("YMC", "endCall")//*
             finish()
         }
@@ -323,7 +324,10 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         override fun onResults(results: Bundle) {
             // 말을 하면 ArrayList에 단어를 넣고 textView에 단어를 이어줌
             val matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-            for (i in matches!!.indices) binding.sttTestTxtview.text = matches[i]
+            for (i in matches!!.indices) {
+                binding.sttTestTxtview.text = matches[i]
+            }
+
             // 인식 결과가 나오면 듣기 재시작
             if(isTranslateMode == true){
                 startListening()

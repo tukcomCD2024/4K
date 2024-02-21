@@ -22,7 +22,7 @@ class SocketRepository(private val messageInterface: NewMessageInterface) {
         //if you are using your phone as emulator your local address, use cmd and then write ipconfig
         // and get your ethernet ipv4 , mine is : "ws://192.168.1.3:3000"
         //but if your websocket is deployed you add your websocket address here
-        webSocket = object :WebSocketClient(URI("wss://4kringo.shop:8080/signal")){
+        webSocket = object :WebSocketClient(URI("ws://172.30.1.83:8080/signal")){
             override fun onOpen(handshakedata: ServerHandshake?) {
                 sendMessageToSocket(
                     MessageModel(
