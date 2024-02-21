@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Speech
 
 class TestSTTViewController: UIViewController {
 
