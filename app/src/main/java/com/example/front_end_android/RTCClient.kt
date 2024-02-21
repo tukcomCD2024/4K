@@ -32,6 +32,7 @@ class RTCClient(
     private var videoCapturer: CameraVideoCapturer? = null
     private var localAudioTrack: AudioTrack? = null
     private var localVideoTrack: VideoTrack? = null
+    private var localStream: MediaStream? = null
 
     private fun initPeerConnectionFactory(application: Application){
         val peerConnectionOption = PeerConnectionFactory.InitializationOptions.builder(application)
@@ -83,9 +84,9 @@ class RTCClient(
         localVideoTrack?.addSink(surface)
         localAudioTrack =
             peerConnectionFactory.createAudioTrack("local_track_audio", localAudioSource)
-        val localStream = peerConnectionFactory.createLocalMediaStream("local_stream")
-        localStream.addTrack(localAudioTrack)
-        localStream.addTrack(localVideoTrack)
+        localStream = peerConnectionFactory.createLocalMediaStream("local_stream")
+        localStream?.addTrack(localAudioTrack)
+        localStream?.addTrack(localVideoTrack)
 
         peerConnection?.addStream(localStream)
 
@@ -220,6 +221,23 @@ class RTCClient(
 
     fun toggleAudio(mute: Boolean) {
         localAudioTrack?.setEnabled(mute)
+    }
+
+    fun deleteLocalStream() {
+        localStream?.let { peerConnection?.removeStream(it) }
+        localStream = null
+    }
+
+    fun reConnectLocalStream(delete: Boolean) {
+        localStream = peerConnectionFactory.createLocalMediaStream("local_stream")
+        if (delete) {
+            localStream?.addTrack(localVideoTrack)
+        } else {
+            localStream?.addTrack(localAudioTrack)
+            localStream?.addTrack(localVideoTrack)
+        }
+
+        peerConnection?.addStream(localStream)
     }
 
     fun toggleCamera(cameraPause: Boolean) {

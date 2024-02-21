@@ -36,7 +36,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private var socketRepository:SocketRepository?=null
     private var rtcClient : RTCClient?=null
     private val gson = Gson()
-    private var isMute = false
+    private var isMute = true
     private var isCameraPause = false
     private val rtcAudioManager by lazy { RTCAudioManager.create(this) }
     private var isSpeakerMode = true
@@ -80,12 +80,16 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 isTranslateMode = true
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
+                rtcClient?.deleteLocalStream()
+                rtcClient?.reConnectLocalStream(true)
                 startListening()
             }else{
                 isTranslateMode = false
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2)
                 binding.translateImg.setImageResource(R.drawable.translate)
                 stopListening()
+                rtcClient?.deleteLocalStream()
+                rtcClient?.reConnectLocalStream(false)
             }
         }
 
