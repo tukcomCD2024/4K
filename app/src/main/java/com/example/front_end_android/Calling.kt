@@ -20,6 +20,7 @@ import org.webrtc.SessionDescription
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.AudioManager
 import android.os.Build
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
@@ -51,6 +52,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         setContentView(binding.root)
         init()
 
+
         binding.nicknameInit.setOnClickListener {
             binding.callingPeopleContainer.visibility = View.GONE
             binding.linearLayout.visibility = View.GONE
@@ -67,6 +69,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             finish()
         }
 
+
         // RecognizerIntent 생성
         recognitionIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         recognitionIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)    // 여분의 키
@@ -80,17 +83,19 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 isTranslateMode = true
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
-                rtcClient?.deleteLocalStream()
-                rtcClient?.reConnectLocalStream(true)
+                //rtcClient?.deleteLocalStream()
+                //rtcClient?.reConnectLocalStream(true)
                 startListening()
             }else{
                 isTranslateMode = false
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2)
                 binding.translateImg.setImageResource(R.drawable.translate)
                 stopListening()
-                rtcClient?.deleteLocalStream()
-                rtcClient?.reConnectLocalStream(false)
+                //rtcClient?.deleteLocalStream()
+                //rtcClient?.reConnectLocalStream(false)
             }
+            //val intent = Intent(this@Calling, MainActivity::class.java)
+            //startActivity(intent)
         }
 
     }

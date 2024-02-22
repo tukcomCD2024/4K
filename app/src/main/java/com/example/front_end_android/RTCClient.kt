@@ -236,7 +236,7 @@ class RTCClient(
             localStream?.addTrack(localAudioTrack)
             localStream?.addTrack(localVideoTrack)
         }
-
+        peerConnection?.setAudioRecording(true)
         peerConnection?.addStream(localStream)
     }
 
