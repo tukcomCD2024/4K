@@ -87,6 +87,7 @@ class RTCClient(
         localStream = peerConnectionFactory.createLocalMediaStream("local_stream")
         localStream?.addTrack(localAudioTrack)
         localStream?.addTrack(localVideoTrack)
+        //peerConnection?.setAudioRecording(true)
 
         peerConnection?.addStream(localStream)
 
@@ -236,7 +237,6 @@ class RTCClient(
             localStream?.addTrack(localAudioTrack)
             localStream?.addTrack(localVideoTrack)
         }
-        peerConnection?.setAudioRecording(true)
         peerConnection?.addStream(localStream)
     }
 
