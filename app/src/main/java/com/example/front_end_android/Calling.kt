@@ -83,6 +83,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 isTranslateMode = true
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
+                //rtcClient?.deleteAudioTrack()
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(true)
                 startListening()
@@ -91,6 +92,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2)
                 binding.translateImg.setImageResource(R.drawable.translate)
                 stopListening()
+                //rtcClient?.addAudioTrack()
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(false)
             }
@@ -275,7 +277,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
     // 듣기 시작
     private fun startListening() {
+        rtcClient?.deleteAudioTrack()
         speechRecognizer.startListening(recognitionIntent) // 듣기 시작
+        rtcClient?.addAudioTrack()
     }
 
     private fun stopListening() {
