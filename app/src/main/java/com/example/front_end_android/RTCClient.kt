@@ -84,13 +84,14 @@ class RTCClient(
         localVideoTrack?.addSink(surface)
         localAudioTrack =
             peerConnectionFactory.createAudioTrack("local_track_audio", localAudioSource)
-        localStream = peerConnectionFactory.createLocalMediaStream("local_stream")
-        localStream?.addTrack(localAudioTrack)
-        localStream?.addTrack(localVideoTrack)
-        //peerConnection?.setAudioRecording(true)
 
-        peerConnection?.addStream(localStream)
-
+        //localStream = peerConnectionFactory.createLocalMediaStream("local_stream")
+        //localStream?.addTrack(localAudioTrack)
+        //localStream?.addTrack(localVideoTrack)
+        //peerConnection?.addStream(localStream)
+        peerConnection?.addTrack(localAudioTrack)
+        peerConnection?.addTrack(localVideoTrack)
+        peerConnection?.setAudioRecording(true)
     }
 
     private fun getVideoCapturer(application: Application): CameraVideoCapturer {
