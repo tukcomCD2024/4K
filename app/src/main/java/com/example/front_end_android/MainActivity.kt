@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.api.gax.core.FixedCredentialsProvider
+import com.google.api.gax.grpc.InstantiatingGrpcChannelProvider
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.speech.v1.RecognitionAudio
 import com.google.cloud.speech.v1.RecognitionConfig
@@ -23,6 +24,8 @@ import com.google.protobuf.ByteString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.IOException
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
 
@@ -131,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         val config = RecognitionConfig.newBuilder()
             .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
             .setSampleRateHertz(16000)
-            .setLanguageCode("en-US")
+            .setLanguageCode("ko-KR")
             .build()
         return RecognizeRequest.newBuilder()
             .setConfig(config)

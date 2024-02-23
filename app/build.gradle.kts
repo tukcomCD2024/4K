@@ -65,9 +65,9 @@ dependencies {
     implementation ("com.guolindev.permissionx:permissionx:1.6.1")
 
     implementation ("com.google.cloud:google-cloud-speech:1.29.1")
-    implementation ("com.google.auth:google-auth-library-oauth2-http:1.17.0")
+    implementation ("com.google.auth:google-auth-library-oauth2-http:0.26.0")
     implementation ("io.grpc:grpc-okhttp:1.38.1")
-    implementation ("io.grpc:grpc-stub:1.55.1")
-    implementation ("com.google.api:gax:2.29.0")
+    implementation ("io.grpc:grpc-stub:1.38.1")
+    implementation ("com.google.api:gax:1.58.0")
 
 }
