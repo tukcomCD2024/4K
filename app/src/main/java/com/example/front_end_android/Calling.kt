@@ -79,7 +79,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         speechRecognizer.setRecognitionListener(recognitionListener)    // 리스너 설정
 
         binding.translateImg.setOnClickListener {
-            if(isTranslateMode == false){
+            /*if(isTranslateMode == false){
                 isTranslateMode = true
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
@@ -95,9 +95,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 //rtcClient?.addAudioTrack()
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(false)
-            }
-            //val intent = Intent(this@Calling, MainActivity::class.java)
-            //startActivity(intent)
+            }*/
+            val intent = Intent(this@Calling, MainActivity::class.java)
+            startActivity(intent)
         }
 
     }

@@ -4,6 +4,13 @@ plugins {
 }
 
 android {
+
+    packagingOptions {
+        exclude( "META-INF/DEPENDENCIES")
+        exclude( "META-INF/INDEX.LIST")
+    }
+
+
     namespace = "com.example.front_end_android"
     compileSdk = 34
 
@@ -56,5 +63,11 @@ dependencies {
     implementation("org.java-websocket:Java-WebSocket:1.5.3")
     implementation ("com.google.code.gson:gson:2.10.1")
     implementation ("com.guolindev.permissionx:permissionx:1.6.1")
+
+    implementation ("com.google.cloud:google-cloud-speech:1.29.1")
+    implementation ("com.google.auth:google-auth-library-oauth2-http:1.17.0")
+    implementation ("io.grpc:grpc-okhttp:1.38.1")
+    implementation ("io.grpc:grpc-stub:1.55.1")
+    implementation ("com.google.api:gax:2.29.0")
 
 }
