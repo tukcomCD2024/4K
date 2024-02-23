@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeSpeechClient() {
-        val credentials = GoogleCredentials.fromStream(resources.openRawResource(R.raw.credentials))
+        val credentials = GoogleCredentials.fromStream(resources.openRawResource())
         val credentialsProvider = FixedCredentialsProvider.create(credentials)
         speechClient = SpeechClient.create(
             SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build()
