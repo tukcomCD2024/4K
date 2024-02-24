@@ -2,30 +2,30 @@ package com.example.front_end_android
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.media.AudioFormat
+import android.media.AudioRecord
+import android.media.MediaRecorder
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.api.gax.core.FixedCredentialsProvider
-import com.google.api.gax.grpc.InstantiatingGrpcChannelProvider
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.speech.v1.RecognitionAudio
 import com.google.cloud.speech.v1.RecognitionConfig
+import com.google.cloud.speech.v1.RecognitionConfig.AudioEncoding
 import com.google.cloud.speech.v1.RecognizeRequest
 import com.google.cloud.speech.v1.SpeechClient
 import com.google.cloud.speech.v1.SpeechRecognitionAlternative
 import com.google.cloud.speech.v1.SpeechRecognitionResult
 import com.google.cloud.speech.v1.SpeechSettings
-
 import com.google.protobuf.ByteString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.IOException
-import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,8 +48,6 @@ class MainActivity : AppCompatActivity() {
 
         override fun onVoice(data: ByteArray?, size: Int) {
             byteArray = data?.let { byteArray.plus(it) }!!
-            Log.e("kya", "***" + byteArray.toString())
-
         }
 
         override fun onVoiceEnd() {
@@ -88,11 +86,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeSpeechClient() {
-        val credentials = GoogleCredentials.fromStream(resources.openRawResource(R.raw.cre))
-        val credentialsProvider = FixedCredentialsProvider.create(credentials)
-        speechClient = SpeechClient.create(
-            SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build()
-        )
+        try {
+            val credentials = GoogleCredentials.fromStream(resources.openRawResource(R.raw.cre))
+            val credentialsProvider = FixedCredentialsProvider.create(credentials)
+            speechClient = SpeechClient.create(
+                SpeechSettings.newBuilder().setCredentialsProvider(credentialsProvider).build()
+            )
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
     override fun onDestroy() {
@@ -132,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         val audioBytes =
             RecognitionAudio.newBuilder().setContent(ByteString.copyFrom(audioData)).build()
         val config = RecognitionConfig.newBuilder()
-            .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
+            .setEncoding(AudioEncoding.LINEAR16)
             .setSampleRateHertz(16000)
             .setLanguageCode("ko-KR")
             .build()
