@@ -6,10 +6,22 @@ import android.media.MediaRecorder
 
 class VoiceRecorder(private val mCallback: Callback) {
     abstract class Callback {
+        /**
+         * Called when the recorder starts hearing voice.
+         */
         open fun onVoiceStart() {}
 
+        /**
+         * Called when the recorder is hearing voice.
+         *
+         * @param data The audio data in [AudioFormat.ENCODING_PCM_16BIT].
+         * @param size The size of the actual data in `data`.
+         */
         open fun onVoice(data: ByteArray?, size: Int) {}
 
+        /**
+         * Called when the recorder stops hearing voice.
+         */
         open fun onVoiceEnd() {}
     }
 
@@ -18,20 +30,36 @@ class VoiceRecorder(private val mCallback: Callback) {
     private var mBuffer: ByteArray? = null
     private val mLock = Any()
 
+    /** The timestamp of the last time that voice is heard.  */
     private var mLastVoiceHeardMillis = Long.MAX_VALUE
+
+    /** The timestamp when the current voice is started.  */
     private var mVoiceStartedMillis: Long = 0
 
+    /**
+     * Starts recording audio.
+     *
+     *
+     * The caller is responsible for calling [.stop] later.
+     */
     fun start() {
+        // Stop recording if it is currently ongoing.
         stop()
+        // Try to create a new recording session.
         mAudioRecord = createAudioRecord()
         if (mAudioRecord == null) {
             throw RuntimeException("Cannot instantiate VoiceRecorder")
         }
+        // Start recording.
         mAudioRecord!!.startRecording()
+        // Start processing the captured audio.
         mThread = Thread(ProcessVoice())
         mThread!!.start()
     }
 
+    /**
+     * Stops recording audio.
+     */
     fun stop() {
         synchronized(mLock) {
             dismiss()
@@ -48,6 +76,9 @@ class VoiceRecorder(private val mCallback: Callback) {
         }
     }
 
+    /**
+     * Dismisses the currently ongoing utterance.
+     */
     fun dismiss() {
         if (mLastVoiceHeardMillis != Long.MAX_VALUE) {
             mLastVoiceHeardMillis = Long.MAX_VALUE
@@ -55,6 +86,22 @@ class VoiceRecorder(private val mCallback: Callback) {
         }
     }
 
+    /**
+     * Retrieves the sample rate currently used to record audio.
+     *
+     * @return The sample rate of recorded audio.
+     */
+    val sampleRate: Int
+        get() = if (mAudioRecord != null) {
+            mAudioRecord!!.sampleRate
+        } else 0
+
+    /**
+     * Creates a new [AudioRecord].
+     *
+     * @return A newly created [AudioRecord], or null if it cannot be created (missing
+     * permissions?).
+     */
     private fun createAudioRecord(): AudioRecord? {
         for (sampleRate in SAMPLE_RATE_CANDIDATES) {
             val sizeInBytes = AudioRecord.getMinBufferSize(sampleRate, CHANNEL, ENCODING)
@@ -75,6 +122,10 @@ class VoiceRecorder(private val mCallback: Callback) {
         return null
     }
 
+    /**
+     * Continuously processes the captured audio and notifies [.mCallback] of corresponding
+     * events.
+     */
     private inner class ProcessVoice : Runnable {
         override fun run() {
             while (true) {
@@ -91,6 +142,9 @@ class VoiceRecorder(private val mCallback: Callback) {
                         }
                         mCallback.onVoice(mBuffer, size)
                         mLastVoiceHeardMillis = now
+                        if (now - mVoiceStartedMillis > MAX_SPEECH_LENGTH_MILLIS) {
+                            end()
+                        }
                     } else if (mLastVoiceHeardMillis != Long.MAX_VALUE) {
                         mCallback.onVoice(mBuffer, size)
                         if (now - mLastVoiceHeardMillis > SPEECH_TIMEOUT_MILLIS) {
@@ -104,13 +158,13 @@ class VoiceRecorder(private val mCallback: Callback) {
         private fun end() {
             mLastVoiceHeardMillis = Long.MAX_VALUE
             mCallback.onVoiceEnd()
-            // 추가: 사용자의 말이 끝나면 자동으로 녹음 중지
-            stop()
         }
 
         private fun isHearingVoice(buffer: ByteArray?, size: Int): Boolean {
             var i = 0
             while (i < size - 1) {
+
+                // The buffer has LINEAR16 in little endian.
                 var s = buffer!![i + 1].toInt()
                 if (s < 0) s *= -1
                 s = s shl 8
