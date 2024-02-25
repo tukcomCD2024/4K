@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onVoiceEnd() {
-            transcribeRecording(byteArray)
+            //transcribeRecording(byteArray)
         }
     }
 
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
     private fun displayTranscription(transcription: String) {
         runOnUiThread {
             textView.text = transcription
-            startVoiceRecorder()
+            //startVoiceRecorder()
             //stopVoiceRecorder()
             //startButton.text = "Start"
         }
@@ -143,9 +143,11 @@ class MainActivity : AppCompatActivity() {
     private fun startVoiceRecorder() {
         if (mVoiceRecorder != null) {
             mVoiceRecorder!!.stop()
+            mVoiceRecorder = null
+        }else{
+            mVoiceRecorder = VoiceRecorder(mVoiceCallBack)
+            mVoiceRecorder!!.start()
         }
-        mVoiceRecorder = VoiceRecorder(mVoiceCallBack)
-        mVoiceRecorder!!.start()
     }
 
     private fun stopVoiceRecorder() {
