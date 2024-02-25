@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         override fun onVoice(data: ByteArray?, size: Int) {
             byteArray = data?.let { byteArray.plus(it) }!!
             Log.e("kya", "***" + byteArray.toString())
-
+            transcribeRecording(byteArray)
         }
 
         override fun onVoiceEnd() {
@@ -110,8 +110,9 @@ class MainActivity : AppCompatActivity() {
     private fun displayTranscription(transcription: String) {
         runOnUiThread {
             textView.text = transcription
-            stopVoiceRecorder()
-            startButton.text = "Start"
+            startVoiceRecorder()
+            //stopVoiceRecorder()
+            //startButton.text = "Start"
         }
     }
 
@@ -131,7 +132,7 @@ class MainActivity : AppCompatActivity() {
         val config = RecognitionConfig.newBuilder()
             .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
             .setSampleRateHertz(16000)
-            .setLanguageCode("en-US")
+            .setLanguageCode("ko-KR")
             .build()
         return RecognizeRequest.newBuilder()
             .setConfig(config)
