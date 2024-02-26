@@ -79,11 +79,11 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         speechRecognizer.setRecognitionListener(recognitionListener)    // 리스너 설정
 
         binding.translateImg.setOnClickListener {
-            /*if(isTranslateMode == false){
+            if(isTranslateMode == false){
                 isTranslateMode = true
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
-                //rtcClient?.deleteAudioTrack()
+                rtcClient?.deleteAudioTrack()
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(true)
                 startListening()
@@ -92,12 +92,12 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2)
                 binding.translateImg.setImageResource(R.drawable.translate)
                 stopListening()
-                //rtcClient?.addAudioTrack()
+                rtcClient?.addAudioTrack()
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(false)
-            }*/
-            val intent = Intent(this@Calling, MainActivity::class.java)
-            startActivity(intent)
+            }
+            //val intent = Intent(this@Calling, MainActivity::class.java)
+            //startActivity(intent)
         }
 
     }
@@ -277,9 +277,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
     // 듣기 시작
     private fun startListening() {
-        rtcClient?.deleteAudioTrack()
+        //rtcClient?.deleteAudioTrack()
         speechRecognizer.startListening(recognitionIntent) // 듣기 시작
-        rtcClient?.addAudioTrack()
+        //rtcClient?.addAudioTrack()
     }
 
     private fun stopListening() {
@@ -342,6 +342,11 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             for (i in matches!!.indices) {
                 binding.sttTestTxtview.text = matches[i]
             }
+            val stt_message = binding.sttTestTxtview.text
+
+            socketRepository?.sendMessageToSocket(
+                MessageModel("stt_message",userName,targetName,stt_message)
+            )
 
             // 인식 결과가 나오면 듣기 재시작
             if(isTranslateMode == true){
