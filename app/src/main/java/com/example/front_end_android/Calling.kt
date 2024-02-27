@@ -42,6 +42,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private val rtcAudioManager by lazy { RTCAudioManager.create(this) }
     private var isSpeakerMode = true
     private var isTranslateMode = false
+    private lateinit var stt_message:String
 
     private lateinit var speechRecognizer: SpeechRecognizer
     private lateinit var recognitionIntent: Intent
@@ -83,7 +84,8 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 isTranslateMode = true
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
-                rtcClient?.deleteAudioTrack()
+                //rtcClient?.deleteAudioTrack()
+                
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(true)
                 startListening()
@@ -92,7 +94,8 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2)
                 binding.translateImg.setImageResource(R.drawable.translate)
                 stopListening()
-                rtcClient?.addAudioTrack()
+                //rtcClient?.addAudioTrack()
+
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(false)
             }
@@ -340,9 +343,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             // 말을 하면 ArrayList에 단어를 넣고 textView에 단어를 이어줌
             val matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
             for (i in matches!!.indices) {
-                binding.sttTestTxtview.text = matches[i]
+                stt_message = matches[i]
             }
-            val stt_message = binding.sttTestTxtview.text
+            binding.sttTestTxtview.text = stt_message
 
             socketRepository?.sendMessageToSocket(
                 MessageModel("stt_message",userName,targetName,stt_message)

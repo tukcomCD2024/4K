@@ -75,7 +75,7 @@ class FriendsFragment : Fragment() {
 
         val gson = GsonBuilder().setLenient().create()
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://4kringo.shop:8080/")//실제로는 aws url이 들어가야함
+            .baseUrl("http://192.168.15.59:8080/")//실제로는 aws url이 들어가야함
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
         val service = retrofit.create(RetrofitService::class.java);
