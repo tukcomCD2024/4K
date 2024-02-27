@@ -11,19 +11,23 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.front_end_android.databinding.ActivityCallingBinding
+import com.example.front_end_android.databinding.ActivityTestBinding
 import java.util.Locale
 
 
 class TestActivity : AppCompatActivity() {
     private lateinit var textToSpeech: TextToSpeech
     private lateinit var editText:EditText
-    @SuppressLint("MissingInflatedId")
+    private lateinit var binding:ActivityTestBinding
+    //@SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityTestBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        editText = findViewById<EditText>(R.id.editText)
-        val textToSpeechBtn = findViewById<Button>(R.id.textToSpeechBtn)
+        editText = binding.editText
+        val textToSpeechBtn = binding.textToSpeechBtn
 
         textToSpeech = TextToSpeech(this) { status ->
             if (status == TextToSpeech.SUCCESS) {
@@ -48,7 +52,7 @@ class TestActivity : AppCompatActivity() {
             }
         }
 
-        val speechToTextBtn = findViewById<Button>(R.id.speechToTextBtn)
+        /*val speechToTextBtn = findViewById<Button>(R.id.speechToTextBtn)
         speechToTextBtn.setOnClickListener {
             editText.text = null
             try {
@@ -76,6 +80,6 @@ class TestActivity : AppCompatActivity() {
             ) as ArrayList<String>
 
             editText.setText(results[0])
-        }
+        }*/
     }
 }
