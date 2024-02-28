@@ -25,8 +25,10 @@ import android.os.Build
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.speech.tts.TextToSpeech
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import java.util.Locale
 
 class Calling : AppCompatActivity(), NewMessageInterface {
 
@@ -43,6 +45,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private var isSpeakerMode = true
     private var isTranslateMode = false
     private lateinit var stt_message:String
+    private lateinit var textToSpeech: TextToSpeech
 
     private lateinit var speechRecognizer: SpeechRecognizer
     private lateinit var recognitionIntent: Intent
@@ -52,7 +55,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         binding = ActivityCallingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
-
 
         binding.nicknameInit.setOnClickListener {
             binding.callingPeopleContainer.visibility = View.GONE
@@ -80,11 +82,11 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         speechRecognizer.setRecognitionListener(recognitionListener)    // 리스너 설정
 
         binding.translateImg.setOnClickListener {
-            /*if(isTranslateMode == false){
+            if(isTranslateMode == false){
                 isTranslateMode = true
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
-                //rtcClient?.deleteAudioTrack()
+                rtcClient?.deleteAudioTrack()
 
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(true)
@@ -94,13 +96,13 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2)
                 binding.translateImg.setImageResource(R.drawable.translate)
                 stopListening()
-                //rtcClient?.addAudioTrack()
+                rtcClient?.addAudioTrack()
 
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(false)
-            }*/
-            val intent = Intent(this@Calling, TestActivity::class.java)
-            startActivity(intent)
+            }
+            //val intent = Intent(this@Calling, TestActivity::class.java)
+            //startActivity(intent)
         }
 
     }
@@ -266,6 +268,25 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         Math.toIntExact(receivingCandidate.sdpMLineIndex.toLong()),receivingCandidate.sdpCandidate))
                 }catch (e:Exception){
                     e.printStackTrace()
+                }
+            }
+            "translate_message"->{
+                textToSpeech = TextToSpeech(this) { status ->
+                    if (status == TextToSpeech.SUCCESS) {
+                        val result = textToSpeech.setLanguage(Locale.US) // 언어를 미국 영어(en-US)로 설정
+                        if (result == TextToSpeech.LANG_MISSING_DATA
+                            || result == TextToSpeech.LANG_NOT_SUPPORTED
+                        ) {
+                            Toast.makeText(this, "Language is not supported", Toast.LENGTH_LONG).show()
+                        } else {
+                            textToSpeech.speak(
+                                message.data.toString().trim(),
+                                TextToSpeech.QUEUE_FLUSH,
+                                null,
+                                null
+                            )
+                        }
+                    }
                 }
             }
         }
