@@ -28,6 +28,10 @@ import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class Calling : AppCompatActivity(), NewMessageInterface {
@@ -87,7 +91,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 isTranslateMode = true
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
-                //rtcClient?.deleteAudioTrack()
+                rtcClient?.deleteAudioTrack()
 
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(true)
@@ -97,7 +101,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2)
                 binding.translateImg.setImageResource(R.drawable.translate)
                 stopListening()
-                //rtcClient?.addAudioTrack()
+                rtcClient?.addAudioTrack()
 
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(false)
@@ -272,8 +276,10 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 }
             }
             "translate_message"->{
-                //isTranslateMode = false
-                //stopListening()
+                /*if(isTranslateMode == true){
+                    isTranslateMode = false
+                    stopListening()
+                }*/
                 textToSpeech = TextToSpeech(this) { status ->
                     if (status == TextToSpeech.SUCCESS) {
                         binding.sttTestTxtview.text = message.data.toString().trim()
@@ -297,9 +303,47 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         }
                     }
                 }
-                //isTranslateMode = true
-                //startListening()
+                /*if(isTranslateMode == false){
+                    isTranslateMode = true
+                    startListening()
+                }*/
             }
+            /*"translate_message" -> {
+                GlobalScope.launch(Dispatchers.Main) {
+                    /*if(isTranslateMode == true){
+                        isTranslateMode = false
+                        stopListening()
+                    }*/
+                    val result = withContext(Dispatchers.IO) {
+                        // 백그라운드 스레드에서 작업을 수행
+                        textToSpeech = TextToSpeech(this@Calling) { status ->
+                            if (status == TextToSpeech.SUCCESS) {
+                                binding.sttTestTxtview.text = message.data.toString().trim()
+                                if (message.target.toString().trim() == "ko") {
+                                    textToSpeech.setLanguage(Locale.KOREAN) // 언어를 한국어로 설정
+                                } else if (message.target.toString().trim() == "en") {
+                                    textToSpeech.setLanguage(Locale.US) // 언어를 미국 영어로 설정
+                                }
+                            }
+                        }
+                        textToSpeech?.speak(
+                            message.data.toString().trim(),
+                            TextToSpeech.QUEUE_FLUSH,
+                            null,
+                            null
+                        )
+                    }
+                    if (result == TextToSpeech.LANG_MISSING_DATA
+                        || result == TextToSpeech.LANG_NOT_SUPPORTED
+                    ) {
+                        Toast.makeText(this@Calling, "Language is not supported", Toast.LENGTH_LONG).show()
+                    }
+                    /*if(isTranslateMode == false){
+                        isTranslateMode = true
+                        startListening()
+                    }*/
+                }
+            }*/
         }
     }
 
