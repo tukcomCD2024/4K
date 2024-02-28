@@ -75,7 +75,7 @@ class FriendsFragment : Fragment() {
 
         val gson = GsonBuilder().setLenient().create()
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.15.59:8080/")//실제로는 aws url이 들어가야함
+            .baseUrl("https://4kringo.shop:8080/")//실제로는 aws url이 들어가야함
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
         val service = retrofit.create(RetrofitService::class.java);
@@ -236,7 +236,7 @@ class FriendsFragment : Fragment() {
                     if (allGranted){
                         startActivity(
                             Intent(requireActivity(),Calling::class.java)
-                                .putExtra("username","1")
+                                .putExtra("username","asdf@naver.com")
                         )
                     } else {
                         Toast.makeText(requireContext(),"you should accept all permissions",Toast.LENGTH_LONG).show()
@@ -252,7 +252,7 @@ class FriendsFragment : Fragment() {
                     if (allGranted){
                         startActivity(
                             Intent(requireActivity(),Calling::class.java)
-                                .putExtra("username","2")
+                                .putExtra("username","asdfg@naver.com")
                         )
                     } else {
                         Toast.makeText(requireContext(),"you should accept all permissions",Toast.LENGTH_LONG).show()

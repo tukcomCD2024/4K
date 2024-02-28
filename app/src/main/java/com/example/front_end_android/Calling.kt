@@ -110,10 +110,10 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
     private fun init(){
         userName = intent.getStringExtra("username")//실제로는 intent로 유저 이름을 받아야함
-        if(userName == "1"){
-            targetName = "2"
+        if(userName == "asdf@naver.com"){
+            targetName = "asdfg@naver.com"
         }else{
-            targetName = "1"//실제로는 intent로 전화를 거는 상대방을 이름을 받아야함
+            targetName = "asdf@naver.com"//실제로는 intent로 전화를 거는 상대방을 이름을 받아야함
         }
         socketRepository = SocketRepository(this)
         userName?.let { socketRepository?.initSocket(it) }
@@ -274,7 +274,13 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             "translate_message"->{
                 textToSpeech = TextToSpeech(this) { status ->
                     if (status == TextToSpeech.SUCCESS) {
-                        val result = textToSpeech.setLanguage(Locale.US) // 언어를 미국 영어(en-US)로 설정
+                        //binding.sttTestTxtview.text = message.data.toString().trim()
+                        var result: Int? = null
+                        if(message.target.toString().trim() == "ko"){
+                            result = textToSpeech.setLanguage(Locale.KOREAN) // 언어를 미국 영어(en-US)로 설정
+                        }else if(message.target.toString().trim() == "en"){
+                            result = textToSpeech.setLanguage(Locale.US) // 언어를 미국 영어(en-US)로 설정
+                        }
                         if (result == TextToSpeech.LANG_MISSING_DATA
                             || result == TextToSpeech.LANG_NOT_SUPPORTED
                         ) {
