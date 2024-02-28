@@ -87,7 +87,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 isTranslateMode = true
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
-                rtcClient?.deleteAudioTrack()
+                //rtcClient?.deleteAudioTrack()
 
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(true)
@@ -97,7 +97,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2)
                 binding.translateImg.setImageResource(R.drawable.translate)
                 stopListening()
-                rtcClient?.addAudioTrack()
+                //rtcClient?.addAudioTrack()
 
                 //rtcClient?.deleteLocalStream()
                 //rtcClient?.reConnectLocalStream(false)
@@ -272,9 +272,11 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 }
             }
             "translate_message"->{
+                //isTranslateMode = false
+                //stopListening()
                 textToSpeech = TextToSpeech(this) { status ->
                     if (status == TextToSpeech.SUCCESS) {
-                        //binding.sttTestTxtview.text = message.data.toString().trim()
+                        binding.sttTestTxtview.text = message.data.toString().trim()
                         var result: Int? = null
                         if(message.target.toString().trim() == "ko"){
                             result = textToSpeech.setLanguage(Locale.KOREAN) // 언어를 미국 영어(en-US)로 설정
@@ -295,6 +297,8 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         }
                     }
                 }
+                //isTranslateMode = true
+                //startListening()
             }
         }
     }
@@ -338,7 +342,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             if(isTranslateMode == true){
                 startListening()
             }else{
-                stopListening()
+                //stopListening()
                 //binding.tvState.text = "종료"
             }
         }
@@ -362,7 +366,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             if(isTranslateMode == true){
                 startListening()
             }else{
-                stopListening()
+                //stopListening()
                 //binding.tvState.text = "종료"
             }
         }
@@ -383,7 +387,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             if(isTranslateMode == true){
                 startListening()
             }else{
-                stopListening()
+                //stopListening()
                 //binding.tvState.text = "종료"
             }
         }
