@@ -100,8 +100,8 @@ public class SignalHandler extends TextWebSocketHandler {
 
         TranslateResponseDto.Result result = translateService.naverPapagoTranslate(srcLang, tarLang, textData);
         if (targetUser != null) {
-            sendMessage(session, "translate_message", result.getTranslatedText());
-            sendMessage(targetUser.get().getSession(), "translate_message", result.getTranslatedText());
+            sendMessage(tarLang,session, "translate_message", result.getTranslatedText());
+            sendMessage(tarLang, targetUser.get().getSession(), "translate_message", result.getTranslatedText());
         } else {
             sendMessage(session, "text", "user is not online");
         }
@@ -179,6 +179,15 @@ public class SignalHandler extends TextWebSocketHandler {
         message.put("data", data);
         session.sendMessage(new TextMessage(message.toString()));
     }
+
+    private void sendMessage(String tarLang, WebSocketSession session, String translateMessage, String translatedText) throws IOException {
+        JSONObject message = new JSONObject();
+        message.put("type", translateMessage);
+        message.put("data", translatedText);
+        message.put("target", tarLang);
+        session.sendMessage(new TextMessage(message.toString()));
+    }
+
 
     private void sendMessage(WebSocketSession session, String message) throws IOException {
         session.sendMessage(new TextMessage(message));
