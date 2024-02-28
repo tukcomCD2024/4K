@@ -76,6 +76,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         // RecognizerIntent 생성
         recognitionIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         recognitionIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)    // 여분의 키
+        // 실제로는 언어 설정에 내가 설정한 언어가 들어가야함
         recognitionIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR")         // 언어 설정
         // 새 SpeechRecognizer 를 만드는 팩토리 메서드
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this@Calling)
