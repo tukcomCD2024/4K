@@ -276,7 +276,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 }
             }
             "translate_message"->{
-                binding.sttTestTxtview.text = message.data.toString().trim()
                 /*if(isTranslateMode == true){
                     isTranslateMode = false
                     stopListening()
@@ -295,6 +294,8 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         ) {
                             Toast.makeText(this, "Language is not supported", Toast.LENGTH_LONG).show()
                         } else {
+                            binding.sttTestTxtview.text = message.data.toString().trim()
+
                             textToSpeech.speak(
                                 message.data.toString().trim(),
                                 TextToSpeech.QUEUE_FLUSH,
