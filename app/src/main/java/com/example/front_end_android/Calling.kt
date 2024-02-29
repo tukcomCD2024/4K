@@ -54,11 +54,15 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private lateinit var speechRecognizer: SpeechRecognizer
     private lateinit var recognitionIntent: Intent
 
+    private lateinit var audioManager: AudioManager
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCallingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
         binding.nicknameInit.setOnClickListener {
             binding.callingPeopleContainer.visibility = View.GONE
@@ -295,6 +299,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                             Toast.makeText(this, "Language is not supported", Toast.LENGTH_LONG).show()
                         } else {
                             binding.sttTestTxtview.text = message.data.toString().trim()
+                            //audioManager.mode = AudioManager.MODE_IN_CALL
 
                             textToSpeech.speak(
                                 message.data.toString().trim(),
