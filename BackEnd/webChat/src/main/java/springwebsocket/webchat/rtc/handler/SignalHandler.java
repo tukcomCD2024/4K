@@ -79,7 +79,9 @@ public class SignalHandler extends TextWebSocketHandler {
                 break;
             case "stt_message":
                 log.info("stt_message");
-                handleText(session, data);
+                String sttData = data.getString("data"); // data 속성을 추출합니다.
+                log.info("STT Data: " + sttData); // 추출한 데이터를 로그에 출력합니다.
+                handlestt(session, data);
                 break;
             default:
                 // 처리되지 않은 유형에 대한 로직을 추가할 수 있습니다.
@@ -87,7 +89,7 @@ public class SignalHandler extends TextWebSocketHandler {
         }
     }
 
-    private void handleText(WebSocketSession session, JSONObject data) throws IOException {
+    private void handlestt(WebSocketSession session, JSONObject data) throws IOException {
         String name = data.getString("name");
         String target = data.getString("target");
 
@@ -99,12 +101,14 @@ public class SignalHandler extends TextWebSocketHandler {
         String textData = data.getString("data");
 
         TranslateResponseDto.Result result = translateService.naverPapagoTranslate(srcLang, tarLang, textData);
+
         if (targetUser != null) {
-            sendMessage(tarLang,session, "translate_message", result.getTranslatedText());
-            sendMessage(tarLang, targetUser.get().getSession(), "translate_message", result.getTranslatedText());
-        } else {
-            sendMessage(session, "text", "user is not online");
+            sendMessage(session, "translate_message",result.getTranslatedText(),name,"tarLang");
+            sendMessage(targetUser.get().getSession(), "translate_message",result.getTranslatedText(),name,"tarLang");
+        }else {
+            sendMessage(session, "translate_message", "user is not exist");
         }
+
     }
 
     private void handleStoreUser(WebSocketSession session, JSONObject data) throws IOException {
@@ -116,7 +120,7 @@ public class SignalHandler extends TextWebSocketHandler {
             sendMessage(session, "user already exists");
         } else {
             // Add new user
-            addUser(name, session,member.getLanguage());
+            addUser(name, session, member.getLanguage());
         }
     }
 
@@ -169,8 +173,8 @@ public class SignalHandler extends TextWebSocketHandler {
                 .findFirst();
     }
 
-    private void addUser(String name, WebSocketSession session,String language) {
-        users.add(new User(name, session,language));
+    private void addUser(String name, WebSocketSession session, String language) {
+        users.add(new User(name, session, language));
     }
 
     private void sendMessage(WebSocketSession session, String type, String data) throws IOException {
@@ -210,4 +214,12 @@ public class SignalHandler extends TextWebSocketHandler {
         session.sendMessage(new TextMessage(message.toString()));
     }
 
+
+    private void sendMessage(WebSocketSession session, String type, String data, String username, String target) throws IOException {
+        JSONObject message = new JSONObject();
+        message.put("type", type);
+        message.put("data", data);
+        message.put("target",target);
+        session.sendMessage(new TextMessage(message.toString()));
+    }
 }

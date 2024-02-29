@@ -16,7 +16,7 @@ public class TranslateService {
     public TranslateResponseDto.Result naverPapagoTranslate(String source, String target, String text) {
 
         WebClient webClient = WebClient.builder()
-                .baseUrl("https://openapi.naver.com/v1/papago/n2mt")
+                .baseUrl("https://naveropenapi.apigw.ntruss.com/nmt/v1/translation")
                 .build();
         TranslateResponseDto response = webClient.post().uri(
                         uriBuilder -> uriBuilder.queryParam("source", source)
@@ -24,8 +24,8 @@ public class TranslateService {
                                 .queryParam("text", text)
                                 .build()
                 )
-                .header("X-Naver-Client-Id", clientId)
-                .header("X-Naver-Client-Secret", clientSecret)
+                .header("X-NCP-APIGW-API-KEY-ID", clientId)
+                .header("X-NCP-APIGW-API-KEY", clientSecret)
                 .header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
                 .retrieve()
                 .bodyToMono(TranslateResponseDto.class).block();
