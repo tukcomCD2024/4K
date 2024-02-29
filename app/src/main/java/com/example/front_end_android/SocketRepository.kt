@@ -23,7 +23,7 @@ class SocketRepository(private val messageInterface: NewMessageInterface) {
         // and get your ethernet ipv4 , mine is : "ws://192.168.1.3:3000"
         //but if your websocket is deployed you add your websocket address here
         //"wss://4kringo.shop:8080/signal"
-        webSocket = object :WebSocketClient(URI("ws://192.168.219.106:8080/signal")){
+        webSocket = object :WebSocketClient(URI("wss://4kringo.shop:8080/signal")){
             override fun onOpen(handshakedata: ServerHandshake?) {
                 sendMessageToSocket(
                     MessageModel(

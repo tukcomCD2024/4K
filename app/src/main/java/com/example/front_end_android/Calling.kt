@@ -298,7 +298,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         ) {
                             Toast.makeText(this, "Language is not supported", Toast.LENGTH_LONG).show()
                         } else {
-                            binding.sttTestTxtview.text = message.data.toString().trim()
+                            binding.sttTestTxtview.text = message.target.toString()
                             //audioManager.mode = AudioManager.MODE_IN_CALL
 
                             textToSpeech.speak(

@@ -2,7 +2,9 @@ package com.example.front_end_android
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognitionListener
@@ -31,6 +33,15 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // AudioManager 객체 생성
+        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        // AudioManager를 사용하여 스트림 타입을 통화 볼륨으로 설정
+        audioManager.mode = AudioManager.MODE_IN_CALL
+
+        // AudioManager를 사용하여 볼륨 조절
+        audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL), AudioManager.FLAG_PLAY_SOUND)
 
         editText = binding.editText
         val textToSpeechBtn = binding.textToSpeechBtn
