@@ -103,8 +103,8 @@ public class SignalHandler extends TextWebSocketHandler {
         TranslateResponseDto.Result result = translateService.naverPapagoTranslate(srcLang, tarLang, textData);
 
         if (targetUser != null) {
-            sendMessage(session, "translate_message",result.getTranslatedText(),name,"tarLang");
-            sendMessage(targetUser.get().getSession(), "translate_message",result.getTranslatedText(),name,"tarLang");
+            sendMessage(session, "translate_message",result.getTranslatedText(),name,tarLang);
+            sendMessage(targetUser.get().getSession(), "translate_message",result.getTranslatedText(),name,tarLang);
         }else {
             sendMessage(session, "translate_message", "user is not exist");
         }
