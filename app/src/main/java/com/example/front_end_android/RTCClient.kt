@@ -19,6 +19,7 @@ class RTCClient(
     private val eglContext = EglBase.create()
     private val peerConnectionFactory by lazy { createPeerConnectionFactory() }
     private val iceServer = listOf(
+        //PeerConnection.IceServer.builder("iphone-stun.strato-iphone.de:3478").createIceServer()
         PeerConnection.IceServer.builder("turn:13.125.213.128:3478").setUsername("ringo").setPassword("qaz7410").createIceServer()//,
         //PeerConnection.IceServer("stun:openrelay.metered.ca:80"),
         //PeerConnection.IceServer("turn:openrelay.metered.ca:80","openrelayproject","openrelayproject"),

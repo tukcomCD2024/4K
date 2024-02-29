@@ -26,4 +26,11 @@
         android:layout_height="wrap_content"
         android:text="Speech To Text" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hello" />
+
+
 </LinearLayout>

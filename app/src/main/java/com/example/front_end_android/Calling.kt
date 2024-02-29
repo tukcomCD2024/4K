@@ -276,19 +276,20 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 }
             }
             "translate_message"->{
+                binding.sttTestTxtview.text = message.data.toString().trim()
                 /*if(isTranslateMode == true){
                     isTranslateMode = false
                     stopListening()
                 }*/
                 textToSpeech = TextToSpeech(this) { status ->
                     if (status == TextToSpeech.SUCCESS) {
-                        binding.sttTestTxtview.text = message.data.toString().trim()
                         var result: Int? = null
                         if(message.target.toString().trim() == "ko"){
                             result = textToSpeech.setLanguage(Locale.KOREAN) // 언어를 미국 영어(en-US)로 설정
                         }else if(message.target.toString().trim() == "en"){
                             result = textToSpeech.setLanguage(Locale.US) // 언어를 미국 영어(en-US)로 설정
                         }
+                        //val result = textToSpeech.setLanguage(Locale.US)
                         if (result == TextToSpeech.LANG_MISSING_DATA
                             || result == TextToSpeech.LANG_NOT_SUPPORTED
                         ) {
@@ -308,42 +309,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                     startListening()
                 }*/
             }
-            /*"translate_message" -> {
-                GlobalScope.launch(Dispatchers.Main) {
-                    /*if(isTranslateMode == true){
-                        isTranslateMode = false
-                        stopListening()
-                    }*/
-                    val result = withContext(Dispatchers.IO) {
-                        // 백그라운드 스레드에서 작업을 수행
-                        textToSpeech = TextToSpeech(this@Calling) { status ->
-                            if (status == TextToSpeech.SUCCESS) {
-                                binding.sttTestTxtview.text = message.data.toString().trim()
-                                if (message.target.toString().trim() == "ko") {
-                                    textToSpeech.setLanguage(Locale.KOREAN) // 언어를 한국어로 설정
-                                } else if (message.target.toString().trim() == "en") {
-                                    textToSpeech.setLanguage(Locale.US) // 언어를 미국 영어로 설정
-                                }
-                            }
-                        }
-                        textToSpeech?.speak(
-                            message.data.toString().trim(),
-                            TextToSpeech.QUEUE_FLUSH,
-                            null,
-                            null
-                        )
-                    }
-                    if (result == TextToSpeech.LANG_MISSING_DATA
-                        || result == TextToSpeech.LANG_NOT_SUPPORTED
-                    ) {
-                        Toast.makeText(this@Calling, "Language is not supported", Toast.LENGTH_LONG).show()
-                    }
-                    /*if(isTranslateMode == false){
-                        isTranslateMode = true
-                        startListening()
-                    }*/
-                }
-            }*/
         }
     }
 
