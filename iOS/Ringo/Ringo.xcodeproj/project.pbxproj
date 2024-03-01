@@ -39,6 +39,7 @@
 		945CF9842B67E1CE00396E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 945CF9832B67E1CE00396E4E /* Assets.xcassets */; };
 		945CF9872B67E1CE00396E4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */; };
 		945CF9902B69341800396E4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 945CF98F2B69341800396E4E /* SnapKit */; };
+		94FB0A6B2B858F66005A4915 /* TestSTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		945CF9832B67E1CE00396E4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		945CF9862B67E1CE00396E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		945CF9882B67E1CE00396E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSTTViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 				94470A942B71680100F0A942 /* SigninService.swift */,
 				940C25652B74EF4D00E069D0 /* FriendService.swift */,
 				94470A962B717DC300F0A942 /* ConnectionViewController.swift */,
+				94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */,
 				945603202B6D2F06002F4B33 /* Canvas.swift */,
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
 				945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */,
@@ -276,6 +279,7 @@
 				945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */,
 				945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */,
 				940C25872B7A89AB00E069D0 /* WebRTCClient.swift in Sources */,
+				94FB0A6B2B858F66005A4915 /* TestSTTViewController.swift in Sources */,
 				945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */,
 				945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */,
 				94470A932B7163E900F0A942 /* Model.swift in Sources */,

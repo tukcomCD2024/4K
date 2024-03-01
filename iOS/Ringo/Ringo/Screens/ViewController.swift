@@ -309,7 +309,7 @@ extension ViewController {
         }
     }
 }
-// MARK: - canvas 이용하기
+// MARK:
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
