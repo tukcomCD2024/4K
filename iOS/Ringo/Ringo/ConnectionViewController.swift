@@ -21,7 +21,7 @@ class ConnectionViewController: UIViewController {
     let translateBtn = UIButton()
     let hangUpBtn = UIButton()
     
-    let randomNames = ["example2"]
+    let randomNames = ["example"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
