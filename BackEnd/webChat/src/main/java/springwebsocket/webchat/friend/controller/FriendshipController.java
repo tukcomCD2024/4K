@@ -53,4 +53,9 @@ public class FriendshipController {
     public List<String> findByUserIdAndStatusOrFriendIdAndStatus(@RequestBody UserIdRequest request) {
         return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(request.getUserId());
     }
+
+    @PostMapping("/findByUserIdAndStatusOrFriendIdAndStatusAny")
+    public List<String> findByUserIdAndStatusOrFriendIdAndStatusAny(Long userId) {
+        return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(userId);
+    }
 }
