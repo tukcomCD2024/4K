@@ -32,6 +32,24 @@ final class SignalingClient {
         self.webSocket.connect()
     }
     
+    func store(id: String) {
+        let message = [
+            "type" : "store_user",
+            "name" : id
+        ]
+        do {
+            let dataMessage = try self.encoder.encode(message)
+            
+            self.webSocket.send(data: dataMessage)
+            
+            debugPrint("send store message")
+            debugPrint(dataMessage)
+        }
+        catch {
+            debugPrint("Warning: Could not encode store message: \(error)")
+        }
+    }
+    
     func send(sdp rtcSdp: RTCSessionDescription) {
         let message = Message.sdp(SessionDescription(from: rtcSdp))
         do {

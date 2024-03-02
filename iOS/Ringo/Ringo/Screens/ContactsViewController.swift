@@ -26,7 +26,8 @@ class ContactsViewController: UIViewController {
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"), style: .plain, target: self, action: #selector(requestFriend))
-
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(test))
+        
         //table
         tableView = UITableView()
         tableView.register(ContactsTableViewCell.self, forCellReuseIdentifier: contactsTableViewCell)
@@ -49,6 +50,11 @@ class ContactsViewController: UIViewController {
         self.navigationController?.pushViewController(FriendRequestViewController(), animated: true)
     }
     
+    @objc private func test() {
+        DispatchQueue.global().async {
+            CallService.shared.signalClient.store(id: "1")
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -108,7 +114,7 @@ extension ContactsViewController {
     
     func loadFriends() {
         //id 3인 유저의 친구목록
-        FriendService.shared.loadFriendsList(userId: 3) { response in
+        FriendService.shared.loadFriendsList(userId: 1) { response in
             switch response {
             case .success(let data):
                     
