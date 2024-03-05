@@ -8,6 +8,8 @@ from . preprocess import preprocess_input
 from background_task import background, Task
 import traceback    # 에러 로깅
 
+from .models import MyModel
+
 model = None
 
 # 모델을 로드하는 함수를 백그라운드로 실행해 모델을 비동기적으로 로드
@@ -26,6 +28,8 @@ def check_model_load():
 
 load_model_function()
 
+model_instance = MyModel.get_instance()
+
 # 방언 문장을 변경하기 위해 POST 응답만 받음
 @api_view(['POST'])
 def convert_dialect_to_standard(request):
@@ -43,7 +47,7 @@ def convert_dialect_to_standard(request):
             if not check_model_load():
                 return JsonResponse({'error': '모델 로드 중, 잠시 후 다시 시도하세요.'}, status=503)
             else:
-                standard_text = model.predict([preprocess_text])[0]
+                standard_text = model_instance.predict([preprocess_text])[0]
         except Exception as e:
             traceback.print_exc()
             return JsonResponse({'error': '모델 예측 중 오류 발생'}, status=500)
