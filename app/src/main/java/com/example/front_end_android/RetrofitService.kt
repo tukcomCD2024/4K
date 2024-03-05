@@ -17,7 +17,7 @@ interface RetrofitService {
     ): Call<Any>
 
     @FormUrlEncoded
-    @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatus")
+    @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatusAny")
     fun myFriendsRetrofit(
         @Field("userId") userId: Int
     ): Call<Any>
