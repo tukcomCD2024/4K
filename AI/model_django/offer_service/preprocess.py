@@ -8,7 +8,7 @@ max_length = 41
 
 def preprocess_input(text):
     okt = Okt()
-    word_to_id = pd.read_csv("word_to_id_all.csv", index_col=0)
+    word_to_id = pd.read_csv("offer_service/word_to_id_all.csv", index_col=0)
 
     input_tokens = []
     tokens = okt.morphs(text)
