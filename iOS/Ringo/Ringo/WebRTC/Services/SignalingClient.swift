@@ -33,17 +33,16 @@ final class SignalingClient {
     }
     
     func store(id: String) {
-        let message = [
-            "type" : "store_user",
-            "name" : id
-        ]
+        let message = #"{"type":"store_user","name":id}"#
         do {
             let dataMessage = try self.encoder.encode(message)
             
-            self.webSocket.send(data: dataMessage)
+//            self.webSocket.send(data: dataMessage)
+//            debugPrint(String(data: dataMessage, encoding: .utf8)!)
             
-            debugPrint("send store message")
-            debugPrint(dataMessage)
+            let stirngMessage = String(data: dataMessage, encoding: .utf8)!
+            self.webSocket.send(string: stirngMessage)
+            print(stirngMessage)
         }
         catch {
             debugPrint("Warning: Could not encode store message: \(error)")
@@ -55,7 +54,12 @@ final class SignalingClient {
         do {
             let dataMessage = try self.encoder.encode(message)
             
-            self.webSocket.send(data: dataMessage)
+//            self.webSocket.send(data: dataMessage)
+//            print(String(data: dataMessage, encoding: .utf8)!)
+            
+            let stringMessage = String(data: dataMessage, encoding: .utf8)!
+            self.webSocket.send(string: stringMessage)
+            print(stringMessage)
         }
         catch {
             debugPrint("Warning: Could not encode sdp: \(error)")
@@ -66,7 +70,11 @@ final class SignalingClient {
         let message = Message.candidate(IceCandidate(from: rtcIceCandidate))
         do {
             let dataMessage = try self.encoder.encode(message)
-            self.webSocket.send(data: dataMessage)
+//            self.webSocket.send(data: dataMessage)
+            
+            let stringMessage = String(data: dataMessage, encoding: .utf8)!
+            self.webSocket.send(string: stringMessage)
+            print(stringMessage)
         }
         catch {
             debugPrint("Warning: Could not encode candidate: \(error)")

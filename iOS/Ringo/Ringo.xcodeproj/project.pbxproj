@@ -439,6 +439,8 @@
 				DEVELOPMENT_TEAM = L2MRZPUQGZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ringo/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for use device's mic";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition will be used to determine which words you speak into the device's microphone.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -466,6 +468,8 @@
 				DEVELOPMENT_TEAM = L2MRZPUQGZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ringo/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for use device's mic";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition will be used to determine which words you speak into the device's microphone.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
