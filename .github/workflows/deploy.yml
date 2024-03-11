@@ -28,12 +28,12 @@ jobs:
           distribution: 'corretto'
 
       - name: Grant execute permission for gradlew
-        working-directory: ./Backend
+        working-directory: ../Backend
         run: chmod +x ./gradlew
         shell: bash
 
       - name: Build Project and Test
-        working-directory: ./Backend
+        working-directory: ../Backend
 
         run: ./gradlew build test
       - name: Setup MySQL
