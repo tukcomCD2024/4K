@@ -28,12 +28,10 @@ jobs:
           distribution: 'corretto'
 
       - name: Add executable permission to gradlew
-        working-directory: ./Backend
         run: chmod +x ./gradlew
         shell: bash
 
       - name: Build Project and Test
-        working-directory: ./Backend
         run: ./gradlew build test
 
       - name: Setup MySQL
