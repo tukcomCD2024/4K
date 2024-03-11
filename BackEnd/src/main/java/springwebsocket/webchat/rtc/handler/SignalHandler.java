@@ -167,7 +167,7 @@ public class SignalHandler extends TextWebSocketHandler {
     }
 
 
-    private Optional<User> findUser(String username) {
+    private Optional<User>  findUser(String username) {
         return users.stream()
                 .filter(user -> user.getName() != null && user.getName().equals(username))
                 .findFirst();

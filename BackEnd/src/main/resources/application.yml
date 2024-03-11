@@ -20,8 +20,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/JPA?characterEncoding=UTF-8&serverTimezone=UTC
-    username: ${mysql-id}
-    password: ${mysql-passwd}
+    username: ${MYSQL_ID}
+    password: ${MYSQL_PASSWORD}
   jpa:
     show-sql: true
     hibernate:
@@ -30,7 +30,7 @@ spring:
       hibernate:
         format_sql: true
   naver :
-    client-id : ${naver-id}
-    client-secret : ${naver-secret}
+    client-id : ${NAVER_ID}
+    client-secret : ${NAVER_SECRET}
   profiles:
     include: SECRET-KEY
