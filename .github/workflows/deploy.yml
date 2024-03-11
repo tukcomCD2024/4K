@@ -28,11 +28,11 @@ jobs:
           distribution: 'corretto'
 
       - name: Add executable permission to gradlew
-        run: chmod +x ./Backend/gradlew
+        run: cd ./Backend && chmod +x ./gradlew
         shell: bash
 
       - name: Build Project and Test
-        run: ./Backend/gradlew build test
+        run: cd ./Backend && ./gradlew build test
 
       - name: Setup MySQL
         uses: mirromutth/mysql-action@v1.1
