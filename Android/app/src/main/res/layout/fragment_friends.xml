@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FriendsFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="130dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="130dp"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="22dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/friends_list"
+                android:textAppearance="@style/friends_list_title"
+                android:lineSpacingExtra="-1sp"
+                android:gravity="center_horizontal|center_vertical"
+                />
+            <!--
+            Font family: Nunito
+            Line height: 22sp
+            (identical to box height)
+            -->
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="42dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/add_friend_img"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/plus"
+                android:gravity="right|center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/add_friend_txt"
+                android:layout_width="80dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="12dp"
+                android:gravity="right|center_vertical"
+                android:lineSpacingExtra="6sp"
+                android:text="@string/add_to_friends"
+                android:textAppearance="@style/add_to_friends"
+                tools:ignore="NotSibling,RtlHardcoded" />
+            <!--
+            Font family: Nunito
+            Line height: 22sp
+            (identical to box height)
+            -->
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/callingtestbtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:text="user" />
+
+        <Button
+            android:id="@+id/callingtestbtn2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="0dp"
+            android:text="target" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="42dp"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/searchfield">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/friendsearch"
+            android:background="@android:color/transparent"/>
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:textColor="@color/black"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:background="@android:color/transparent"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/microphone" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/friends_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="93dp"
+        android:layout_marginBottom="50dp">
+        <LinearLayout
+            android:id="@+id/frineds_scrollview_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

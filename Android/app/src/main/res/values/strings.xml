@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">front-end_android</string>
+
+    <string name="sign_in">
+        Sign in
+    </string>
+
+    <string name="if_you_don_">
+        If you don\'t have an account register
+    </string>
+
+    <string name="you_can_sig">
+        You can
+    </string>
+
+    <string name="sign_up">
+        Sign up here !
+    </string>
+
+    <string name="header_labe">
+        E-mail
+    </string>
+
+    <string name="place_holde">
+        Enter your email
+    </string>
+
+    <string name="header_labe2">
+        Password
+    </string>
+
+    <string name="place_holde2">
+        Enter your password
+    </string>
+
+    <string name="forgot_pass">
+        Forgot Password?
+    </string>
+
+    <string name="login">
+        Sign in
+    </string>
+
+    <string name="or_continue">
+        or continue with
+    </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="friends_list">
+        Friends List
+    </string>
+
+    <string name="recent_calls">
+        Recents calls
+    </string>
+
+    <string name="my_info">
+        My Info
+    </string>
+
+    <string name="add_to_friends">
+        Add to friends
+    </string>
+
+    <string name="recent_call_title">
+        Recent Calls
+    </string>
+
+    <string name="my_info_title">
+        My Info
+    </string>
+
+    <string name="back_friend_list">
+        Friend List
+    </string>
+
+    <string name="add_friend_large_title">
+        Add as username
+    </string>
+
+    <string name="user_name_hint">
+        username#0000
+    </string>
+
+    <string name="nickname1">
+        Nickname 1
+    </string>
+
+    <string name="nickname2">
+        Nickname 2
+    </string>
+
+    <string name="mute">
+        mute
+    </string>
+
+    <string name="speaker">
+        speaker
+    </string>
+
+    <string name="translate">
+        translate
+    </string>
+
+</resources>
