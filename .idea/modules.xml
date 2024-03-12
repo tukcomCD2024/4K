@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/4K.iml" filepath="$PROJECT_DIR$/.idea/4K.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webChat.iml" filepath="$PROJECT_DIR$/.idea/modules/webChat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webChat.main.iml" filepath="$PROJECT_DIR$/.idea/modules/webChat.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webChat.test.iml" filepath="$PROJECT_DIR$/.idea/modules/webChat.test.iml" />
     </modules>
   </component>
 </project>

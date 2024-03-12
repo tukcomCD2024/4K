@@ -38,6 +38,6 @@ out/
 
 
 ### SECRET KEY INFO ###
-/src/main/resources/application-SECRET-KEY.properties
-/src/main/resources/firebase/webrtc.json
-/src/main/resources/ssl/keystore.p12
+BackEnd/src/main/resources/application-SECRET-KEY.properties
+BackEnd/src/main/resources/firebase/webrtc.json
+BackEnd/src/main/resources/ssl/keystore.p12
