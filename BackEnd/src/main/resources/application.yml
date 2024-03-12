@@ -36,3 +36,6 @@ spring:
     client-secret : ${NAVER_SECRET}
   profiles:
     include: SECRET-KEY
+
+firebase:
+  directory: ${FIREBASE_DIRECTORY}
