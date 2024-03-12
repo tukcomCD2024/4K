@@ -3,6 +3,10 @@ KEY=/home/ubuntu/key
 REPOSITORY=/home/ubuntu/4k
 cd $REPOSITORY
 
+echo "> Paste Folder"
+cp -r $KEY/ssl $REPOSITORY/src/main/resources
+cp -r $KEY/firebase $REPOSITORY/src/main/resources
+
 JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep 'SNAPSHOT.jar' | tail -n 1)
 JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
@@ -16,10 +20,6 @@ else
   kill -15 $CURRENT_PID
   sleep 5
 fi
-
-echo "> Paste Folder"
-cp -r $KEY/ssl $REPOSITORY/src/main/resources
-cp -r $KEY/firebase $REPOSITORY/src/main/resources
 
 echo "> Deploy - $JAR_PATH "
 nohup java -jar $JAR_PATH > $REPOSITORY/build/libs/nohup.out 2>&1 &
