@@ -1,3 +1,5 @@
+KEY=/home/ubuntu/key
+
 REPOSITORY=/home/ubuntu/4k
 cd $REPOSITORY
 
@@ -14,6 +16,10 @@ else
   kill -15 $CURRENT_PID
   sleep 5
 fi
+
+echo "> Paste Folder"
+cp -r $KEY/ssl $REPOSITORY/src/main/resources
+cp -r $KEY/firebase $REPOSITORY/src/main/resources
 
 echo "> Deploy - $JAR_PATH "
 nohup java -jar $JAR_PATH > $REPOSITORY/build/libs/nohup.out 2>&1 &
