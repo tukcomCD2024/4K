@@ -28,10 +28,12 @@ import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import java.util.Locale
 
 class Calling : AppCompatActivity(), NewMessageInterface {
@@ -229,9 +231,19 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             }
             "answer_received" ->{
                 Log.d("YMC", "answer_received: $message")//*
+
+                val data11 = message.data
+                Log.d("YMC", "data: $data11")//*
+
+                val sdpStartIndex = message.data.toString().indexOf("sdp=")
+                val sdpEndIndex = message.data.toString().indexOf("}", startIndex = sdpStartIndex)
+                val sdpValueAnswer = message.data.toString().substring(sdpStartIndex + 4, sdpEndIndex) // "+ 4" to skip "sdp="
+
+                Log.d("YMC", "sdpValueAnswer: $sdpValueAnswer")
                 val session = SessionDescription(
                     SessionDescription.Type.ANSWER,
-                    message.data.toString()
+                    sdpValueAnswer.toString()
+                    //message.data.toString()
                 )
                 rtcClient?.onRemoteSessionReceived(session)
                 runOnUiThread {
@@ -242,6 +254,15 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             "offer_received" -> {
                 runOnUiThread {
                     Log.d("YMC", "offer_received: $message")//*
+
+                    val data11 = message.data
+                    Log.d("YMC", "data: $data11")//*
+
+                    val sdpStartIndex = message.data.toString().indexOf("sdp=")
+                    val sdpEndIndex = message.data.toString().indexOf("}", startIndex = sdpStartIndex)
+                    val sdpValueOffer = message.data.toString().substring(sdpStartIndex + 4, sdpEndIndex) // "+ 4" to skip "sdp="
+
+                    Log.d("YMC", "sdpValueOffer: $sdpValueOffer")
                     setIncomingCallLayoutVisible()
                     binding.incomingNameTV.text = "${message.name.toString()} is calling you"
                     binding.acceptButton.setOnClickListener {
@@ -255,10 +276,13 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         }
                         val session = SessionDescription(
                             SessionDescription.Type.OFFER,
-                            message.data.toString()
+                            sdpValueOffer.toString()
+                            //message.data.toString()
                         )
                         rtcClient?.onRemoteSessionReceived(session)
+                        Log.d("YMC", "@@@@@@@@@@@@@@@")
                         rtcClient?.answer(message.name!!)
+                        Log.d("YMC", "###############")
                         targetName = message.name!!
                         binding.remoteViewLoading.visibility = View.GONE
                     }
