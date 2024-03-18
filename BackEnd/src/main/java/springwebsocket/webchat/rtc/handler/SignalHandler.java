@@ -140,7 +140,7 @@ public class SignalHandler extends TextWebSocketHandler {
         Optional<User> userToReceiveOffer = findUser(target);
         if (userToReceiveOffer != null) {
             JSONObject offerData = data.getJSONObject("data");
-            sendMessage(userToReceiveOffer.get().getSession(), "offer_received", data.getString("name"), offerData);
+            sendMessageSDP(userToReceiveOffer.get().getSession(), "offer_received", data.getString("name"), offerData);
         }
     }
 
@@ -149,7 +149,7 @@ public class SignalHandler extends TextWebSocketHandler {
         Optional<User> userToReceiveAnswer = findUser(target);
         if (userToReceiveAnswer != null) {
             JSONObject answerData = data.getJSONObject("data");
-            sendMessage(userToReceiveAnswer.get().getSession(), "answer_received", data.getString("name"), answerData);
+            sendMessageSDP(userToReceiveAnswer.get().getSession(), "answer_received", data.getString("name"), answerData);
         }
     }
 
@@ -197,7 +197,7 @@ public class SignalHandler extends TextWebSocketHandler {
         session.sendMessage(new TextMessage(message));
     }
 
-    private void sendMessage(WebSocketSession session, String messageType, String name, String sdp) throws IOException {
+    private void sendMessageSDP(WebSocketSession session, String messageType, String name, JSONObject sdp) throws IOException {
         JSONObject message = new JSONObject();
         message.put("type", messageType);
         message.put("name", name);
@@ -208,8 +208,6 @@ public class SignalHandler extends TextWebSocketHandler {
     private void sendMessage(WebSocketSession session, String messageType, String name, JSONObject candidateData) throws IOException {
         JSONObject message = new JSONObject();
         message.put("type", messageType);
-        JSONObject data = new JSONObject();
-        data.put("name", name);
         message.put("data", candidateData);
         session.sendMessage(new TextMessage(message.toString()));
     }
