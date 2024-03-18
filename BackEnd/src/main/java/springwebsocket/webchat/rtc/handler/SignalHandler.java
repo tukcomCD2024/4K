@@ -140,7 +140,7 @@ public class SignalHandler extends TextWebSocketHandler {
         Optional<User> userToReceiveOffer = findUser(target);
         if (userToReceiveOffer != null) {
             JSONObject offerData = data.getJSONObject("data");
-            sendMessage(userToReceiveOffer.get().getSession(), "offer_received", data.getString("name"), offerData.getString("sdp"));
+            sendMessage(userToReceiveOffer.get().getSession(), "offer_received", data.getString("name"), offerData);
         }
     }
 
@@ -149,7 +149,7 @@ public class SignalHandler extends TextWebSocketHandler {
         Optional<User> userToReceiveAnswer = findUser(target);
         if (userToReceiveAnswer != null) {
             JSONObject answerData = data.getJSONObject("data");
-            sendMessage(userToReceiveAnswer.get().getSession(), "answer_received", data.getString("name"), answerData.getString("sdp"));
+            sendMessage(userToReceiveAnswer.get().getSession(), "answer_received", data.getString("name"), answerData);
         }
     }
 
