@@ -55,6 +55,7 @@ public class SignalHandler extends TextWebSocketHandler {
         // JSON 문자열을 파싱하여 데이터를 추출합니다.
         JSONObject data = new JSONObject(payload);
         String type = data.getString("type");
+        log.info("request payload = {}", payload.toString());
 
         switch (type) {
             case "store_user":
@@ -113,7 +114,6 @@ public class SignalHandler extends TextWebSocketHandler {
 
     private void handleStoreUser(WebSocketSession session, JSONObject data) throws IOException {
         String name = data.getString("name");
-        log.info("name ={}", name);
         Member member = memberRepository.findByEmail(name).get();
         Optional<User> user = findUser(name);
         if (user.isPresent()) {
@@ -181,7 +181,9 @@ public class SignalHandler extends TextWebSocketHandler {
         JSONObject message = new JSONObject();
         message.put("type", type);
         message.put("data", data);
-        session.sendMessage(new TextMessage(message.toString()));
+        TextMessage message1 = new TextMessage(message.toString());
+        log.info("response message = {}", message1.getPayload().toString());
+        session.sendMessage(message1);
     }
 
     private void sendMessage(String tarLang, WebSocketSession session, String translateMessage, String translatedText) throws IOException {
@@ -194,7 +196,9 @@ public class SignalHandler extends TextWebSocketHandler {
 
 
     private void sendMessage(WebSocketSession session, String message) throws IOException {
-        session.sendMessage(new TextMessage(message));
+        TextMessage message1 = new TextMessage(message);
+        log.info("response message = {}", message1.getPayload().toString());
+        session.sendMessage(message1);
     }
 
     private void sendMessageSDP(WebSocketSession session, String messageType, String name, JSONObject sdp) throws IOException {
@@ -202,14 +206,18 @@ public class SignalHandler extends TextWebSocketHandler {
         message.put("type", messageType);
         message.put("name", name);
         message.put("data", sdp);
-        session.sendMessage(new TextMessage(message.toString()));
+        TextMessage message1 = new TextMessage(message.toString());
+        log.info("response message = {}", message1.getPayload().toString());
+        session.sendMessage(message1);
     }
 
     private void sendMessage(WebSocketSession session, String messageType, String name, JSONObject candidateData) throws IOException {
         JSONObject message = new JSONObject();
         message.put("type", messageType);
         message.put("data", candidateData);
-        session.sendMessage(new TextMessage(message.toString()));
+        TextMessage message1 = new TextMessage(message.toString());
+        log.info("response message = {}", message1.getPayload().toString());
+        session.sendMessage(message1);
     }
 
 
@@ -218,6 +226,8 @@ public class SignalHandler extends TextWebSocketHandler {
         message.put("type", type);
         message.put("data", data);
         message.put("target",target);
-        session.sendMessage(new TextMessage(message.toString()));
+        TextMessage message1 = new TextMessage(message.toString());
+        log.info("response message = {}", message1.getPayload().toString());
+        session.sendMessage(message1);
     }
 }
