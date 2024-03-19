@@ -52,7 +52,7 @@ class ContactsViewController: UIViewController {
     
     @objc private func test() {
         DispatchQueue.global().async {
-            CallService.shared.signalClient.store(id: "1")
+            CallService.shared.signalClient.store(id: "asdfg@naver.com")
         }
     }
 }
@@ -113,8 +113,8 @@ extension ContactsViewController: UITableViewDataSource {
 extension ContactsViewController {
     
     func loadFriends() {
-        //id 3인 유저의 친구목록
-        FriendService.shared.loadFriendsList(userId: 1) { response in
+        //id ??인 유저의 친구목록
+        FriendService.shared.loadFriendsList(userId: 2) { response in
             switch response {
             case .success(let data):
                     
@@ -145,12 +145,7 @@ extension ContactsViewController {
 extension ContactsViewController: ContactsTableViewCellDelegate {
     
     func pressedButton() {
-        CallService.shared.webRTCClient.offer { (sdp) in
-            CallService.shared.signalClient.send(sdp: sdp)
-        }
-        let connectionVC = ConnectionViewController()
-        connectionVC.modalPresentationStyle = .fullScreen
-        present(connectionVC, animated: true,completion: nil)
+        CallService.shared.signalClient.startcall(id: "2", target: "1")
     }
     
 }

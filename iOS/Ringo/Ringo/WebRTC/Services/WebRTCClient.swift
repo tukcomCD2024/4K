@@ -43,9 +43,9 @@ final class WebRTCClient: NSObject {
         fatalError("WebRTCClient:init is unavailable")
     }
     
-    required init(iceServers: [String]) {
+    required init(iceServers: [RTCIceServer]) {
         let config = RTCConfiguration()
-        config.iceServers = [RTCIceServer(urlStrings: iceServers)]
+        config.iceServers = iceServers
         
         // Unified plan is more superior than planB
         config.sdpSemantics = .unifiedPlan
