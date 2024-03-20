@@ -40,6 +40,7 @@
 		945CF9872B67E1CE00396E4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */; };
 		945CF9902B69341800396E4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 945CF98F2B69341800396E4E /* SnapKit */; };
 		94FB0A6B2B858F66005A4915 /* TestSTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */; };
+		94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6C2BAAD64A005A4915 /* TTS.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		945CF9862B67E1CE00396E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		945CF9882B67E1CE00396E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSTTViewController.swift; sourceTree = "<group>"; };
+		94FB0A6C2BAAD64A005A4915 /* TTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				940C25652B74EF4D00E069D0 /* FriendService.swift */,
 				94470A962B717DC300F0A942 /* ConnectionViewController.swift */,
 				94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */,
+				94FB0A6C2BAAD64A005A4915 /* TTS.swift */,
 				945603202B6D2F06002F4B33 /* Canvas.swift */,
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
 				945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */,
@@ -273,6 +276,7 @@
 				940C25852B7A89AB00E069D0 /* NativeWebSocket.swift in Sources */,
 				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
 				940C25642B73D20900E069D0 /* ConnectionCollectionViewCell.swift in Sources */,
+				94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */,
 				940C257A2B7A899500E069D0 /* IceCandidate.swift in Sources */,
 				945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */,
 				940C258A2B7A8FA900E069D0 /* CallService.swift in Sources */,

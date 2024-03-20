@@ -53,7 +53,7 @@ import Foundation
 struct Message: Codable {
     
     enum MessageType: String, Codable {
-        case call_response, create_offer, offer_received, create_answer, answer_received, ice_candidate, start_call
+        case call_response, create_offer, offer_received, create_answer, answer_received, ice_candidate, start_call, stt_message, translate_message
     }
 
     enum DataType {
@@ -90,7 +90,7 @@ struct Message: Codable {
         self.name = try? container.decode(String.self, forKey: .name)
         self.target = try? container.decode(String.self, forKey: .target)
         switch type {
-        case .call_response:
+        case .call_response,.stt_message,.translate_message:
             self.data = .response(try container.decode(String.self, forKey: .data))
         case .create_offer,.offer_received,.create_answer,.answer_received:
             debugPrint("sdp")
