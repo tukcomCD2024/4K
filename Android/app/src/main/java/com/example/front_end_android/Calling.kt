@@ -363,7 +363,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private val recognitionListener: RecognitionListener = object : RecognitionListener {
         // 말하기 시작할 준비가되면 호출
         override fun onReadyForSpeech(params: Bundle) {
-            Toast.makeText(applicationContext, "음성인식 시작", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(applicationContext, "음성인식 시작", Toast.LENGTH_SHORT).show()
             //binding.tvState.text = "이제 말씀하세요!"
         }
         // 말하기 시작했을 때 호출
@@ -399,7 +399,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> "말하는 시간초과"
                 else -> "알 수 없는 오류임"
             }
-            Toast.makeText(applicationContext, "에러 발생: $message", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(applicationContext, "에러 발생: $message", Toast.LENGTH_SHORT).show()
             //binding.tvState.text = "에러 발생: $message"
             // 에러 발생 시 듣기 재시작
             if(isTranslateMode == true){
