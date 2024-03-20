@@ -32,7 +32,7 @@ public class MemberController {
 
     private final MemberServiceV3 userService;
     @PostMapping("/signup")
-    public ResponseEntity<UserResponse> register(@Valid @RequestBody  final SignUpRequest request) {
+    public ResponseEntity<UserResponse> register(final @RequestBody SignUpRequest request) {
         UserResponse userResponse = userService.signUp(request);
         return ResponseEntity.ok().body(userResponse);
     }
