@@ -38,6 +38,5 @@ out/
 
 
 ### SECRET KEY INFO ###
-BackEnd/src/main/resources/application-SECRET-KEY.properties
 BackEnd/src/main/resources/firebase/webrtc.json
 BackEnd/src/main/resources/ssl/keystore.p12
