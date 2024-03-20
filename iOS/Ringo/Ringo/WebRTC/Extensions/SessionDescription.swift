@@ -11,12 +11,12 @@ import WebRTC
 
 /// This enum is a swift wrapper over `RTCSdpType` for easy encode and decode
 enum SdpType: String, Codable {
-    case OFFER, prAnswer, answer, rollback
+    case OFFER, prAnswer, ANSWER, rollback
     
     var rtcSdpType: RTCSdpType {
         switch self {
         case .OFFER:    return .offer
-        case .answer:   return .answer
+        case .ANSWER:   return .answer
         case .prAnswer: return .prAnswer
         case .rollback: return .rollback
         }
@@ -34,7 +34,7 @@ struct SessionDescription: Codable {
         switch rtcSessionDescription.type {
         case .offer:    self.type = .OFFER
         case .prAnswer: self.type = .prAnswer
-        case .answer:   self.type = .answer
+        case .answer:   self.type = .ANSWER
         case .rollback: self.type = .rollback
         @unknown default:
             fatalError("Unknown RTCSessionDescription type: \(rtcSessionDescription.type.rawValue)")

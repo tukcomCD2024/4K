@@ -15,6 +15,7 @@ protocol SignalClientDelegate: AnyObject {
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription)
     func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate)
     func signalClient(_ signalClient: SignalingClient, didReceiveCallResponse response: String)
+    func signalClient(_ signalClient: SignalingClient, didReceiveTranslation msg: String, language: String)
 }
 
 final class SignalingClient {
@@ -135,11 +136,11 @@ extension SignalingClient: WebSocketProviderDelegate {
         switch message.type {
         case .call_response:
             debugPrint("call_response")
-            debugPrint(message)
+//            debugPrint(message)
             self.delegate?.signalClient(self, didReceiveCallResponse: message.dataString())
         case .offer_received,.answer_received:
             debugPrint("received")
-            debugPrint(message)
+//            debugPrint(message)
             switch message.data {
             case .sdp(let sessionDescription):
                 self.delegate?.signalClient(self, didReceiveRemoteSdp: sessionDescription.rtcSessionDescription)
@@ -148,13 +149,17 @@ extension SignalingClient: WebSocketProviderDelegate {
             }
         case .ice_candidate:
             debugPrint("ice_candidate")
-            debugPrint(message)
+//            debugPrint(message)
             switch message.data {
             case .candidate(let iceCandidate):
                 self.delegate?.signalClient(self, didReceiveCandidate: iceCandidate.rtcIceCandidate)
             default:
                 print("????")
             }
+        case .translate_message:
+            debugPrint("receive trans msg")
+            debugPrint(message)
+            self.delegate?.signalClient(self, didReceiveTranslation: message.dataString(), language: message.target!)
         default:
             debugPrint("message.type is nothing")
             debugPrint(message)

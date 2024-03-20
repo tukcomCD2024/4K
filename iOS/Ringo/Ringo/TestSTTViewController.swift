@@ -129,6 +129,13 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
                 // Update the text view with the results.
                 self.textView.text = result.bestTranscription.formattedString
                 isFinal = result.isFinal
+                debugPrint(result.bestTranscription.formattedString)
+                if result.speechRecognitionMetadata != nil {
+                    var message = Message(type: .stt_message, name: "rkdwlsgur@naver.com", target: "rkdwltjr@naver.com")
+                    message.data = .response(result.bestTranscription.formattedString)
+                    CallService.shared.signalClient.send(message: message)
+                    debugPrint("send trans msg")
+                }
             }
             
             if error != nil || isFinal {
