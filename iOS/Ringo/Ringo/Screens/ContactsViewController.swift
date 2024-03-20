@@ -26,7 +26,8 @@ class ContactsViewController: UIViewController {
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"), style: .plain, target: self, action: #selector(requestFriend))
-
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(test))
+        
         //table
         tableView = UITableView()
         tableView.register(ContactsTableViewCell.self, forCellReuseIdentifier: contactsTableViewCell)
@@ -49,6 +50,11 @@ class ContactsViewController: UIViewController {
         self.navigationController?.pushViewController(FriendRequestViewController(), animated: true)
     }
     
+    @objc private func test() {
+        DispatchQueue.global().async {
+            CallService.shared.signalClient.store(id: "asdfg@naver.com")
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -107,8 +113,8 @@ extension ContactsViewController: UITableViewDataSource {
 extension ContactsViewController {
     
     func loadFriends() {
-        //id 3인 유저의 친구목록
-        FriendService.shared.loadFriendsList(userId: 3) { response in
+        //id ??인 유저의 친구목록
+        FriendService.shared.loadFriendsList(userId: 2) { response in
             switch response {
             case .success(let data):
                     
@@ -139,12 +145,7 @@ extension ContactsViewController {
 extension ContactsViewController: ContactsTableViewCellDelegate {
     
     func pressedButton() {
-        CallService.shared.webRTCClient.offer { (sdp) in
-            CallService.shared.signalClient.send(sdp: sdp)
-        }
-        let connectionVC = ConnectionViewController()
-        connectionVC.modalPresentationStyle = .fullScreen
-        present(connectionVC, animated: true,completion: nil)
+        CallService.shared.signalClient.startcall(id: "2", target: "1")
     }
     
 }

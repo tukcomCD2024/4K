@@ -16,7 +16,8 @@ class FriendService {
     
     func loadFriendsList(userId: Int64, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "http://192.168.0.7:7080/friendship/findByUserIdAndStatusOrFriendIdAndStatus"
+//        let url = "http://192.168.0.7:7080/friendship/findByUserIdAndStatusOrFriendIdAndStatus"
+        let url = "https://4kringo.shop:8080/friendship/findByUserIdAndStatusOrFriendIdAndStatus"
         
         let header : HTTPHeaders = ["Content-Type" : "application/json"]
         
@@ -46,7 +47,6 @@ class FriendService {
         }
     }
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
-        print(statusCode)
         switch statusCode {
         case ..<300 : return isVaildData(data: data)
         case 400..<500 : return .pathErr

@@ -32,13 +32,19 @@ class NativeWebSocket: NSObject, WebSocketProvider {
         self.socket?.send(.data(data)) { _ in }
     }
     
+    func send(string: String){
+        self.socket?.send(.string(string)) { _ in }
+    }
+    
     private func readMessage() {
         self.socket?.receive { [weak self] message in
             guard let self = self else { return }
             
             switch message {
-            case .success(.data(let data)):
-                self.delegate?.webSocket(self, didReceiveData: data)
+            case .success(.string(let stringdata)):
+                print(stringdata)
+                let strdata = stringdata.data(using: .utf8)
+                self.delegate?.webSocket(self, didReceiveData: strdata!)
                 self.readMessage()
                 
             case .success:

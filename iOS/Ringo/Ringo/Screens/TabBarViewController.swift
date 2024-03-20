@@ -65,9 +65,30 @@ extension TabBarViewController: SignalClientDelegate {
         }
     }
     
+    func signalClient(_ signalClient: SignalingClient, didReceiveCallResponse response: String) {
+        if response == "user is ready for call" {
+            CallService.shared.webRTCClient.offer { (sdp) in
+                var message = Message(type: .create_offer, name: "asdfg@naver.com", target: "asdf@naver.com")
+                message.data = .sdp(SessionDescription(from: sdp))
+                CallService.shared.signalClient.send(message: message)
+            }
+            DispatchQueue.main.async { [self] in
+                let connectionVC = ConnectionViewController()
+                connectionVC.modalPresentationStyle = .fullScreen
+                present(connectionVC, animated: true,completion: nil)
+            }
+        } else {
+            debugPrint("response message")
+            debugPrint(response)
+        }
+    }
+    
     func acceptCall() {
         CallService.shared.webRTCClient.answer { (localSdp) in
-            CallService.shared.signalClient.send(sdp: localSdp)
+            var message = Message(type: .create_answer, name: "asdfg@naver.com", target: "asdf@naver.com")
+            message.data = .sdp(SessionDescription(from: localSdp))
+            CallService.shared.signalClient.send(message: message)
+//            CallService.shared.signalClient.send(sdp: localSdp)
         }
         let connectionVC = ConnectionViewController()
         connectionVC.modalPresentationStyle = .fullScreen
@@ -79,7 +100,10 @@ extension TabBarViewController: SignalClientDelegate {
 extension TabBarViewController: WebRTCClientDelegate {
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
         print("discovered local candidate")
-        CallService.shared.signalClient.send(candidate: candidate)
+        var message = Message(type: .ice_candidate, name: "asdfg@naver.com", target: "asdf@naver.com")
+        message.data = .candidate(IceCandidate(from: candidate))
+        CallService.shared.signalClient.send(message: message)
+//        CallService.shared.signalClient.send(candidate: candidate)
     }
     
     func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
