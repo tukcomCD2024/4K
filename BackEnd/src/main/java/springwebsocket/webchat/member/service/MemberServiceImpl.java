@@ -11,14 +11,13 @@ import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.exception.EmailDuplicatedException;
 import springwebsocket.webchat.member.repository.MemberRepository;
-import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
 
 import java.util.Optional;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MemberServiceV2 implements MemberServiceV3 {
+public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
 

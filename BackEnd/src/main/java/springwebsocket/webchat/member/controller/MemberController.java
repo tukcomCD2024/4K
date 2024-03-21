@@ -1,12 +1,9 @@
 package springwebsocket.webchat.member.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +13,7 @@ import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
-import springwebsocket.webchat.member.exception.EmailDuplicatedException;
-import springwebsocket.webchat.member.service.MemberServiceV1;
-import springwebsocket.webchat.member.service.MemberServiceV2;
-import springwebsocket.webchat.member.service.MemberServiceV3;
+import springwebsocket.webchat.member.service.MemberService;
 
 import java.util.Optional;
 
@@ -30,7 +24,7 @@ import java.util.Optional;
 @RequestMapping("/member")
 public class MemberController {
 
-    private final MemberServiceV3 userService;
+    private final MemberService userService;
     @PostMapping("/signup")
     public ResponseEntity<UserResponse> register(final @RequestBody SignUpRequest request) {
         UserResponse userResponse = userService.signUp(request);
