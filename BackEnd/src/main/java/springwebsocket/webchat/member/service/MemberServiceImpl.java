@@ -3,6 +3,7 @@ package springwebsocket.webchat.member.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
@@ -16,21 +17,24 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
+    public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.memberRepository = memberRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
     @Transactional
     public UserResponse signUp(SignUpRequest signUpRequest) {
         String name = signUpRequest.getName();
         String email = signUpRequest.getEmail();
-        String password = signUpRequest.getPassword();
+        String password =bCryptPasswordEncoder.encode(signUpRequest.getPassword());
 
-        Member member = new Member(email, password, name);
+        Member member = new Member(email, password, name,"ROLE_ADMIN");
         try {
             memberRepository.save(member);
         }catch (DataIntegrityViolationException ex){

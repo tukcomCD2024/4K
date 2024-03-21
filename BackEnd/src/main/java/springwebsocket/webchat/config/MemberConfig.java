@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import springwebsocket.webchat.member.repository.JpaMemberRepository;
 import springwebsocket.webchat.member.repository.MemberRepository;
 import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
@@ -19,9 +20,15 @@ public class MemberConfig {
 
     private final SpringDataJpaMemberRepository springDataJpaMemberRepository;
 
+
     @Bean
     public MemberService userService() {
-        return new MemberServiceImpl(memberRepository());
+        return new MemberServiceImpl(memberRepository(),encoder());
+    }
+
+    @Bean
+    public BCryptPasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
