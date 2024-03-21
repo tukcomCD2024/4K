@@ -21,6 +21,7 @@ public class Member {
     private String name;
     private String firebaseToken;
     private String language;
+    private String role;
     public Member() {
     }
 
