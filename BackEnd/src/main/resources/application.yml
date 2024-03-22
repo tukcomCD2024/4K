@@ -34,6 +34,8 @@ spring:
 #    properties:
 #      hibernate:
 #        format_sql: true
+  jwt:
+    secret: ${JWT_KEY}
   naver :
     client-id : ${NAVER_ID}
     client-secret : ${NAVER_SECRET}
