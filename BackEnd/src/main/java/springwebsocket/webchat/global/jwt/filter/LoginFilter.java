@@ -1,4 +1,4 @@
-package springwebsocket.webchat.global.jwt;
+package springwebsocket.webchat.global.jwt.filter;
 
 
 import jakarta.servlet.FilterChain;
@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import springwebsocket.webchat.global.jwt.JWTUtil;
 import springwebsocket.webchat.global.jwt.dto.CustomUserDetails;
 
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
         //클라이언트 요청에서 username, password 추출
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        log.info("username = {}", email);
+        log.info("email = {}", email);
         log.info("password = {}", password);
 
         /**
@@ -61,7 +62,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
         //UserDetails
         CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();     //getPrincipal은 사용자의 정보를 반환
 
-        String username = customUserDetails.getUsername();
+        String email = customUserDetails.getEmail();
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
@@ -69,7 +70,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
 
         String role = auth.getAuthority();
 
-        String token = jwtUtil.createJwt(username, role, 60*60*10L);
+        String token = jwtUtil.createJwt(email, role, 60*60*10L);
 
         /**
          * 예시 : Http 인증 방식은 아래 인증 헤더 형태를 가져야 한다.

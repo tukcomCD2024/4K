@@ -25,9 +25,9 @@ public class JWTUtil {
      * getUsername, getRole, isExpired 메서드는
      * 검증을 진행할 메소드이다.
      */
-    public String getUsername(String token) {
+    public String getEmail(String token) {
 
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username", String.class);
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("email", String.class);
     }
 
     public String getRole(String token) {

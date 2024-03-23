@@ -2,7 +2,6 @@ package springwebsocket.webchat.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,7 +10,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import springwebsocket.webchat.global.jwt.JWTUtil;
-import springwebsocket.webchat.global.jwt.LoginFilter;
+import springwebsocket.webchat.global.jwt.filter.JWTFilter;
+import springwebsocket.webchat.global.jwt.filter.LoginFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -63,6 +63,9 @@ public class SecurityConfig {
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
+        //JWTFilter 등록
+        http
+                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
         //세션 설정
         http
