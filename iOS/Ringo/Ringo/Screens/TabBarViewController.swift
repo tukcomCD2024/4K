@@ -68,7 +68,7 @@ extension TabBarViewController: SignalClientDelegate {
     func signalClient(_ signalClient: SignalingClient, didReceiveCallResponse response: String) {
         if response == "user is ready for call" {
             CallService.shared.webRTCClient.offer { (sdp) in
-                var message = Message(type: .create_offer, name: "rkdwlsgur@naver.com", target: "rkdwltjr@naver.com")
+                var message = Message(type: .create_offer, name: "rkdwltjr@naver.com", target: "rkdwlsgur@naver.com")
                 message.data = .sdp(SessionDescription(from: sdp))
                 CallService.shared.signalClient.send(message: message)
             }
@@ -85,12 +85,11 @@ extension TabBarViewController: SignalClientDelegate {
     
     func signalClient(_ signalClient: SignalingClient, didReceiveTranslation msg: String, language: String) {
         TTS.shared.play(msg, language)
-        TTS.shared.stop()
     }
     
     func acceptCall() {
         CallService.shared.webRTCClient.answer { (localSdp) in
-            var message = Message(type: .create_answer, name: "rkdwlsgur@naver.com", target: "rkdwltjr@naver.com")
+            var message = Message(type: .create_answer, name: "rkdwltjr@naver.com", target: "rkdwlsgur@naver.com")
             message.data = .sdp(SessionDescription(from: localSdp))
             CallService.shared.signalClient.send(message: message)
 //            CallService.shared.signalClient.send(sdp: localSdp)
@@ -105,7 +104,7 @@ extension TabBarViewController: SignalClientDelegate {
 extension TabBarViewController: WebRTCClientDelegate {
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
         print("discovered local candidate")
-        var message = Message(type: .ice_candidate, name: "rkdwlsgur@naver.com", target: "rkdwltjr@naver.com")
+        var message = Message(type: .ice_candidate, name: "rkdwltjr@naver.com", target: "rkdwlsgur@naver.com")
         message.data = .candidate(IceCandidate(from: candidate))
         CallService.shared.signalClient.send(message: message)
 //        CallService.shared.signalClient.send(candidate: candidate)

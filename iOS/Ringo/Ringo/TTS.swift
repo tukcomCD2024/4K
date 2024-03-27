@@ -11,18 +11,19 @@ import AVFoundation
 class TTS {
     static let shared = TTS()
     
-    private let synthesizer = AVSpeechSynthesizer()
+    private var synthesizer = AVSpeechSynthesizer()
+    
+    func play(_ string: String, _ language: String) {
+        debugPrint("문장 : " + string)
+        let utterance = AVSpeechUtterance(string: string)
+        utterance.voice = AVSpeechSynthesisVoice(language: language)
+        utterance.rate = 0.4
+        synthesizer.stopSpeaking(at: .immediate)
+        synthesizer.speak(utterance)
+    }
         
-    internal func play(_ string: String, _ language: String) {
-            let utterance = AVSpeechUtterance(string: string)
-            utterance.voice = AVSpeechSynthesisVoice(language: language)
-            utterance.rate = 0.4
-            synthesizer.stopSpeaking(at: .immediate)
-            synthesizer.speak(utterance)
-        }
-        
-        internal func stop() {
-            synthesizer.stopSpeaking(at: .immediate)
-        }
+    func stop() {
+        synthesizer.stopSpeaking(at: .immediate)
+    }
     
 }
