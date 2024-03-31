@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import springwebsocket.webchat.global.jwt.JWTUtil;
 import springwebsocket.webchat.global.jwt.filter.CustomLogoutFilter;
 import springwebsocket.webchat.global.jwt.filter.JWTFilter;
@@ -65,17 +66,18 @@ public class SecurityConfig {
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
 
-        //필터 추가 LoginFilter()는 인자를 받음 (AuthenticationManager() 메소드에 authenticationConfiguration 객체를 넣어야 함) 따라서 등록 필요
-        http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil,refreshMemberRepository), UsernamePasswordAuthenticationFilter.class);
-
         //JWTFilter 등록
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
+        //필터 추가 LoginFilter()는 인자를 받음 (AuthenticationManager() 메소드에 authenticationConfiguration 객체를 넣어야 함) 따라서 등록 필요
+        http
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil,refreshMemberRepository), UsernamePasswordAuthenticationFilter.class);
+
+
         //로그아웃 필터 등록
         http
-                .addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshMemberRepository), LoginFilter.class);
+                .addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshMemberRepository), LogoutFilter.class);
 
         //세션 설정
         http

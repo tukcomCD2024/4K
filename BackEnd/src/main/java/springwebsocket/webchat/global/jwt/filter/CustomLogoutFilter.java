@@ -8,12 +8,14 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.GenericFilterBean;
 import springwebsocket.webchat.global.jwt.JWTUtil;
 import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 
 import java.io.IOException;
 
+@Slf4j
 public class CustomLogoutFilter extends GenericFilterBean {
 
     private final JWTUtil jwtUtil;
@@ -26,17 +28,23 @@ public class CustomLogoutFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        log.info("/logout");
         doFilter((HttpServletRequest) request, (HttpServletResponse) response, chain);
     }
 
     private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+
         //path and method verify
         String requestUri = request.getRequestURI();
+        log.info(requestUri);
+
         if (!requestUri.matches("^\\/logout$")) {
 
             filterChain.doFilter(request, response);
             return;
         }
+        log.info("/logout.doFilter");
         String requestMethod = request.getMethod();
         if (!requestMethod.equals("POST")) {
 
@@ -61,7 +69,6 @@ public class CustomLogoutFilter extends GenericFilterBean {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-
         //expired check
         try {
             jwtUtil.isExpired(refresh);
