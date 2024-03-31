@@ -3,9 +3,11 @@ package springwebsocket.webchat.global.jwt.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -67,17 +69,21 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
         GrantedAuthority auth = iterator.next();
-
         String role = auth.getAuthority();
 
-        String token = jwtUtil.createJwt(email, role, 60*60*10L);
+        //토큰 생성
+        String access = jwtUtil.createJwt("access", email, role, 600000L);
+        String refresh = jwtUtil.createJwt("refresh", email, role, 86400000L);
 
         /**
          * 예시 : Http 인증 방식은 아래 인증 헤더 형태를 가져야 한다.
          * Authorization: Bearer 인증토큰 string
          * Bearer : 인증방식
          */
-        response.addHeader("Authorization", "Bearer " + token);
+        //응답 설정
+        response.setHeader("access", access);
+        response.addCookie(createCookie("refresh", refresh));
+        response.setStatus(HttpStatus.OK.value());
 
     }
 
@@ -86,5 +92,16 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         log.info("unsuccessfulAuthentication");
         response.setStatus(401);
+    }
+
+    private Cookie createCookie(String key, String value) {
+
+        Cookie cookie = new Cookie(key, value);
+        cookie.setMaxAge(24*60*60);
+        //        cookie.setSecure(true); //https 를 적용 할 경우 true 값 설정;
+        //        cookie.setPath("/");  //쿠키가 적용될 부분
+        cookie.setHttpOnly(true);   //클라이언트단에서 자바 스크립트로 접근할 수 없도록 필수적으로 설정해야 할 부분
+
+        return cookie;
     }
 }
