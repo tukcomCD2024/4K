@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import springwebsocket.webchat.global.jwt.JWTUtil;
+import springwebsocket.webchat.global.jwt.filter.CustomLogoutFilter;
 import springwebsocket.webchat.global.jwt.filter.JWTFilter;
 import springwebsocket.webchat.global.jwt.filter.LoginFilter;
 import springwebsocket.webchat.member.repository.RefreshMemberRepository;
@@ -71,6 +72,10 @@ public class SecurityConfig {
         //JWTFilter 등록
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
+
+        //로그아웃 필터 등록
+        http
+                .addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshMemberRepository), LoginFilter.class);
 
         //세션 설정
         http
