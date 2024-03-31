@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import springwebsocket.webchat.global.jwt.JWTUtil;
 import springwebsocket.webchat.global.jwt.filter.JWTFilter;
 import springwebsocket.webchat.global.jwt.filter.LoginFilter;
+import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -20,10 +21,13 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTUtil jwtUtil;
 
+    private final RefreshMemberRepository refreshMemberRepository;
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil) {
+
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil, RefreshMemberRepository refreshMemberRepository) {
         this.authenticationConfiguration = authenticationConfiguration;
         this.jwtUtil = jwtUtil;
+        this.refreshMemberRepository = refreshMemberRepository;
     }
 
     @Bean
@@ -51,6 +55,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/login", "/", "/member/*").permitAll()
+                        .requestMatchers("reissue").permitAll()
                         .requestMatchers("/favicon.ico",
                                 "/error",
                                 "/swagger-ui/**",
@@ -61,7 +66,7 @@ public class SecurityConfig {
 
         //필터 추가 LoginFilter()는 인자를 받음 (AuthenticationManager() 메소드에 authenticationConfiguration 객체를 넣어야 함) 따라서 등록 필요
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil,refreshMemberRepository), UsernamePasswordAuthenticationFilter.class);
 
         //JWTFilter 등록
         http

@@ -16,9 +16,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import springwebsocket.webchat.global.jwt.JWTUtil;
 import springwebsocket.webchat.global.jwt.dto.CustomUserDetails;
+import springwebsocket.webchat.member.entity.RefreshMember;
+import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
 
@@ -30,9 +33,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
 
     private final JWTUtil jwtUtil;
 
-    public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
+    private final RefreshMemberRepository refreshMemberRepository;
+
+    public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, RefreshMemberRepository refreshMemberRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
+        this.refreshMemberRepository = refreshMemberRepository;
     }
 
     // AuthenticationManager 여기서 인증
@@ -75,6 +81,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
         String access = jwtUtil.createJwt("access", email, role, 600000L);
         String refresh = jwtUtil.createJwt("refresh", email, role, 86400000L);
 
+        //Refresh Token 저장
+        addRefreshEntity(email, refresh, 86400000L);
+
+
         /**
          * 예시 : Http 인증 방식은 아래 인증 헤더 형태를 가져야 한다.
          * Authorization: Bearer 인증토큰 string
@@ -103,5 +113,18 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
         cookie.setHttpOnly(true);   //클라이언트단에서 자바 스크립트로 접근할 수 없도록 필수적으로 설정해야 할 부분
 
         return cookie;
+    }
+
+    // RefreshToken 저장 함수
+    private void addRefreshEntity(String email, String refresh, Long expiredMs) {
+
+        Date date = new Date(System.currentTimeMillis() + expiredMs);
+
+        RefreshMember refreshMember = new RefreshMember();
+        refreshMember.setEmail(email);
+        refreshMember.setRefresh(refresh);
+        refreshMember.setExpiration(date.toString());
+
+        refreshMemberRepository.save(refreshMember);
     }
 }
