@@ -6,4 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".SignUp">
 
+    <TextView
+        android:id="@+id/sign_up"
+        android:layout_width="99dp"
+        android:layout_height="39dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="86dp"
+        android:gravity="top"
+        android:text="@string/sign_up"
+        android:textAppearance="@style/sign_up"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/if_you_don_"
+        android:layout_width="308dp"
+        android:layout_height="21dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="145dp"
+        android:gravity="top"
+        android:text="@string/if_you_already_have_an_account_register"
+        android:textAppearance="@style/if_you_already_have_an_account_register"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/you_can_sig"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="172dp"
+        android:gravity="top"
+        android:text="@string/you_can2"
+        android:textAppearance="@style/you_can2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/go_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="172dp"
+        android:gravity="top"
+        android:text="@string/sign_in_here"
+        android:textAppearance="@style/sign_in_here"
+        app:layout_constraintStart_toEndOf="@+id/you_can_sig"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

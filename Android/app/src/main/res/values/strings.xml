@@ -1,50 +1,71 @@
 <resources>
     <string name="app_name">front-end_android</string>
 
+    <!-- Activity_Login -->
     <string name="sign_in">
         Sign in
     </string>
 
-    <string name="if_you_don_">
+    <string name="if_you_don_t_have_an_account_register">
         If you don\'t have an account register
     </string>
 
-    <string name="you_can_sig">
+    <string name="you_can">
         You can
     </string>
 
-    <string name="sign_up">
+    <string name="sign_up_here">
         Sign up here !
     </string>
 
-    <string name="header_labe">
+    <string name="e_mail">
         E-mail
     </string>
 
-    <string name="place_holde">
+    <string name="enter_your_email">
         Enter your email
     </string>
 
-    <string name="header_labe2">
+    <string name="password">
         Password
     </string>
 
-    <string name="place_holde2">
+    <string name="enter_your_password">
         Enter your password
     </string>
 
-    <string name="forgot_pass">
+    <string name="forgot_password">
         Forgot Password?
     </string>
 
-    <string name="login">
+    <string name="sign_in2">
         Sign in
     </string>
 
-    <string name="or_continue">
+    <string name="or_continue_with">
         or continue with
     </string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- Activity_Sign_up -->
+
+    <string name="sign_up">
+        Sign up
+    </string>
+
+    <string name="if_you_already_have_an_account_register">
+        If you already have an account register
+    </string>
+
+    <string name="you_can2">
+        You can
+    </string>
+
+    <string name="sign_in_here">
+        Sign in here !
+    </string>
+
+    <!---->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="friends_list">

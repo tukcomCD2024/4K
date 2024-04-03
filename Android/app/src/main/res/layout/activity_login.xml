@@ -19,11 +19,6 @@
         android:textAppearance="@style/sign_in"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--
-    Font family: Poppins
-    Line height: 39sp
-    (identical to box height)
-    -->
 
     <TextView
         android:id="@+id/if_you_don_"
@@ -34,15 +29,10 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="145dp"
         android:gravity="top"
-        android:text="@string/if_you_don_"
-        android:textAppearance="@style/if_you_don_"
+        android:text="@string/if_you_don_t_have_an_account_register"
+        android:textAppearance="@style/if_you_don_t_have_an_account_register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--
-    Font family: Poppins
-    Line height: 21sp
-    (identical to box height)
-    -->
 
     <TextView
         android:id="@+id/you_can_sig"
@@ -53,8 +43,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="172dp"
         android:gravity="top"
-        android:text="@string/you_can_sig"
-        android:textAppearance="@style/you_can_sig"
+        android:text="@string/you_can"
+        android:textAppearance="@style/you_can"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,15 +57,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="172dp"
         android:gravity="top"
-        android:text="@string/sign_up"
-        android:textAppearance="@style/sign_up"
+        android:text="@string/sign_up_here"
+        android:textAppearance="@style/sign_up_here"
         app:layout_constraintStart_toEndOf="@+id/you_can_sig"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--
-    Font family: Poppins
-    Line height: 21sp
-    (identical to box height)
-    -->
 
     <RelativeLayout
         android:id="@+id/text_field"
@@ -100,15 +85,9 @@
                 android:layout_marginStart="20dp"
                 android:gravity="top"
                 android:lineSpacingExtra="3sp"
-                android:text="@string/header_labe"
-                android:textAppearance="@style/header_labe"
+                android:text="@string/e_mail"
+                android:textAppearance="@style/e_mail"
                 android:translationY="-1.45sp" />
-            <!--
-            Font family: Nunito
-            Line height: 22sp
-            (identical to box height)
-            translationY compensates for the line height adjustment of text
-            -->
 
         </RelativeLayout>
 
@@ -128,21 +107,13 @@
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="@string/place_holde"
+                android:hint="@string/enter_your_email"
                 android:lineSpacingExtra="3sp"
-                android:textAppearance="@style/place_holde"
+                android:textAppearance="@style/enter_your_email"
                 android:translationY="-1.45sp"
                 android:background="@android:color/transparent"/>
-            <!--
-            Font family: Nunito
-            Line height: 22sp
-            (identical to box height)
-            translationY compensates for the line height adjustment of text
-            -->
-
 
         </RelativeLayout>
-
 
     </RelativeLayout>
 
@@ -169,16 +140,9 @@
                 android:layout_marginStart="20dp"
                 android:gravity="top"
                 android:lineSpacingExtra="3sp"
-                android:text="@string/header_labe2"
-                android:textAppearance="@style/header_labe2"
+                android:text="@string/password"
+                android:textAppearance="@style/password"
                 android:translationY="-1.45sp" />
-            <!--
-            Font family: Nunito
-            Line height: 22sp
-            (identical to box height)
-            translationY compensates for the line height adjustment of text
-            -->
-
 
         </RelativeLayout>
 
@@ -198,21 +162,14 @@
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="@string/place_holde2"
+                android:hint="@string/enter_your_password"
                 android:lineSpacingExtra="3sp"
                 android:inputType="textPassword"
-                android:textAppearance="@style/place_holde2"
+                android:textAppearance="@style/enter_your_password"
                 android:translationY="-1.45sp"
                 android:background="@android:color/transparent"/>
-            <!--
-            Font family: Nunito
-            Line height: 22sp
-            (identical to box height)
-            translationY compensates for the line height adjustment of text
-            -->
 
         </RelativeLayout>
-
 
     </RelativeLayout>
 
@@ -226,8 +183,8 @@
         android:layout_marginEnd="20dp"
         android:gravity="right|top"
         android:lineSpacingExtra="3sp"
-        android:text="@string/forgot_pass"
-        android:textAppearance="@style/forgot_pass"
+        android:text="@string/forgot_password"
+        android:textAppearance="@style/forgot_password"
         android:translationY="-1.45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -252,8 +209,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_2"
-            android:text="@string/login"
-            android:textAppearance="@string/login"
+            android:text="@string/sign_in2"
+            android:textAppearance="@string/sign_in2"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -269,16 +226,10 @@
         android:layout_marginTop="550dp"
         android:layout_marginEnd="8dp"
         android:gravity="top"
-        android:text="@string/or_continue"
-        android:textAppearance="@style/or_continue"
+        android:text="@string/or_continue_with"
+        android:textAppearance="@style/or_continue_with"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--
-    Font family: Poppins
-    Line height: 24sp
-    (identical to box height)
-    -->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
