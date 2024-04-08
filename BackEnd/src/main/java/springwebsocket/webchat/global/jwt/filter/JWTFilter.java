@@ -58,7 +58,7 @@ public class JWTFilter extends OncePerRequestFilter {
         //토큰이 access인지 확인 (발급시 페이로드에 명시)
         String category = tokenProvider.getCategory(accessToken);
 
-        if (!category.equals("access")) {
+        if (!category.equals("accessToken")) {
 
             //response body
             PrintWriter writer = response.getWriter();
@@ -73,6 +73,8 @@ public class JWTFilter extends OncePerRequestFilter {
         String email = tokenProvider.getEmail(accessToken);
         String role = tokenProvider.getRole(accessToken);
 
+        log.info("email = {}", email);
+        log.info("role = {}", role);
 
         //memberEntity를 생성하여 값 set
         Member member = new Member();

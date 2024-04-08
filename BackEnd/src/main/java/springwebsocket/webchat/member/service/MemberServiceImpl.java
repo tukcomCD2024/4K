@@ -71,7 +71,6 @@ public class MemberServiceImpl implements MemberService {
         log.info("password ={}", password);
         Optional<Member> user = memberRepository.findByLoginEmail(loginEmail)
                 .filter(m -> bCryptPasswordEncoder.matches(password, m.getPassword()));
-        log.info("user = {}", user.get().toString());
 
         if (!user.isEmpty()) {
             log.info("user!=null");
