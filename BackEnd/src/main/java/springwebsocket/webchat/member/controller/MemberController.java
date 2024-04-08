@@ -46,8 +46,9 @@ public class MemberController {
         userService.delete(id);
     }
 
-//    @PostMapping("/login")
-//    public String login(@RequestBody LoginRequest request) {
-//        return userService.login(request.getLoginEmail(), request.getPassword());
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        log.info("/member/login");
+        return userService.login(request.getLoginEmail(), request.getPassword());
+    }
 }

@@ -10,7 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-import springwebsocket.webchat.global.jwt.JWTUtil;
+import springwebsocket.webchat.global.jwt.TokenProvider;
 import springwebsocket.webchat.global.jwt.dto.CustomUserDetails;
 import springwebsocket.webchat.member.entity.Member;
 
@@ -18,13 +18,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Optional;
 
+
 @Slf4j
 public class JWTFilter extends OncePerRequestFilter {
+    private final TokenProvider tokenProvider;
 
-    private final JWTUtil jwtUtil;
-
-    public JWTFilter(JWTUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
+    public JWTFilter(TokenProvider tokenProvider) {
+        this.tokenProvider = tokenProvider;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         //토큰 만료 여부 확인, 만료시 다음 필터로 넘기지 않음
         try {
-            jwtUtil.isExpired(accessToken);
+            tokenProvider.isExpired(accessToken);
         } catch (ExpiredJwtException e) {
 
             //response body
@@ -56,7 +56,7 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         //토큰이 access인지 확인 (발급시 페이로드에 명시)
-        String category = jwtUtil.getCategory(accessToken);
+        String category = tokenProvider.getCategory(accessToken);
 
         if (!category.equals("access")) {
 
@@ -70,8 +70,8 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         // email, role값 획득
-        String email = jwtUtil.getEmail(accessToken);
-        String role = jwtUtil.getRole(accessToken);
+        String email = tokenProvider.getEmail(accessToken);
+        String role = tokenProvider.getRole(accessToken);
 
 
         //memberEntity를 생성하여 값 set

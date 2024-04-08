@@ -3,9 +3,12 @@ package springwebsocket.webchat.member.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import springwebsocket.webchat.global.jwt.TokenProvider;
+import springwebsocket.webchat.global.jwt.filter.LoginFilter;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.UserResponse;
@@ -21,10 +24,13 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final TokenProvider tokenProvider;
 
-    public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+
+    public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider) {
         this.memberRepository = memberRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.tokenProvider = tokenProvider;
     }
 
     @Override
@@ -32,12 +38,12 @@ public class MemberServiceImpl implements MemberService {
     public UserResponse signUp(SignUpRequest signUpRequest) {
         String name = signUpRequest.getName();
         String email = signUpRequest.getEmail();
-        String password =bCryptPasswordEncoder.encode(signUpRequest.getPassword());
+        String password = bCryptPasswordEncoder.encode(signUpRequest.getPassword());
 
-        Member member = new Member(email, password, name,"ROLE_ADMIN");
+        Member member = new Member(email, password, name, "ROLE_ADMIN");
         try {
             memberRepository.save(member);
-        }catch (DataIntegrityViolationException ex){
+        } catch (DataIntegrityViolationException ex) {
             throw new EmailDuplicatedException(email);
 
         }
@@ -59,16 +65,28 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.delete(id);
     }
 
-    public String login(String loginEmail, String password){
-        Member user = memberRepository.findByLoginEmail(loginEmail)
-                .filter(m -> m.getPassword().equals(password))
-                .orElse(null);
+    public ResponseEntity<String> login(String loginEmail, String password) {
+        log.info("/member/login/service");
+        log.info("loginEmail = {}", loginEmail);
+        log.info("password ={}", password);
+        Optional<Member> user = memberRepository.findByLoginEmail(loginEmail)
+                .filter(m -> bCryptPasswordEncoder.matches(password, m.getPassword()));
+        log.info("user = {}", user.get().toString());
 
-        if (user == null) {
-            return "fail";
+        if (!user.isEmpty()) {
+            log.info("user!=null");
+            return handleExistingMemberLogin(user.get());
         }
         else{
-            return "success";
+            return ResponseEntity.ok().body("로그인 실패");
         }
+    }
+
+    private ResponseEntity<String> handleExistingMemberLogin(Member user) {
+
+        String accessToken = tokenProvider.createAccessToken(user.getEmail());
+        return ResponseEntity.ok()
+                .header("Access-Token", accessToken)
+                .body("로그인 성공");
     }
 }

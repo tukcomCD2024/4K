@@ -15,6 +15,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import springwebsocket.webchat.global.jwt.JWTUtil;
+import springwebsocket.webchat.global.jwt.TokenProvider;
 import springwebsocket.webchat.global.jwt.dto.CustomUserDetails;
 import springwebsocket.webchat.member.entity.RefreshMember;
 import springwebsocket.webchat.member.repository.RefreshMemberRepository;
@@ -31,13 +32,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
 
     private final AuthenticationManager authenticationManager;
 
-    private final JWTUtil jwtUtil;
+    private final TokenProvider tokenProvider;
 
     private final RefreshMemberRepository refreshMemberRepository;
 
-    public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, RefreshMemberRepository refreshMemberRepository) {
+    public LoginFilter(AuthenticationManager authenticationManager, TokenProvider tokenProvider, RefreshMemberRepository refreshMemberRepository) {
         this.authenticationManager = authenticationManager;
-        this.jwtUtil = jwtUtil;
+        this.tokenProvider = tokenProvider;
         this.refreshMemberRepository = refreshMemberRepository;
     }
 
@@ -78,11 +79,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
         String role = auth.getAuthority();
 
         //토큰 생성
-        String access = jwtUtil.createJwt("access", email, role, 600000L);
-        String refresh = jwtUtil.createJwt("refresh", email, role, 86400000L);
+        String access = tokenProvider.createAccessToken(email);
+//        String refresh = tokenProvider.createAccessToken(email);
 
         //Refresh Token 저장
-        addRefreshEntity(email, refresh, 86400000L);
+//        addRefreshEntity(email, refresh, 86400000L);
 
 
         /**
@@ -92,7 +93,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter{
          */
         //응답 설정
         response.setHeader("access", access);
-        response.addCookie(createCookie("refresh", refresh));
+//        response.addCookie(createCookie("refresh", refresh));
         response.setStatus(HttpStatus.OK.value());
 
     }

@@ -1,5 +1,6 @@
 package springwebsocket.webchat.member.service;
 
+import org.springframework.http.ResponseEntity;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.UserResponse;
@@ -16,5 +17,5 @@ public interface MemberService {
 
     void delete(Long id);
 
-    String login(String loginEmail, String password);
+    ResponseEntity<String> login(String loginEmail, String password);
 }
