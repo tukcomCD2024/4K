@@ -2,13 +2,11 @@ package springwebsocket.webchat.global.jwt;
 
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import springwebsocket.webchat.global.jwt.service.CustomUserDetailsService;
+import springwebsocket.webchat.member.entity.RefreshMember;
+import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -19,14 +17,14 @@ import java.util.Date;
 @Component
 public class TokenProvider {
 
-    private final CustomUserDetailsService customUserDetailsService;
     private final SecretKey secretKey;
     private final Long accessExpirationTime;
     private final Long refreshExpirationTime;
+    private final RefreshMemberRepository refreshMemberRepository;
 
-    public TokenProvider(CustomUserDetailsService customUserDetailsService, @Value("${spring.jwt.secret}") String secret) {
-        this.customUserDetailsService = customUserDetailsService;
+    public TokenProvider(@Value("${spring.jwt.secret}") String secret, RefreshMemberRepository refreshMemberRepository) {
         this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
+        this.refreshMemberRepository = refreshMemberRepository;
         this.accessExpirationTime = 3 * 60 * 60 * 1000L;       // 3 hours
         this.refreshExpirationTime = 15 * 24 * 60 * 60 * 1000L;  // 15 days
     }
@@ -49,32 +47,35 @@ public class TokenProvider {
     }
 
 
-//    // Refresh Token 검증
-//    public boolean validateRefreshToken(String refreshToken) {
-//        try {
-//            Claims claims = parseClaims(refreshToken);
-//
-//            // 토큰 타입 확인
-//            String tokenType = (String) claims.get("token_type");
-//            if (!"refreshToken".equals(tokenType)) {
-//                return false;
-//            }
-//
-//            // 만료 날짜 확인
-//            return !claims.getExpiration().before(new Date());
-//
-//        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-//            log.warn("잘못된 JWT 서명입니다.", e);
-//        } catch (ExpiredJwtException e) {
-//            log.warn("만료된 JWT입니다.", e);
-//        } catch (UnsupportedJwtException e) {
-//            log.warn("지원되지 않는 JWT입니다.", e);
-//        } catch (IllegalArgumentException e) {
-//            log.warn("잘못된 JWT입니다.", e);
-//        }
-//
-//        return false;
-//    }
+    public String createRefreshToken(String email) {
+
+        // claim은 payload에 추가
+        String refreshToken = Jwts.builder()
+                .claim("category", "refreshToken")    // category = {access, refresh}
+                .claim("email", email)
+                .claim("role", "ROLE_ADMIN")
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + refreshExpirationTime))
+                .signWith(secretKey)
+                .compact();
+
+        //Refresh Token 저장
+        addRefreshEntity(email, refreshToken, refreshExpirationTime);
+
+        return refreshToken;
+    }
+
+    private void addRefreshEntity(String email, String refresh, Long expiredMs) {
+
+        Date date = new Date(System.currentTimeMillis() + expiredMs);
+
+        RefreshMember refreshMember = new RefreshMember();
+        refreshMember.setEmail(email);
+        refreshMember.setRefresh(refresh);
+        refreshMember.setExpiration(date.toString());
+
+        refreshMemberRepository.save(refreshMember);
+    }
 
 
     private Date getExpirationTime(Long expirationTime) {

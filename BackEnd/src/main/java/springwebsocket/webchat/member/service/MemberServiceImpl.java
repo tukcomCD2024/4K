@@ -84,8 +84,10 @@ public class MemberServiceImpl implements MemberService {
     private ResponseEntity<String> handleExistingMemberLogin(Member user) {
 
         String accessToken = tokenProvider.createAccessToken(user.getEmail());
+        String refreshToken = tokenProvider.createRefreshToken(user.getEmail());
         return ResponseEntity.ok()
                 .header("Access-Token", accessToken)
+                .header("Refresh-Token", refreshToken)
                 .body("로그인 성공");
     }
 }
