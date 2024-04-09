@@ -28,11 +28,6 @@
                 android:lineSpacingExtra="-1sp"
                 android:gravity="center_horizontal|center_vertical"
                 />
-            <!--
-            Font family: Nunito
-            Line height: 22sp
-            (identical to box height)
-            -->
 
         </RelativeLayout>
 
