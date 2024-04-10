@@ -64,9 +64,9 @@
 
     <RelativeLayout
         android:id="@+id/text_field"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="74dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="256dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,11 +75,11 @@
 
         <RelativeLayout
             android:id="@+id/header"
-            android:layout_width="358dp"
+            android:layout_width="match_parent"
             android:layout_height="22dp">
 
             <TextView
-                android:id="@+id/header_labe"
+                android:id="@+id/header_label"
                 android:layout_width="42dp"
                 android:layout_height="22dp"
                 android:layout_marginStart="20dp"
@@ -93,19 +93,19 @@
 
         <RelativeLayout
             android:id="@+id/input"
-            android:layout_width="358dp"
+            android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:layout_marginTop="28dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/input"
             android:clipToOutline="true">
 
             <EditText
                 android:id="@+id/email_edt"
-                android:layout_width="326dp"
+                android:layout_width="match_parent"
                 android:layout_height="46dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/enter_your_email"
                 android:lineSpacingExtra="3sp"
@@ -119,7 +119,7 @@
 
     <RelativeLayout
         android:id="@+id/text_field2"
-        android:layout_width="358dp"
+        android:layout_width="match_parent"
         android:layout_height="74dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -130,7 +130,7 @@
 
         <RelativeLayout
             android:id="@+id/header2"
-            android:layout_width="358dp"
+            android:layout_width="match_parent"
             android:layout_height="22dp">
 
             <TextView
@@ -146,9 +146,9 @@
 
         </RelativeLayout>
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:id="@+id/input2"
-            android:layout_width="358dp"
+            android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_marginTop="28dp"
             android:layout_marginStart="20dp"
@@ -158,7 +158,7 @@
 
             <EditText
                 android:id="@+id/password_edt"
-                android:layout_width="326dp"
+                android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"

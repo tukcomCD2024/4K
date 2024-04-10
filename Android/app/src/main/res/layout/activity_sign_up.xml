@@ -70,13 +70,115 @@
         android:layout_marginBottom="160dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp">
+
         <LinearLayout
-            android:id="@+id/sign_up_scrollview_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_email"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_email_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_email_header_label"
+                        android:layout_width="42dp"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/e_mail"
+                        android:textAppearance="@style/e_mail"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_email_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_email_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/enter_your_email"
+                        android:lineSpacingExtra="3sp"
+                        android:textAppearance="@style/enter_your_email"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_user_name_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_user_name_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/user_name"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_user_name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_user_name_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/create_user_name"
+                        android:lineSpacingExtra="3sp"
+                        android:inputType="textPassword"
+                        android:textAppearance="@style/create_user_name"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
