@@ -48,6 +48,8 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/v3/api-docs/**").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/friendship/*").hasRole("ADMIN")
+                        .requestMatchers("/signal").hasRole("ADMIN")
                         .anyRequest().authenticated());
 
         //JWTFilter 등록
