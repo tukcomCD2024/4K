@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springwebsocket.webchat.global.jwt.TokenProvider;
-import springwebsocket.webchat.global.jwt.filter.LoginFilter;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.UserResponse;
