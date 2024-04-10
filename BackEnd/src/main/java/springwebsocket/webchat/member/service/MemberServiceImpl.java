@@ -1,6 +1,7 @@
 package springwebsocket.webchat.member.service;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import springwebsocket.webchat.global.jwt.TokenProvider;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
@@ -32,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
     private final RefreshMemberRepository refreshMemberRepository;
 
 
-    public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider,RefreshMemberRepository refreshMemberRepository) {
+    public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider, RefreshMemberRepository refreshMemberRepository) {
         this.memberRepository = memberRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.tokenProvider = tokenProvider;
@@ -81,8 +84,7 @@ public class MemberServiceImpl implements MemberService {
         if (!user.isEmpty()) {
             log.info("user!=null");
             return handleExistingMemberLogin(user.get());
-        }
-        else{
+        } else {
             return ResponseEntity.ok().body("로그인 실패");
         }
     }
@@ -136,6 +138,20 @@ public class MemberServiceImpl implements MemberService {
                 .header("Access-Token", newAccessToken)
                 .header("Refresh-Token", newRefreshToken)
                 .body("재발급 성공");
+    }
+
+    public ResponseEntity<?> logout() {
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+        //get refresh token
+        String refreshToken = request.getHeader("Refresh-Token");
+
+        //로그아웃 진행
+        //Refresh 토큰 DB에서 제거
+        refreshMemberRepository.deleteByRefresh(refreshToken);
+
+        return ResponseEntity.ok().body("로그아웃 성공");
     }
 
     private ResponseEntity<String> handleExistingMemberLogin(Member user) {

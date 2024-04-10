@@ -6,10 +6,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.UserResponse;
@@ -54,9 +53,17 @@ public class MemberController {
         return userService.login(request.getLoginEmail(), request.getPassword());
     }
 
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout() {
+        log.info("/member/logout");
+        return userService.logout();
+    }
+
     @PostMapping("/reissue")
     public ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response) {
         log.info("/member/reissue");
         return userService.reissue(request, response);
     }
+
+
 }

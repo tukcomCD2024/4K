@@ -22,4 +22,6 @@ public interface MemberService {
     ResponseEntity<String> login(String loginEmail, String password);
 
     ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response);
+
+    ResponseEntity<?> logout();
 }
