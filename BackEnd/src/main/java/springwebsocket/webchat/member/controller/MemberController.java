@@ -1,6 +1,8 @@
 package springwebsocket.webchat.member.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +52,11 @@ public class MemberController {
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
         log.info("/member/login");
         return userService.login(request.getLoginEmail(), request.getPassword());
+    }
+
+    @PostMapping("/reissue")
+    public ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response) {
+        log.info("/member/reissue");
+        return userService.reissue(request, response);
     }
 }

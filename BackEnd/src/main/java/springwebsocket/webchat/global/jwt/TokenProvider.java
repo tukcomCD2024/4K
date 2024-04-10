@@ -77,11 +77,6 @@ public class TokenProvider {
         refreshMemberRepository.save(refreshMember);
     }
 
-
-    private Date getExpirationTime(Long expirationTime) {
-        return new Date((new Date()).getTime() + expirationTime);
-    }
-
     public String getEmail(String token) {
 
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("email", String.class);

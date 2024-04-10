@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import springwebsocket.webchat.global.jwt.TokenProvider;
 import springwebsocket.webchat.member.repository.JpaMemberRepository;
 import springwebsocket.webchat.member.repository.MemberRepository;
+import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
 import springwebsocket.webchat.member.service.MemberServiceImpl;
 import springwebsocket.webchat.member.service.MemberService;
@@ -23,10 +24,12 @@ public class MemberConfig {
 
     private final TokenProvider tokenProvider;
 
+    private final RefreshMemberRepository refreshMemberRepository;
+
 
     @Bean
     public MemberService userService() {
-        return new MemberServiceImpl(memberRepository(), encoder(), tokenProvider);
+        return new MemberServiceImpl(memberRepository(), encoder(), tokenProvider,refreshMemberRepository);
     }
 
     @Bean

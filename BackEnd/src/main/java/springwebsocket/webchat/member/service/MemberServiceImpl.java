@@ -1,8 +1,12 @@
 package springwebsocket.webchat.member.service;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,7 @@ import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.exception.EmailDuplicatedException;
 import springwebsocket.webchat.member.repository.MemberRepository;
+import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 
 import java.util.Optional;
 
@@ -25,12 +30,14 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final TokenProvider tokenProvider;
+    private final RefreshMemberRepository refreshMemberRepository;
 
 
-    public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider) {
+    public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider,RefreshMemberRepository refreshMemberRepository) {
         this.memberRepository = memberRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.tokenProvider = tokenProvider;
+        this.refreshMemberRepository = refreshMemberRepository;
     }
 
     @Override
@@ -81,6 +88,57 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    public ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response) {
+        //get refresh token
+        String refreshToken = request.getHeader("Refresh-Token");
+
+        if (refreshToken == null) {
+
+            //response status code
+            return new ResponseEntity<>("refresh token null", HttpStatus.BAD_REQUEST);
+        }
+
+        //expired check
+        try {
+            tokenProvider.isExpired(refreshToken);
+        } catch (ExpiredJwtException e) {
+
+            //response status code
+            return new ResponseEntity<>("refresh token expired", HttpStatus.BAD_REQUEST);
+        }
+
+        // 토큰이 refresh인지 확인 (발급시 페이로드에 명시)
+        String category = tokenProvider.getCategory(refreshToken);
+
+        if (!category.equals("refreshToken")) {
+
+            //response status code
+            return new ResponseEntity<>("invalid refresh token", HttpStatus.BAD_REQUEST);
+        }
+
+        //DB에 저장되어 있는지 확인
+        Boolean isExist = refreshMemberRepository.existsByRefresh(refreshToken);
+        if (!isExist) {
+
+            //response body
+            return new ResponseEntity<>("invalid refresh token", HttpStatus.BAD_REQUEST);
+        }
+
+        String email = tokenProvider.getEmail(refreshToken);
+
+        //make new JWT
+        String newAccessToken = tokenProvider.createAccessToken(email);
+        String newRefreshToken = tokenProvider.createRefreshToken(email);
+
+        //Refresh 토큰 저장 DB에 기존의 Refresh 토큰 삭제 후 새 Refresh 토큰 저장
+        refreshMemberRepository.deleteByRefresh(refreshToken);
+
+        return ResponseEntity.ok()
+                .header("Access-Token", newAccessToken)
+                .header("Refresh-Token", newRefreshToken)
+                .body("재발급 성공");
+    }
+
     private ResponseEntity<String> handleExistingMemberLogin(Member user) {
 
         String accessToken = tokenProvider.createAccessToken(user.getEmail());
@@ -90,4 +148,5 @@ public class MemberServiceImpl implements MemberService {
                 .header("Refresh-Token", refreshToken)
                 .body("로그인 성공");
     }
+
 }
