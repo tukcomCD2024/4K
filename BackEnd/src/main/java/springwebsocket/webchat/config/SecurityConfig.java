@@ -9,9 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
 import springwebsocket.webchat.global.jwt.TokenProvider;
-import springwebsocket.webchat.global.jwt.filter.CustomLogoutFilter;
 import springwebsocket.webchat.global.jwt.filter.JWTFilter;
 
 @Configuration
@@ -23,13 +21,6 @@ public class SecurityConfig {
     public SecurityConfig(TokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
-
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

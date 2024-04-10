@@ -4,7 +4,6 @@ import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import springwebsocket.webchat.global.jwt.service.CustomUserDetailsService;
 import springwebsocket.webchat.member.entity.RefreshMember;
 import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 
