@@ -15,9 +15,6 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_17">
     <output url="file://$MODULE_DIR$/../../BackEnd/build/classes/java/main" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../BackEnd/build/generated/sources/annotationProcessor/java/main">
-      <sourceFolder url="file://$MODULE_DIR$/../../BackEnd/build/generated/sources/annotationProcessor/java/main" isTestSource="false" generated="true" />
-    </content>
     <content url="file://$MODULE_DIR$/../../BackEnd/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../BackEnd/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../BackEnd/src/main/resources" type="java-resource" />
