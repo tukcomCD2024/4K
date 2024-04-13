@@ -4,13 +4,14 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import springwebsocket.webchat.global.jwt.TokenProvider;
 import springwebsocket.webchat.member.repository.JpaMemberRepository;
 import springwebsocket.webchat.member.repository.MemberRepository;
+import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
+import springwebsocket.webchat.member.service.MemberServiceImpl;
 import springwebsocket.webchat.member.service.MemberService;
-import springwebsocket.webchat.member.service.MemberServiceV1;
-import springwebsocket.webchat.member.service.MemberServiceV2;
-import springwebsocket.webchat.member.service.MemberServiceV3;
 
 
 @Configuration
@@ -21,9 +22,19 @@ public class MemberConfig {
 
     private final SpringDataJpaMemberRepository springDataJpaMemberRepository;
 
+    private final TokenProvider tokenProvider;
+
+    private final RefreshMemberRepository refreshMemberRepository;
+
+
     @Bean
-    public MemberServiceV3 userService() {
-        return new MemberServiceV2(memberRepository());
+    public MemberService userService() {
+        return new MemberServiceImpl(memberRepository(), encoder(), tokenProvider,refreshMemberRepository);
+    }
+
+    @Bean
+    public BCryptPasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

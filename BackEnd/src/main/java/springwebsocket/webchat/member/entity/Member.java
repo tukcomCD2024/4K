@@ -21,12 +21,14 @@ public class Member {
     private String name;
     private String firebaseToken;
     private String language;
+    private String role;
     public Member() {
     }
 
-    public Member(String email, String password, String name) {
+    public Member(String email, String password, String name, String role) {
         this.email = email;
         this.password = password;
         this.name = name;
+        this.role = role;
     }
 }
