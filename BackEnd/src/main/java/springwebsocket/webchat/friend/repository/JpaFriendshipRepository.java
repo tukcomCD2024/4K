@@ -25,13 +25,13 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     private final SpringDataJpaMemberRepository memberRepository;
 
     @Override
-    public Friendship sendFriendRequest(Long senderId, String receiverEmail) {
+    public Friendship sendFriendRequest(String senderEmail, String receiverEmail) {
 
-        Optional<Member> senderMember = memberRepository.findById(senderId);
+        Optional<Member> senderMember = memberRepository.findByEmail(senderEmail);
         Optional<Member> receiverMember = memberRepository.findByEmail(receiverEmail);
 
         if (receiverMember.isPresent()) {
-            // 상대방 Id가 존재할 때
+            // 상대방 Email가 존재할 때
             Member sender = senderMember.get();
             Member receiver = receiverMember.get();
 

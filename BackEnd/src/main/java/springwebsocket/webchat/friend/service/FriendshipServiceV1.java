@@ -15,8 +15,8 @@ public class FriendshipServiceV1 implements FriendshipService{
     private final FriendshipRepository friendshipRepository;
 
     @Override
-    public Friendship sendFriendRequest(Long senderId, String receiverEmail) {
-        return friendshipRepository.sendFriendRequest(senderId, receiverEmail);
+    public Friendship sendFriendRequest(String senderEmail, String receiverEmail) {
+        return friendshipRepository.sendFriendRequest(senderEmail, receiverEmail);
     }
 
     @Override

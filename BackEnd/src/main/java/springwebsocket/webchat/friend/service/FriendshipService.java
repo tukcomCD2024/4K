@@ -8,7 +8,7 @@ import java.util.List;
 public interface FriendshipService {
 
     // 친구 요청 보내기
-    Friendship sendFriendRequest(Long senderId, String receiverEmail);
+    Friendship sendFriendRequest(String senderEmail, String receiverEmail);
 
     // 친구 요청 수락
     void acceptFriendRequestById(Long senderId, String receiverEmail);

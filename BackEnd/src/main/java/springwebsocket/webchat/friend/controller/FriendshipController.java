@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springwebsocket.webchat.friend.dto.UserIdRequest;
+import springwebsocket.webchat.friend.dto.request.UserEmailRequest;
 import springwebsocket.webchat.friend.entity.Friendship;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.friend.service.FriendshipService;
@@ -20,9 +21,12 @@ public class FriendshipController {
     private final FriendshipService friendshipService;
 
     @PostMapping("/sendFriendRequest")
-    public String sendFriendRequest(Long senderId, String receiverEmail) {
+    public String sendFriendRequest(@RequestBody UserEmailRequest userEmailRequest) {
 
-        Friendship friendship = friendshipService.sendFriendRequest(senderId, receiverEmail);
+        String senderEmail = userEmailRequest.getSenderEmail();
+        String receiverEmail = userEmailRequest.getReceiverEmail();
+
+        Friendship friendship = friendshipService.sendFriendRequest(senderEmail, receiverEmail);
 
         if (friendship == null) {
             return "fail";
