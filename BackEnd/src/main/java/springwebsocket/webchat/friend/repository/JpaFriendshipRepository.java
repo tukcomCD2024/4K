@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import springwebsocket.webchat.friend.entity.Friendship;
+import springwebsocket.webchat.friend.repository.springdata.UserInfoMapping;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.friend.repository.springdata.SpringDataJpaFriendshipRepository;
 import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
@@ -88,7 +89,7 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public List<Member> findByFriendIdAndStatus(Long id) {
+    public List<UserInfoMapping> findByFriendIdAndStatus(Long id) {
         Optional<Member> userMember = memberRepository.findById(id);
         return friendshipRepository.findByFriendIdAndStatus(userMember.get(), Friendship.FriendshipStatus.PENDING);
     }

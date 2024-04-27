@@ -14,8 +14,12 @@ public interface SpringDataJpaFriendshipRepository extends JpaRepository<Friends
 
     Optional<Friendship> findByFriendIdAndUserId(Member sender, Member receiver);
 
-    @Query("SELECT f.userId FROM Friendship f WHERE f.friendId = :friendId AND f.status = :status")
-    List<Member> findByFriendIdAndStatus(@Param("friendId") Member friend, @Param("status") Friendship.FriendshipStatus status);
+    @Query("SELECT u.email AS email, u.name AS name " +
+            "FROM Friendship f " +
+            "JOIN f.userId u " +
+            "WHERE f.friendId = :friendId AND f.status = :status")
+    List<UserInfoMapping> findByFriendIdAndStatus(@Param("friendId") Member friend, @Param("status") Friendship.FriendshipStatus status);
+
 
     @Query("SELECT f.friendId.email FROM Friendship f WHERE f.userId = :userId AND f.status= :status")
     List<String> findFriendshipByUserIdAndStatus(Member userId,Friendship.FriendshipStatus status);

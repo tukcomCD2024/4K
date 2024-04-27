@@ -3,6 +3,7 @@ package springwebsocket.webchat.friend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import springwebsocket.webchat.friend.entity.Friendship;
+import springwebsocket.webchat.friend.repository.springdata.UserInfoMapping;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.friend.repository.FriendshipRepository;
 
@@ -30,7 +31,7 @@ public class FriendshipServiceV1 implements FriendshipService{
     }
 
     @Override
-    public List<Member> findByFriendIdAndStatus(Long id) {
+    public List<UserInfoMapping> findByFriendIdAndStatus(Long id) {
         return friendshipRepository.findByFriendIdAndStatus(id);
     }
 
