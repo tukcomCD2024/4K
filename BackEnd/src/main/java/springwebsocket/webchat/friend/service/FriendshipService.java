@@ -15,7 +15,7 @@ public interface FriendshipService {
     String acceptFriendRequestById(String senderEmail, String receiverEmail);
 
     // 친구 요청 거절
-    void rejectFriendRequestById(Long id, String Email);
+    String rejectFriendRequestById(String senderEmail, String receiverEmail);
 
     // 나에게 온 친구 요청 목록 조회
     List<UserInfoMapping> findByFriendIdAndStatus(Long id);

@@ -75,19 +75,22 @@ public class JpaFriendshipRepository implements FriendshipRepository {
 
 
     @Override
-    public void rejectFriendRequestById(Long id, String Email) {
+    public String rejectFriendRequestById(String senderEmail, String receiverEmail) {
 
-        Optional<Member> memberMe = memberRepository.findById(id);
-        Optional<Member> memberYou = memberRepository.findByEmail(Email);
+        Optional<Member> memberMe = memberRepository.findByEmail(senderEmail);
+        Optional<Member> memberYou = memberRepository.findByEmail(receiverEmail);
 
         // 기존의 Friendship 엔터티를 찾는다.
         Optional<Friendship> existingFriendship = friendshipRepository.findByFriendIdAndUserId(memberMe.get(), memberYou.get());
+
+        if(existingFriendship.isEmpty()) return "fail";
 
         existingFriendship.ifPresent(friendship ->{
             // Friendship 엔터티를 삭제
             friendshipRepository.delete(existingFriendship.get());
         });
 
+        return "success";
     }
 
     @Override

@@ -44,9 +44,10 @@ public class FriendshipController {
     }
 
     @PostMapping("/rejectFriendRequestById")
-    public String rejectFriendRequestById(Long id, String Email) {
-        friendshipService.rejectFriendRequestById(id, Email);
-        return "success";
+    public String rejectFriendRequestById(@RequestBody UserEmailRequest userEmailRequest) {
+        String senderEmail = userEmailRequest.getSenderEmail();
+        String receiverEmail = userEmailRequest.getReceiverEmail();
+        return friendshipService.rejectFriendRequestById(senderEmail, receiverEmail);
     }
 
     @PostMapping("/findByFriendIdAndStatus")
