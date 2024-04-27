@@ -36,7 +36,7 @@ public class FriendshipServiceV1 implements FriendshipService{
     }
 
     @Override
-    public List<String> findByUserIdAndStatusOrFriendIdAndStatus(Long userId) {
+    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(Long userId) {
         return friendshipRepository.findByUserIdAndStatusOrFriendIdAndStatus(userId);
     }
 }

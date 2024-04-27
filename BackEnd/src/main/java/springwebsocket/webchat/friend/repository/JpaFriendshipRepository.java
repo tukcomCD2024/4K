@@ -95,14 +95,14 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public List<String> findByUserIdAndStatusOrFriendIdAndStatus(Long userId) {
+    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(Long userId) {
 
-        List<String> friendList = new ArrayList<>();
+        List<UserInfoMapping> friendList = new ArrayList<>();
 
         Optional<Member> userMember = memberRepository.findById(userId);
 
-        List<String> friendList1 = friendshipRepository.findFriendshipByUserIdAndStatus(userMember.get(), FRIENDS);
-        List<String> friendList2 = friendshipRepository.findFriendshipsByFriendIdAndStatus(userMember.get(), FRIENDS);
+        List<UserInfoMapping> friendList1 = friendshipRepository.findFriendshipByUserIdAndStatus(userMember.get(), FRIENDS);
+        List<UserInfoMapping> friendList2 = friendshipRepository.findFriendshipsByFriendIdAndStatus(userMember.get(), FRIENDS);
 
         friendList.addAll(friendList1);
         friendList.addAll(friendList2);

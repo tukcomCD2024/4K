@@ -14,18 +14,24 @@ public interface SpringDataJpaFriendshipRepository extends JpaRepository<Friends
 
     Optional<Friendship> findByFriendIdAndUserId(Member sender, Member receiver);
 
-    @Query("SELECT u.email AS email, u.name AS name " +
-            "FROM Friendship f " +
-            "JOIN f.userId u " +
+    @Query("SELECT u.email AS email, u.name AS name, u.language AS language " +
+            "FROM Friendship AS f " +
+            "JOIN f.userId AS u " +
             "WHERE f.friendId = :friendId AND f.status = :status")
     List<UserInfoMapping> findByFriendIdAndStatus(@Param("friendId") Member friend, @Param("status") Friendship.FriendshipStatus status);
 
 
-    @Query("SELECT f.friendId.email FROM Friendship f WHERE f.userId = :userId AND f.status= :status")
-    List<String> findFriendshipByUserIdAndStatus(Member userId,Friendship.FriendshipStatus status);
+    @Query("SELECT u.email AS email, u.name AS name, u.language AS language " +
+            "FROM Friendship AS f " +
+            "JOIN f.friendId AS u " +
+            "WHERE f.userId = :userId AND f.status= :status")
+    List<UserInfoMapping> findFriendshipByUserIdAndStatus(Member userId,Friendship.FriendshipStatus status);
 
-    @Query("SELECT f.userId.email FROM Friendship f WHERE f.friendId = :friendId AND f.status= :status")
-    List<String> findFriendshipsByFriendIdAndStatus(Member friendId,Friendship.FriendshipStatus status);
+    @Query("SELECT u.email AS email, u.name AS name, u.language AS language " +
+            "FROM Friendship AS f " +
+            "JOIN f.userId AS u " +
+            "WHERE f.friendId = :friendId AND f.status= :status")
+    List<UserInfoMapping> findFriendshipsByFriendIdAndStatus(Member friendId,Friendship.FriendshipStatus status);
 
 
 }

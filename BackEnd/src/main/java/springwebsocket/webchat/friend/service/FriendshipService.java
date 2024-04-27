@@ -21,7 +21,7 @@ public interface FriendshipService {
     List<UserInfoMapping> findByFriendIdAndStatus(Long id);
 
     // 서로 친구인 친구 목록 조회
-    List<String> findByUserIdAndStatusOrFriendIdAndStatus(Long userId);
+    List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(Long userId);
 
 }
 

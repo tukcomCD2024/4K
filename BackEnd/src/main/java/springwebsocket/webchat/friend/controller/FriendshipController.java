@@ -54,12 +54,12 @@ public class FriendshipController {
     }
 
     @PostMapping("/findByUserIdAndStatusOrFriendIdAndStatus")
-    public List<String> findByUserIdAndStatusOrFriendIdAndStatus(@RequestBody UserIdRequest request) {
+    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(@RequestBody UserIdRequest request) {
         return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(request.getUserId());
     }
 
     @PostMapping("/findByUserIdAndStatusOrFriendIdAndStatusAny")
-    public List<String> findByUserIdAndStatusOrFriendIdAndStatusAny(Long userId) {
+    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatusAny(Long userId) {
         return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(userId);
     }
 }
