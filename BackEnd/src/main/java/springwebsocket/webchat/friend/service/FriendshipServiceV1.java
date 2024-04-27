@@ -21,8 +21,8 @@ public class FriendshipServiceV1 implements FriendshipService{
     }
 
     @Override
-    public void acceptFriendRequestById(Long senderId, String receiverEmail) {
-        friendshipRepository.acceptFriendRequestById(senderId, receiverEmail);
+    public String acceptFriendRequestById(String senderEmail, String receiverEmail) {
+        return friendshipRepository.acceptFriendRequestById(senderEmail, receiverEmail);
     }
 
     @Override

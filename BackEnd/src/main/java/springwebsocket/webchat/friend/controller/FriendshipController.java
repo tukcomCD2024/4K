@@ -36,10 +36,11 @@ public class FriendshipController {
     }
 
     @PostMapping("/acceptFriendRequestById")
-    public String acceptFriendRequestById(Long senderId, String receiverEmail) {
-        friendshipService.acceptFriendRequestById(senderId, receiverEmail);
+    public String acceptFriendRequestById(@RequestBody UserEmailRequest userEmailRequest) {
+        String senderEmail = userEmailRequest.getSenderEmail();
+        String receiverEmail = userEmailRequest.getReceiverEmail();
 
-        return "success";
+        return friendshipService.acceptFriendRequestById(senderEmail, receiverEmail);
     }
 
     @PostMapping("/rejectFriendRequestById")

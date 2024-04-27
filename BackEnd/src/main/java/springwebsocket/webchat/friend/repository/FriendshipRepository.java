@@ -12,7 +12,7 @@ public interface FriendshipRepository{
     Friendship sendFriendRequest(String senderEmail, String receiverEmail);
 
     // 친구 요청 수락
-    void acceptFriendRequestById(Long senderId, String receiverEmail);
+    String acceptFriendRequestById(String senderEmail, String receiverEmail);
 
     // 친구 요청 거절
     void rejectFriendRequestById(Long id, String Email);
