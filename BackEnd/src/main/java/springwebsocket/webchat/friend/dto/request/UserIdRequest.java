@@ -1,4 +1,4 @@
-package springwebsocket.webchat.friend.dto;
+package springwebsocket.webchat.friend.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
