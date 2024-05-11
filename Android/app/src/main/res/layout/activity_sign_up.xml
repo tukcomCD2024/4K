@@ -168,6 +168,157 @@
                         android:layout_marginEnd="16dp"
                         android:hint="@string/create_user_name"
                         android:lineSpacingExtra="3sp"
+                        android:textAppearance="@style/create_user_name"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_nickname_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_nickname_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/nickname"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_nickname_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_nickname_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/enter_nickname"
+                        android:lineSpacingExtra="3sp"
+                        android:textAppearance="@style/create_user_name"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_password"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_password_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_password_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/password2"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_password_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_password_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/password_hint"
+                        android:lineSpacingExtra="3sp"
+                        android:inputType="textPassword"
+                        android:textAppearance="@style/create_user_name"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_confirm_password_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_confirm_password_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/confirm_password"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_confirm_password_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_confirm_password_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/password_hint"
+                        android:lineSpacingExtra="3sp"
                         android:inputType="textPassword"
                         android:textAppearance="@style/create_user_name"
                         android:translationY="-1.45sp"
@@ -180,5 +331,30 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/create_account_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_scrollview">
+
+        <android.widget.Button
+            android:id="@+id/create_account_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_2"
+            android:text="@string/create_account"
+            android:textAppearance="@string/sign_in2"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

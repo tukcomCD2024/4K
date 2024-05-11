@@ -72,6 +72,30 @@
         Create user name
     </string>
 
+    <string name="nickname">
+        Nickname
+    </string>
+
+    <string name="enter_nickname">
+        Enter nickname
+    </string>
+
+    <string name="password2">
+        Password
+    </string>
+
+    <string name="password_hint">
+        **********
+    </string>
+
+    <string name="confirm_password">
+        Confirm Password
+    </string>
+
+    <string name="create_account">
+        Create Account
+    </string>
+
     <!---->
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
