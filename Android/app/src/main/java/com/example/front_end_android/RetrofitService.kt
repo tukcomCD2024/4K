@@ -2,6 +2,8 @@ package com.example.front_end_android
 
 import com.example.front_end_android.dataclass.LoginRequest
 import com.example.front_end_android.dataclass.LoginResponse
+import com.example.front_end_android.dataclass.SignUpRequest
+import com.example.front_end_android.dataclass.SignUpResponse
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.Body
@@ -12,15 +14,11 @@ import retrofit2.http.POST
 
 interface RetrofitService {
 
+    @POST("member/signup")
+    fun signUpRetrofit(@Body signUpRequest: SignUpRequest): Call<SignUpResponse>
+
     @POST("member/login")
     fun loginRetrofit(@Body loginRequest: LoginRequest): Call<String>
-
-    @FormUrlEncoded
-    @POST("member/login")
-    fun loginRetrofit(
-        @Field("loginEmail") loginEmail: String,
-        @Field("password") password: String
-    ): Call<Any>
 
     @FormUrlEncoded
     @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatusAny")
