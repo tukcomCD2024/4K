@@ -1,13 +1,19 @@
 package com.example.front_end_android
 
+import com.example.front_end_android.dataclass.LoginRequest
+import com.example.front_end_android.dataclass.LoginResponse
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Field
+import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface RetrofitService {
+
+    @POST("member/login")
+    fun loginRetrofit(@Body loginRequest: LoginRequest): Call<String>
 
     @FormUrlEncoded
     @POST("member/login")
