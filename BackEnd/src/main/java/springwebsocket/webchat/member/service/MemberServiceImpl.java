@@ -18,6 +18,7 @@ import springwebsocket.webchat.global.jwt.TokenProvider;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.UserResponse;
+import springwebsocket.webchat.member.dto.response.loginMessage;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.exception.EmailDuplicatedException;
 import springwebsocket.webchat.member.repository.MemberRepository;
@@ -74,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.delete(id);
     }
 
-    public ResponseEntity<String> login(String loginEmail, String password) {
+    public ResponseEntity<loginMessage> login(String loginEmail, String password) {
         log.info("/member/login/service");
         log.info("loginEmail = {}", loginEmail);
         log.info("password ={}", password);
@@ -85,7 +86,8 @@ public class MemberServiceImpl implements MemberService {
             log.info("user!=null");
             return handleExistingMemberLogin(user.get());
         } else {
-            return ResponseEntity.ok().body("로그인 실패");
+            loginMessage message = new loginMessage("로그인 실패");
+            return ResponseEntity.ok().body(message);
         }
     }
 
@@ -154,14 +156,14 @@ public class MemberServiceImpl implements MemberService {
         return ResponseEntity.ok().body("로그아웃 성공");
     }
 
-    private ResponseEntity<String> handleExistingMemberLogin(Member user) {
-
+    private ResponseEntity<loginMessage> handleExistingMemberLogin(Member user) {
+        loginMessage message = new loginMessage("로그인 성공");
         String accessToken = tokenProvider.createAccessToken(user.getEmail());
         String refreshToken = tokenProvider.createRefreshToken(user.getEmail());
         return ResponseEntity.ok()
                 .header("Access-Token", accessToken)
                 .header("Refresh-Token", refreshToken)
-                .body("로그인 성공");
+                .body(message);
     }
 
 }

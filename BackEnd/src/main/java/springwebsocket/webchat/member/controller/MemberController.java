@@ -12,6 +12,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.UserResponse;
+import springwebsocket.webchat.member.dto.response.loginMessage;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.service.MemberService;
@@ -48,7 +49,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<loginMessage> login(@RequestBody LoginRequest request) {
         log.info("/member/login");
         return userService.login(request.getLoginEmail(), request.getPassword());
     }
