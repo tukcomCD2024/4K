@@ -96,6 +96,24 @@
         Create Account
     </string>
 
+    <!--Activity_Find_password-->
+
+    <string name="forgot_password2">
+        Forgot Password
+    </string>
+
+    <string name="no_worries...">
+        No worries! Enter your email address below and
+    </string>
+
+    <string name="we_will_send...">
+        we will send you a code to reset password.
+    </string>
+
+    <string name="send_reset_instruction">
+        Send Reset Instruction
+    </string>
+
     <!---->
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

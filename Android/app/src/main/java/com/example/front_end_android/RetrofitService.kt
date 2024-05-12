@@ -18,7 +18,7 @@ interface RetrofitService {
     fun signUpRetrofit(@Body signUpRequest: SignUpRequest): Call<SignUpResponse>
 
     @POST("member/login")
-    fun loginRetrofit(@Body loginRequest: LoginRequest): Call<String>
+    fun loginRetrofit(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
     @FormUrlEncoded
     @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatusAny")

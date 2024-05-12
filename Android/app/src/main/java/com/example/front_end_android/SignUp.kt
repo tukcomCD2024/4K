@@ -22,6 +22,10 @@ class SignUp : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.goSignIn.setOnClickListener{
+            finish()
+        }
+
         binding.createAccountBtn.setOnClickListener {
             if (binding.scrollViewTextFieldEmailEdt.text.toString().isEmpty() and
                 binding.scrollViewTextFieldConfirmPasswordEdt.text.toString().isEmpty() and

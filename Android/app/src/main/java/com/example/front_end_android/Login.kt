@@ -30,10 +30,15 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.forgotPass.setOnClickListener {
+            val intent = Intent(this, FindPassword::class.java)
+            startActivity(intent)
+        }
+
         val gson = GsonBuilder().setLenient().create()
         val retrofit = Retrofit.Builder()
             .baseUrl("https://4kringo.shop:8080/")
-            .addConverterFactory(ScalarsConverterFactory.create())
+            //.addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
@@ -45,13 +50,13 @@ class Login : AppCompatActivity() {
             var loginpassword = binding.passwordEdt.text.toString()
             val loginRequest = LoginRequest(loginemail, loginpassword)
             val call = service.loginRetrofit(loginRequest)
-            //val call = service.loginRetrofit("newsungk7@naver.com", "1234")
 
-            call.enqueue(object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+            call.enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     if (response.isSuccessful) {
                         val jsonResponse = response.body()
                         Log.d("YMC", "onResponse 성공: $jsonResponse $response")
+                        val message = jsonResponse?.message
 
                         val headers = response.headers()
 
@@ -60,7 +65,7 @@ class Login : AppCompatActivity() {
                         Log.d("YMC", "access token : $access_token")
                         Log.d("YMC", "Refresh token : $refresh_token")
 
-                        if (jsonResponse == "로그인 성공") {
+                        if (message == "로그인 성공") {
                             val intent = Intent(this@Login, NaviActivity::class.java)
                             startActivity(intent)
                         }
@@ -69,7 +74,7 @@ class Login : AppCompatActivity() {
                         Log.d("YMC", "onResponse 실패")//*
                     }
                 }
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.d("YMC", "onFailure 에러: ${t.message}")//*
                 }
             })
