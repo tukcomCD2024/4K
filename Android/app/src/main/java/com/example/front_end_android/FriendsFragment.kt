@@ -72,8 +72,10 @@ class FriendsFragment : Fragment() {
 
         val access_token = MyApplication.preferences.getString("AccessToken",".")
         val refresh_token = MyApplication.preferences.getString("RefreshToken",".")
+        val user_email = MyApplication.preferences.getString("email",".")
         Log.d("YMC", "access token : $access_token")
         Log.d("YMC", "Refresh token : $refresh_token")
+        Log.d("YMC", "email : $user_email")
 
         //"https://4kringo.shop:8080/"
         val gson = GsonBuilder().setLenient().create()

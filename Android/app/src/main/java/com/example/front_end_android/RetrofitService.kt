@@ -1,5 +1,6 @@
 package com.example.front_end_android
 
+import com.example.front_end_android.dataclass.AddFriendRequest
 import com.example.front_end_android.dataclass.LoginRequest
 import com.example.front_end_android.dataclass.LoginResponse
 import com.example.front_end_android.dataclass.SignUpRequest
@@ -19,6 +20,10 @@ interface RetrofitService {
 
     @POST("member/login")
     fun loginRetrofit(@Body loginRequest: LoginRequest): Call<LoginResponse>
+
+    @POST("friendship/sendFriendRequest")
+    fun sendFriendRequestRetrofit(@Body addFriendRequest: AddFriendRequest): Call<String>
+    //fun sendFriendRequestRetrofit(@Body addFriendRequest: AddFriendRequest): Call<AddFriendResponse>
 
     @FormUrlEncoded
     @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatusAny")

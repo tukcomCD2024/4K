@@ -61,6 +61,7 @@ class Login : AppCompatActivity() {
                         val refresh_token = headers.get("Refresh-Token")
                         MyApplication.preferences.setString("AccessToken",access_token.toString())
                         MyApplication.preferences.setString("RefreshToken",refresh_token.toString())
+                        MyApplication.preferences.setString("email",loginemail)
                         Log.d("YMC", "access token : $access_token")
                         Log.d("YMC", "Refresh token : $refresh_token")
 
