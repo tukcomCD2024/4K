@@ -1,12 +1,14 @@
 package springwebsocket.webchat.friend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springwebsocket.webchat.friend.dto.request.UserIdRequest;
 import springwebsocket.webchat.friend.dto.request.UserEmailRequest;
+import springwebsocket.webchat.friend.dto.response.friendMessageResponse;
 import springwebsocket.webchat.friend.entity.Friendship;
 import springwebsocket.webchat.friend.repository.springdata.UserInfoMapping;
 import springwebsocket.webchat.friend.service.FriendshipService;
@@ -21,18 +23,13 @@ public class FriendshipController {
     private final FriendshipService friendshipService;
 
     @PostMapping("/sendFriendRequest")
-    public String sendFriendRequest(@RequestBody UserEmailRequest userEmailRequest) {
+    public ResponseEntity<?> sendFriendRequest(@RequestBody UserEmailRequest userEmailRequest) {
 
         String senderEmail = userEmailRequest.getSenderEmail();
         String receiverEmail = userEmailRequest.getReceiverEmail();
 
-        Friendship friendship = friendshipService.sendFriendRequest(senderEmail, receiverEmail);
+        return friendshipService.sendFriendRequest(senderEmail, receiverEmail);
 
-        if (friendship == null) {
-            return "fail";
-        } else {
-            return "success";
-        }
     }
 
     @PostMapping("/acceptFriendRequestById")

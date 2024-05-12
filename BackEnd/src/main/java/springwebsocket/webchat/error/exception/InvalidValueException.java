@@ -8,7 +8,7 @@ public class InvalidValueException extends ApplicationException{
         super(message, errorCode);
     }
 
-    public InvalidValueException(ErrorCode errorCode) {
+    protected InvalidValueException(ErrorCode errorCode) {
         super(errorCode);
     }
 }

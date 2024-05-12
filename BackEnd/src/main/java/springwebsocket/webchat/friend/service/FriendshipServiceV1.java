@@ -1,6 +1,7 @@
 package springwebsocket.webchat.friend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import springwebsocket.webchat.friend.entity.Friendship;
 import springwebsocket.webchat.friend.repository.springdata.UserInfoMapping;
@@ -16,7 +17,7 @@ public class FriendshipServiceV1 implements FriendshipService{
     private final FriendshipRepository friendshipRepository;
 
     @Override
-    public Friendship sendFriendRequest(String senderEmail, String receiverEmail) {
+    public ResponseEntity<?> sendFriendRequest(String senderEmail, String receiverEmail) {
         return friendshipRepository.sendFriendRequest(senderEmail, receiverEmail);
     }
 
