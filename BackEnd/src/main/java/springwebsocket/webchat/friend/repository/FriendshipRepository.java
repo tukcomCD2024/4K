@@ -1,5 +1,7 @@
 package springwebsocket.webchat.friend.repository;
 
+import org.springframework.http.ResponseEntity;
+import springwebsocket.webchat.friend.dto.response.friendMessageResponse;
 import springwebsocket.webchat.friend.entity.Friendship;
 import springwebsocket.webchat.friend.repository.springdata.UserInfoMapping;
 import springwebsocket.webchat.member.entity.Member;
@@ -9,7 +11,7 @@ import java.util.List;
 public interface FriendshipRepository{
 
     // 친구 요청 보내기
-    Friendship sendFriendRequest(String senderEmail, String receiverEmail);
+    ResponseEntity<?> sendFriendRequest(String senderEmail, String receiverEmail);
 
     // 친구 요청 수락
     String acceptFriendRequestById(String senderEmail, String receiverEmail);

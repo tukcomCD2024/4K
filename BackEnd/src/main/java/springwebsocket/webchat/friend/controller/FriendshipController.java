@@ -1,6 +1,7 @@
 package springwebsocket.webchat.friend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,20 +23,13 @@ public class FriendshipController {
     private final FriendshipService friendshipService;
 
     @PostMapping("/sendFriendRequest")
-    public friendMessageResponse sendFriendRequest(@RequestBody UserEmailRequest userEmailRequest) {
+    public ResponseEntity<?> sendFriendRequest(@RequestBody UserEmailRequest userEmailRequest) {
 
         String senderEmail = userEmailRequest.getSenderEmail();
         String receiverEmail = userEmailRequest.getReceiverEmail();
 
-        Friendship friendship = friendshipService.sendFriendRequest(senderEmail, receiverEmail);
+        return friendshipService.sendFriendRequest(senderEmail, receiverEmail);
 
-        friendMessageResponse message;
-        if (friendship == null) {
-            message = new friendMessageResponse("fail");
-        } else {
-            message = new friendMessageResponse("success");
-        }
-        return message;
     }
 
     @PostMapping("/acceptFriendRequestById")

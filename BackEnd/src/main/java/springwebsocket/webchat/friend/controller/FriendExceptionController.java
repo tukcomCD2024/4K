@@ -1,19 +1,22 @@
-package springwebsocket.webchat.member.controller;
+package springwebsocket.webchat.friend.controller;
+
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import springwebsocket.webchat.member.exception.EmailDuplicatedException;
+import springwebsocket.webchat.friend.exception.FriendDuplicationException;
 import springwebsocket.webchat.global.exception.ExceptionResponse;
+
 
 @RestControllerAdvice
 @Slf4j
-public class ExceptionController {
-    // 400
+public class FriendExceptionController {
 
-    @ExceptionHandler(EmailDuplicatedException.class)
-    public ResponseEntity<ExceptionResponse> EmailDuplicatedException(EmailDuplicatedException e) {
+    @ExceptionHandler(FriendDuplicationException.class)
+    public ResponseEntity<ExceptionResponse> DataIntegrityViolationException(FriendDuplicationException e){
+        log.info("DataIntegrityViolationException");
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getErrorCode());
         return ResponseEntity.status(exceptionResponse.getStatus()).body(exceptionResponse);
     }

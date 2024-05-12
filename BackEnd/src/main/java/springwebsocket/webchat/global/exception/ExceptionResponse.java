@@ -1,4 +1,4 @@
-package springwebsocket.webchat.member.exception.response;
+package springwebsocket.webchat.global.exception;
 
 import org.springframework.http.HttpStatus;
 import springwebsocket.webchat.error.ErrorCode;
