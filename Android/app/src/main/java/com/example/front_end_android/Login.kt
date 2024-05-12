@@ -4,18 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import com.example.front_end_android.databinding.ActivityLoginBinding
 import com.example.front_end_android.dataclass.LoginRequest
 import com.example.front_end_android.dataclass.LoginResponse
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class Login : AppCompatActivity() {
 
@@ -62,6 +59,8 @@ class Login : AppCompatActivity() {
 
                         val access_token = headers.get("Access-Token")
                         val refresh_token = headers.get("Refresh-Token")
+                        MyApplication.preferences.setString("AccessToken",access_token.toString())
+                        MyApplication.preferences.setString("RefreshToken",refresh_token.toString())
                         Log.d("YMC", "access token : $access_token")
                         Log.d("YMC", "Refresh token : $refresh_token")
 

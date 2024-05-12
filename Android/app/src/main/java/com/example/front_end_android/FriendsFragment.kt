@@ -2,15 +2,12 @@ package com.example.front_end_android
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -72,6 +69,12 @@ class FriendsFragment : Fragment() {
             startActivity(intent)
 
         }
+
+        val access_token = MyApplication.preferences.getString("AccessToken",".")
+        val refresh_token = MyApplication.preferences.getString("RefreshToken",".")
+        Log.d("YMC", "access token : $access_token")
+        Log.d("YMC", "Refresh token : $refresh_token")
+
         //"https://4kringo.shop:8080/"
         val gson = GsonBuilder().setLenient().create()
         val retrofit = Retrofit.Builder()
