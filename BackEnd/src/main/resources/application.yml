@@ -11,29 +11,29 @@ springdoc:
 
 
 #SSL
-server:
-  ssl:
-    key-store: file:/home/ubuntu/key/ssl/keystore.p12
-    key-store-type: PKCS12
-    key-store-password: 1234
+#server:
+#  ssl:
+#    key-store: file:/home/ubuntu/key/ssl/keystore.p12
+#    key-store-type: PKCS12
+#    key-store-password: 1234
 
 #MySQL
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${MYSQL_DATABASE_URL}
-    username: ${MYSQL_DATABASE_USERNAME}
-    password: ${MYSQL_DATABASE_PASSWORD}
-#    url: "jdbc:mysql://localhost:3306/JPA?characterEncoding=UTF-8&serverTimezone=UTC"
-#    username: "springDB"
-#    password:
+    #    url: ${MYSQL_DATABASE_URL}
+    #    username: ${MYSQL_DATABASE_USERNAME}
+    #    password: ${MYSQL_DATABASE_PASSWORD}
+    url: "jdbc:mysql://localhost:3306/JPA?characterEncoding=UTF-8&serverTimezone=UTC"
+    username: "springDB"
+    password:
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-#    properties:
-#      hibernate:
-#        format_sql: true
+  #    properties:
+  #      hibernate:
+  #        format_sql: true
   jwt:
     secret: ${JWT_KEY}
   naver :
@@ -41,6 +41,13 @@ spring:
     client-secret : ${NAVER_SECRET}
   profiles:
     include: SECRET-KEY
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: MyDB
+      username: MyUser
+      password: 1234
 
 firebase:
   directory: ${FIREBASE_DIRECTORY}
