@@ -103,6 +103,21 @@
         <item name="android:textColor">#000000</item>
     </style>
 
+    <!--Fragment_My_Info-->
+
+    <style name="name">
+        <item name="android:textSize">22sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!-- styles.xml -->
+    <style name="apple_id_ic">
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
     <!---->
 
     <style name="friends_list_title">
