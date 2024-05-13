@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springwebsocket.webchat.friend.dto.request.UserIdRequest;
 import springwebsocket.webchat.friend.dto.request.UserEmailRequest;
+import springwebsocket.webchat.friend.dto.request.UserRequest;
 import springwebsocket.webchat.friend.dto.response.friendMessageResponse;
 import springwebsocket.webchat.friend.entity.Friendship;
 import springwebsocket.webchat.friend.repository.springdata.UserInfoMapping;
@@ -48,8 +49,8 @@ public class FriendshipController {
     }
 
     @PostMapping("/findByFriendIdAndStatus")
-    public List<UserInfoMapping> findByFriendIdAndStatus(@RequestBody UserIdRequest id) {
-        return friendshipService.findByFriendIdAndStatus(id.getUserId());
+    public List<UserInfoMapping> findByFriendIdAndStatus(@RequestBody UserRequest email) {
+        return friendshipService.findByFriendIdAndStatus(email.getEmail());
     }
 
     @PostMapping("/findByUserIdAndStatusOrFriendIdAndStatus")

@@ -6,6 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import springwebsocket.webchat.friend.dto.request.UserRequest;
 import springwebsocket.webchat.friend.dto.response.friendMessageResponse;
 import springwebsocket.webchat.friend.entity.Friendship;
 import springwebsocket.webchat.friend.exception.FriendDuplicationException;
@@ -125,9 +126,10 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public List<UserInfoMapping> findByFriendIdAndStatus(Long id) {
-        Optional<Member> userMember = memberRepository.findById(id);
-        return friendshipRepository.findByFriendIdAndStatus(userMember.get(), Friendship.FriendshipStatus.PENDING);
+    public List<UserInfoMapping> findByFriendIdAndStatus(String email) {
+        Optional<Member> userMember = memberRepository.findByEmail(email);
+        Member member = userMember.get();
+        return friendshipRepository.findByFriendIdAndStatus(member, Friendship.FriendshipStatus.PENDING);
     }
 
     @Override
