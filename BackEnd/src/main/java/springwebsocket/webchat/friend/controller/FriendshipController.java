@@ -6,11 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import springwebsocket.webchat.friend.dto.request.UserIdRequest;
 import springwebsocket.webchat.friend.dto.request.UserEmailRequest;
 import springwebsocket.webchat.friend.dto.request.UserRequest;
-import springwebsocket.webchat.friend.dto.response.friendMessageResponse;
-import springwebsocket.webchat.friend.entity.Friendship;
 import springwebsocket.webchat.friend.repository.springdata.UserInfoMapping;
 import springwebsocket.webchat.friend.service.FriendshipService;
 
@@ -54,12 +51,7 @@ public class FriendshipController {
     }
 
     @PostMapping("/findByUserIdAndStatusOrFriendIdAndStatus")
-    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(@RequestBody UserIdRequest request) {
-        return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(request.getUserId());
-    }
-
-    @PostMapping("/findByUserIdAndStatusOrFriendIdAndStatusAny")
-    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatusAny(Long userId) {
-        return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(userId);
+    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(@RequestBody UserRequest email) {
+        return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(email.getEmail());
     }
 }

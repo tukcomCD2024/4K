@@ -23,7 +23,7 @@ public interface FriendshipService {
     List<UserInfoMapping> findByFriendIdAndStatus(String email);
 
     // 서로 친구인 친구 목록 조회
-    List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(Long userId);
+    List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(String email);
 
 }
 
