@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.front_end_android.databinding.ActivityAddFriendBinding
 import com.example.front_end_android.dataclass.AddFriendRequest
+import com.example.front_end_android.dataclass.AddFriendResponse
 import com.example.front_end_android.dataclass.LoginResponse
 import com.example.front_end_android.util.AuthInterceptor
 import com.google.gson.GsonBuilder
@@ -34,6 +35,11 @@ class AddFriend : AppCompatActivity() {
             finish()
         }
 
+        binding.friendRequestTxt.setOnClickListener {
+            val intent = Intent(this, Friend_Request::class.java)
+            startActivity(intent)
+        }
+
         binding.createAccountBtn.setOnClickListener {
 
             val accessToken = MyApplication.preferences.getString("AccessToken",".")
@@ -57,18 +63,25 @@ class AddFriend : AppCompatActivity() {
             val call = service.sendFriendRequestRetrofit(addFriendRequest)
             Log.d("YMC", "accessToken: $accessToken")
 
-            call.enqueue(object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+            call.enqueue(object : Callback<AddFriendResponse> {
+                override fun onResponse(call: Call<AddFriendResponse>, response: Response<AddFriendResponse>) {
+                    val jsonResponse = response.body()
+                    val message = jsonResponse?.message
+
                     if (response.isSuccessful) {
 
-                        val jsonResponse = response.body()
                         Log.d("YMC", "onResponse 성공: $jsonResponse $response")
+                        Log.d("YMC", "message: $message")
 
                     } else {
+
                         Log.d("YMC", "onResponse 실패")//*
+                        Log.d("YMC", "onResponse 성공: $jsonResponse $response")
+                        Log.d("YMC", "message: $message")
                     }
+
                 }
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<AddFriendResponse>, t: Throwable) {
                     Log.d("YMC", "onFailure 에러: ${t.message}")//*
                 }
             })

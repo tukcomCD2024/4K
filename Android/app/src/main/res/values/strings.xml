@@ -120,7 +120,17 @@
         Send Friend Request
     </string>
 
+    <string name="friend_request">
+        Friend Request
+    </string>
+
     <!--Fragment_My_Info-->
+
+    <!--Activity_Friend_Request-->
+
+    <string name="add_friend">
+        Add Friend
+    </string>
 
     <!---->
 
@@ -181,7 +191,6 @@
     <string name="translate">
         translate
     </string>
-
 
 
 </resources>

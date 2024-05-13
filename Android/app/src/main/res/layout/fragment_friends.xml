@@ -58,11 +58,6 @@
                 android:text="@string/add_to_friends"
                 android:textAppearance="@style/add_to_friends"
                 tools:ignore="NotSibling,RtlHardcoded" />
-            <!--
-            Font family: Nunito
-            Line height: 22sp
-            (identical to box height)
-            -->
         </RelativeLayout>
 
         <Button

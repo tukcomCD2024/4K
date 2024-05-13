@@ -56,7 +56,6 @@ class Login : AppCompatActivity() {
                         val message = jsonResponse?.message
 
                         val headers = response.headers()
-
                         val access_token = headers.get("Access-Token")
                         val refresh_token = headers.get("Refresh-Token")
                         MyApplication.preferences.setString("AccessToken",access_token.toString())
@@ -64,6 +63,7 @@ class Login : AppCompatActivity() {
                         MyApplication.preferences.setString("email",loginemail)
                         Log.d("YMC", "access token : $access_token")
                         Log.d("YMC", "Refresh token : $refresh_token")
+                        Log.d("YMC", "message: $message")
 
                         if (message == "로그인 성공") {
                             val intent = Intent(this@Login, NaviActivity::class.java)
