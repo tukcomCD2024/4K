@@ -65,19 +65,25 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public String acceptFriendRequestById(String senderEmail, String receiverEmail) {
+    public ResponseEntity<?> acceptFriendRequestById(String senderEmail, String receiverEmail) {
 
         Optional<Member> senderMember = memberRepository.findByEmail(senderEmail);
         Optional<Member> receiverMember = memberRepository.findByEmail(receiverEmail);
 
 
+        if(receiverMember.isEmpty()){
+            friendMessageResponse message = new friendMessageResponse("상대방 이메일이 존재하지 않음");
+            return ResponseEntity.ok().body(message);
+        }
         Member sender = senderMember.get();
         Member receiver = receiverMember.get();
 
-        // 기존의 Friendship 엔터티를 찾는다.
         Optional<Friendship> existingFriendship = friendshipRepository.findByFriendIdAndUserId(sender, receiver);
 
-        if (existingFriendship.isEmpty()) return "fail";
+        if (existingFriendship.isEmpty()) {
+            friendMessageResponse message = new friendMessageResponse("실패");
+            return ResponseEntity.ok().body(message);
+        }
 
         existingFriendship.ifPresent(friendship -> {
             // Friendship 엔터티의 상태를 FRIENDS로 update.
@@ -85,7 +91,9 @@ public class JpaFriendshipRepository implements FriendshipRepository {
             // 업데이트된 Friendship 엔터티를 저장.
 //            friendshipRepository.save(friendship);
         });
-        return "success";
+
+        friendMessageResponse message = new friendMessageResponse("성공");
+        return ResponseEntity.ok().body(message);
     }
 
 

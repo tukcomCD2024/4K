@@ -22,7 +22,7 @@ public class FriendshipServiceV1 implements FriendshipService{
     }
 
     @Override
-    public String acceptFriendRequestById(String senderEmail, String receiverEmail) {
+    public ResponseEntity<?> acceptFriendRequestById(String senderEmail, String receiverEmail) {
         return friendshipRepository.acceptFriendRequestById(senderEmail, receiverEmail);
     }
 

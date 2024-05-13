@@ -33,7 +33,7 @@ public class FriendshipController {
     }
 
     @PostMapping("/acceptFriendRequestById")
-    public String acceptFriendRequestById(@RequestBody UserEmailRequest userEmailRequest) {
+    public ResponseEntity<?> acceptFriendRequestById(@RequestBody UserEmailRequest userEmailRequest) {
         String senderEmail = userEmailRequest.getSenderEmail();
         String receiverEmail = userEmailRequest.getReceiverEmail();
 

@@ -13,7 +13,7 @@ public interface FriendshipService {
     ResponseEntity<?> sendFriendRequest(String senderEmail, String receiverEmail);
 
     // 친구 요청 수락
-    String acceptFriendRequestById(String senderEmail, String receiverEmail);
+    ResponseEntity<?> acceptFriendRequestById(String senderEmail, String receiverEmail);
 
     // 친구 요청 거절
     String rejectFriendRequestById(String senderEmail, String receiverEmail);
