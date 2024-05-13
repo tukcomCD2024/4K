@@ -27,7 +27,7 @@ public class FriendshipServiceV1 implements FriendshipService{
     }
 
     @Override
-    public String rejectFriendRequestById(String senderEmail, String receiverEmail) {
+    public ResponseEntity<?> rejectFriendRequestById(String senderEmail, String receiverEmail) {
         return friendshipRepository.rejectFriendRequestById(senderEmail, receiverEmail);
     }
 

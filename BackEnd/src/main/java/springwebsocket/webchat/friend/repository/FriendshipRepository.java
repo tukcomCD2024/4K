@@ -17,7 +17,7 @@ public interface FriendshipRepository{
     ResponseEntity<?> acceptFriendRequestById(String senderEmail, String receiverEmail);
 
     // 친구 요청 거절
-    String rejectFriendRequestById(String senderEmail, String receiverEmail);
+    ResponseEntity<?> rejectFriendRequestById(String senderEmail, String receiverEmail);
 
     // 나에게 온 친구 요청 목록 조회
     List<UserInfoMapping> findByFriendIdAndStatus(Long id);

@@ -41,7 +41,7 @@ public class FriendshipController {
     }
 
     @PostMapping("/rejectFriendRequestById")
-    public String rejectFriendRequestById(@RequestBody UserEmailRequest userEmailRequest) {
+    public ResponseEntity<?> rejectFriendRequestById(@RequestBody UserEmailRequest userEmailRequest) {
         String senderEmail = userEmailRequest.getSenderEmail();
         String receiverEmail = userEmailRequest.getReceiverEmail();
         return friendshipService.rejectFriendRequestById(senderEmail, receiverEmail);
