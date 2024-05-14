@@ -15,6 +15,6 @@ public class ExceptionController {
     @ExceptionHandler(EmailDuplicatedException.class)
     public ResponseEntity<ExceptionResponse> EmailDuplicatedException(EmailDuplicatedException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getErrorCode());
-        return ResponseEntity.status(exceptionResponse.getStatus()).body(exceptionResponse);
+        return ResponseEntity.ok(exceptionResponse);
     }
 }

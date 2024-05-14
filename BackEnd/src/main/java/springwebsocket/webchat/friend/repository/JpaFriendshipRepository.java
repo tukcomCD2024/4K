@@ -6,17 +6,15 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import springwebsocket.webchat.friend.dto.request.UserRequest;
 import springwebsocket.webchat.friend.dto.response.friendMessageResponse;
 import springwebsocket.webchat.friend.entity.Friendship;
 import springwebsocket.webchat.friend.exception.FriendDuplicationException;
 import springwebsocket.webchat.friend.repository.springdata.UserInfoMapping;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.friend.repository.springdata.SpringDataJpaFriendshipRepository;
-import springwebsocket.webchat.member.exception.EmailDuplicatedException;
 import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -65,19 +63,25 @@ public class JpaFriendshipRepository implements FriendshipRepository {
     }
 
     @Override
-    public String acceptFriendRequestById(String senderEmail, String receiverEmail) {
+    public ResponseEntity<?> acceptFriendRequestById(String senderEmail, String receiverEmail) {
 
         Optional<Member> senderMember = memberRepository.findByEmail(senderEmail);
         Optional<Member> receiverMember = memberRepository.findByEmail(receiverEmail);
 
 
+        if(receiverMember.isEmpty()){
+            friendMessageResponse message = new friendMessageResponse("상대방 이메일이 존재하지 않음");
+            return ResponseEntity.ok().body(message);
+        }
         Member sender = senderMember.get();
         Member receiver = receiverMember.get();
 
-        // 기존의 Friendship 엔터티를 찾는다.
         Optional<Friendship> existingFriendship = friendshipRepository.findByFriendIdAndUserId(sender, receiver);
 
-        if (existingFriendship.isEmpty()) return "fail";
+        if (existingFriendship.isEmpty()) {
+            friendMessageResponse message = new friendMessageResponse("실패");
+            return ResponseEntity.ok().body(message);
+        }
 
         existingFriendship.ifPresent(friendship -> {
             // Friendship 엔터티의 상태를 FRIENDS로 update.
@@ -85,41 +89,55 @@ public class JpaFriendshipRepository implements FriendshipRepository {
             // 업데이트된 Friendship 엔터티를 저장.
 //            friendshipRepository.save(friendship);
         });
-        return "success";
+
+        friendMessageResponse message = new friendMessageResponse("성공");
+        return ResponseEntity.ok().body(message);
     }
 
 
     @Override
-    public String rejectFriendRequestById(String senderEmail, String receiverEmail) {
+    public ResponseEntity<?> rejectFriendRequestById(String senderEmail, String receiverEmail) {
 
-        Optional<Member> memberMe = memberRepository.findByEmail(senderEmail);
-        Optional<Member> memberYou = memberRepository.findByEmail(receiverEmail);
+        Optional<Member> senderMember = memberRepository.findByEmail(senderEmail);
+        Optional<Member> receiverMember = memberRepository.findByEmail(receiverEmail);
+
+        if(receiverMember.isEmpty()){
+            friendMessageResponse message = new friendMessageResponse("상대방 이메일이 존재하지 않음");
+            return ResponseEntity.ok().body(message);
+        }
+        Member sender = senderMember.get();
+        Member receiver = receiverMember.get();
 
         // 기존의 Friendship 엔터티를 찾는다.
-        Optional<Friendship> existingFriendship = friendshipRepository.findByFriendIdAndUserId(memberMe.get(), memberYou.get());
+        Optional<Friendship> existingFriendship = friendshipRepository.findByFriendIdAndUserId(sender, receiver);
 
-        if (existingFriendship.isEmpty()) return "fail";
+        if (existingFriendship.isEmpty()) {
+            friendMessageResponse message = new friendMessageResponse("실패");
+            return ResponseEntity.ok().body(message);
+        }
 
         existingFriendship.ifPresent(friendship -> {
             // Friendship 엔터티를 삭제
             friendshipRepository.delete(existingFriendship.get());
         });
 
-        return "success";
+        friendMessageResponse message = new friendMessageResponse("성공");
+        return ResponseEntity.ok().body(message);
     }
 
     @Override
-    public List<UserInfoMapping> findByFriendIdAndStatus(Long id) {
-        Optional<Member> userMember = memberRepository.findById(id);
-        return friendshipRepository.findByFriendIdAndStatus(userMember.get(), Friendship.FriendshipStatus.PENDING);
+    public List<UserInfoMapping> findByFriendIdAndStatus(String email) {
+        Optional<Member> userMember = memberRepository.findByEmail(email);
+        Member member = userMember.get();
+        return friendshipRepository.findByFriendIdAndStatus(member, Friendship.FriendshipStatus.PENDING);
     }
 
     @Override
-    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(Long userId) {
+    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(String email) {
 
         List<UserInfoMapping> friendList = new ArrayList<>();
 
-        Optional<Member> userMember = memberRepository.findById(userId);
+        Optional<Member> userMember = memberRepository.findByEmail(email);
 
         List<UserInfoMapping> friendList1 = friendshipRepository.findFriendshipByUserIdAndStatus(userMember.get(), FRIENDS);
         List<UserInfoMapping> friendList2 = friendshipRepository.findFriendshipsByFriendIdAndStatus(userMember.get(), FRIENDS);

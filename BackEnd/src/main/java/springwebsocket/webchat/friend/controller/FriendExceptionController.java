@@ -16,8 +16,7 @@ public class FriendExceptionController {
 
     @ExceptionHandler(FriendDuplicationException.class)
     public ResponseEntity<ExceptionResponse> DataIntegrityViolationException(FriendDuplicationException e){
-        log.info("DataIntegrityViolationException");
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getErrorCode());
-        return ResponseEntity.status(exceptionResponse.getStatus()).body(exceptionResponse);
+        return ResponseEntity.ok(exceptionResponse);
     }
 }

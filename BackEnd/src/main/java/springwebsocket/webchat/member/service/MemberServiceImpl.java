@@ -53,7 +53,9 @@ public class MemberServiceImpl implements MemberService {
         Member member = new Member(email, password, name, "ROLE_ADMIN");
         try {
             memberRepository.save(member);
+            log.info("member ={}", member.getEmail());
         } catch (DataIntegrityViolationException ex) {
+            log.info("DataIntegrityViolationException");
             throw new EmailDuplicatedException(email);
 
         }
