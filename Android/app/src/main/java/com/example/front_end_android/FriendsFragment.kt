@@ -58,16 +58,19 @@ class FriendsFragment : Fragment() {
         binding=FragmentFriendsBinding.inflate(inflater)
 
         binding.addFriendImg.setOnClickListener {
-
             val intent = Intent(requireActivity(), AddFriend::class.java)
             startActivity(intent)
 
         }
         binding.addFriendTxt.setOnClickListener {
-
             val intent = Intent(requireActivity(), AddFriend::class.java)
             startActivity(intent)
 
+        }
+
+        binding.friendRequestTxt.setOnClickListener {
+            val intent = Intent(requireActivity(), Friend_Request::class.java)
+            startActivity(intent)
         }
 
         val access_token = MyApplication.preferences.getString("AccessToken",".")
@@ -86,13 +89,13 @@ class FriendsFragment : Fragment() {
         val service = retrofit.create(RetrofitService::class.java);
         val call = service.myFriendsRetrofit(1)//실제로는 intent하여 받은 user id가 들어가야함
 
-        val friends_scrollView = binding.friendsScrollview
-        val friends_scrollView_Linear = binding.frinedsScrollviewLinear
-
-        val textLayoutParams = LinearLayout.LayoutParams(
+        //val friends_scrollView = binding.friendsScrollview
+        /*val textLayoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
-        )
+        )*/
+
+        val friends_scrollView_Linear = binding.frinedsScrollviewLinear
 
         call.enqueue(object : Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {

@@ -35,19 +35,13 @@
                 android:layout_height="22dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
-                android:text="@string/add_friend"
+                android:text="@string/friends_list"
                 android:textAppearance="@style/back_friend_list"
                 android:lineSpacingExtra="-1sp"
                 android:gravity="center_vertical"
                 />
 
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/test_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"/>
 
     </RelativeLayout>
 
