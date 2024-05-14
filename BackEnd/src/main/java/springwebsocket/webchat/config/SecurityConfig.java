@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/", "/member/*").permitAll()
                         .requestMatchers("reissue").permitAll()
+                        .requestMatchers("/signal").permitAll()
                         .requestMatchers("/favicon.ico",
                                 "/error",
                                 "/swagger-ui/**",
