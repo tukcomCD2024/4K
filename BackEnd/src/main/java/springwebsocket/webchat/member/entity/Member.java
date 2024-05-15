@@ -25,10 +25,13 @@ public class Member {
     public Member() {
     }
 
-    public Member(String email, String password, String name, String role) {
+    public Member(String email, String password, String name, String role, String language) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.role = role;
+        this.language = language;
     }
+
+
 }

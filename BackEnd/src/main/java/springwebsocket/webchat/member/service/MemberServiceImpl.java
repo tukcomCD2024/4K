@@ -55,8 +55,8 @@ public class MemberServiceImpl implements MemberService {
         String name = signUpRequest.getName();
         String email = signUpRequest.getEmail();
         String password = bCryptPasswordEncoder.encode(signUpRequest.getPassword());
-
-        Member member = new Member(email, password, name, "ROLE_ADMIN");
+        String language = signUpRequest.getLanguage();
+        Member member = new Member(email, password, name, "ROLE_ADMIN", language);
         try {
             memberRepository.save(member);
             log.info("member ={}", member.getEmail());
