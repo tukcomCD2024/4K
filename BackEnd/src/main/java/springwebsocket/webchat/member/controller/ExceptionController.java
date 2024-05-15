@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import springwebsocket.webchat.member.exception.EmailDuplicatedException;
-import springwebsocket.webchat.global.exception.ExceptionResponse;
+import springwebsocket.webchat.global.response.ResultResponse;
 
 @RestControllerAdvice
 @Slf4j
@@ -13,8 +13,8 @@ public class ExceptionController {
     // 400
 
     @ExceptionHandler(EmailDuplicatedException.class)
-    public ResponseEntity<ExceptionResponse> EmailDuplicatedException(EmailDuplicatedException e) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse(e.getErrorCode());
+    public ResponseEntity<ResultResponse> EmailDuplicatedException(EmailDuplicatedException e) {
+        ResultResponse exceptionResponse = new ResultResponse(e.getErrorCode());
         return ResponseEntity.status(exceptionResponse.getStatus()).body(exceptionResponse);
     }
 }
