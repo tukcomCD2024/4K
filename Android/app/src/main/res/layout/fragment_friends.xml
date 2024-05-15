@@ -98,7 +98,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:text="user" />
 
         <Button
@@ -109,7 +109,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="100dp"
             android:layout_marginTop="0dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:text="target" />
 
     </RelativeLayout>

@@ -119,11 +119,14 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     }
 
     private fun init(){
-        val userName = MyApplication.preferences.getString("email",".")
-        val targetName = MyApplication.preferences.getString("targetName",".")
-        Log.d("YMC", "userName : $userName")
-        Log.d("YMC", "targetName : $targetName")
-
+        userName = MyApplication.preferences.getString("email",".")
+        targetName = MyApplication.preferences.getString("targetName",".")
+        /*userName = intent.getStringExtra("username")//실제로는 intent로 유저 이름을 받아야함
+        if(userName == "asdf@naver.com"){
+            targetName = "asdfg@naver.com"
+        }else{
+            targetName = "asdf@naver.com"//실제로는 intent로 전화를 거는 상대방을 이름을 받아야함
+        }*/
         socketRepository = SocketRepository(this)
         userName?.let { socketRepository?.initSocket(it) }
         rtcClient = RTCClient(application, userName!!, socketRepository!!, object : PeerConnectionObserver(){
