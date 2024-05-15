@@ -4,6 +4,8 @@ import com.example.front_end_android.dataclass.AcceptFriendRequest
 import com.example.front_end_android.dataclass.AcceptFriendResponse
 import com.example.front_end_android.dataclass.AddFriendRequest
 import com.example.front_end_android.dataclass.AddFriendResponse
+import com.example.front_end_android.dataclass.FindMyFriendsRequest
+import com.example.front_end_android.dataclass.FindMyFriendsResponse
 import com.example.front_end_android.dataclass.FriendRequestListRequest
 import com.example.front_end_android.dataclass.FriendRequestListResponse
 import com.example.front_end_android.dataclass.LoginRequest
@@ -35,13 +37,13 @@ interface RetrofitService {
     fun friendRequestListRetrofit(@Body friendRequestListRequest: FriendRequestListRequest): Call<List<FriendRequestListResponse>>
 
     @POST("friendship/acceptFriendRequestById")
-    fun acceptFriendRequestRetrofit(@Body AcceptFriendRequest: AcceptFriendRequest): Call<AcceptFriendResponse>
+    fun acceptFriendRequestRetrofit(@Body acceptFriendRequest: AcceptFriendRequest): Call<AcceptFriendResponse>
 
     @POST("friendship/rejectFriendRequestById")
-    fun rejectFriendRequestRetrofit(@Body RejectFriendRequest: RejectFriendRequest): Call<RejectFriendResponse>
+    fun rejectFriendRequestRetrofit(@Body rejectFriendRequest: RejectFriendRequest): Call<RejectFriendResponse>
 
     @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatus")
-    fun findMyFriendsRetrofit(@Body RejectFriendRequest: RejectFriendRequest): Call<RejectFriendResponse>
+    fun findMyFriendsRetrofit(@Body findMyFriendsRequest: FindMyFriendsRequest): Call<List<FindMyFriendsResponse>>
 
 
     @FormUrlEncoded

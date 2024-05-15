@@ -48,6 +48,7 @@ class Friend_Request : AppCompatActivity() {
         }
 
         val accessToken = MyApplication.preferences.getString("AccessToken",".")
+        val refreshToken = MyApplication.preferences.getString("RefreshToken",".")
         val senderEmail = MyApplication.preferences.getString("email",".")
 
         val client = OkHttpClient.Builder()
