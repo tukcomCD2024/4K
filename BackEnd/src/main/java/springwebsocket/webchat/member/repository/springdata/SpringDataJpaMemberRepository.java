@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
 
+    Optional<TargetInfoMapping> findMemberByEmail(String email);
+
 
 }

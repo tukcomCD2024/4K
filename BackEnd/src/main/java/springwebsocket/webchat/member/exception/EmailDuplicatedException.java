@@ -1,9 +1,9 @@
 package springwebsocket.webchat.member.exception;
 
-import springwebsocket.webchat.error.ErrorCode;
-import springwebsocket.webchat.error.exception.InvalidValueException;
+import springwebsocket.webchat.global.error.BusinessException;
+import springwebsocket.webchat.global.response.ErrorCode;
 
-public class EmailDuplicatedException extends InvalidValueException {
+public class EmailDuplicatedException extends BusinessException {
 
     public EmailDuplicatedException(String email) {
         super(email, ErrorCode.EMAIL_ALREADY_TAKEN);

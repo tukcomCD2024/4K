@@ -11,5 +11,10 @@
         <module name="webChat.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="webChat" target="17" />
+      <module name="webChat.main" target="17" />
+      <module name="webChat.test" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

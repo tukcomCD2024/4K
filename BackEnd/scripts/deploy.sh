@@ -10,7 +10,7 @@ cp -r $KEY/firebase $REPOSITORY/src/main/resources
 JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep 'SNAPSHOT.jar' | tail -n 1)
 JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
-CURRENT_PID=$(pgrep -fl 'java -jar webChat-0.0.1-SNAPSHOT.jar')
+CURRENT_PID=$(pgrep -fl 'java -jar /home/ubuntu/4k/build/libs/webChat-0.0.1-SNAPSHOT.jar')
 
 if [ -z $CURRENT_PID ]
 then
