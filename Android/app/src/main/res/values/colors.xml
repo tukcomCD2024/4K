@@ -10,4 +10,5 @@
     <color name="calling_background3">#0D2445</color>
     <color name="exit_call_red">#0D2445</color>
     <color name="teal_700">#FF018786</color>
+    <color name="gray_white">#F5F5F5</color>
 </resources>

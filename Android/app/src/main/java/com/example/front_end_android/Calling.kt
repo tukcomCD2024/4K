@@ -28,10 +28,12 @@ import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import java.util.Locale
 
 class Calling : AppCompatActivity(), NewMessageInterface {
@@ -117,12 +119,14 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     }
 
     private fun init(){
-        userName = intent.getStringExtra("username")//실제로는 intent로 유저 이름을 받아야함
+        userName = MyApplication.preferences.getString("email",".")
+        targetName = MyApplication.preferences.getString("targetName",".")
+        /*userName = intent.getStringExtra("username")//실제로는 intent로 유저 이름을 받아야함
         if(userName == "asdf@naver.com"){
             targetName = "asdfg@naver.com"
         }else{
             targetName = "asdf@naver.com"//실제로는 intent로 전화를 거는 상대방을 이름을 받아야함
-        }
+        }*/
         socketRepository = SocketRepository(this)
         userName?.let { socketRepository?.initSocket(it) }
         rtcClient = RTCClient(application, userName!!, socketRepository!!, object : PeerConnectionObserver(){
@@ -229,9 +233,19 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             }
             "answer_received" ->{
                 Log.d("YMC", "answer_received: $message")//*
+
+                val data11 = message.data
+                Log.d("YMC", "data: $data11")//*
+
+                val sdpStartIndex = message.data.toString().indexOf("sdp=")
+                val sdpEndIndex = message.data.toString().indexOf("}", startIndex = sdpStartIndex)
+                val sdpValueAnswer = message.data.toString().substring(sdpStartIndex + 4, sdpEndIndex) // "+ 4" to skip "sdp="
+
+                Log.d("YMC", "sdpValueAnswer: $sdpValueAnswer")
                 val session = SessionDescription(
                     SessionDescription.Type.ANSWER,
-                    message.data.toString()
+                    sdpValueAnswer.toString()
+                    //message.data.toString()
                 )
                 rtcClient?.onRemoteSessionReceived(session)
                 runOnUiThread {
@@ -242,6 +256,15 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             "offer_received" -> {
                 runOnUiThread {
                     Log.d("YMC", "offer_received: $message")//*
+
+                    val data11 = message.data
+                    Log.d("YMC", "data: $data11")//*
+
+                    val sdpStartIndex = message.data.toString().indexOf("sdp=")
+                    val sdpEndIndex = message.data.toString().indexOf("}", startIndex = sdpStartIndex)
+                    val sdpValueOffer = message.data.toString().substring(sdpStartIndex + 4, sdpEndIndex) // "+ 4" to skip "sdp="
+
+                    Log.d("YMC", "sdpValueOffer: $sdpValueOffer")
                     setIncomingCallLayoutVisible()
                     binding.incomingNameTV.text = "${message.name.toString()} is calling you"
                     binding.acceptButton.setOnClickListener {
@@ -255,10 +278,13 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         }
                         val session = SessionDescription(
                             SessionDescription.Type.OFFER,
-                            message.data.toString()
+                            sdpValueOffer.toString()
+                            //message.data.toString()
                         )
                         rtcClient?.onRemoteSessionReceived(session)
+                        Log.d("YMC", "@@@@@@@@@@@@@@@")
                         rtcClient?.answer(message.name!!)
+                        Log.d("YMC", "###############")
                         targetName = message.name!!
                         binding.remoteViewLoading.visibility = View.GONE
                     }
@@ -339,7 +365,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private val recognitionListener: RecognitionListener = object : RecognitionListener {
         // 말하기 시작할 준비가되면 호출
         override fun onReadyForSpeech(params: Bundle) {
-            Toast.makeText(applicationContext, "음성인식 시작", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(applicationContext, "음성인식 시작", Toast.LENGTH_SHORT).show()
             //binding.tvState.text = "이제 말씀하세요!"
         }
         // 말하기 시작했을 때 호출
@@ -375,7 +401,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> "말하는 시간초과"
                 else -> "알 수 없는 오류임"
             }
-            Toast.makeText(applicationContext, "에러 발생: $message", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(applicationContext, "에러 발생: $message", Toast.LENGTH_SHORT).show()
             //binding.tvState.text = "에러 발생: $message"
             // 에러 발생 시 듣기 재시작
             if(isTranslateMode == true){

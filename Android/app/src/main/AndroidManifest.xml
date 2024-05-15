@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -22,6 +23,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Friend_Request"
+            android:exported="false" />
+        <activity
+            android:name=".FindPassword"
+            android:exported="true" />
+        <activity
             android:name=".TestActivity"
             android:exported="true" />
         <activity
@@ -29,13 +36,14 @@
             android:exported="true" />
         <activity
             android:name=".AddFriend"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".Login"
+            android:name=".NaviActivity"
             android:exported="true" />
         <activity
             android:name=".SignUp"
-            android:exported="false" />
+            android:exported="true" />
         <!--
         <meta-data
             android:name="com.google.android.actions"
@@ -45,7 +53,7 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".NaviActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,72 +1,125 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Base.Theme.Frontend_android" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:textColorPrimary">@android:color/black</item>
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
     </style>
 
+    <!-- Activity_login -->
     <style name="sign_in">
         <item name="android:textSize">26sp</item>
         <item name="android:textColor">#000000</item>
     </style>
 
-    <style name="if_you_don_">
+    <style name="if_you_don_t_have_an_account_register">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#000000</item>
     </style>
 
-    <style name="you_can_sig">
+    <style name="you_can">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#000000</item>
     </style>
 
-    <style name="sign_up">
+    <style name="sign_up_here">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#007AFF</item>
     </style>
 
-    <style name="header_labe">
+    <style name="e_mail">
         <item name="android:textSize">14sp</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:textColor">#1E293B</item>
     </style>
 
-    <style name="place_holde">
+    <style name="enter_your_email">
         <item name="android:textSize">14sp</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:textColor">#94A3B8</item>
     </style>
 
-    <style name="header_labe2">
+    <style name="password">
         <item name="android:textSize">14sp</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:textColor">#1E293B</item>
     </style>
 
-    <style name="place_holde2">
+    <style name="enter_your_password">
         <item name="android:textSize">14sp</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:textColor">#94A3B8</item>
     </style>
 
-    <style name="forgot_pass">
+    <style name="forgot_password">
         <item name="android:textSize">14sp</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:textColor">#3C9AFB</item>
     </style>
 
-    <style name="login">
+    <style name="sign_in2">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
-    <style name="or_continue">
+    <style name="or_continue_with">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#B5B5B5</item>
     </style>
+
+    <!-- Activity_sign_up -->
+
+    <style name="sign_up">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="if_you_already_have_an_account_register">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="you_can2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="sign_in_here">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#007AFF</item>
+    </style>
+
+    <style name="create_user_name">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textColor">#94A3B8</item>
+    </style>
+
+    <!-- Activity_Find_Password -->
+
+    <style name="forgot_password2">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!--Fragment_My_Info-->
+
+    <style name="name">
+        <item name="android:textSize">22sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!-- styles.xml -->
+    <style name="apple_id_ic">
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!---->
+
     <style name="friends_list_title">
         <item name="android:textSize">17sp</item>
         <item name="android:letterSpacing">-0.02</item>
@@ -102,4 +155,5 @@
         <item name="android:letterSpacing">-0.01</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
+
 </resources>

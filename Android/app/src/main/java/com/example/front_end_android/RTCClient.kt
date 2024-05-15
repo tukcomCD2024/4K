@@ -1,6 +1,7 @@
 package com.example.front_end_android
 
 import android.app.Application
+import android.util.Log
 import com.example.front_end_android.models.MessageModel
 import org.java_websocket.client.WebSocketClient
 import org.webrtc.*
@@ -127,6 +128,7 @@ class RTCClient(
                             "sdp" to desc?.description,
                             "type" to desc?.type
                         )
+                        Log.d("YMC", "offer: $offer")
 
                         socketRepository.sendMessageToSocket(
                             MessageModel(
@@ -191,6 +193,7 @@ class RTCClient(
                             "sdp" to desc?.description,
                             "type" to desc?.type
                         )
+                        Log.d("YMC", "answer: $answer")//*
                         socketRepository.sendMessageToSocket(
                             MessageModel(
                                 "create_answer", username, target, answer
