@@ -2,8 +2,10 @@ package springwebsocket.webchat.member.dto.response;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class TokenMessage {
     String AccessToken;
     String RefreshToken;

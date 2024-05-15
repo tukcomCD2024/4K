@@ -20,6 +20,7 @@ import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.exception.EmailDuplicatedException;
+import springwebsocket.webchat.member.exception.LoginFailException;
 import springwebsocket.webchat.member.repository.MemberRepository;
 import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 
@@ -84,7 +85,7 @@ public class MemberServiceImpl implements MemberService {
         if (!user.isEmpty()) {
             return handleExistingMemberLogin(user.get());
         } else {
-            throw null;
+            throw new LoginFailException();
         }
     }
 

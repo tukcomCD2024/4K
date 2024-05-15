@@ -12,7 +12,7 @@ public enum ErrorCode {
 
     // Member
     EMAIL_ALREADY_TAKEN(400, "이미 존재하는 이메일입니다."),
-
+    LOGIN_FAIL_TAKEN(400,"로그인 실패"),
 
     //Friend
     FRIEND_ALREADT_TAKEN(400,"이미 친구 요청을 보낸 상대입니다.");

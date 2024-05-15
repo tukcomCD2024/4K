@@ -20,7 +20,7 @@ public class ExceptionAdvice {
 	public ResponseEntity<ApiResponse<?>> handleDuplicatedUserException(BusinessException e) {
 		final ErrorCode errorCode = e.getErrorCode();
 
-		return ResponseEntity.status(HttpStatus.CONFLICT).body(ApiResponse.createError(errorCode.getMessage()));
+		return ResponseEntity.status(errorCode.getStatus()).body(ApiResponse.createError(errorCode.getMessage()));
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
