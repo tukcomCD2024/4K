@@ -33,7 +33,7 @@ public class JWTFilter extends OncePerRequestFilter {
         log.info("JWTFilter doFilterInternal");
 
         //request에서 access 헤더 찾기
-        String accessToken = request.getHeader("Access-Token");
+        String accessToken = request.getHeader("AccessToken");
 
         //토큰이 없다면 다음 필터로 넘김
         if (accessToken == null) {

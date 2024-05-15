@@ -7,12 +7,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import springwebsocket.webchat.global.response.ApiResponse;
 import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
-import springwebsocket.webchat.member.dto.response.UserResponse;
-import springwebsocket.webchat.member.dto.response.loginMessage;
+import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.service.MemberService;
@@ -28,9 +26,10 @@ public class MemberController {
 
     private final MemberService userService;
     @PostMapping("/signup")
-    public ResponseEntity<UserResponse> register(final @RequestBody SignUpRequest request) {
-        UserResponse userResponse = userService.signUp(request);
-        return ResponseEntity.ok().body(userResponse);
+    public ApiResponse<?> register(final @RequestBody SignUpRequest request) {
+
+        userService.signUp(request);
+        return ApiResponse.createSuccessWithNoContent();
     }
 
     @PostMapping("/update")
@@ -49,9 +48,9 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<loginMessage> login(@RequestBody LoginRequest request) {
-        log.info("/member/login");
-        return userService.login(request.getLoginEmail(), request.getPassword());
+    public ApiResponse<?> login(@RequestBody LoginRequest request) {
+        TokenMessage message = userService.login(request.getLoginEmail(), request.getPassword());
+        return ApiResponse.createSuccess(message);
     }
 
     @GetMapping("/logout")

@@ -1,10 +1,8 @@
 package springwebsocket.webchat.member.service;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -15,10 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import springwebsocket.webchat.global.jwt.TokenProvider;
+import springwebsocket.webchat.global.response.ApiResponse;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
+import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
-import springwebsocket.webchat.member.dto.response.loginMessage;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.exception.EmailDuplicatedException;
 import springwebsocket.webchat.member.repository.MemberRepository;
@@ -77,19 +76,15 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.delete(id);
     }
 
-    public ResponseEntity<loginMessage> login(String loginEmail, String password) {
-        log.info("/member/login/service");
-        log.info("loginEmail = {}", loginEmail);
-        log.info("password ={}", password);
+    public TokenMessage login(String loginEmail, String password) {
+
         Optional<Member> user = memberRepository.findByLoginEmail(loginEmail)
                 .filter(m -> bCryptPasswordEncoder.matches(password, m.getPassword()));
 
         if (!user.isEmpty()) {
-            log.info("user!=null");
             return handleExistingMemberLogin(user.get());
         } else {
-            loginMessage message = new loginMessage("로그인 실패");
-            return ResponseEntity.ok().body(message);
+            throw null;
         }
     }
 
@@ -139,8 +134,8 @@ public class MemberServiceImpl implements MemberService {
         refreshMemberRepository.deleteByRefresh(refreshToken);
 
         return ResponseEntity.ok()
-                .header("Access-Token", newAccessToken)
-                .header("Refresh-Token", newRefreshToken)
+                .header("AccessToken", newAccessToken)
+                .header("RefreshToken", newRefreshToken)
                 .body("재발급 성공");
     }
 
@@ -158,14 +153,10 @@ public class MemberServiceImpl implements MemberService {
         return ResponseEntity.ok().body("로그아웃 성공");
     }
 
-    private ResponseEntity<loginMessage> handleExistingMemberLogin(Member user) {
-        loginMessage message = new loginMessage("로그인 성공");
+    private TokenMessage handleExistingMemberLogin(Member user) {
         String accessToken = tokenProvider.createAccessToken(user.getEmail());
         String refreshToken = tokenProvider.createRefreshToken(user.getEmail());
-        return ResponseEntity.ok()
-                .header("Access-Token", accessToken)
-                .header("Refresh-Token", refreshToken)
-                .body(message);
-    }
 
+        return new TokenMessage(accessToken, refreshToken);
+    }
 }
