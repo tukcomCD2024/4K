@@ -1,12 +1,15 @@
 package com.example.front_end_android
 
 import com.example.front_end_android.dataclass.AcceptFriendRequest
+import com.example.front_end_android.dataclass.AcceptFriendResponse
 import com.example.front_end_android.dataclass.AddFriendRequest
 import com.example.front_end_android.dataclass.AddFriendResponse
 import com.example.front_end_android.dataclass.FriendRequestListRequest
 import com.example.front_end_android.dataclass.FriendRequestListResponse
 import com.example.front_end_android.dataclass.LoginRequest
 import com.example.front_end_android.dataclass.LoginResponse
+import com.example.front_end_android.dataclass.RejectFriendRequest
+import com.example.front_end_android.dataclass.RejectFriendResponse
 import com.example.front_end_android.dataclass.SignUpRequest
 import com.example.front_end_android.dataclass.SignUpResponse
 import com.google.gson.JsonObject
@@ -19,11 +22,11 @@ import retrofit2.http.POST
 
 interface RetrofitService {
 
-    @POST("member/signup")
-    fun signUpRetrofit(@Body signUpRequest: SignUpRequest): Call<SignUpResponse>
-
     @POST("member/login")
     fun loginRetrofit(@Body loginRequest: LoginRequest): Call<LoginResponse>
+
+    @POST("member/signup")
+    fun signUpRetrofit(@Body signUpRequest: SignUpRequest): Call<SignUpResponse>
 
     @POST("friendship/sendFriendRequest")
     fun sendFriendRequestRetrofit(@Body addFriendRequest: AddFriendRequest): Call<AddFriendResponse>
@@ -31,8 +34,15 @@ interface RetrofitService {
     @POST("friendship/findByFriendIdAndStatus")
     fun friendRequestListRetrofit(@Body friendRequestListRequest: FriendRequestListRequest): Call<List<FriendRequestListResponse>>
 
-    fun AcceptFriendRequestRetrofit(@Body AcceptFriendRequest: AcceptFriendRequest): Call<String>
-    //fun AcceptFriendRequestRetrofit(@Body AcceptFriendRequest: AcceptFriendRequest): Call<AddFriendResponse>
+    @POST("friendship/acceptFriendRequestById")
+    fun acceptFriendRequestRetrofit(@Body AcceptFriendRequest: AcceptFriendRequest): Call<AcceptFriendResponse>
+
+    @POST("friendship/rejectFriendRequestById")
+    fun rejectFriendRequestRetrofit(@Body RejectFriendRequest: RejectFriendRequest): Call<RejectFriendResponse>
+
+    @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatus")
+    fun findMyFriendsRetrofit(@Body RejectFriendRequest: RejectFriendRequest): Call<RejectFriendResponse>
+
 
     @FormUrlEncoded
     @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatusAny")

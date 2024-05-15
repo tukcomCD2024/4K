@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.front_end_android.databinding.ActivityLoginBinding
+import com.example.front_end_android.dataclass.ErrorResponse
+import com.example.front_end_android.dataclass.LoginErrorResponse
 import com.example.front_end_android.dataclass.LoginRequest
 import com.example.front_end_android.dataclass.LoginResponse
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,26 +55,38 @@ class Login : AppCompatActivity() {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     if (response.isSuccessful) {
                         val jsonResponse = response.body()
-                        Log.d("YMC", "onResponse 성공: $jsonResponse $response")
-                        val message = jsonResponse?.message
+                        Log.d("YMC", "onResponse 성공 jsonResponse: $jsonResponse")
+                        Log.d("YMC", "onResponse 성공 response: $response")
 
-                        val headers = response.headers()
-                        val access_token = headers.get("Access-Token")
-                        val refresh_token = headers.get("Refresh-Token")
-                        MyApplication.preferences.setString("AccessToken",access_token.toString())
-                        MyApplication.preferences.setString("RefreshToken",refresh_token.toString())
-                        MyApplication.preferences.setString("email",loginemail)
-                        Log.d("YMC", "access token : $access_token")
-                        Log.d("YMC", "Refresh token : $refresh_token")
-                        Log.d("YMC", "message: $message")
+                        val status = jsonResponse?.status
 
-                        if (message == "로그인 성공") {
+                        if (status == "success") {
+                            val access_token = jsonResponse.data?.accessToken
+                            val refresh_token = jsonResponse.data?.refreshToken
+                            MyApplication.preferences.setString("AccessToken",access_token.toString())
+                            MyApplication.preferences.setString("RefreshToken",refresh_token.toString())
+                            MyApplication.preferences.setString("email",loginemail)
+                            Log.d("YMC", "access token : $access_token")
+                            Log.d("YMC", "Refresh token : $refresh_token")
                             val intent = Intent(this@Login, NaviActivity::class.java)
                             startActivity(intent)
                         }
 
                     } else {
-                        Log.d("YMC", "onResponse 실패")//*
+                        val errorBody = response.errorBody()
+                        if (errorBody != null) {
+                            val errorJson = errorBody.string()
+                            Log.d("YMC", "onResponse 실패 errorJson: $errorJson")
+
+                            val errorResponse = Gson().fromJson(errorJson, ErrorResponse::class.java)
+
+                            val status = errorResponse.status
+                            val message = errorResponse.message
+                            val data = errorResponse.data
+                            Log.d("YMC", "onResponse 실패 : $status $message $data")
+                        } else {
+                            Log.d("YMC", "onResponse 실패 : errorBody is null")
+                        }
                     }
                 }
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {

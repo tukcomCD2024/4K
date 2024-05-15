@@ -155,7 +155,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <android.widget.Button
-            android:id="@+id/create_account_btn"
+            android:id="@+id/send_friend_request_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_2"

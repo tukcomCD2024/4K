@@ -328,6 +328,51 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_language"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_language_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_language_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/language"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_language_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <Spinner
+                        android:id="@+id/language_spinner"
+                        android:layout_marginStart="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </ScrollView>

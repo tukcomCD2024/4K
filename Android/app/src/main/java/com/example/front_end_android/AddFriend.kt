@@ -8,8 +8,11 @@ import android.widget.Toast
 import com.example.front_end_android.databinding.ActivityAddFriendBinding
 import com.example.front_end_android.dataclass.AddFriendRequest
 import com.example.front_end_android.dataclass.AddFriendResponse
+import com.example.front_end_android.dataclass.ErrorResponse
+import com.example.front_end_android.dataclass.LoginErrorResponse
 import com.example.front_end_android.dataclass.LoginResponse
 import com.example.front_end_android.util.AuthInterceptor
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -40,7 +43,7 @@ class AddFriend : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.createAccountBtn.setOnClickListener {
+        binding.sendFriendRequestBtn.setOnClickListener {
 
             val accessToken = MyApplication.preferences.getString("AccessToken",".")
             val senderEmail = MyApplication.preferences.getString("email",".")
@@ -69,15 +72,28 @@ class AddFriend : AppCompatActivity() {
                     val message = jsonResponse?.message
 
                     if (response.isSuccessful) {
-
                         Log.d("YMC", "onResponse 성공: $jsonResponse $response")
                         Log.d("YMC", "message: $message")
 
                     } else {
-
                         Log.d("YMC", "onResponse 실패")//*
-                        Log.d("YMC", "onResponse 성공: $jsonResponse $response")
+                        Log.d("YMC", "onResponse 실패: $jsonResponse $response")
                         Log.d("YMC", "message: $message")
+                        val errorBody = response.errorBody()
+                        if (errorBody != null) {
+                            val errorJson = errorBody.string()
+                            Log.d("YMC", "onResponse 실패 errorJson: $errorJson")
+
+                            val errorResponse = Gson().fromJson(errorJson, ErrorResponse::class.java)
+
+                            val status = errorResponse.status
+                            val message = errorResponse.message
+                            val data = errorResponse.data
+                            val code = errorResponse.code
+                            Log.d("YMC", "onResponse 실패 : $status $message $data $code")
+                        } else {
+                            Log.d("YMC", "onResponse 실패 : errorBody is null")
+                        }
                     }
 
                 }

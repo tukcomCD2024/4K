@@ -92,9 +92,22 @@
         Confirm Password
     </string>
 
+    <string name="language">
+        language
+    </string>
+
     <string name="create_account">
         Create Account
     </string>
+
+    <string-array name="language_array">
+        <item>English</item>
+        <item>Korean</item>
+        <item>Spanish</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Chinese</item>
+    </string-array>
 
     <!--Activity_Find_password-->
 
