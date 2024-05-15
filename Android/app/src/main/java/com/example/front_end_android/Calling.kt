@@ -121,6 +121,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private fun init(){
         userName = MyApplication.preferences.getString("email",".")
         targetName = MyApplication.preferences.getString("targetName",".")
+        binding.nicknameInit.text = targetName
         /*userName = intent.getStringExtra("username")//실제로는 intent로 유저 이름을 받아야함
         if(userName == "asdf@naver.com"){
             targetName = "asdfg@naver.com"
