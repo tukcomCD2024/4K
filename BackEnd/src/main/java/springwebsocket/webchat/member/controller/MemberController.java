@@ -1,25 +1,21 @@
 package springwebsocket.webchat.member.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import springwebsocket.webchat.global.response.ApiResponse;
+import springwebsocket.webchat.member.dto.request.EmailRequest;
 import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
+import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
-import springwebsocket.webchat.member.exception.EmailDuplicatedException;
-import springwebsocket.webchat.member.service.MemberServiceV1;
-import springwebsocket.webchat.member.service.MemberServiceV2;
-import springwebsocket.webchat.member.service.MemberServiceV3;
+import springwebsocket.webchat.member.service.MemberService;
 
 import java.util.Optional;
 
@@ -30,11 +26,12 @@ import java.util.Optional;
 @RequestMapping("/member")
 public class MemberController {
 
-    private final MemberServiceV3 userService;
+    private final MemberService userService;
     @PostMapping("/signup")
-    public ResponseEntity<UserResponse> register(@Valid @RequestBody  final SignUpRequest request) {
-        UserResponse userResponse = userService.signUp(request);
-        return ResponseEntity.ok().body(userResponse);
+    public ApiResponse<?> register(final @RequestBody SignUpRequest request) {
+
+        userService.signUp(request);
+        return ApiResponse.createSuccessWithNoContent();
     }
 
     @PostMapping("/update")
@@ -47,13 +44,35 @@ public class MemberController {
         return userService.findById(id);
     }
 
+    @PostMapping("/findtarget")
+    public ApiResponse<UserResponse> findByTarget(@RequestBody EmailRequest email){
+        UserResponse target = userService.findByTarget(email);
+
+        return ApiResponse.createSuccess(target);
+    }
+
     @PostMapping("/delete")
     public void delete(Long id) {
         userService.delete(id);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
-        return userService.login(request.getLoginEmail(), request.getPassword());
+    public ApiResponse<?> login(@RequestBody LoginRequest request) {
+        TokenMessage message = userService.login(request.getLoginEmail(), request.getPassword());
+        return ApiResponse.createSuccess(message);
     }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout() {
+        log.info("/member/logout");
+        return userService.logout();
+    }
+
+    @PostMapping("/reissue")
+    public ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response) {
+        log.info("/member/reissue");
+        return userService.reissue(request, response);
+    }
+
+
 }

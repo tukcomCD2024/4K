@@ -55,3 +55,4 @@ jobs:
       - name: Code Deploy to EC2
         working-directory: ./BackEnd
         run: aws deploy create-deployment --application-name ${{ env.AWS_CODE_DEPLOY_APPLICATION }} --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name ${{ env.AWS_CODE_DEPLOY_GROUP }} --s3-location bucket=${{ env.AWS_S3_BUCKET }},key=4K-Backend-EC2/$GITHUB_SHA.zip,bundleType=zip
+

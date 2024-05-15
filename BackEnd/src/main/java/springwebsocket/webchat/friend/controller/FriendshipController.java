@@ -1,13 +1,14 @@
 package springwebsocket.webchat.friend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import springwebsocket.webchat.friend.dto.UserIdRequest;
-import springwebsocket.webchat.friend.entity.Friendship;
-import springwebsocket.webchat.member.entity.Member;
+import springwebsocket.webchat.friend.dto.request.UserEmailRequest;
+import springwebsocket.webchat.friend.dto.request.UserRequest;
+import springwebsocket.webchat.friend.repository.springdata.UserInfoMapping;
 import springwebsocket.webchat.friend.service.FriendshipService;
 
 import java.util.List;
@@ -20,42 +21,37 @@ public class FriendshipController {
     private final FriendshipService friendshipService;
 
     @PostMapping("/sendFriendRequest")
-    public String sendFriendRequest(Long senderId, String receiverEmail) {
+    public ResponseEntity<?> sendFriendRequest(@RequestBody UserEmailRequest userEmailRequest) {
 
-        Friendship friendship = friendshipService.sendFriendRequest(senderId, receiverEmail);
+        String senderEmail = userEmailRequest.getSenderEmail();
+        String receiverEmail = userEmailRequest.getReceiverEmail();
 
-        if (friendship == null) {
-            return "fail";
-        } else {
-            return "success";
-        }
+        return friendshipService.sendFriendRequest(senderEmail, receiverEmail);
+
     }
 
     @PostMapping("/acceptFriendRequestById")
-    public String acceptFriendRequestById(Long senderId, String receiverEmail) {
-        friendshipService.acceptFriendRequestById(senderId, receiverEmail);
+    public ResponseEntity<?> acceptFriendRequestById(@RequestBody UserEmailRequest userEmailRequest) {
+        String senderEmail = userEmailRequest.getSenderEmail();
+        String receiverEmail = userEmailRequest.getReceiverEmail();
 
-        return "success";
+        return friendshipService.acceptFriendRequestById(senderEmail, receiverEmail);
     }
 
     @PostMapping("/rejectFriendRequestById")
-    public String rejectFriendRequestById(Long id, String Email) {
-        friendshipService.rejectFriendRequestById(id, Email);
-        return "success";
+    public ResponseEntity<?> rejectFriendRequestById(@RequestBody UserEmailRequest userEmailRequest) {
+        String senderEmail = userEmailRequest.getSenderEmail();
+        String receiverEmail = userEmailRequest.getReceiverEmail();
+        return friendshipService.rejectFriendRequestById(senderEmail, receiverEmail);
     }
 
     @PostMapping("/findByFriendIdAndStatus")
-    public List<Member> findByFriendIdAndStatus(Long id) {
-        return friendshipService.findByFriendIdAndStatus(id);
+    public List<UserInfoMapping> findByFriendIdAndStatus(@RequestBody UserRequest email) {
+        return friendshipService.findByFriendIdAndStatus(email.getEmail());
     }
 
     @PostMapping("/findByUserIdAndStatusOrFriendIdAndStatus")
-    public List<String> findByUserIdAndStatusOrFriendIdAndStatus(@RequestBody UserIdRequest request) {
-        return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(request.getUserId());
-    }
-
-    @PostMapping("/findByUserIdAndStatusOrFriendIdAndStatusAny")
-    public List<String> findByUserIdAndStatusOrFriendIdAndStatusAny(Long userId) {
-        return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(userId);
+    public List<UserInfoMapping> findByUserIdAndStatusOrFriendIdAndStatus(@RequestBody UserRequest email) {
+        return friendshipService.findByUserIdAndStatusOrFriendIdAndStatus(email.getEmail());
     }
 }

@@ -24,13 +24,18 @@ spring:
     url: ${MYSQL_DATABASE_URL}
     username: ${MYSQL_DATABASE_USERNAME}
     password: ${MYSQL_DATABASE_PASSWORD}
+#    url: "jdbc:mysql://localhost:3306/JPA?characterEncoding=UTF-8&serverTimezone=UTC"
+#    username: "springDB"
+#    password:
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
+  #    properties:
+  #      hibernate:
+  #        format_sql: true
+  jwt:
+    secret: ${JWT_KEY}
   naver :
     client-id : ${NAVER_ID}
     client-secret : ${NAVER_SECRET}
