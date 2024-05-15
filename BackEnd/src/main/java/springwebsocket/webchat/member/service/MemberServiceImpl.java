@@ -132,8 +132,8 @@ public class MemberServiceImpl implements MemberService {
         refreshMemberRepository.deleteByRefresh(refreshToken);
 
         return ResponseEntity.ok()
-                .header("Access-Token", newAccessToken)
-                .header("Refresh-Token", newRefreshToken)
+                .header("AccessToken", newAccessToken)
+                .header("RefreshToken", newRefreshToken)
                 .body("재발급 성공");
     }
 
