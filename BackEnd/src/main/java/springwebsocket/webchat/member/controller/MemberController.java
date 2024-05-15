@@ -7,8 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import springwebsocket.webchat.global.response.ApiResponse;
 import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.UserResponse;
@@ -28,9 +27,10 @@ public class MemberController {
 
     private final MemberService userService;
     @PostMapping("/signup")
-    public ResponseEntity<UserResponse> register(final @RequestBody SignUpRequest request) {
-        UserResponse userResponse = userService.signUp(request);
-        return ResponseEntity.ok().body(userResponse);
+    public ApiResponse<?> register(final @RequestBody SignUpRequest request) {
+
+        userService.signUp(request);
+        return ApiResponse.createSuccessWithNoContent();
     }
 
     @PostMapping("/update")
