@@ -18,6 +18,8 @@ import springwebsocket.webchat.member.service.MemberService;
 @RequiredArgsConstructor
 public class MemberConfig {
 
+    private final SpringDataJpaMemberRepository jpaMemberRepository;
+
     private final EntityManager em;
 
     private final SpringDataJpaMemberRepository springDataJpaMemberRepository;
@@ -29,7 +31,7 @@ public class MemberConfig {
 
     @Bean
     public MemberService userService() {
-        return new MemberServiceImpl(memberRepository(), encoder(), tokenProvider,refreshMemberRepository);
+        return new MemberServiceImpl(jpaMemberRepository, memberRepository(), encoder(), tokenProvider,refreshMemberRepository);
     }
 
     @Bean
