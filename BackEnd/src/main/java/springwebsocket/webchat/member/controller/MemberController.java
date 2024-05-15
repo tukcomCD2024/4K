@@ -8,9 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springwebsocket.webchat.global.response.ApiResponse;
+import springwebsocket.webchat.member.dto.request.EmailRequest;
 import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.TokenMessage;
+import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.service.MemberService;
@@ -40,6 +42,13 @@ public class MemberController {
     @PostMapping("/find")
     public Optional<Member> findById(Long id) {
         return userService.findById(id);
+    }
+
+    @PostMapping("/findtarget")
+    public ApiResponse<UserResponse> findByTarget(@RequestBody EmailRequest email){
+        UserResponse target = userService.findByTarget(email);
+
+        return ApiResponse.createSuccess(target);
     }
 
     @PostMapping("/delete")

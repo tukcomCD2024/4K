@@ -15,14 +15,18 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import springwebsocket.webchat.global.jwt.TokenProvider;
 import springwebsocket.webchat.global.response.ApiResponse;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
+import springwebsocket.webchat.member.dto.request.EmailRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.exception.EmailDuplicatedException;
+import springwebsocket.webchat.member.exception.FindTargetException;
 import springwebsocket.webchat.member.exception.LoginFailException;
 import springwebsocket.webchat.member.repository.MemberRepository;
 import springwebsocket.webchat.member.repository.RefreshMemberRepository;
+import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
+import springwebsocket.webchat.member.repository.springdata.TargetInfoMapping;
 
 import java.util.Optional;
 
@@ -30,13 +34,15 @@ import java.util.Optional;
 @Slf4j
 public class MemberServiceImpl implements MemberService {
 
+    private final SpringDataJpaMemberRepository jpaMemberRepository;
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final TokenProvider tokenProvider;
     private final RefreshMemberRepository refreshMemberRepository;
 
 
-    public MemberServiceImpl(MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider, RefreshMemberRepository refreshMemberRepository) {
+    public MemberServiceImpl(SpringDataJpaMemberRepository jpaMemberRepository,MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider, RefreshMemberRepository refreshMemberRepository) {
+        this.jpaMemberRepository = jpaMemberRepository;
         this.memberRepository = memberRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.tokenProvider = tokenProvider;
@@ -70,6 +76,17 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Optional<Member> findById(Long id) {
         return memberRepository.findById(id);
+    }
+
+    @Override
+    public UserResponse findByTarget(EmailRequest email) {
+        Optional<TargetInfoMapping> findEmail = jpaMemberRepository.findMemberByEmail(email.getEmail());
+        if (findEmail.isEmpty()) {
+            throw new FindTargetException();
+        }
+
+        UserResponse userResponse = new UserResponse(findEmail.get().getName(),findEmail.get().getEmail());
+        return userResponse;
     }
 
     @Override
