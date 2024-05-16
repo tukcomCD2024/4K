@@ -13,16 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import springwebsocket.webchat.global.jwt.TokenProvider;
-import springwebsocket.webchat.global.response.ApiResponse;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.EmailRequest;
+import springwebsocket.webchat.member.dto.request.EmailPasswordRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
-import springwebsocket.webchat.member.exception.EmailDuplicatedException;
-import springwebsocket.webchat.member.exception.FindTargetException;
-import springwebsocket.webchat.member.exception.LoginFailException;
+import springwebsocket.webchat.member.exception.*;
 import springwebsocket.webchat.member.repository.MemberRepository;
 import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
@@ -41,7 +39,7 @@ public class MemberServiceImpl implements MemberService {
     private final RefreshMemberRepository refreshMemberRepository;
 
 
-    public MemberServiceImpl(SpringDataJpaMemberRepository jpaMemberRepository,MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider, RefreshMemberRepository refreshMemberRepository) {
+    public MemberServiceImpl(SpringDataJpaMemberRepository jpaMemberRepository, MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider, RefreshMemberRepository refreshMemberRepository) {
         this.jpaMemberRepository = jpaMemberRepository;
         this.memberRepository = memberRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -69,13 +67,43 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void update(Long userId, MemberUpdataDto updateParam) {
-        memberRepository.update(userId, updateParam);
+    public void update(MemberUpdataDto updateParam) {
+        String email = updateParam.getEmail();
+        String password = updateParam.getPassword();
+        String newPassword = updateParam.getNewPassword();
+        String language = updateParam.getLanguage();
+        String name = updateParam.getName();
+        Optional<Member> user = jpaMemberRepository.findByEmail(email)
+                .filter(m -> bCryptPasswordEncoder.matches(password, m.getPassword()));
+
+        if(user.isEmpty()) throw new FindEmailPasswordException();
+
+        Member member = user.get();
+
+        if (language != null) {
+            member.setLanguage(language);
+        }
+        if (name != null) {
+            member.setName(name);
+        }
+        if (newPassword != null) {
+            member.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        }
+
+        jpaMemberRepository.save(member);
     }
 
+
     @Override
-    public Optional<Member> findById(Long id) {
-        return memberRepository.findById(id);
+    public Member findById(EmailRequest emailRequest) {
+        String email = emailRequest.getEmail();
+        Optional<Member> findMember = jpaMemberRepository.findByEmail(email);
+
+        if(findMember.isEmpty()) throw new FindEmailException();
+        Member member = findMember.get();
+        member.setPassword(null);
+        member.setFirebaseToken(null);
+        return member;
     }
 
     @Override
@@ -85,13 +113,19 @@ public class MemberServiceImpl implements MemberService {
             throw new FindTargetException();
         }
 
-        UserResponse userResponse = new UserResponse(findEmail.get().getName(),findEmail.get().getEmail());
+        UserResponse userResponse = new UserResponse(findEmail.get().getName(), findEmail.get().getEmail());
         return userResponse;
     }
 
     @Override
-    public void delete(Long id) {
-        memberRepository.delete(id);
+    public void delete(EmailPasswordRequest request) {
+        String email = request.getEmail();
+        String password = request.getPassword();
+        Optional<Member> user = memberRepository.findByLoginEmail(email)
+                .filter(m -> bCryptPasswordEncoder.matches(password, m.getPassword()));
+        if(user.isEmpty()) throw new FindEmailPasswordException();
+
+        jpaMemberRepository.delete(user.get());
     }
 
     public TokenMessage login(String loginEmail, String password) {

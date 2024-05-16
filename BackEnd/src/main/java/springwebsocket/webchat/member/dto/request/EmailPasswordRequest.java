@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginRequest {
+public class EmailPasswordRequest {
 
-    private String loginEmail;
+    private String email;
     private String password;
 
 }
