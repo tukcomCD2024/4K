@@ -154,9 +154,19 @@
     </string>
 
     <!--Activity_My_Info_Detail-->
+
     <string name="edit_my_info">
         Edit My Information
     </string>
+
+    <string name="modify">
+        Modify
+    </string>
+
+    <string name="check">
+        Check
+    </string>
+
     <!---->
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

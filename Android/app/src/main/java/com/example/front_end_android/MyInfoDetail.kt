@@ -30,6 +30,13 @@ class MyInfoDetail : AppCompatActivity() {
         binding = ActivityMyInfoDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.changeBtn.setOnClickListener {
+            binding.changeBtn.isEnabled = false
+            binding.changeBtn.visibility = View.INVISIBLE
+            binding.checkBtn.isEnabled = true
+            binding.checkBtn.visibility = View.VISIBLE
+        }
+
         val spinner: Spinner = findViewById(R.id.language_spinner)
         ArrayAdapter.createFromResource(
             this@MyInfoDetail,

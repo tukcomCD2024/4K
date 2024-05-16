@@ -344,4 +344,51 @@
 
     </ScrollView>
 
+    <RelativeLayout
+        android:id="@+id/check_btn_container"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintEnd_toStartOf="@id/change_btn_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.4">
+
+        <Button
+            android:id="@+id/check_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_grey_btn"
+            android:text="@string/check"
+            android:textAppearance="@style/sign_in2"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:enabled="false"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/change_btn_container"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/check_btn_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.4">
+
+        <Button
+            android:id="@+id/change_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_2"
+            android:text="@string/modify"
+            android:textAppearance="@style/sign_in2"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
