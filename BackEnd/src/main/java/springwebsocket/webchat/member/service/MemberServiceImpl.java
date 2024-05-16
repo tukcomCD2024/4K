@@ -21,6 +21,7 @@ import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
 import springwebsocket.webchat.member.exception.EmailDuplicatedException;
+import springwebsocket.webchat.member.exception.FindEmailException;
 import springwebsocket.webchat.member.exception.FindTargetException;
 import springwebsocket.webchat.member.exception.LoginFailException;
 import springwebsocket.webchat.member.repository.MemberRepository;
@@ -41,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
     private final RefreshMemberRepository refreshMemberRepository;
 
 
-    public MemberServiceImpl(SpringDataJpaMemberRepository jpaMemberRepository,MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider, RefreshMemberRepository refreshMemberRepository) {
+    public MemberServiceImpl(SpringDataJpaMemberRepository jpaMemberRepository, MemberRepository memberRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TokenProvider tokenProvider, RefreshMemberRepository refreshMemberRepository) {
         this.jpaMemberRepository = jpaMemberRepository;
         this.memberRepository = memberRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -69,9 +70,32 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void update(Long userId, MemberUpdataDto updateParam) {
-        memberRepository.update(userId, updateParam);
+    public void update(MemberUpdataDto updateParam) {
+        String email = updateParam.getEmail();
+        String password = updateParam.getPassword();
+        String newPassword = updateParam.getNewPassword();
+        String language = updateParam.getLanguage();
+        String name = updateParam.getName();
+        Optional<Member> user = jpaMemberRepository.findByEmail(email)
+                .filter(m -> bCryptPasswordEncoder.matches(password, m.getPassword()));
+
+        if(user.isEmpty()) throw new FindEmailException();
+
+        Member member = user.get();
+
+        if (language != null) {
+            member.setLanguage(language);
+        }
+        if (name != null) {
+            member.setName(name);
+        }
+        if (newPassword != null) {
+            member.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        }
+
+        jpaMemberRepository.save(member);
     }
+
 
     @Override
     public Optional<Member> findById(Long id) {
@@ -85,7 +109,7 @@ public class MemberServiceImpl implements MemberService {
             throw new FindTargetException();
         }
 
-        UserResponse userResponse = new UserResponse(findEmail.get().getName(),findEmail.get().getEmail());
+        UserResponse userResponse = new UserResponse(findEmail.get().getName(), findEmail.get().getEmail());
         return userResponse;
     }
 

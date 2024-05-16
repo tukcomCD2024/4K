@@ -16,7 +16,7 @@ import java.util.Optional;
 public interface MemberService {
     UserResponse signUp(SignUpRequest signUpRequest);
 
-    void update(Long userId, MemberUpdataDto updateParam);
+    void update(MemberUpdataDto updateParam);
 
     Optional<Member> findById(Long id);
 

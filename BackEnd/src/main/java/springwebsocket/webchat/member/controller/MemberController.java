@@ -35,8 +35,9 @@ public class MemberController {
     }
 
     @PostMapping("/update")
-    public void update(Long userId, MemberUpdataDto updateParam) {
-        userService.update(userId, updateParam);
+    public ApiResponse<?> update(@RequestBody MemberUpdataDto updateParam) {
+        userService.update(updateParam);
+        return ApiResponse.createSuccessWithNoContent();
     }
 
     @PostMapping("/find")
