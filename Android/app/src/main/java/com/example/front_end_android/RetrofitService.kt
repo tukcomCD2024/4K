@@ -18,6 +18,8 @@ import com.example.front_end_android.dataclass.RejectFriendRequest
 import com.example.front_end_android.dataclass.RejectFriendResponse
 import com.example.front_end_android.dataclass.SignUpRequest
 import com.example.front_end_android.dataclass.SignUpResponse
+import com.example.front_end_android.dataclass.UpdateRequest
+import com.example.front_end_android.dataclass.UpdateResponse
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.Body
@@ -54,5 +56,8 @@ interface RetrofitService {
 
     @POST("member/delete")
     fun deleteRetrofit(@Body deleteRequest: DeleteRequest): Call<DeleteResponse>
+
+    @POST("member/update")
+    fun updateRetrofit(@Body updateRequest: UpdateRequest): Call<UpdateResponse>
 
 }
