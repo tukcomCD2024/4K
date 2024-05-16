@@ -13,17 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import springwebsocket.webchat.global.jwt.TokenProvider;
-import springwebsocket.webchat.global.response.ApiResponse;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.EmailRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
 import springwebsocket.webchat.member.entity.Member;
-import springwebsocket.webchat.member.exception.EmailDuplicatedException;
-import springwebsocket.webchat.member.exception.FindEmailException;
-import springwebsocket.webchat.member.exception.FindTargetException;
-import springwebsocket.webchat.member.exception.LoginFailException;
+import springwebsocket.webchat.member.exception.*;
 import springwebsocket.webchat.member.repository.MemberRepository;
 import springwebsocket.webchat.member.repository.RefreshMemberRepository;
 import springwebsocket.webchat.member.repository.springdata.SpringDataJpaMemberRepository;
@@ -79,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> user = jpaMemberRepository.findByEmail(email)
                 .filter(m -> bCryptPasswordEncoder.matches(password, m.getPassword()));
 
-        if(user.isEmpty()) throw new FindEmailException();
+        if(user.isEmpty()) throw new FindEmailPasswordException();
 
         Member member = user.get();
 
@@ -98,8 +94,15 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public Optional<Member> findById(Long id) {
-        return memberRepository.findById(id);
+    public Member findById(EmailRequest emailRequest) {
+        String email = emailRequest.getEmail();
+        Optional<Member> findMember = jpaMemberRepository.findByEmail(email);
+
+        if(findMember.isEmpty()) throw new FindEmailException();
+        Member member = findMember.get();
+        member.setPassword(null);
+        member.setFirebaseToken(null);
+        return member;
     }
 
     @Override

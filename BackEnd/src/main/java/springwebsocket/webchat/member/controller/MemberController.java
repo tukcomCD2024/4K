@@ -41,8 +41,9 @@ public class MemberController {
     }
 
     @PostMapping("/find")
-    public Optional<Member> findById(Long id) {
-        return userService.findById(id);
+    public ApiResponse<Member> findById(@RequestBody EmailRequest email) {
+        Member member = userService.findById(email);
+        return ApiResponse.createSuccess(member);
     }
 
     @PostMapping("/findtarget")

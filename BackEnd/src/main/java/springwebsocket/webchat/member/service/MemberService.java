@@ -18,7 +18,7 @@ public interface MemberService {
 
     void update(MemberUpdataDto updateParam);
 
-    Optional<Member> findById(Long id);
+    Member findById(EmailRequest emailRequest);
 
     UserResponse findByTarget(EmailRequest email);
 

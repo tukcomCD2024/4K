@@ -15,6 +15,7 @@ public enum ErrorCode {
     LOGIN_FAIL_TAKEN(400,"로그인 실패"),
     FIND_TARGETUSER_TAKEN(400,"상대방이 존재하지 않습니다."),
     FIND_TAKEN(400,"이메일과 패스워드를 다시 한번 검토해보시오."),
+    FIND_EMAIL_TAKEN(400,"이메일이 존재하지 않습니다"),
 
     //Friend
     FRIEND_ALREADT_TAKEN(400,"이미 친구 요청을 보낸 상대입니다.");
