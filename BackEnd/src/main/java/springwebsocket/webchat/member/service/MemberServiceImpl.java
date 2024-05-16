@@ -196,7 +196,7 @@ public class MemberServiceImpl implements MemberService {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
         //get refresh token
-        String refreshToken = request.getHeader("Refresh-Token");
+        String refreshToken = request.getHeader("RefreshToken");
 
         //로그아웃 진행
         //Refresh 토큰 DB에서 제거
