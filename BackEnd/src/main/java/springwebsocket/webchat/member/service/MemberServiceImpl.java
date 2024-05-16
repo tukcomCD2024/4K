@@ -15,6 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import springwebsocket.webchat.global.jwt.TokenProvider;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.EmailRequest;
+import springwebsocket.webchat.member.dto.request.EmailPasswordRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
@@ -117,8 +118,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void delete(Long id) {
-        memberRepository.delete(id);
+    public void delete(EmailPasswordRequest request) {
+        String email = request.getEmail();
+        String password = request.getPassword();
+        Optional<Member> user = memberRepository.findByLoginEmail(email)
+                .filter(m -> bCryptPasswordEncoder.matches(password, m.getPassword()));
+        if(user.isEmpty()) throw new FindEmailPasswordException();
+
+        jpaMemberRepository.delete(user.get());
     }
 
     public TokenMessage login(String loginEmail, String password) {
