@@ -10,7 +10,6 @@ import android.widget.Spinner
 import android.widget.Toast
 import com.example.front_end_android.databinding.ActivitySignUpBinding
 import com.example.front_end_android.dataclass.ErrorResponse
-import com.example.front_end_android.dataclass.LoginErrorResponse
 import com.example.front_end_android.dataclass.SignUpErrorResponse
 import com.example.front_end_android.dataclass.SignUpRequest
 import com.example.front_end_android.dataclass.SignUpResponse

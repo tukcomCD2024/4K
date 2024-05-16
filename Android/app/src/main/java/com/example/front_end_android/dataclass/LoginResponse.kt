@@ -12,9 +12,3 @@ data class LoginData(
     val accessToken:String?,
     val refreshToken:String?
 )
-
-data class LoginErrorResponse(
-    val status: String,
-    val message: String,
-    val data: Any
-)

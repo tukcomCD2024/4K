@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import com.example.front_end_android.databinding.ActivityLoginBinding
 import com.example.front_end_android.dataclass.ErrorResponse
-import com.example.front_end_android.dataclass.LoginErrorResponse
 import com.example.front_end_android.dataclass.LoginRequest
 import com.example.front_end_android.dataclass.LoginResponse
 import com.google.gson.Gson

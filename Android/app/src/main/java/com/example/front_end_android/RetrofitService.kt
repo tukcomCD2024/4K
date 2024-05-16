@@ -4,8 +4,12 @@ import com.example.front_end_android.dataclass.AcceptFriendRequest
 import com.example.front_end_android.dataclass.AcceptFriendResponse
 import com.example.front_end_android.dataclass.AddFriendRequest
 import com.example.front_end_android.dataclass.AddFriendResponse
+import com.example.front_end_android.dataclass.DeleteRequest
+import com.example.front_end_android.dataclass.DeleteResponse
 import com.example.front_end_android.dataclass.FindMyFriendsRequest
 import com.example.front_end_android.dataclass.FindMyFriendsResponse
+import com.example.front_end_android.dataclass.FindRequest
+import com.example.front_end_android.dataclass.FindResponse
 import com.example.front_end_android.dataclass.FriendRequestListRequest
 import com.example.front_end_android.dataclass.FriendRequestListResponse
 import com.example.front_end_android.dataclass.LoginRequest
@@ -45,17 +49,10 @@ interface RetrofitService {
     @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatus")
     fun findMyFriendsRetrofit(@Body findMyFriendsRequest: FindMyFriendsRequest): Call<List<FindMyFriendsResponse>>
 
+    @POST("member/find")
+    fun findRetrofit(@Body findRequest: FindRequest): Call<FindResponse>
 
-    @FormUrlEncoded
-    @POST("friendship/findByUserIdAndStatusOrFriendIdAndStatusAny")
-    fun myFriendsRetrofit(
-        @Field("userId") userId: Int
-    ): Call<Any>
-
-    @FormUrlEncoded
-    @POST("member/save")
-    fun setUser(@Field("email") email: String,
-                @Field("password") password:String,
-                @Field("name") name: String):Call<JsonObject>
+    @POST("member/delete")
+    fun deleteRetrofit(@Body deleteRequest: DeleteRequest): Call<DeleteResponse>
 
 }

@@ -59,6 +59,7 @@
             >
 
             <TextView
+                android:id="@+id/name_txt"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:backgroundTint="@color/gray_white"
@@ -70,7 +71,7 @@
                 />
 
             <TextView
-                android:id="@+id/apple_id_ic"
+                android:id="@+id/email_txt"
                 android:layout_width="253dp"
                 android:layout_height="18dp"
                 android:layout_marginTop="38dp"
@@ -83,6 +84,44 @@
                 />
 
         </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="240dp">
+
+        <android.widget.Button
+            android:id="@+id/sign_out_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_btn_red"
+            android:text="@string/sign_out"
+            android:textAppearance="@string/sign_in2"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="299dp">
+
+        <android.widget.Button
+            android:id="@+id/withdrawal_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_grey_btn"
+            android:text="@string/Withdrawal"
+            android:textAppearance="@string/sign_in2"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
