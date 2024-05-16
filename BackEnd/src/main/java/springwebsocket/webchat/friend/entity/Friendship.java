@@ -7,6 +7,10 @@ import springwebsocket.webchat.member.entity.Member;
 
 @Data
 @Entity
+@Table(name = "friendship",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id", "friend_id"})
+        })
 public class Friendship {
 
     public enum FriendshipStatus {
@@ -20,11 +24,11 @@ public class Friendship {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private Member userId;
 
     @ManyToOne
-    @JoinColumn(name = "friend_id", nullable = false)
+    @JoinColumn(name = "friend_id", referencedColumnName = "id", nullable = false)
     private Member friendId;
 
     @Column(name = "status")
