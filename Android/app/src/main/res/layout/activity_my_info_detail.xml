@@ -133,7 +133,8 @@
                         android:lineSpacingExtra="3sp"
                         android:textAppearance="@style/enter_your_email"
                         android:translationY="-1.45sp"
-                        android:background="@android:color/transparent"/>
+                        android:background="@android:color/transparent"
+                        android:enabled="false"/>
 
                 </RelativeLayout>
 
@@ -183,12 +184,13 @@
                         android:lineSpacingExtra="3sp"
                         android:textAppearance="@style/create_user_name"
                         android:translationY="-1.45sp"
-                        android:background="@android:color/transparent"/>
+                        android:background="@android:color/transparent"
+                        android:enabled="false"/>
 
                 </RelativeLayout>
 
             </RelativeLayout>
-
+            <!--
             <RelativeLayout
                 android:id="@+id/scroll_view_text_field_nickname"
                 android:layout_width="match_parent"
@@ -233,12 +235,13 @@
                         android:lineSpacingExtra="3sp"
                         android:textAppearance="@style/create_user_name"
                         android:translationY="-1.45sp"
-                        android:background="@android:color/transparent"/>
+                        android:background="@android:color/transparent"
+                        android:enabled="false"/>
 
                 </RelativeLayout>
 
             </RelativeLayout>
-
+-->
             <RelativeLayout
                 android:id="@+id/scroll_view_text_field_password"
                 android:layout_width="match_parent"
@@ -284,58 +287,8 @@
                         android:inputType="textPassword"
                         android:textAppearance="@style/create_user_name"
                         android:translationY="-1.45sp"
-                        android:background="@android:color/transparent"/>
-
-                </RelativeLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/scroll_view_text_field_confirm_password"
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <RelativeLayout
-                    android:id="@+id/scroll_view_text_field_confirm_password_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="22dp">
-
-                    <TextView
-                        android:id="@+id/scroll_view_text_field_confirm_password_header_labe"
-                        android:layout_width="match_parent"
-                        android:layout_height="22dp"
-                        android:gravity="top"
-                        android:lineSpacingExtra="3sp"
-                        android:text="@string/confirm_password"
-                        android:textAppearance="@style/password"
-                        android:translationY="-1.45sp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/scroll_view_text_field_confirm_password_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:layout_marginTop="28dp"
-                    android:background="@drawable/input"
-                    android:clipToOutline="true">
-
-                    <EditText
-                        android:id="@+id/scroll_view_text_field_confirm_password_edt"
-                        android:layout_width="match_parent"
-                        android:layout_height="46dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:hint="@string/password_hint"
-                        android:lineSpacingExtra="3sp"
-                        android:inputType="textPassword"
-                        android:textAppearance="@style/create_user_name"
-                        android:translationY="-1.45sp"
-                        android:background="@android:color/transparent"/>
+                        android:background="@android:color/transparent"
+                        android:enabled="false"/>
 
                 </RelativeLayout>
 
@@ -380,7 +333,8 @@
                         android:layout_marginStart="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true"
+                        android:enabled="false"/>
 
                 </RelativeLayout>
 
