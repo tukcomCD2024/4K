@@ -93,7 +93,7 @@
     </string>
 
     <string name="language">
-        language
+        Language
     </string>
 
     <string name="create_account">
@@ -139,10 +139,42 @@
 
     <!--Fragment_My_Info-->
 
+    <string name="sign_out">
+        Sign out
+    </string>
+
+    <string name="Withdrawal">
+        Withdrawal
+    </string>
+
     <!--Activity_Friend_Request-->
 
     <string name="add_friend">
         Add Friend
+    </string>
+
+    <!--Activity_My_Info_Detail-->
+
+    <string name="edit_my_info">
+        Edit My Information
+    </string>
+
+    <string name="modify">
+        Modify
+    </string>
+
+    <string name="check">
+        Check
+    </string>
+
+    <string name="new_passwrod">
+        New Password
+    </string>
+
+    <!--Fragment_Chat(Recent_Call)-->
+
+    <string name="chat">
+        Chat
     </string>
 
     <!---->

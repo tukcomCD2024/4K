@@ -9,7 +9,6 @@ import com.example.front_end_android.databinding.ActivityAddFriendBinding
 import com.example.front_end_android.dataclass.AddFriendRequest
 import com.example.front_end_android.dataclass.AddFriendResponse
 import com.example.front_end_android.dataclass.ErrorResponse
-import com.example.front_end_android.dataclass.LoginErrorResponse
 import com.example.front_end_android.dataclass.LoginResponse
 import com.example.front_end_android.util.AuthInterceptor
 import com.google.gson.Gson

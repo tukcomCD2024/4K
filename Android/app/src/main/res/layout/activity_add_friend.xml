@@ -61,6 +61,7 @@
                 tools:ignore="RtlHardcoded" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/friend_request_txt"
                 android:layout_width="80dp"
                 android:layout_height="22dp"
