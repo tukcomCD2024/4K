@@ -1,14 +1,22 @@
 package springwebsocket.webchat.member.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLDelete;
+import springwebsocket.webchat.chat.entity.MemberChattingRoom;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
+@SQLDelete(sql = "UPDATE member SET deleted = true WHERE id=?")
 @Entity
 public class Member {
 
@@ -22,16 +30,21 @@ public class Member {
     private String firebaseToken;
     private String language;
     private String role;
-    public Member() {
+
+    @Builder.Default
+    @OneToMany(mappedBy = "member")
+    private List<MemberChattingRoom> memberChattingRooms = new ArrayList<>();
+
+    public void createChatting(MemberChattingRoom memberChattingRoom) {
+        memberChattingRooms.add(memberChattingRoom);
     }
 
-    public Member(String email, String password, String name, String role, String language) {
+    public Member(String email, String password, String name, String language, String role) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.role = role;
         this.language = language;
+        this.role = role;
     }
-
 
 }
