@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		940C25642B73D20900E069D0 /* ConnectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */; };
+		940C25662B74EF4D00E069D0 /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25652B74EF4D00E069D0 /* FriendService.swift */; };
+		940C25722B7A88FB00E069D0 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25712B7A88FB00E069D0 /* Config.swift */; };
+		940C25782B7A899500E069D0 /* RTCStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25752B7A899500E069D0 /* RTCStates.swift */; };
+		940C25792B7A899500E069D0 /* SessionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25762B7A899500E069D0 /* SessionDescription.swift */; };
+		940C257A2B7A899500E069D0 /* IceCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25772B7A899500E069D0 /* IceCandidate.swift */; };
+		940C25832B7A89AB00E069D0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C257C2B7A89AB00E069D0 /* Message.swift */; };
+		940C25842B7A89AB00E069D0 /* WebSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C257E2B7A89AB00E069D0 /* WebSocketProvider.swift */; };
+		940C25852B7A89AB00E069D0 /* NativeWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C257F2B7A89AB00E069D0 /* NativeWebSocket.swift */; };
+		940C25862B7A89AB00E069D0 /* StarscreamProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25802B7A89AB00E069D0 /* StarscreamProvider.swift */; };
+		940C25872B7A89AB00E069D0 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25812B7A89AB00E069D0 /* WebRTCClient.swift */; };
+		940C25882B7A89AB00E069D0 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25822B7A89AB00E069D0 /* SignalingClient.swift */; };
+		940C258A2B7A8FA900E069D0 /* CallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25892B7A8FA900E069D0 /* CallService.swift */; };
+		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
+		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
+		94470A902B710CE500F0A942 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8F2B710CE500F0A942 /* WebRTC */; };
+		94470A932B7163E900F0A942 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94470A922B7163E900F0A942 /* Model.swift */; };
+		94470A952B71680100F0A942 /* SigninService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94470A942B71680100F0A942 /* SigninService.swift */; };
+		94470A972B717DC300F0A942 /* ConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94470A962B717DC300F0A942 /* ConnectionViewController.swift */; };
+		945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603122B6AC07D002F4B33 /* TabBarViewController.swift */; };
+		945603152B6AC22A002F4B33 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603142B6AC22A002F4B33 /* ContactsViewController.swift */; };
+		945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603162B6AC2D3002F4B33 /* RecentsViewController.swift */; };
+		945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603182B6AC365002F4B33 /* AccountViewController.swift */; };
+		9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */; };
+		945603212B6D2F06002F4B33 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603202B6D2F06002F4B33 /* Canvas.swift */; };
+		945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */; };
+		945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97A2B67E1CD00396E4E /* AppDelegate.swift */; };
+		945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */; };
+		945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97E2B67E1CD00396E4E /* ViewController.swift */; };
+		945CF9842B67E1CE00396E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 945CF9832B67E1CE00396E4E /* Assets.xcassets */; };
+		945CF9872B67E1CE00396E4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */; };
+		945CF9902B69341800396E4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 945CF98F2B69341800396E4E /* SnapKit */; };
+		94FB0A6B2B858F66005A4915 /* TestSTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */; };
+		94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6C2BAAD64A005A4915 /* TTS.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		940C25652B74EF4D00E069D0 /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
+		940C25712B7A88FB00E069D0 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		940C25752B7A899500E069D0 /* RTCStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTCStates.swift; sourceTree = "<group>"; };
+		940C25762B7A899500E069D0 /* SessionDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDescription.swift; sourceTree = "<group>"; };
+		940C25772B7A899500E069D0 /* IceCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceCandidate.swift; sourceTree = "<group>"; };
+		940C257C2B7A89AB00E069D0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		940C257E2B7A89AB00E069D0 /* WebSocketProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketProvider.swift; sourceTree = "<group>"; };
+		940C257F2B7A89AB00E069D0 /* NativeWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeWebSocket.swift; sourceTree = "<group>"; };
+		940C25802B7A89AB00E069D0 /* StarscreamProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarscreamProvider.swift; sourceTree = "<group>"; };
+		940C25812B7A89AB00E069D0 /* WebRTCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
+		940C25822B7A89AB00E069D0 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
+		940C25892B7A8FA900E069D0 /* CallService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallService.swift; sourceTree = "<group>"; };
+		94470A922B7163E900F0A942 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		94470A942B71680100F0A942 /* SigninService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninService.swift; sourceTree = "<group>"; };
+		94470A962B717DC300F0A942 /* ConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewController.swift; sourceTree = "<group>"; };
+		945603122B6AC07D002F4B33 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		945603142B6AC22A002F4B33 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		945603162B6AC2D3002F4B33 /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
+		945603182B6AC365002F4B33 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestViewController.swift; sourceTree = "<group>"; };
+		945603202B6D2F06002F4B33 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
+		945CF9772B67E1CD00396E4E /* Ringo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ringo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		945CF97A2B67E1CD00396E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		945CF97E2B67E1CD00396E4E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		945CF9832B67E1CE00396E4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		945CF9862B67E1CE00396E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		945CF9882B67E1CE00396E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSTTViewController.swift; sourceTree = "<group>"; };
+		94FB0A6C2BAAD64A005A4915 /* TTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		945CF9742B67E1CD00396E4E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				945CF9902B69341800396E4E /* SnapKit in Frameworks */,
+				94470A902B710CE500F0A942 /* WebRTC in Frameworks */,
+				94470A8A2B71050700F0A942 /* Alamofire in Frameworks */,
+				94470A8D2B710A3100F0A942 /* Starscream in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		940C256A2B79EC5700E069D0 /* WebRTC */ = {
+			isa = PBXGroup;
+			children = (
+				940C257B2B7A89AB00E069D0 /* Services */,
+				940C25742B7A899500E069D0 /* Extensions */,
+				940C25712B7A88FB00E069D0 /* Config.swift */,
+				940C25892B7A8FA900E069D0 /* CallService.swift */,
+			);
+			path = WebRTC;
+			sourceTree = "<group>";
+		};
+		940C25742B7A899500E069D0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				940C25752B7A899500E069D0 /* RTCStates.swift */,
+				940C25762B7A899500E069D0 /* SessionDescription.swift */,
+				940C25772B7A899500E069D0 /* IceCandidate.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		940C257B2B7A89AB00E069D0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				940C257C2B7A89AB00E069D0 /* Message.swift */,
+				940C257D2B7A89AB00E069D0 /* WebSocketProvider */,
+				940C25812B7A89AB00E069D0 /* WebRTCClient.swift */,
+				940C25822B7A89AB00E069D0 /* SignalingClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		940C257D2B7A89AB00E069D0 /* WebSocketProvider */ = {
+			isa = PBXGroup;
+			children = (
+				940C257E2B7A89AB00E069D0 /* WebSocketProvider.swift */,
+				940C257F2B7A89AB00E069D0 /* NativeWebSocket.swift */,
+				940C25802B7A89AB00E069D0 /* StarscreamProvider.swift */,
+			);
+			path = WebSocketProvider;
+			sourceTree = "<group>";
+		};
+		94470A912B71157C00F0A942 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				945CF97E2B67E1CD00396E4E /* ViewController.swift */,
+				945603122B6AC07D002F4B33 /* TabBarViewController.swift */,
+				945603142B6AC22A002F4B33 /* ContactsViewController.swift */,
+				9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */,
+				945603162B6AC2D3002F4B33 /* RecentsViewController.swift */,
+				945603182B6AC365002F4B33 /* AccountViewController.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		945CF96E2B67E1CD00396E4E = {
+			isa = PBXGroup;
+			children = (
+				945CF9792B67E1CD00396E4E /* Ringo */,
+				945CF9782B67E1CD00396E4E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		945CF9782B67E1CD00396E4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				945CF9772B67E1CD00396E4E /* Ringo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		945CF9792B67E1CD00396E4E /* Ringo */ = {
+			isa = PBXGroup;
+			children = (
+				940C256A2B79EC5700E069D0 /* WebRTC */,
+				94470A912B71157C00F0A942 /* Screens */,
+				945CF97A2B67E1CD00396E4E /* AppDelegate.swift */,
+				945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */,
+				940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */,
+				945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */,
+				94470A922B7163E900F0A942 /* Model.swift */,
+				94470A942B71680100F0A942 /* SigninService.swift */,
+				940C25652B74EF4D00E069D0 /* FriendService.swift */,
+				94470A962B717DC300F0A942 /* ConnectionViewController.swift */,
+				94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */,
+				94FB0A6C2BAAD64A005A4915 /* TTS.swift */,
+				945603202B6D2F06002F4B33 /* Canvas.swift */,
+				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
+				945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */,
+				945CF9882B67E1CE00396E4E /* Info.plist */,
+			);
+			path = Ringo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		945CF9762B67E1CD00396E4E /* Ringo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 945CF98B2B67E1CE00396E4E /* Build configuration list for PBXNativeTarget "Ringo" */;
+			buildPhases = (
+				945CF9732B67E1CD00396E4E /* Sources */,
+				945CF9742B67E1CD00396E4E /* Frameworks */,
+				945CF9752B67E1CD00396E4E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ringo;
+			packageProductDependencies = (
+				945CF98F2B69341800396E4E /* SnapKit */,
+				94470A892B71050700F0A942 /* Alamofire */,
+				94470A8C2B710A3100F0A942 /* Starscream */,
+				94470A8F2B710CE500F0A942 /* WebRTC */,
+			);
+			productName = Ringo;
+			productReference = 945CF9772B67E1CD00396E4E /* Ringo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		945CF96F2B67E1CD00396E4E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 1510;
+				TargetAttributes = {
+					945CF9762B67E1CD00396E4E = {
+						CreatedOnToolsVersion = 15.1;
+					};
+				};
+			};
+			buildConfigurationList = 945CF9722B67E1CD00396E4E /* Build configuration list for PBXProject "Ringo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 945CF96E2B67E1CD00396E4E;
+			packageReferences = (
+				945CF98E2B69341800396E4E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				94470A882B71050700F0A942 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				94470A8B2B710A3100F0A942 /* XCRemoteSwiftPackageReference "Starscream" */,
+				94470A8E2B710CE500F0A942 /* XCRemoteSwiftPackageReference "WebRTC" */,
+			);
+			productRefGroup = 945CF9782B67E1CD00396E4E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				945CF9762B67E1CD00396E4E /* Ringo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		945CF9752B67E1CD00396E4E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				945CF9872B67E1CE00396E4E /* LaunchScreen.storyboard in Resources */,
+				945CF9842B67E1CE00396E4E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		945CF9732B67E1CD00396E4E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				945603212B6D2F06002F4B33 /* Canvas.swift in Sources */,
+				94470A972B717DC300F0A942 /* ConnectionViewController.swift in Sources */,
+				945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */,
+				940C25782B7A899500E069D0 /* RTCStates.swift in Sources */,
+				940C25852B7A89AB00E069D0 /* NativeWebSocket.swift in Sources */,
+				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
+				940C25642B73D20900E069D0 /* ConnectionCollectionViewCell.swift in Sources */,
+				94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */,
+				940C257A2B7A899500E069D0 /* IceCandidate.swift in Sources */,
+				945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */,
+				940C258A2B7A8FA900E069D0 /* CallService.swift in Sources */,
+				945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */,
+				945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */,
+				940C25872B7A89AB00E069D0 /* WebRTCClient.swift in Sources */,
+				94FB0A6B2B858F66005A4915 /* TestSTTViewController.swift in Sources */,
+				945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */,
+				945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */,
+				94470A932B7163E900F0A942 /* Model.swift in Sources */,
+				940C25662B74EF4D00E069D0 /* FriendService.swift in Sources */,
+				940C25792B7A899500E069D0 /* SessionDescription.swift in Sources */,
+				945603152B6AC22A002F4B33 /* ContactsViewController.swift in Sources */,
+				940C25722B7A88FB00E069D0 /* Config.swift in Sources */,
+				940C25842B7A89AB00E069D0 /* WebSocketProvider.swift in Sources */,
+				940C25882B7A89AB00E069D0 /* SignalingClient.swift in Sources */,
+				940C25832B7A89AB00E069D0 /* Message.swift in Sources */,
+				940C25862B7A89AB00E069D0 /* StarscreamProvider.swift in Sources */,
+				9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */,
+				94470A952B71680100F0A942 /* SigninService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				945CF9862B67E1CE00396E4E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		945CF9892B67E1CE00396E4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		945CF98A2B67E1CE00396E4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		945CF98C2B67E1CE00396E4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L2MRZPUQGZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ringo/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for use device's mic";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition will be used to determine which words you speak into the device's microphone.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tukcomCD2024.Ringo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		945CF98D2B67E1CE00396E4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L2MRZPUQGZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ringo/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for use device's mic";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition will be used to determine which words you speak into the device's microphone.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tukcomCD2024.Ringo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		945CF9722B67E1CD00396E4E /* Build configuration list for PBXProject "Ringo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				945CF9892B67E1CE00396E4E /* Debug */,
+				945CF98A2B67E1CE00396E4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		945CF98B2B67E1CE00396E4E /* Build configuration list for PBXNativeTarget "Ringo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				945CF98C2B67E1CE00396E4E /* Debug */,
+				945CF98D2B67E1CE00396E4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		94470A882B71050700F0A942 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
+		94470A8B2B710A3100F0A942 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.6;
+			};
+		};
+		94470A8E2B710CE500F0A942 /* XCRemoteSwiftPackageReference "WebRTC" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stasel/WebRTC.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 120.0.0;
+			};
+		};
+		945CF98E2B69341800396E4E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		94470A892B71050700F0A942 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94470A882B71050700F0A942 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		94470A8C2B710A3100F0A942 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94470A8B2B710A3100F0A942 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+		94470A8F2B710CE500F0A942 /* WebRTC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94470A8E2B710CE500F0A942 /* XCRemoteSwiftPackageReference "WebRTC" */;
+			productName = WebRTC;
+		};
+		945CF98F2B69341800396E4E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 945CF98E2B69341800396E4E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 945CF96F2B67E1CD00396E4E /* Project object */;
+}
