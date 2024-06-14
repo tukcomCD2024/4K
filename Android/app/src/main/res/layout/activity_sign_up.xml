@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp">
+
+    <TextView
+        android:id="@+id/sign_up"
+        android:layout_width="99dp"
+        android:layout_height="39dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="86dp"
+        android:gravity="top"
+        android:text="@string/sign_up"
+        android:textAppearance="@style/sign_up"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/if_you_don_"
+        android:layout_width="308dp"
+        android:layout_height="21dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="145dp"
+        android:gravity="top"
+        android:text="@string/if_you_already_have_an_account_register"
+        android:textAppearance="@style/if_you_already_have_an_account_register"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/you_can_sig"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="172dp"
+        android:gravity="top"
+        android:text="@string/you_can2"
+        android:textAppearance="@style/you_can2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/go_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="172dp"
+        android:gravity="top"
+        android:text="@string/sign_in_here"
+        android:textAppearance="@style/sign_in_here"
+        app:layout_constraintStart_toEndOf="@+id/you_can_sig"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/sign_up_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="210dp"
+        android:layout_marginBottom="160dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_email"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_email_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_email_header_label"
+                        android:layout_width="42dp"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/e_mail"
+                        android:textAppearance="@style/e_mail"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_email_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_email_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/enter_your_email"
+                        android:lineSpacingExtra="3sp"
+                        android:textAppearance="@style/enter_your_email"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_user_name_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_user_name_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/user_name"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_user_name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_user_name_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/create_user_name"
+                        android:lineSpacingExtra="3sp"
+                        android:textAppearance="@style/create_user_name"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_nickname_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_nickname_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/nickname"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_nickname_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_nickname_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/enter_nickname"
+                        android:lineSpacingExtra="3sp"
+                        android:textAppearance="@style/create_user_name"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_password"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_password_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_password_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/password2"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_password_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_password_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/password_hint"
+                        android:lineSpacingExtra="3sp"
+                        android:inputType="textPassword"
+                        android:textAppearance="@style/create_user_name"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_confirm_password_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_confirm_password_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/confirm_password"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_confirm_password_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <EditText
+                        android:id="@+id/scroll_view_text_field_confirm_password_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:hint="@string/password_hint"
+                        android:lineSpacingExtra="3sp"
+                        android:inputType="textPassword"
+                        android:textAppearance="@style/create_user_name"
+                        android:translationY="-1.45sp"
+                        android:background="@android:color/transparent"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scroll_view_text_field_language"
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_language_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp">
+
+                    <TextView
+                        android:id="@+id/scroll_view_text_field_language_header_labe"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="3sp"
+                        android:text="@string/language"
+                        android:textAppearance="@style/password"
+                        android:translationY="-1.45sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/scroll_view_text_field_language_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/input"
+                    android:clipToOutline="true">
+
+                    <Spinner
+                        android:id="@+id/language_spinner"
+                        android:layout_marginStart="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/create_account_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_scrollview">
+
+        <android.widget.Button
+            android:id="@+id/create_account_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_2"
+            android:text="@string/create_account"
+            android:textAppearance="@string/sign_in2"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

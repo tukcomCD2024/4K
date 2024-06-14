@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- 기본 액션 바 테마 -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- 액션 바 배경색을 하얀색으로 설정 -->
+        <item name="android:background">@color/white</item>
+
+        <!-- 상태 표시줄 텍스트를 어두운 색상으로 설정 (API 23 이상) -->
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- 액션 바 텍스트 색상을 어두운 색상으로 설정 -->
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+</resources>

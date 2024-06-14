@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="Gold">#FFFFD700</color>
+    <color name="blue_click">#007AFF</color>
+    <color name="gray_click">#3C3C43</color>
+    <color name="calling_background1">#5D727E</color>
+    <color name="calling_background2">#112B4A</color>
+    <color name="calling_background3">#0D2445</color>
+    <color name="exit_call_red">#0D2445</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="gray_white">#F5F5F5</color>
+</resources>

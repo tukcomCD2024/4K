@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/calling_background"
+    tools:context=".Calling">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/incomingCallLayout"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="6"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="someone is calling"
+            android:id="@+id/incomingNameTV"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:src="@drawable/ic_accept"
+            android:padding="15dp"
+            android:id="@+id/acceptButton"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:src="@drawable/ic_reject"
+            android:padding="15dp"
+            android:id="@+id/rejectButton"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/calling_people_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.6">
+
+        <RelativeLayout
+            android:id="@+id/calling_people1"
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_height="160dp"
+            android:visibility="gone"
+            android:background="@drawable/calling_people_background">
+            
+            <TextView
+                android:id="@+id/nickname1"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="@string/nickname1"
+                android:background="@android:color/transparent"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/calling_people_init"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/calling_people_background">
+
+            <TextView
+                android:id="@+id/nickname_init"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
+                android:background="@android:color/transparent"
+                android:text="@string/nickname1"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/calling_people2"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:visibility="gone"
+            android:layout_below="@id/calling_people1"
+            android:background="@drawable/calling_people_background">
+
+            <TextView
+                android:id="@+id/nickname2"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="@string/nickname2"
+                android:background="@android:color/transparent"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/exit_call_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calling_people_container">
+
+        <!-- 첫 번째 아이콘 -->
+        <RelativeLayout
+            android:id="@+id/mute_container"
+            android:layout_width="74dp"
+            android:layout_height="100dp"
+            android:background="@android:color/transparent">
+
+            <RelativeLayout
+                android:id="@+id/mute_background"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/mute2">
+
+                <ImageView
+                    android:id="@+id/mute_img"
+                    android:layout_width="29dp"
+                    android:layout_height="34dp"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/mute" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mute_background"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:text="@string/mute"/>
+
+        </RelativeLayout>
+
+        <!-- 두 번째 아이콘 -->
+        <RelativeLayout
+            android:id="@+id/speaker_container"
+            android:layout_width="74dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="40dp"
+            android:background="@android:color/transparent">
+
+            <RelativeLayout
+                android:id="@+id/speaker_background"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/mute2">
+
+                <ImageView
+                    android:id="@+id/speaker_img"
+                    android:layout_width="36dp"
+                    android:layout_height="26dp"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/speaker" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/speaker_background"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:text="@string/speaker"/>
+
+        </RelativeLayout>
+
+        <!-- 세 번째 아이콘 -->
+        <RelativeLayout
+            android:id="@+id/translate_container"
+            android:layout_width="74dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="40dp"
+            android:background="@android:color/transparent">
+
+            <RelativeLayout
+                android:id="@+id/translate_background"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/mute2">
+
+                <ImageView
+                    android:id="@+id/translate_img"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/translate" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/translate_background"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:text="@string/translate"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/exit_call_background"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:background="@drawable/exit_call_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/exit_call_img"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/exit_call" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/callLayout"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_height="match_parent">
+        <org.webrtc.SurfaceViewRenderer
+            android:background="@android:color/transparent"
+            android:id="@+id/remote_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <org.webrtc.SurfaceViewRenderer
+            android:background="@android:color/transparent"
+            android:id="@+id/local_view"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_above="@+id/controls"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="16dp" />
+        <ProgressBar
+            android:layout_centerInParent="true"
+            android:id="@+id/remote_view_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="@id/remote_view"
+            app:layout_constraintEnd_toEndOf="@id/remote_view"
+            app:layout_constraintStart_toStartOf="@id/remote_view"
+            app:layout_constraintTop_toTopOf="@id/remote_view" />
+        <LinearLayout
+            android:gravity="center"
+            android:background="@drawable/curve_background"
+            android:backgroundTint="@android:color/secondary_text_light"
+            android:id="@+id/controls"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/mic_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="12dp"
+                android:background="@drawable/circle_background"
+                app:backgroundTint="@color/cardview_dark_background"
+                app:srcCompat="@drawable/ic_baseline_mic_24" />
+            <ImageView
+                android:id="@+id/video_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="12dp"
+                android:background="@drawable/circle_background"
+                app:backgroundTint="@color/cardview_dark_background"
+                app:srcCompat="@drawable/ic_baseline_videocam_24" />
+            <ImageView
+                android:id="@+id/end_call_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="12dp"
+                android:background="@drawable/circle_background"
+                app:backgroundTint="@android:color/holo_red_dark"
+                app:srcCompat="@drawable/ic_baseline_call_end_24" />
+            <ImageView
+                android:id="@+id/switch_camera_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="12dp"
+                android:background="@drawable/circle_background"
+                app:backgroundTint="@color/cardview_dark_background"
+                app:srcCompat="@drawable/ic_baseline_cameraswitch_24" />
+            <ImageView
+                android:id="@+id/audio_output_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="8dp"
+                android:padding="12dp"
+                android:background="@drawable/circle_background"
+                app:backgroundTint="@color/cardview_dark_background"
+                app:srcCompat="@drawable/ic_baseline_speaker_up_24" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:visibility="visible"
+        android:id="@+id/button_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="50dp"
+        android:text="통화 참가 테스트"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/stt_test_txtview"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

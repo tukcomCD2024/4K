@@ -1,0 +1,241 @@
+<resources>
+    <string name="app_name">front-end_android</string>
+
+    <!-- Activity_Login -->
+    <string name="sign_in">
+        Sign in
+    </string>
+
+    <string name="if_you_don_t_have_an_account_register">
+        If you don\'t have an account register
+    </string>
+
+    <string name="you_can">
+        You can
+    </string>
+
+    <string name="sign_up_here">
+        Sign up here !
+    </string>
+
+    <string name="e_mail">
+        E-mail
+    </string>
+
+    <string name="enter_your_email">
+        Enter your email
+    </string>
+
+    <string name="password">
+        Password
+    </string>
+
+    <string name="enter_your_password">
+        Enter your password
+    </string>
+
+    <string name="forgot_password">
+        Forgot Password?
+    </string>
+
+    <string name="sign_in2">
+        Sign in
+    </string>
+
+    <string name="or_continue_with">
+        or continue with
+    </string>
+
+    <!-- Activity_Sign_up -->
+
+    <string name="sign_up">
+        Sign up
+    </string>
+
+    <string name="if_you_already_have_an_account_register">
+        If you already have an account register
+    </string>
+
+    <string name="you_can2">
+        You can
+    </string>
+
+    <string name="sign_in_here">
+        Sign in here !
+    </string>
+
+    <string name="user_name">
+        User name
+    </string>
+
+    <string name="create_user_name">
+        Create user name
+    </string>
+
+    <string name="nickname">
+        Nickname
+    </string>
+
+    <string name="enter_nickname">
+        Enter nickname
+    </string>
+
+    <string name="password2">
+        Password
+    </string>
+
+    <string name="password_hint">
+        **********
+    </string>
+
+    <string name="confirm_password">
+        Confirm Password
+    </string>
+
+    <string name="language">
+        Language
+    </string>
+
+    <string name="create_account">
+        Create Account
+    </string>
+
+    <string-array name="language_array">
+        <item>English</item>
+        <item>Korean</item>
+        <item>Spanish</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Chinese</item>
+    </string-array>
+
+    <!--Activity_Find_password-->
+
+    <string name="forgot_password2">
+        Forgot Password
+    </string>
+
+    <string name="no_worries...">
+        No worries! Enter your email address below and
+    </string>
+
+    <string name="we_will_send...">
+        we will send you a code to reset password.
+    </string>
+
+    <string name="send_reset_instruction">
+        Send Reset Instruction
+    </string>
+
+    <!-- Activity_add_friend -->
+
+    <string name="send_friend_request">
+        Send Friend Request
+    </string>
+
+    <string name="friend_request">
+        Friend Request
+    </string>
+
+    <!--Fragment_My_Info-->
+
+    <string name="sign_out">
+        Sign out
+    </string>
+
+    <string name="Withdrawal">
+        Withdrawal
+    </string>
+
+    <!--Activity_Friend_Request-->
+
+    <string name="add_friend">
+        Add Friend
+    </string>
+
+    <!--Activity_My_Info_Detail-->
+
+    <string name="edit_my_info">
+        Edit My Information
+    </string>
+
+    <string name="modify">
+        Modify
+    </string>
+
+    <string name="check">
+        Check
+    </string>
+
+    <string name="new_passwrod">
+        New Password
+    </string>
+
+    <!--Fragment_Chat(Recent_Call)-->
+
+    <string name="chat">
+        Chat
+    </string>
+
+    <!---->
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="friends_list">
+        Friends List
+    </string>
+
+    <string name="recent_calls">
+        Recents calls
+    </string>
+
+    <string name="my_info">
+        My Info
+    </string>
+
+    <string name="add_to_friends">
+        Add to friends
+    </string>
+
+    <string name="recent_call_title">
+        Recent Calls
+    </string>
+
+    <string name="my_info_title">
+        My Info
+    </string>
+
+    <string name="back_friend_list">
+        Friend List
+    </string>
+
+    <string name="add_friend_large_title">
+        Add as username
+    </string>
+
+    <string name="user_name_hint">
+        username#0000
+    </string>
+
+    <string name="nickname1">
+        Nickname 1
+    </string>
+
+    <string name="nickname2">
+        Nickname 2
+    </string>
+
+    <string name="mute">
+        mute
+    </string>
+
+    <string name="speaker">
+        speaker
+    </string>
+
+    <string name="translate">
+        translate
+    </string>
+
+
+</resources>

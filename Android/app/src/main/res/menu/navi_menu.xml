@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/friendsFragment"
+        android:title="@string/friends_list"
+        android:icon="@drawable/friends"/>
+
+    <item
+        android:id="@+id/recentcallsFragment"
+        android:title="@string/chat"
+        android:icon="@drawable/recentcalls"/>
+
+    <item
+        android:id="@+id/myinfoFragment"
+        android:title="@string/my_info"
+        android:icon="@drawable/myinfo"/>
+
+</menu>
