@@ -25,6 +25,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     // 수신된 RemoteMessage 객체를 기준으로 작업을 수행하고 메시지 데이터를 가져올 수 있다.
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
+        Log.d("EEEE", "onmessagereceived")
 
         // 메시지에 데이터 페이로드가 포함 되어 있는지 확인한다.
         // 페이로드란 전송된 데이터를 의미한다.
@@ -76,12 +77,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     // 수신 된 FCM 메시지를 포함하는 간단한 알림을 만들고 표시한다.
     private fun sendNotification(title: String, body: String) {
-        val intent = Intent(this, Calling::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.putExtra("userState","receiver")
+        Log.d("EEEE", "sendnotivication")
+        val intent = Intent(this, Calling::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            putExtra("userState", "receiver")
+        }
+
         val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent,
-            PendingIntent.FLAG_IMMUTABLE
+            this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         val channelId = "fcm_default_channel"

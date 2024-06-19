@@ -8,6 +8,8 @@ import com.example.front_end_android.databinding.ActivityLoginBinding
 import com.example.front_end_android.dataclass.ErrorResponse
 import com.example.front_end_android.dataclass.LoginRequest
 import com.example.front_end_android.dataclass.LoginResponse
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -19,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class Login : AppCompatActivity() {
 
     private lateinit var binding:ActivityLoginBinding
+    private lateinit var token:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -34,6 +37,19 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // 토큰 가져오기
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+
+            // FCM 등록 토큰 가져오기
+            token = task.result
+
+            val msg = "FCM Registration token: " + token
+            Log.d("YMC", msg)
+        })
+
         val gson = GsonBuilder().setLenient().create()
         val retrofit = Retrofit.Builder()
             .baseUrl("https://4kringo.shop:8080/")
@@ -47,7 +63,7 @@ class Login : AppCompatActivity() {
 
             var loginemail = binding.emailEdt.text.toString()
             var loginpassword = binding.passwordEdt.text.toString()
-            val loginRequest = LoginRequest(loginemail, loginpassword)
+            val loginRequest = LoginRequest(loginemail, loginpassword, token)
             val call = service.loginRetrofit(loginRequest)
 
             call.enqueue(object : Callback<LoginResponse> {

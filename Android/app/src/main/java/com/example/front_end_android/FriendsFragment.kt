@@ -65,20 +65,6 @@ class FriendsFragment : Fragment() {
 
         binding=FragmentFriendsBinding.inflate(inflater)
 
-        // 현재 토큰을 가져오려면
-        // FirebaseMessaging.getInstace().getToken()을 호출한다.
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
-            }
-
-            // FCM 등록 토큰 가져오기
-            val token = task.result
-
-            val msg = "FCM Registration token: " + token
-            Log.d("YMC", msg)
-        })
-
         binding.addFriendImg.setOnClickListener {
             val intent = Intent(requireActivity(), AddFriend::class.java)
             startActivity(intent)
