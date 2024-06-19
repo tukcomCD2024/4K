@@ -134,6 +134,7 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> user = memberRepository.findByLoginEmail(request.getEmail())
                 .filter(m -> bCryptPasswordEncoder.matches(request.getPassword(), m.getPassword()));
 
+        log.info("service login ={}",request.toString());
         if (!user.isEmpty()) {
             Member member = user.get();
             member.setFirebaseToken(request.getFCMToken());
