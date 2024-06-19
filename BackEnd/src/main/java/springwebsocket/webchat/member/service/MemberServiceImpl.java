@@ -102,8 +102,6 @@ public class MemberServiceImpl implements MemberService {
 
         if(findMember.isEmpty()) throw new FindEmailException();
         Member member = findMember.get();
-        member.setPassword(null);
-        member.setFirebaseToken(null);
         return member;
     }
 
@@ -138,6 +136,7 @@ public class MemberServiceImpl implements MemberService {
         if (!user.isEmpty()) {
             Member member = user.get();
             member.setFirebaseToken(request.getFCMToken());
+            jpaMemberRepository.save(member);
             return handleExistingMemberLogin(user.get());
         } else {
             throw new LoginFailException();
