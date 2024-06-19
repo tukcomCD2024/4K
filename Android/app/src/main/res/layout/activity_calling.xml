@@ -365,14 +365,14 @@
     </RelativeLayout>
 
     <Button
-        android:visibility="visible"
         android:id="@+id/button_test"
+        android:background="@drawable/green_circle_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="50dp"
-        android:text="통화 참가 테스트"
+        android:layout_marginBottom="150dp"
+        android:text="call"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView

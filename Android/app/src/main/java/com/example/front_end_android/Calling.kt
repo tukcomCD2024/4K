@@ -66,6 +66,10 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         init()
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
+        //binding.callingPeopleContainer.visibility = View.GONE
+        binding.linearLayout.visibility = View.GONE
+        binding.exitCallBackground.visibility = View.GONE
+
         binding.nicknameInit.setOnClickListener {
             binding.callingPeopleContainer.visibility = View.GONE
             binding.linearLayout.visibility = View.GONE
@@ -155,11 +159,20 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
         binding.apply {
             binding.buttonTest.setOnClickListener {
+                binding.buttonTest.visibility = View.GONE
+                binding.linearLayout.visibility = View.VISIBLE
+                binding.exitCallBackground.visibility = View.VISIBLE
+                //상대방이들어오면
                 socketRepository?.sendMessageToSocket(
                     MessageModel("start_call",userName,targetName,null
                     ))
+            }
+
+            val userState = intent.getStringExtra("userState")
+            if(userState == "receiver"){
                 binding.buttonTest.visibility = View.GONE
             }
+
             switchCameraButton.setOnClickListener {
                 rtcClient?.switchCamera()
             }

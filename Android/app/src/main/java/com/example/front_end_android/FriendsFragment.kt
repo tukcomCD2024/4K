@@ -27,6 +27,8 @@ import com.example.front_end_android.dataclass.FindMyFriendsRequest
 import com.example.front_end_android.dataclass.FindMyFriendsResponse
 import com.example.front_end_android.dataclass.FriendRequestListRequest
 import com.example.front_end_android.util.AuthInterceptor
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import okhttp3.OkHttpClient
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
@@ -62,6 +64,20 @@ class FriendsFragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding=FragmentFriendsBinding.inflate(inflater)
+
+        // 현재 토큰을 가져오려면
+        // FirebaseMessaging.getInstace().getToken()을 호출한다.
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+
+            // FCM 등록 토큰 가져오기
+            val token = task.result
+
+            val msg = "FCM Registration token: " + token
+            Log.d("YMC", msg)
+        })
 
         binding.addFriendImg.setOnClickListener {
             val intent = Intent(requireActivity(), AddFriend::class.java)
