@@ -40,7 +40,7 @@ public class SecurityConfig {
         //경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/member/*").permitAll()
+                        .requestMatchers("/", "/member/*","/api/v1/notification").permitAll()
                         .requestMatchers("reissue").permitAll()
                         .requestMatchers("/signal").permitAll()
                         .requestMatchers("/favicon.ico",
