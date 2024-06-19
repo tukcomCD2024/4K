@@ -111,5 +111,12 @@ class Login : AppCompatActivity() {
 
         }
 
+        val state = intent.getStringExtra("State")
+
+        /*if(state == "calling"){
+            val intent = Intent(this, Calling::class.java)
+            startActivity(intent)
+        }*/
+
     }
 }

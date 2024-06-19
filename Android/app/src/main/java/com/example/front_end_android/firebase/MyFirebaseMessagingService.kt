@@ -14,6 +14,8 @@ import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.front_end_android.Calling
+import com.example.front_end_android.Login
+import com.example.front_end_android.MyApplication
 import com.example.front_end_android.R
 import com.example.front_end_android.TestActivity
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -78,13 +80,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     // 수신 된 FCM 메시지를 포함하는 간단한 알림을 만들고 표시한다.
     private fun sendNotification(title: String, body: String) {
         Log.d("EEEE", "sendnotivication")
+        MyApplication.preferences.setString("targetName",body)
         val intent = Intent(this, Calling::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             putExtra("userState", "receiver")
+            //putExtra("targetName",body)
         }
 
         val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            this, 0, intent, PendingIntent.FLAG_IMMUTABLE
         )
 
         val channelId = "fcm_default_channel"

@@ -66,9 +66,12 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         init()
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
-        //binding.callingPeopleContainer.visibility = View.GONE
         binding.linearLayout.visibility = View.GONE
-        binding.exitCallBackground.visibility = View.GONE
+        val userState = intent.getStringExtra("userState")
+        if(userState == "receiver"){
+            binding.buttonTest.visibility = View.GONE
+        }
+        //binding.exitCallBackground.visibility = View.GONE
 
         binding.nicknameInit.setOnClickListener {
             binding.callingPeopleContainer.visibility = View.GONE
@@ -125,13 +128,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private fun init(){
         userName = MyApplication.preferences.getString("email",".")
         targetName = MyApplication.preferences.getString("targetName",".")
+
         binding.nicknameInit.text = targetName
-        /*userName = intent.getStringExtra("username")//실제로는 intent로 유저 이름을 받아야함
-        if(userName == "asdf@naver.com"){
-            targetName = "asdfg@naver.com"
-        }else{
-            targetName = "asdf@naver.com"//실제로는 intent로 전화를 거는 상대방을 이름을 받아야함
-        }*/
+
         socketRepository = SocketRepository(this)
         userName?.let { socketRepository?.initSocket(it) }
         rtcClient = RTCClient(application, userName!!, socketRepository!!, object : PeerConnectionObserver(){
@@ -166,11 +165,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 socketRepository?.sendMessageToSocket(
                     MessageModel("start_call",userName,targetName,null
                     ))
-            }
-
-            val userState = intent.getStringExtra("userState")
-            if(userState == "receiver"){
-                binding.buttonTest.visibility = View.GONE
             }
 
             switchCameraButton.setOnClickListener {

@@ -4,6 +4,8 @@ import com.example.front_end_android.dataclass.AcceptFriendRequest
 import com.example.front_end_android.dataclass.AcceptFriendResponse
 import com.example.front_end_android.dataclass.AddFriendRequest
 import com.example.front_end_android.dataclass.AddFriendResponse
+import com.example.front_end_android.dataclass.CallFCMRequest
+import com.example.front_end_android.dataclass.CallFCMResponse
 import com.example.front_end_android.dataclass.DeleteRequest
 import com.example.front_end_android.dataclass.DeleteResponse
 import com.example.front_end_android.dataclass.FindMyFriendsRequest
@@ -59,5 +61,8 @@ interface RetrofitService {
 
     @POST("member/update")
     fun updateRetrofit(@Body updateRequest: UpdateRequest): Call<UpdateResponse>
+
+    @POST("api/v1/notification")
+    fun callFCMRetrofit(@Body callFCMRequest: CallFCMRequest): Call<CallFCMResponse>
 
 }

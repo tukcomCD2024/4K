@@ -3,6 +3,6 @@
     android:shape="oval">
     <solid android:color="#00AA00" /> <!-- 초록색 배경 -->
     <size
-        android:width="80dp"
-        android:height="80dp" /> <!-- 원의 지름 -->
+        android:width="74dp"
+        android:height="74dp" /> <!-- 원의 지름 -->
 </shape>
