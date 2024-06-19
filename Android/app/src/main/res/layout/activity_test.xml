@@ -8,29 +8,12 @@
     android:orientation="vertical"
     tools:context=".TestActivity">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter the text"
-        android:inputType="text" />
-
     <Button
-        android:id="@+id/textToSpeechBtn"
+        android:id="@+id/btn1"
+        android:layout_marginTop="200dp"
         android:layout_width="match_parent"
+        android:onClick="requestPermission"
         android:layout_height="wrap_content"
-        android:text="Text To Speech" />
-    <Button
-        android:id="@+id/speechToTextBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Speech To Text" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="hello" />
-
+        android:text="allow permission" />
 
 </LinearLayout>
