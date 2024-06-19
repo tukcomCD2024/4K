@@ -130,16 +130,16 @@ public class MemberServiceImpl implements MemberService {
         jpaMemberRepository.delete(user.get());
     }
 
+    @Transactional
     public TokenMessage login(LoginRequest request) {
 
         Optional<Member> user = memberRepository.findByLoginEmail(request.getEmail())
                 .filter(m -> bCryptPasswordEncoder.matches(request.getPassword(), m.getPassword()));
 
-        log.info("service login ={}",request.toString());
         if (!user.isEmpty()) {
             Member member = user.get();
-            member.setFirebaseToken(request.getFCMToken());
-            jpaMemberRepository.save(member);
+            member.setFirebaseToken(request.getToken());
+
             return handleExistingMemberLogin(user.get());
         } else {
             throw new LoginFailException();
