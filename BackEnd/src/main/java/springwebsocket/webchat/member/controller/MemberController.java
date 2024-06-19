@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import springwebsocket.webchat.global.response.ApiResponse;
 import springwebsocket.webchat.member.dto.request.EmailRequest;
 import springwebsocket.webchat.member.dto.request.EmailPasswordRequest;
+import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
@@ -58,8 +59,8 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<?> login(@RequestBody EmailPasswordRequest request) {
-        TokenMessage message = userService.login(request.getEmail(), request.getPassword());
+    public ApiResponse<?> login(@RequestBody LoginRequest request) {
+        TokenMessage message = userService.login(request);
         return ApiResponse.createSuccess(message);
     }
 
