@@ -60,7 +60,6 @@ public class MemberController {
 
     @PostMapping("/login")
     public ApiResponse<?> login(@RequestBody LoginRequest request) {
-//        log.info("request = {}", request.toString());
         TokenMessage message = userService.login(request);
         return ApiResponse.createSuccess(message);
     }
