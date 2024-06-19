@@ -97,11 +97,14 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member findById(EmailRequest emailRequest) {
+        log.info("findById");
         String email = emailRequest.getEmail();
         Optional<Member> findMember = jpaMemberRepository.findByEmail(email);
 
         if(findMember.isEmpty()) throw new FindEmailException();
         Member member = findMember.get();
+        member.setPassword(null);
+        member.setFirebaseToken(null);
         return member;
     }
 
