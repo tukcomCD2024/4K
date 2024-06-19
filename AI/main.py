@@ -109,8 +109,8 @@ class AttnDecoderRNN(nn.Module):
                 torch.zeros(1, 1, self.hidden_size))
 
 # 모델 경로와 언어 사전
-encoder_path = 'model_encoder.pth'
-decoder_path = 'model_decoder.pth'
+encoder_path = 'encoder.pth'
+decoder_path = 'decoder.pth'
 dialect_lang_path = 'dialect_lang.json'
 standard_lang_path = 'standard_lang.json'
 hidden_size = 256
@@ -138,35 +138,44 @@ encoder, decoder = loadModel(encoder_path, decoder_path)
 
 # 예측 함수 정의
 def predict(sentence):
-    with torch.no_grad():
-        input_tensor = tensorFromSentence(dialect_lang, sentence, max_len)
-        input_length = input_tensor.size()[0]
-        encoder_hidden = encoder.initHidden()
+    try:
+        print(f"Received sentence: {sentence}")
+        with torch.no_grad():
+            input_tensor = tensorFromSentence(dialect_lang, sentence, max_len)
+            print(f"Input tensor: {input_tensor}")
+            input_length = input_tensor.size()[0]
+            encoder_hidden = encoder.initHidden()
 
-        encoder_outputs = torch.zeros(max_len, encoder.hidden_size)
+            encoder_outputs = torch.zeros(max_len, encoder.hidden_size)
+            print("Encoder hidden initialized.")
 
-        for ei in range(input_length):
-            encoder_output, encoder_hidden = encoder(input_tensor[ei], encoder_hidden)
-            encoder_outputs[ei] = encoder_output[0, 0]
+            for ei in range(input_length):
+                encoder_output, encoder_hidden = encoder(input_tensor[ei], encoder_hidden)
+                encoder_outputs[ei] = encoder_output[0, 0]
+                print(f"Encoder output {ei}: {encoder_output}")
 
-        decoder_input = torch.tensor([[SOS_token]])
-        decoder_hidden = encoder_hidden
+            decoder_input = torch.tensor([[SOS_token]])
+            decoder_hidden = encoder_hidden
 
-        decoded_words = []
+            decoded_words = []
 
-        for di in range(max_len):
-            decoder_output, decoder_hidden, decoder_attention = decoder(
-                decoder_input, decoder_hidden, encoder_outputs)
-            topv, topi = decoder_output.topk(1)
-            if topi.item() == EOS_token:
-                decoded_words.append('<EOS>')
-                break
-            else:
-                decoded_words.append(standard_lang.index2word[topi.item()])
+            for di in range(max_len):
+                decoder_output, decoder_hidden, decoder_attention = decoder(
+                    decoder_input, decoder_hidden, encoder_outputs)
+                topv, topi = decoder_output.topk(1)
+                if topi.item() == EOS_token:
+                    decoded_words.append('<EOS>')
+                    break
+                else:
+                    decoded_words.append(standard_lang.index2word[topi.item()])
 
-            decoder_input = topi.squeeze().detach()
+                decoder_input = topi.squeeze().detach()
 
-        return ' '.join(decoded_words)
+            print(f"Decoded words: {decoded_words}")
+            return ' '.join(decoded_words)
+    except Exception as e:
+        print(f"Error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # FastAPI 애플리케이션 생성
 app = FastAPI()
@@ -175,8 +184,16 @@ app = FastAPI()
 class SentenceRequest(BaseModel):
     sentence: str
 
+@app.get("/")
+def root():
+    return {"hello root"}
+
+@app.get("/world")
+def root():
+    return {"hello world"}
+
 # 엔드포인트 정의
-@app.post("/predict/")
+@app.post("/predict")
 async def get_prediction(request: SentenceRequest):
     prediction = predict(request.sentence)
     return {"input": request.sentence, "prediction": prediction}
