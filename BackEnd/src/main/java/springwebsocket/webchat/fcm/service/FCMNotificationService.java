@@ -26,8 +26,13 @@ public class FCMNotificationService {
         if (member.isPresent()) {
             if (member.get().getFirebaseToken() != null) {
                 Map<String, String> data = new HashMap<>();
+<<<<<<< HEAD
                 data.put("title",requestDto.getTitle());
                 data.put("body",requestDto.getBody());
+=======
+                data.put("title", requestDto.getTitle());
+                data.put("body", requestDto.getBody());
+>>>>>>> 2f5eb62125f5c6701b7cf15180a0af3f1751349b
 
                 Message message = Message.builder()
                         .setToken(member.get().getFirebaseToken())
