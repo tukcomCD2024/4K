@@ -2,7 +2,7 @@ import torch
 from fastapi import FastAPI
 from pydantic import BaseModel
 import torch.nn as nn
-import pickle
+import json
 
 class Lang:
     def __init__(self, name):
@@ -27,6 +27,21 @@ class Lang:
 
     def getWordIndex(self, word):
         return self.word2index.get(word, self.word2index["UNK"])
+
+    def saveLang(self, filename):
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump({
+                'word2index': self.word2index,
+                'index2word': self.index2word,
+                'n_words': self.n_words
+            }, f, ensure_ascii=False, indent=4)
+
+    def loadLang(self, filename):
+        with open(filename, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            self.word2index = data['word2index']
+            self.index2word = data['index2word']
+            self.n_words = data['n_words']
 
 def indexesFromSentence(lang, sentence):
     return [lang.getWordIndex(word) for word in sentence.split(' ')]
@@ -96,6 +111,8 @@ class AttnDecoderRNN(nn.Module):
 # 모델 경로와 언어 사전
 encoder_path = 'model_encoder.pth'
 decoder_path = 'model_decoder.pth'
+dialect_lang_path = 'dialect_lang.json'
+standard_lang_path = 'standard_lang.json'
 hidden_size = 256
 max_len = 22  # 최대 문장 길이
 SOS_token = 0
@@ -106,11 +123,8 @@ PAD_token = 3
 # Lang 객체 생성
 dialect_lang = Lang("Dialect")
 standard_lang = Lang("Standard")
-
-for sentence in filtered_dialect:
-    dialect_lang.addSentence(sentence)
-for sentence in filtered_standard:
-    standard_lang.addSentence(sentence)
+dialect_lang.loadLang(dialect_lang_path)
+standard_lang.loadLang(standard_lang_path)
 
 # 모델 로드 함수
 def loadModel(encoder_path='encoder.pth', decoder_path='decoder.pth'):
