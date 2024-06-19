@@ -184,14 +184,6 @@ app = FastAPI()
 class SentenceRequest(BaseModel):
     sentence: str
 
-@app.get("/")
-def root():
-    return {"hello root"}
-
-@app.get("/world")
-def root():
-    return {"hello world"}
-
 # 엔드포인트 정의
 @app.post("/predict")
 async def get_prediction(request: SentenceRequest):
