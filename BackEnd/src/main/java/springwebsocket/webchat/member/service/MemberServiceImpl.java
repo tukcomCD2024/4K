@@ -16,6 +16,7 @@ import springwebsocket.webchat.global.jwt.TokenProvider;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.EmailRequest;
 import springwebsocket.webchat.member.dto.request.EmailPasswordRequest;
+import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
@@ -128,12 +129,14 @@ public class MemberServiceImpl implements MemberService {
         jpaMemberRepository.delete(user.get());
     }
 
-    public TokenMessage login(String loginEmail, String password) {
+    public TokenMessage login(LoginRequest request) {
 
-        Optional<Member> user = memberRepository.findByLoginEmail(loginEmail)
-                .filter(m -> bCryptPasswordEncoder.matches(password, m.getPassword()));
+        Optional<Member> user = memberRepository.findByLoginEmail(request.getEmail())
+                .filter(m -> bCryptPasswordEncoder.matches(request.getPassword(), m.getPassword()));
 
         if (!user.isEmpty()) {
+            Member member = user.get();
+            member.setFirebaseToken(request.getFCMToken());
             return handleExistingMemberLogin(user.get());
         } else {
             throw new LoginFailException();

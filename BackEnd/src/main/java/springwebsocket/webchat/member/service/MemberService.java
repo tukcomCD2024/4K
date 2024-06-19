@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import springwebsocket.webchat.member.dto.MemberUpdataDto;
 import springwebsocket.webchat.member.dto.request.EmailRequest;
 import springwebsocket.webchat.member.dto.request.EmailPasswordRequest;
+import springwebsocket.webchat.member.dto.request.LoginRequest;
 import springwebsocket.webchat.member.dto.request.SignUpRequest;
 import springwebsocket.webchat.member.dto.response.TokenMessage;
 import springwebsocket.webchat.member.dto.response.UserResponse;
@@ -22,7 +23,7 @@ public interface MemberService {
 
     void delete(EmailPasswordRequest request);
 
-    TokenMessage login(String loginEmail, String password);
+    TokenMessage login(LoginRequest request);
 
     ResponseEntity<?> reissue(HttpServletRequest request, HttpServletResponse response);
 
