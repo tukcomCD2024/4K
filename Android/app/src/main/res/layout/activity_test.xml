@@ -8,29 +8,14 @@
     android:orientation="vertical"
     tools:context=".TestActivity">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter the text"
-        android:inputType="text" />
-
-    <Button
-        android:id="@+id/textToSpeechBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Text To Speech" />
-    <Button
-        android:id="@+id/speechToTextBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Speech To Text" />
-
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_token"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello" />
-
+        android:text="Hello DynamicLink!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </LinearLayout>

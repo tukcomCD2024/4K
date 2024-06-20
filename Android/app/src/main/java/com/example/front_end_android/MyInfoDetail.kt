@@ -50,10 +50,31 @@ class MyInfoDetail : AppCompatActivity() {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val selected= parent.getItemAtPosition(position).toString()
-                if(selected == "English")
+                var language = " "
+                if(selected == "English"){
+                    language = "en-US"
                     selectedLanguage = "en"
-                else if(selected == "Korean")
+                }else if(selected == "Korean"){
+                    language = "ko-KR"
                     selectedLanguage = "ko"
+                }
+                else if(selected == "Spanish") {
+                    language = "es-ES"
+                    selectedLanguage = "es"
+                }
+                else if(selected == "French"){
+                    selectedLanguage = "fr"
+                    language = "fr-FR"
+                }
+                else if(selected == "German"){
+                    selectedLanguage = "de"
+                    language = "de-DE"
+                }
+                else if(selected == "Chinese"){
+                    selectedLanguage = "zh-CN"
+                    language = "zh-CN"
+                }
+                MyApplication.preferences.setString("SttLanguage", language)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -104,6 +125,14 @@ class MyInfoDetail : AppCompatActivity() {
                             spinner.setSelection(0)
                         }else if(data.language == "ko"){
                             spinner.setSelection(1)
+                        }else if(data.language == "es"){
+                            spinner.setSelection(2)
+                        }else if(data.language == "fr"){
+                            spinner.setSelection(3)
+                        }else if(data.language == "de"){
+                            spinner.setSelection(4)
+                        }else if(data.language == "zh-CN"){
+                            spinner.setSelection(5)
                         }
                     }
 

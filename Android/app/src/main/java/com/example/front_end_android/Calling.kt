@@ -1,11 +1,16 @@
 package com.example.front_end_android
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.media.AudioManager
 import android.os.Bundle
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.front_end_android.databinding.ActivityCallingBinding
 import com.example.front_end_android.models.IceCandidateModel
 import com.example.front_end_android.models.MessageModel
@@ -15,25 +20,7 @@ import com.example.front_end_android.util.RTCAudioManager
 import com.google.gson.Gson
 import org.webrtc.IceCandidate
 import org.webrtc.MediaStream
-import org.webrtc.PeerConnection
 import org.webrtc.SessionDescription
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.media.AudioManager
-import android.os.Build
-import android.speech.RecognitionListener
-import android.speech.RecognizerIntent
-import android.speech.SpeechRecognizer
-import android.speech.tts.TextToSpeech
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.google.gson.JsonObject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import java.util.Locale
 
 class Calling : AppCompatActivity(), NewMessageInterface {
@@ -66,6 +53,14 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         init()
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
+        binding.linearLayout.visibility = View.GONE
+        val callingState  = MyApplication.preferences.getString("callingState",".")
+        if(callingState == "receiver"){
+            binding.waitTxt.visibility = View.VISIBLE
+            binding.buttonTest.visibility = View.GONE
+        }
+        //binding.exitCallBackground.visibility = View.GONE
+
         binding.nicknameInit.setOnClickListener {
             binding.callingPeopleContainer.visibility = View.GONE
             binding.linearLayout.visibility = View.GONE
@@ -87,7 +82,8 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         recognitionIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         recognitionIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)    // 여분의 키
         // 실제로는 언어 설정에 내가 설정한 언어가 들어가야함
-        recognitionIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR")         // 언어 설정
+        val sttLanguage = MyApplication.preferences.getString("SttLanguage","ko-KR")
+        recognitionIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, sttLanguage)         // 언어 설정
         // 새 SpeechRecognizer 를 만드는 팩토리 메서드
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this@Calling)
         speechRecognizer.setRecognitionListener(recognitionListener)    // 리스너 설정
@@ -121,13 +117,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private fun init(){
         userName = MyApplication.preferences.getString("email",".")
         targetName = MyApplication.preferences.getString("targetName",".")
+
         binding.nicknameInit.text = targetName
-        /*userName = intent.getStringExtra("username")//실제로는 intent로 유저 이름을 받아야함
-        if(userName == "asdf@naver.com"){
-            targetName = "asdfg@naver.com"
-        }else{
-            targetName = "asdf@naver.com"//실제로는 intent로 전화를 거는 상대방을 이름을 받아야함
-        }*/
+
         socketRepository = SocketRepository(this)
         userName?.let { socketRepository?.initSocket(it) }
         rtcClient = RTCClient(application, userName!!, socketRepository!!, object : PeerConnectionObserver(){
@@ -155,11 +147,12 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
         binding.apply {
             binding.buttonTest.setOnClickListener {
+                //상대방이들어오면
                 socketRepository?.sendMessageToSocket(
                     MessageModel("start_call",userName,targetName,null
                     ))
-                binding.buttonTest.visibility = View.GONE
             }
+
             switchCameraButton.setOnClickListener {
                 rtcClient?.switchCamera()
             }
@@ -224,6 +217,10 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                     runOnUiThread {
 
                         binding.apply {
+                            binding.waitTxt.visibility = View.GONE
+                            binding.buttonTest.visibility = View.GONE
+                            binding.linearLayout.visibility = View.VISIBLE
+                            binding.exitCallBackground.visibility = View.VISIBLE
                             rtcClient?.initializeSurfaceView(localView)
                             rtcClient?.initializeSurfaceView(remoteView)
                             rtcClient?.startLocalVideo(localView)
@@ -270,6 +267,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                     binding.incomingNameTV.text = "${message.name.toString()} is calling you"
                     binding.acceptButton.setOnClickListener {
                         binding.buttonTest.visibility = View.GONE
+                        binding.waitTxt.visibility = View.GONE
+                        binding.linearLayout.visibility = View.VISIBLE
+                        binding.exitCallBackground.visibility = View.VISIBLE
                         setIncomingCallLayoutGone()
 
                         binding.apply {
@@ -315,9 +315,17 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                     if (status == TextToSpeech.SUCCESS) {
                         var result: Int? = null
                         if(message.target.toString().trim() == "ko"){
-                            result = textToSpeech.setLanguage(Locale.KOREAN) // 언어를 미국 영어(en-US)로 설정
+                            result = textToSpeech.setLanguage(Locale.KOREAN)
                         }else if(message.target.toString().trim() == "en"){
-                            result = textToSpeech.setLanguage(Locale.US) // 언어를 미국 영어(en-US)로 설정
+                            result = textToSpeech.setLanguage(Locale.US)
+                        }else if(message.target.toString().trim() == "zh-CN"){
+                            result = textToSpeech.setLanguage(Locale.SIMPLIFIED_CHINESE)
+                        }else if(message.target.toString().trim() == "de"){
+                            result = textToSpeech.setLanguage(Locale.GERMANY)
+                        }else if(message.target.toString().trim() == "es"){
+                            result = textToSpeech.setLanguage(Locale("es", "ES"))
+                        }else if(message.target.toString().trim() == "fr"){
+                            result = textToSpeech.setLanguage(Locale.FRANCE)
                         }
                         //val result = textToSpeech.setLanguage(Locale.US)
                         if (result == TextToSpeech.LANG_MISSING_DATA

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "278561057427",
+    "project_id": "ringo-4a945",
+    "storage_bucket": "ringo-4a945.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278561057427:android:56c0f13373217851e07b66",
+        "android_client_info": {
+          "package_name": "com.example.front_end_android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDAxuh8PRCxuQxI2tUZ-qu15Uq1AJSStU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

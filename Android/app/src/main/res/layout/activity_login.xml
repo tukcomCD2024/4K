@@ -173,9 +173,20 @@
 
     </RelativeLayout>
 
+    <CheckBox
+        android:id="@+id/auto_login_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Auto Login"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_field2"
+        android:checked="false"/>
+
     <TextView
         android:id="@+id/forgot_pass"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -187,7 +198,6 @@
         android:textAppearance="@style/forgot_password"
         android:translationY="-1.45sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlHardcoded" />
 

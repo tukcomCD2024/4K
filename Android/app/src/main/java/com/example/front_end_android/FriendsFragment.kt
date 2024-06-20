@@ -23,10 +23,17 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.Manifest
+import com.example.front_end_android.dataclass.CallFCMRequest
+import com.example.front_end_android.dataclass.CallFCMResponse
+import com.example.front_end_android.dataclass.ErrorResponse
 import com.example.front_end_android.dataclass.FindMyFriendsRequest
 import com.example.front_end_android.dataclass.FindMyFriendsResponse
+import com.example.front_end_android.dataclass.FindResponse
 import com.example.front_end_android.dataclass.FriendRequestListRequest
 import com.example.front_end_android.util.AuthInterceptor
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
@@ -217,6 +224,9 @@ class FriendsFragment : Fragment() {
                                         imageView.layoutParams = image_params
                                         imageView.setOnClickListener {
                                             MyApplication.preferences.setString("targetName",email)
+                                            val callingState = "sender"
+                                            MyApplication.preferences.setString("callingState",callingState)
+                                            sendCallFCM(email)
 
                                             PermissionX.init(requireActivity())
                                                 .permissions(
@@ -312,6 +322,68 @@ class FriendsFragment : Fragment() {
     private fun Int.dpToPx(): Int {
         val scale = resources.displayMetrics.density
         return (this * scale + 0.5f).toInt()
+    }
+
+    private fun sendCallFCM(target: String){
+        val accessToken = MyApplication.preferences.getString("AccessToken",".")
+        val refreshToken = MyApplication.preferences.getString("RefreshToken",".")
+        val userEmail = MyApplication.preferences.getString("email",".")
+        val client = OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor(accessToken))
+            .build()
+
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://4kringo.shop:8080/")
+            .client(client)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+        val service = retrofit.create(RetrofitService::class.java)
+
+        val callFCMRequest = CallFCMRequest(target,"Ringo", userEmail)
+        val callFCM = service.callFCMRetrofit(callFCMRequest)
+
+        callFCM.enqueue(object : Callback<CallFCMResponse> {
+            override fun onResponse(call: Call<CallFCMResponse>, response: Response<CallFCMResponse>) {
+                val jsonResponse = response.body()
+                val message = jsonResponse?.message
+                //val status = jsonResponse?.status
+                //val data = jsonResponse?.data
+
+                if (response.isSuccessful) {
+                    Log.d("YMC", "onResponse 성공: $jsonResponse $response")
+                    Log.d("YMC", "message: $message")
+                    //Log.d("YMC", "data: $data")
+                    //Log.d("YMC", "status: $status")
+
+                } else {
+                    Log.d("YMC", "onResponse 실패")//*
+                    Log.d("YMC", "onResponse 실패: $jsonResponse $response")
+                    Log.d("YMC", "message: $message")
+                    val errorBody = response.errorBody()
+                    if (errorBody != null) {
+                        val errorJson = errorBody.string()
+                        Log.d("YMC", "onResponse 실패 errorJson: $errorJson")
+
+                        val errorResponse = Gson().fromJson(errorJson, ErrorResponse::class.java)
+
+                        val status = errorResponse.status
+                        val message = errorResponse.message
+                        val data = errorResponse.data
+                        val code = errorResponse.code
+                        Log.d("YMC", "onResponse 실패 : $status $message $data $code")
+                    } else {
+                        Log.d("YMC", "onResponse 실패 : errorBody is null")
+                    }
+                }
+
+            }
+            override fun onFailure(call: Call<CallFCMResponse>, t: Throwable) {
+                Log.d("YMC", "onFailure 에러: ${t.message}")//*
+            }
+        })
+
     }
 
 }
