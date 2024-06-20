@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 public class TokenMessage {
     String AccessToken;
     String RefreshToken;
+    String language;
 
-    public TokenMessage(String accessToken, String refreshToken) {
+    public TokenMessage(String accessToken, String refreshToken, String language) {
         AccessToken = accessToken;
         RefreshToken = refreshToken;
+        this.language = language;
     }
 }

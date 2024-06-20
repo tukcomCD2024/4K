@@ -139,7 +139,6 @@ public class MemberServiceImpl implements MemberService {
         if (!user.isEmpty()) {
             Member member = user.get();
             member.setFirebaseToken(request.getToken());
-
             return handleExistingMemberLogin(user.get());
         } else {
             throw new LoginFailException();
@@ -215,6 +214,6 @@ public class MemberServiceImpl implements MemberService {
         String accessToken = tokenProvider.createAccessToken(user.getEmail());
         String refreshToken = tokenProvider.createRefreshToken(user.getEmail());
 
-        return new TokenMessage(accessToken, refreshToken);
+        return new TokenMessage(accessToken, refreshToken,user.getLanguage());
     }
 }
