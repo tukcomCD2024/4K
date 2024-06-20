@@ -10,5 +10,6 @@ data class LoginResponse(
 
 data class LoginData(
     val accessToken:String?,
-    val refreshToken:String?
+    val refreshToken:String?,
+    val language:String
 )

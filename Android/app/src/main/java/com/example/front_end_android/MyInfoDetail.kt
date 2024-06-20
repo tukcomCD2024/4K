@@ -50,18 +50,31 @@ class MyInfoDetail : AppCompatActivity() {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val selected= parent.getItemAtPosition(position).toString()
-                if(selected == "English")
+                var language = " "
+                if(selected == "English"){
+                    language = "en-US"
                     selectedLanguage = "en"
-                else if(selected == "Korean")
+                }else if(selected == "Korean"){
+                    language = "ko-KR"
                     selectedLanguage = "ko"
-                else if(selected == "Spanish")
+                }
+                else if(selected == "Spanish") {
+                    language = "es-ES"
                     selectedLanguage = "es"
-                else if(selected == "French")
+                }
+                else if(selected == "French"){
                     selectedLanguage = "fr"
-                else if(selected == "German")
+                    language = "fr-FR"
+                }
+                else if(selected == "German"){
                     selectedLanguage = "de"
-                else if(selected == "Chinese")
+                    language = "de-DE"
+                }
+                else if(selected == "Chinese"){
                     selectedLanguage = "zh-CN"
+                    language = "zh-CN"
+                }
+                MyApplication.preferences.setString("SttLanguage", language)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {

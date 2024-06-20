@@ -97,8 +97,23 @@ class Login : AppCompatActivity() {
                         if (status == "success") {
                             val access_token = jsonResponse.data?.accessToken
                             val refresh_token = jsonResponse.data?.refreshToken
+                            var language = " "
+                            if(jsonResponse.data?.language == "ko"){
+                                language = "ko-KR"
+                            }else if(jsonResponse.data?.language == "en"){
+                                language = "en-US"
+                            }else if(jsonResponse.data?.language == "zh-CN"){
+                                language = "zh-CN"
+                            }else if(jsonResponse.data?.language == "de"){
+                                language = "de-DE"
+                            }else if(jsonResponse.data?.language == "es"){
+                                language = "es-ES"
+                            }else if(jsonResponse.data?.language == "fr"){
+                                language = "fr-FR"
+                            }
                             MyApplication.preferences.setString("AccessToken",access_token.toString())
                             MyApplication.preferences.setString("RefreshToken",refresh_token.toString())
+                            MyApplication.preferences.setString("SttLanguage", language)
                             MyApplication.preferences.setString("email",loginemail)
                             Log.d("YMC", "access token : $access_token")
                             Log.d("YMC", "Refresh token : $refresh_token")
