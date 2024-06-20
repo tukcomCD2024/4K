@@ -138,6 +138,8 @@ class MyInfoFragment : Fragment() {
                 .setTitle("sign out")
                 .setMessage("Are you sure you want to sign out?")
                 .setPositiveButton("check") { dialog, which ->
+                    val loginState = "AutoNotChecked"
+                    MyApplication.preferences.setString("LoginState",loginState)
                     val intent = Intent(requireActivity(), Login::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)

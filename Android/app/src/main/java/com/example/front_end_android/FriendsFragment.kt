@@ -224,6 +224,8 @@ class FriendsFragment : Fragment() {
                                         imageView.layoutParams = image_params
                                         imageView.setOnClickListener {
                                             MyApplication.preferences.setString("targetName",email)
+                                            val callingState = "sender"
+                                            MyApplication.preferences.setString("callingState",callingState)
                                             sendCallFCM(email)
 
                                             PermissionX.init(requireActivity())

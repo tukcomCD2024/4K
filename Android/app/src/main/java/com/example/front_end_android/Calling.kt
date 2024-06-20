@@ -1,11 +1,16 @@
 package com.example.front_end_android
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.media.AudioManager
 import android.os.Bundle
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.front_end_android.databinding.ActivityCallingBinding
 import com.example.front_end_android.models.IceCandidateModel
 import com.example.front_end_android.models.MessageModel
@@ -15,25 +20,7 @@ import com.example.front_end_android.util.RTCAudioManager
 import com.google.gson.Gson
 import org.webrtc.IceCandidate
 import org.webrtc.MediaStream
-import org.webrtc.PeerConnection
 import org.webrtc.SessionDescription
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.media.AudioManager
-import android.os.Build
-import android.speech.RecognitionListener
-import android.speech.RecognizerIntent
-import android.speech.SpeechRecognizer
-import android.speech.tts.TextToSpeech
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.google.gson.JsonObject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import java.util.Locale
 
 class Calling : AppCompatActivity(), NewMessageInterface {
@@ -67,8 +54,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
         binding.linearLayout.visibility = View.GONE
-        val userState = intent.getStringExtra("userState")
-        if(userState == "receiver"){
+        val callingState  = MyApplication.preferences.getString("callingState",".")
+        if(callingState == "receiver"){
+            binding.waitTxt.visibility = View.VISIBLE
             binding.buttonTest.visibility = View.GONE
         }
         //binding.exitCallBackground.visibility = View.GONE
@@ -158,9 +146,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
         binding.apply {
             binding.buttonTest.setOnClickListener {
-                binding.buttonTest.visibility = View.GONE
-                binding.linearLayout.visibility = View.VISIBLE
-                binding.exitCallBackground.visibility = View.VISIBLE
                 //상대방이들어오면
                 socketRepository?.sendMessageToSocket(
                     MessageModel("start_call",userName,targetName,null
@@ -231,6 +216,10 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                     runOnUiThread {
 
                         binding.apply {
+                            binding.waitTxt.visibility = View.GONE
+                            binding.buttonTest.visibility = View.GONE
+                            binding.linearLayout.visibility = View.VISIBLE
+                            binding.exitCallBackground.visibility = View.VISIBLE
                             rtcClient?.initializeSurfaceView(localView)
                             rtcClient?.initializeSurfaceView(remoteView)
                             rtcClient?.startLocalVideo(localView)
@@ -277,6 +266,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                     binding.incomingNameTV.text = "${message.name.toString()} is calling you"
                     binding.acceptButton.setOnClickListener {
                         binding.buttonTest.visibility = View.GONE
+                        binding.waitTxt.visibility = View.GONE
+                        binding.linearLayout.visibility = View.VISIBLE
+                        binding.exitCallBackground.visibility = View.VISIBLE
                         setIncomingCallLayoutGone()
 
                         binding.apply {
@@ -322,9 +314,17 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                     if (status == TextToSpeech.SUCCESS) {
                         var result: Int? = null
                         if(message.target.toString().trim() == "ko"){
-                            result = textToSpeech.setLanguage(Locale.KOREAN) // 언어를 미국 영어(en-US)로 설정
+                            result = textToSpeech.setLanguage(Locale.KOREAN)
                         }else if(message.target.toString().trim() == "en"){
-                            result = textToSpeech.setLanguage(Locale.US) // 언어를 미국 영어(en-US)로 설정
+                            result = textToSpeech.setLanguage(Locale.US)
+                        }else if(message.target.toString().trim() == "zh-CN"){
+                            result = textToSpeech.setLanguage(Locale.SIMPLIFIED_CHINESE)
+                        }else if(message.target.toString().trim() == "de"){
+                            result = textToSpeech.setLanguage(Locale.GERMANY)
+                        }else if(message.target.toString().trim() == "es"){
+                            result = textToSpeech.setLanguage(Locale("es", "ES"))
+                        }else if(message.target.toString().trim() == "fr"){
+                            result = textToSpeech.setLanguage(Locale.FRANCE)
                         }
                         //val result = textToSpeech.setLanguage(Locale.US)
                         if (result == TextToSpeech.LANG_MISSING_DATA

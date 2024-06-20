@@ -22,10 +22,29 @@ class Login : AppCompatActivity() {
 
     private lateinit var binding:ActivityLoginBinding
     private lateinit var token:String
+    private lateinit var loginState:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if(MyApplication.preferences.getString("LoginState","AutoNotChecked") == "AutoChecked"){
+            Log.d("YMC", "dddd")
+            val intent = Intent(this@Login, NaviActivity::class.java)
+            startActivity(intent)
+        }
+
+        /*binding.autoLoginCb.setOnCheckedChangeListener { buttonView, isChecked ->
+            if(isChecked){
+                loginState = "AutoChecked"
+                MyApplication.preferences.setString("LoginState",loginState)
+                Log.d("YMC", loginState)
+            }else{
+                loginState = "AutoNotChecked"
+                MyApplication.preferences.setString("LoginState",loginState)
+                Log.d("YMC", loginState)
+            }
+        }*/
 
         binding.goSignUp.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
@@ -83,6 +102,17 @@ class Login : AppCompatActivity() {
                             MyApplication.preferences.setString("email",loginemail)
                             Log.d("YMC", "access token : $access_token")
                             Log.d("YMC", "Refresh token : $refresh_token")
+
+                            if(binding.autoLoginCb.isChecked){
+                                loginState = "AutoChecked"
+                                MyApplication.preferences.setString("LoginState",loginState)
+                                Log.d("YMC", loginState)
+                            }else{
+                                loginState = "AutoNotChecked"
+                                MyApplication.preferences.setString("LoginState",loginState)
+                                Log.d("YMC", loginState)
+                            }
+
                             val intent = Intent(this@Login, NaviActivity::class.java)
                             startActivity(intent)
                         }

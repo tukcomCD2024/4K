@@ -80,7 +80,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     // 수신 된 FCM 메시지를 포함하는 간단한 알림을 만들고 표시한다.
     private fun sendNotification(title: String, body: String) {
         Log.d("EEEE", "sendnotivication")
+        val callingState = "receiver"
         MyApplication.preferences.setString("targetName",body)
+        MyApplication.preferences.setString("callingState",callingState)
         val intent = Intent(this, Calling::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             putExtra("userState", "receiver")

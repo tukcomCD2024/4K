@@ -54,6 +54,14 @@ class MyInfoDetail : AppCompatActivity() {
                     selectedLanguage = "en"
                 else if(selected == "Korean")
                     selectedLanguage = "ko"
+                else if(selected == "Spanish")
+                    selectedLanguage = "es"
+                else if(selected == "French")
+                    selectedLanguage = "fr"
+                else if(selected == "German")
+                    selectedLanguage = "de"
+                else if(selected == "Chinese")
+                    selectedLanguage = "zh-CN"
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -104,6 +112,14 @@ class MyInfoDetail : AppCompatActivity() {
                             spinner.setSelection(0)
                         }else if(data.language == "ko"){
                             spinner.setSelection(1)
+                        }else if(data.language == "es"){
+                            spinner.setSelection(2)
+                        }else if(data.language == "fr"){
+                            spinner.setSelection(3)
+                        }else if(data.language == "de"){
+                            spinner.setSelection(4)
+                        }else if(data.language == "zh-CN"){
+                            spinner.setSelection(5)
                         }
                     }
 

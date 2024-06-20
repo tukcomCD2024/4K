@@ -54,6 +54,14 @@ class SignUp : AppCompatActivity() {
                     selectedLanguage = "en"
                 else if(selected == "Korean")
                     selectedLanguage = "ko"
+                else if(selected == "Spanish")
+                    selectedLanguage = "es"
+                else if(selected == "French")
+                    selectedLanguage = "fr"
+                else if(selected == "German")
+                    selectedLanguage = "de"
+                else if(selected == "Chinese")
+                    selectedLanguage = "zh-CN"
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
