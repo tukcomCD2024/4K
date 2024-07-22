@@ -131,7 +131,7 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
                 isFinal = result.isFinal
                 debugPrint(result.bestTranscription.formattedString)
                 if result.speechRecognitionMetadata != nil {
-                    var message = Message(type: .stt_message, name: "rkdwlsgur@naver.com", target: "rkdwltjr@naver.com")
+                    var message = Message(type: .stt_message, name: UserManager.getData(type: String.self, forKey: .email)!, target: UserManager.getData(type: String.self, forKey: .receiver)!)
                     message.data = .response(result.bestTranscription.formattedString)
                     CallService.shared.signalClient.send(message: message)
                     debugPrint("send trans msg")

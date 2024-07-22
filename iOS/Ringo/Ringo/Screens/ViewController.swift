@@ -269,14 +269,17 @@ extension ViewController {
     func login() {
             
         guard let email = input_email.text else { return }
-        guard let passward = input_passwd.text else { return }
+        guard let password = input_passwd.text else { return }
         
-        SigninSercive.shared.login(email: email, password: passward) { response in
+        SigninSercive.shared.login(email: email, password: password) { response in
             switch response {
             case .success(let data):
                     
                 guard let data = data as? String else { return }
                 if data == "success"{
+                    
+                    UserManager.setData(value: email, key: .email)
+                    UserManager.setData(value: password, key: .password)
 //                    UserDefaults.standard.set(data.data?.jwtToken, forKey: "jwtToken")
                     let nav = UINavigationController()
                     nav.modalPresentationStyle = .fullScreen

@@ -12,7 +12,7 @@ class ContactsViewController: UIViewController {
     
     let contactsTableViewCell = ContactsTableViewCell.identifier
     
-    var randomNames = [String]()
+    var friendsList = [String]()
 
     let searchController = UISearchController()
     var tableView: UITableView!
@@ -52,7 +52,7 @@ class ContactsViewController: UIViewController {
     
     @objc private func test() {
         DispatchQueue.global().async {
-            CallService.shared.signalClient.store(id: "rkdwltjr@naver.com")
+            CallService.shared.signalClient.store(user: UserManager.getData(type: String.self, forKey: .email)!)
         }
     }
 }
@@ -96,13 +96,13 @@ extension ContactsViewController: UITableViewDelegate {
 extension ContactsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return randomNames.count
+        return friendsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: contactsTableViewCell, for: indexPath) as! ContactsTableViewCell
         
-        cell.name.text = randomNames[indexPath.row]
+        cell.name.text = friendsList[indexPath.row]
         cell.selectionStyle = .none
         cell.delegate = self
                 
@@ -114,13 +114,13 @@ extension ContactsViewController {
     
     func loadFriends() {
         //id ??인 유저의 친구목록
-        FriendService.shared.loadFriendsList(userId: 8) { response in
+        FriendService.shared.loadFriendsList(email: UserManager.getData(type: String.self, forKey: .email) ?? "") { response in
             switch response {
             case .success(let data):
                     
                 guard let data = data as? [String] else { return }
                 if !data.isEmpty {
-                    self.randomNames = data
+                    self.friendsList = data
                     self.tableView.reloadData()
                 } else {
                     let alert = UIAlertController(title: "친구가 없습니다", message: "", preferredStyle: .alert)
@@ -145,7 +145,9 @@ extension ContactsViewController {
 extension ContactsViewController: ContactsTableViewCellDelegate {
     
     func pressedButton() {
-        CallService.shared.signalClient.startcall(id: "8", target: "10")
+        let rowNum = tableView.indexPathForSelectedRow!.row
+        CallService.shared.signalClient.startcall(user: UserManager.getData(type: String.self, forKey: .email)!, target: friendsList[rowNum])
+        UserManager.setData(value: friendsList[rowNum], key: .receiver)
     }
     
 }

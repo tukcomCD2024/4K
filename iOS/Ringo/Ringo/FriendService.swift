@@ -14,7 +14,7 @@ class FriendService {
     
     private init() {}
     
-    func loadFriendsList(userId: Int64, completion: @escaping(NetworkResult<Any>) -> Void)
+    func loadFriendsList(email: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
 //        let url = "http://192.168.0.7:7080/friendship/findByUserIdAndStatusOrFriendIdAndStatus"
         let url = "https://4kringo.shop:8080/friendship/findByUserIdAndStatusOrFriendIdAndStatus"
@@ -22,7 +22,7 @@ class FriendService {
         let header : HTTPHeaders = ["Content-Type" : "application/json"]
         
         let body : Parameters = [
-            "userId" : userId
+            "email" : email
         ]
         
         let dataRequest = AF.request(url,
