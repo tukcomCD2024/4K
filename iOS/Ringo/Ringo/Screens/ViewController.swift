@@ -43,17 +43,19 @@ class ViewController: UIViewController {
         view.addSubview(signupBtn)
         view.addSubview(email)
         view.addSubview(input_email)
+        
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(passwd)
+        stackView.addArrangedSubview(input_passwd)
+        stackView.addArrangedSubview(error)
         view.addSubview(forgotPwBtn)
+        
         view.addSubview(signinBtn)
         view.addSubview(Text4)
         view.addSubview(google)
         view.addSubview(apple)
         view.addSubview(facebook)
         
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(passwd)
-        stackView.addArrangedSubview(input_passwd)
-        stackView.addArrangedSubview(error)
     }
     
     func setUpValue() {
@@ -64,7 +66,7 @@ class ViewController: UIViewController {
         Text1.text = "Sign in"
         Text1.font = .preferredFont(forTextStyle: .title1)
         
-        Text2.text = "If you don't have an account register \nYou can"
+        Text2.text = "If you don't have an account register"
         Text2.font = .preferredFont(forTextStyle: .body)
         
         Text3.text = "You can"
@@ -74,6 +76,7 @@ class ViewController: UIViewController {
         signupBtn.setTitleColor(.systemBlue, for: .normal)
         signupBtn.titleLabel?.font = .systemFont(ofSize: 18)
         signupBtn.setTitleColor(.systemBlue.withAlphaComponent(0.5), for: .highlighted)
+        signupBtn.addTarget(self, action: #selector(onPressSignup(_:)), for: .touchUpInside)
         
         email.text = "E-mail"
         email.font = .preferredFont(forTextStyle: .body)
@@ -87,6 +90,8 @@ class ViewController: UIViewController {
         input_email.autocapitalizationType = .none
         input_email.autocorrectionType = .no
         input_email.spellCheckingType = .no
+        input_email.clearButtonMode = .unlessEditing
+        input_email.delegate = self
         
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -229,6 +234,13 @@ class ViewController: UIViewController {
             view.endEditing(true)
         }
     
+    @objc func onPressSignup(_ sender: UIButton) {
+        let signupVC = SignupViewController()
+        signupVC.modalPresentationStyle = .fullScreen
+        signupVC.modalTransitionStyle = .crossDissolve
+        present(signupVC, animated: true)
+    }
+    
     @objc func onPressSignin(_ sender: UIButton) {
         login()
     }
@@ -275,12 +287,21 @@ extension ViewController {
             switch response {
             case .success(let data):
                     
-                guard let data = data as? String else { return }
-                if data == "success"{
+                guard let data = data as? SigninDataResponse else { return }
+                if data.status == "success"{
                     
                     UserManager.setData(value: email, key: .email)
                     UserManager.setData(value: password, key: .password)
-//                    UserDefaults.standard.set(data.data?.jwtToken, forKey: "jwtToken")
+                    UserManager.setData(value: data.data?.language, key: .language)
+                    UserManager.setData(value: data.data?.accessToken, key: .accessToken)
+                    UserManager.setData(value: data.data?.refreshToken, key: .refreshToken)
+
+                    print(UserManager.getData(type: String.self, forKey: .email) ?? "")
+                    print(UserManager.getData(type: String.self, forKey: .password) ?? "")
+                    print(UserManager.getData(type: String.self, forKey: .accessToken) ?? "")
+                    print(UserManager.getData(type: String.self, forKey: .refreshToken) ?? "")
+                    print(UserManager.getData(type: String.self, forKey: .language) ?? "")
+                    
                     let nav = UINavigationController()
                     nav.modalPresentationStyle = .fullScreen
                     
@@ -291,7 +312,7 @@ extension ViewController {
                     nav.viewControllers = [controller]
                     self.present(nav, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(title: data, message: "", preferredStyle: .alert)
+                    let alert = UIAlertController(title: data.status, message: data.message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
             //            alert.addAction(UIAlertAction(title: "DEFAULT", style: .default, handler: nil))
             //            alert.addAction(UIAlertAction(title: "DESTRUCTIVE", style: .destructive, handler: nil))
@@ -308,11 +329,13 @@ extension ViewController {
                 print("serverErr")
             case .networkFail:
                 print("networkFail")
+            case .dataErr:
+                print("dataErr")
             }
         }
     }
 }
-// MARK:
+// MARK: - 키보드 사라지게 하기
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

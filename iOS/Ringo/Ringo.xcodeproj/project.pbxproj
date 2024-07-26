@@ -41,6 +41,8 @@
 		945CF9902B69341800396E4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 945CF98F2B69341800396E4E /* SnapKit */; };
 		94C3E5412C3398C900EBF588 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3E5402C3398C900EBF588 /* AuthInterceptor.swift */; };
 		94C3E5432C351A6A00EBF588 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3E5422C351A6A00EBF588 /* UserManager.swift */; };
+		94C3E5452C4DF99200EBF588 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3E5442C4DF99200EBF588 /* SignupViewController.swift */; };
+		94C3E5472C4E26AE00EBF588 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3E5462C4E26AE00EBF588 /* Language.swift */; };
 		94FB0A6B2B858F66005A4915 /* TestSTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */; };
 		94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6C2BAAD64A005A4915 /* TTS.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,8 @@
 		945CF9882B67E1CE00396E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94C3E5402C3398C900EBF588 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		94C3E5422C351A6A00EBF588 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		94C3E5442C4DF99200EBF588 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		94C3E5462C4E26AE00EBF588 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSTTViewController.swift; sourceTree = "<group>"; };
 		94FB0A6C2BAAD64A005A4915 /* TTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				945CF97E2B67E1CD00396E4E /* ViewController.swift */,
+				94C3E5442C4DF99200EBF588 /* SignupViewController.swift */,
 				945603122B6AC07D002F4B33 /* TabBarViewController.swift */,
 				945603142B6AC22A002F4B33 /* ContactsViewController.swift */,
 				9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */,
@@ -179,6 +184,7 @@
 				940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */,
 				945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */,
 				94470A922B7163E900F0A942 /* Model.swift */,
+				94C3E5462C4E26AE00EBF588 /* Language.swift */,
 				94470A942B71680100F0A942 /* SigninService.swift */,
 				940C25652B74EF4D00E069D0 /* FriendService.swift */,
 				94470A962B717DC300F0A942 /* ConnectionViewController.swift */,
@@ -294,7 +300,9 @@
 				940C257A2B7A899500E069D0 /* IceCandidate.swift in Sources */,
 				94C3E5412C3398C900EBF588 /* AuthInterceptor.swift in Sources */,
 				945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */,
+				94C3E5452C4DF99200EBF588 /* SignupViewController.swift in Sources */,
 				940C258A2B7A8FA900E069D0 /* CallService.swift in Sources */,
+				94C3E5472C4E26AE00EBF588 /* Language.swift in Sources */,
 				945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */,
 				945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */,
 				940C25872B7A89AB00E069D0 /* WebRTCClient.swift in Sources */,

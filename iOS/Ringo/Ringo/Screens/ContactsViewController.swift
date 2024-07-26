@@ -136,6 +136,8 @@ extension ContactsViewController {
                 print("serverErr")
             case .networkFail:
                 print("networkFail")
+            case .dataErr:
+                print("dataErr")
             }
         }
     }

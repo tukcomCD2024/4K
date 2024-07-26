@@ -50,6 +50,9 @@ final class AuthInterceptor : RequestInterceptor {
                     case .networkFail:
                         print("networkFail")
                         return completion(.doNotRetryWithError(error))
+                    case .dataErr:
+                        print("dataErr")
+                        return completion(.doNotRetryWithError(error))
                     }
                 }
                 UserManager.setData(value: newAccessToken, key: .accessToken) // 토큰 갱신 코드
