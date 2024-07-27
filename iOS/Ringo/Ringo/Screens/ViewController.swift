@@ -297,6 +297,8 @@ extension ViewController {
                     UserManager.setData(value: data.data?.language, key: .language)
                     UserManager.setData(value: data.data?.accessToken, key: .accessToken)
                     UserManager.setData(value: data.data?.refreshToken, key: .refreshToken)
+                    self.input_email.text = ""
+                    self.input_passwd.text = ""
                     
                     let nav = UINavigationController()
                     nav.modalPresentationStyle = .fullScreen

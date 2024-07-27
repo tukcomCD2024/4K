@@ -63,6 +63,7 @@ class AccountViewController: UIViewController {
             btn.configuration?.buttonSize = .large
             btn.configuration?.baseBackgroundColor = .systemRed
             btn.configuration?.title = "Sign out"
+            btn.addTarget(self, action: #selector(self.signout(_:)), for: .touchUpInside)
         }
         
         withdrawal.configuration = UIButton.Configuration.filled()
@@ -93,6 +94,9 @@ class AccountViewController: UIViewController {
             make.leading.equalTo(mainText.snp.leading)
             make.trailing.equalTo(mainText.snp.trailing)
         }
+    }
+    @objc func signout(_ sender: UIButton) {
+        dismiss(animated: true)
     }
 }
 // MARK: - canvas 이용하기
