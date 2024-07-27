@@ -343,4 +343,11 @@ extension ViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == input_passwd && !error.isHidden {
+            error.isHidden = true
+            input_passwd.layer.borderColor = UIColor.clear.cgColor
+        }
+        return true
+    }
 }

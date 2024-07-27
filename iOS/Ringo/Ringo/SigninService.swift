@@ -44,6 +44,11 @@ class SigninSercive {
                 guard let statusCode = response.response?.statusCode else {return}
                 guard let value = response.value else {return}
                 
+//                디버그
+//                print(statusCode)
+//                print((response.response?.allHeaderFields)!)
+//                print(String(data: response.data!, encoding: .utf8)!)
+                
                 let networkResult = self.judgeStatus(by: statusCode, value)
                 completion(networkResult)
                 
@@ -134,10 +139,11 @@ class SigninSercive {
     }
     
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
-        print(statusCode)
+//        print(statusCode) //디버그
         switch statusCode {
         case ..<300 : return isVaildData(data: data)
-        case 400..<500 : return .pathErr
+        case 400 : return isVaildData(data: data)
+        case 401..<500 : return .pathErr
         case 500..<600 : return .serverErr
         default : return .networkFail
         }
