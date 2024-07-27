@@ -83,14 +83,15 @@ class ViewController: UIViewController {
         
         input_email.placeholder = "Enter your email"
         input_email.borderStyle = .roundedRect
-        input_email.layer.borderWidth = 1.5
-        input_email.layer.borderColor = UIColor(hexCode: "E2E8F0").cgColor
-        input_email.layer.cornerRadius = 5
+//        input_email.layer.borderWidth = 1.5
+//        input_email.layer.borderColor = UIColor(hexCode: "E2E8F0").cgColor
+//        input_email.layer.cornerRadius = 5
         input_email.keyboardType = .emailAddress
         input_email.autocapitalizationType = .none
         input_email.autocorrectionType = .no
         input_email.spellCheckingType = .no
         input_email.clearButtonMode = .unlessEditing
+        input_email.backgroundColor = .systemGray6
         input_email.delegate = self
         
         stackView.axis = .vertical
@@ -126,8 +127,9 @@ class ViewController: UIViewController {
         input_passwd.delegate = self
         input_passwd.autocorrectionType = .no
         input_passwd.spellCheckingType = .no
+        input_passwd.backgroundColor = .systemGray6
         
-        error.layer.isHidden = true
+        error.isHidden = true
         error.setTitle(" Incorrect password. Please check your password.", for: .normal)
         error.setTitleColor(.red, for: .normal)
         error.titleLabel?.font = .systemFont(ofSize: 13)
@@ -295,12 +297,6 @@ extension ViewController {
                     UserManager.setData(value: data.data?.language, key: .language)
                     UserManager.setData(value: data.data?.accessToken, key: .accessToken)
                     UserManager.setData(value: data.data?.refreshToken, key: .refreshToken)
-
-                    print(UserManager.getData(type: String.self, forKey: .email) ?? "")
-                    print(UserManager.getData(type: String.self, forKey: .password) ?? "")
-                    print(UserManager.getData(type: String.self, forKey: .accessToken) ?? "")
-                    print(UserManager.getData(type: String.self, forKey: .refreshToken) ?? "")
-                    print(UserManager.getData(type: String.self, forKey: .language) ?? "")
                     
                     let nav = UINavigationController()
                     nav.modalPresentationStyle = .fullScreen
@@ -312,6 +308,12 @@ extension ViewController {
                     nav.viewControllers = [controller]
                     self.present(nav, animated: true, completion: nil)
                 } else {
+                    
+                    self.input_passwd.layer.borderWidth = 1
+                    self.input_passwd.layer.cornerRadius = 5
+                    self.input_passwd.layer.borderColor = UIColor.systemRed.cgColor
+                    self.error.isHidden = false
+                    
                     let alert = UIAlertController(title: data.status, message: data.message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
             //            alert.addAction(UIAlertAction(title: "DEFAULT", style: .default, handler: nil))
