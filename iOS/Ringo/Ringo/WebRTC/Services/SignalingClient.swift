@@ -12,6 +12,7 @@ import WebRTC
 protocol SignalClientDelegate: AnyObject {
     func signalClientDidConnect(_ signalClient: SignalingClient)
     func signalClientDidDisconnect(_ signalClient: SignalingClient)
+    func signalClientDidForceDisconnect(_ signalClient: SignalingClient)
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, sender: String)
     func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate, sender: String)
     func signalClient(_ signalClient: SignalingClient, didReceiveCallResponse response: String, sender: String)
@@ -32,6 +33,9 @@ final class SignalingClient {
     func connect() {
         self.webSocket.delegate = self
         self.webSocket.connect()
+    }
+    func forceDisconnect() {
+        self.webSocket.forceDisconnect()
     }
     
     func store(user: String) {
@@ -108,12 +112,16 @@ extension SignalingClient: WebSocketProviderDelegate {
     
     func webSocketDidDisconnect(_ webSocket: WebSocketProvider) {
         self.delegate?.signalClientDidDisconnect(self)
-        
-        // try to reconnect every two seconds
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-            debugPrint("Trying to reconnect to signaling server...")
-            self.webSocket.connect()
-        }
+//        
+//        // try to reconnect every two seconds
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+//            debugPrint("Trying to reconnect to signaling server...")
+//            self.webSocket.connect()
+//        }
+    }
+    
+    func webSocketDidForceDisconnect(_ webSocket: any WebSocketProvider) {
+        self.delegate?.signalClientDidForceDisconnect(self)
     }
     
     func webSocket(_ webSocket: WebSocketProvider, didReceiveData data: Data) {

@@ -18,8 +18,6 @@ class TabBarViewController: UITabBarController{
         CallService.shared.signalClient.delegate = self
         CallService.shared.signalClient.connect()
         
-        view.backgroundColor = .systemBackground
-        
         tabBar.backgroundColor = .systemGray6
         
         let contactsVC = UINavigationController(rootViewController: ContactsViewController())
@@ -43,6 +41,10 @@ extension TabBarViewController: SignalClientDelegate {
     
     func signalClientDidDisconnect(_ signalClient: SignalingClient) {
         print("signal disconnect")
+    }
+    
+    func signalClientDidForceDisconnect(_ signalClient: SignalingClient) {
+        print("signal forceDisconnect")
     }
     
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, sender: String) {

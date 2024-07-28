@@ -11,7 +11,7 @@ class AccountViewController: UIViewController {
 
     let mainText = UILabel()
     let userInfo = UIButton()
-    let signout = UIButton()
+    let signoutBtn = UIButton()
     let withdrawal = UIButton()
     
     override func viewDidLoad() {
@@ -25,7 +25,7 @@ class AccountViewController: UIViewController {
     func setUpView() {
         view.addSubview(mainText)
         view.addSubview(userInfo)
-        view.addSubview(signout)
+        view.addSubview(signoutBtn)
         view.addSubview(withdrawal)
     }
     func setUpValue() {
@@ -33,7 +33,7 @@ class AccountViewController: UIViewController {
         
         mainText.text = "Account"
 //        mainText.font = .preferredFont(forTextStyle: .largeTitle)
-        mainText.font = UIFont.boldSystemFont(ofSize: 35)
+        mainText.font = UIFont.systemFont(ofSize: 35, weight: .bold)
         
         userInfo.configuration = UIButton.Configuration.filled()
         userInfo.configurationUpdateHandler = { btn in
@@ -58,12 +58,12 @@ class AccountViewController: UIViewController {
             btn.tintColor = .tertiarySystemBackground
         }
         
-        signout.configuration = UIButton.Configuration.filled()
-        signout.configurationUpdateHandler = { btn in
+        signoutBtn.configuration = UIButton.Configuration.filled()
+        signoutBtn.configurationUpdateHandler = { btn in
             btn.configuration?.buttonSize = .large
             btn.configuration?.baseBackgroundColor = .systemRed
             btn.configuration?.title = "Sign out"
-            btn.addTarget(self, action: #selector(self.signout(_:)), for: .touchUpInside)
+            btn.addTarget(self, action: #selector(self.onPressSignout(_:)), for: .touchUpInside)
         }
         
         withdrawal.configuration = UIButton.Configuration.filled()
@@ -84,7 +84,7 @@ class AccountViewController: UIViewController {
             make.leading.equalTo(mainText.snp.leading)
             make.trailing.equalTo(mainText.snp.trailing)
         }
-        signout.snp.makeConstraints { make in
+        signoutBtn.snp.makeConstraints { make in
             make.bottom.equalTo(withdrawal.snp.top).offset(-30)
             make.leading.equalTo(mainText.snp.leading)
             make.trailing.equalTo(mainText.snp.trailing)
@@ -95,10 +95,47 @@ class AccountViewController: UIViewController {
             make.trailing.equalTo(mainText.snp.trailing)
         }
     }
-    @objc func signout(_ sender: UIButton) {
-        dismiss(animated: true)
+    @objc func onPressSignout(_ sender: UIButton) {
+        signout()
     }
 }
+// MARK: -  Sign out
+extension AccountViewController {
+    
+    func signout() {
+            
+        guard let refreshtoken = UserManager.getData(type: String.self, forKey: .refreshToken) else { return }
+    
+        SigninSercive.shared.signout(refreshToken: refreshtoken) { response in
+            switch response {
+            case .success(let data):
+                    
+                guard let data = data as? String else { return }
+                if data == "로그아웃 성공"{
+                    self.dismiss(animated: true)
+                    CallService.shared.signalClient.forceDisconnect()
+                } else {
+                    let alert = UIAlertController(title: data, message: data, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    print(data)
+                    }
+                    
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            case .dataErr:
+                print("dataErr")
+            }
+        }
+    }
+}
+
 // MARK: - canvas 이용하기
 import SwiftUI
 @available(iOS 13.0.0, *)

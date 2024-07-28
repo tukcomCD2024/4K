@@ -62,6 +62,11 @@ class NativeWebSocket: NSObject, WebSocketProvider {
         self.socket = nil
         self.delegate?.webSocketDidDisconnect(self)
     }
+    func forceDisconnect() {
+        self.socket?.cancel()
+        self.socket = nil
+        self.delegate?.webSocketDidForceDisconnect(self)
+    }
 }
 
 @available(iOS 13.0, *)
