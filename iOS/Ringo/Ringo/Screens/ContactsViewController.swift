@@ -48,8 +48,6 @@ class ContactsViewController: UIViewController {
     }
     //navigaion rightBtn action
     @objc private func requestFriend(_ sender: UIBarButtonItem) {
-//        self.tabBarController?.tabBar.isHidden = true
-        tabBarController?.tabBar.isHiddenWithAnimation()
         self.navigationController?.pushViewController(FriendRequestViewController(), animated: true)
     }
     
@@ -57,16 +55,6 @@ class ContactsViewController: UIViewController {
         DispatchQueue.global().async {
             CallService.shared.signalClient.store(user: UserManager.getData(type: String.self, forKey: .email)!)
         }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tabBarController?.tabBar.isAppearedWithAnimation()
-//        self.tabBarController?.tabBar.isHidden = false
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        tabBarController?.tabBar.isAppearedWithAnimation()
-//        self.tabBarController?.tabBar.isHidden = false
     }
 }
 
@@ -165,30 +153,6 @@ extension ContactsViewController: ContactsTableViewCellDelegate {
         UserManager.setData(value: friendsList[rowNum], key: .receiver)
     }
     
-}
-// MARK: - TabBar Animation
-extension UITabBar {
-    func isHiddenWithAnimation() {
-        let orig = self.frame
-        var target = self.frame
-        target.origin.x = target.origin.x - target.size.width
-        UIView.animate(withDuration: 0.18, animations: {
-            self.frame = target
-        }) { (true) in
-            self.isHidden = true
-            self.frame = orig
-        }
-    }
-    func isAppearedWithAnimation() {
-        let orig = self.frame
-        var target = self.frame
-        target.origin.x = target.origin.x - target.size.width
-        self.frame = target
-        self.isHidden = false
-        UIView.animate(withDuration: 0.3, animations: {
-            self.frame = orig
-        })
-    }
 }
 // MARK: - canvas 이용하기
 import SwiftUI

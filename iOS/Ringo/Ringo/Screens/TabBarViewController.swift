@@ -27,8 +27,6 @@ class TabBarViewController: UITabBarController{
         contactsVC.tabBarItem = UITabBarItem(title: "Contacts", image: UIImage(systemName: "person.3"), tag: 1)
         recentsVC.tabBarItem = UITabBarItem(title: "Recents", image: UIImage(systemName: "clock"), tag: 2)
         accountVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(systemName: "person.text.rectangle"), tag: 3)
-
-        contactsVC.navigationBar.backgroundColor = .systemBackground
         
         setViewControllers([contactsVC,recentsVC,accountVC], animated: false)
     }
