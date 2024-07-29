@@ -66,7 +66,7 @@ class SigninSercive {
         //HTTP Headers : 요청 헤더
         let header : HTTPHeaders = [
             "Content-Type" : "application/json",
-            "refresh-token" : token
+            "Refresh-Token" : token
         ]
         
         //요청 바디
@@ -87,7 +87,16 @@ class SigninSercive {
             case .success: //데이터 통신이 성공한 경우에
                 guard let statusCode = response.response?.statusCode else {return}
                 guard let value = response.value else {return}
-                
+                guard let access = response.response?.value(forHTTPHeaderField: "AccessToken") else {
+                    print("get access fail")
+                    return }
+                guard let refresh = response.response?.value(forHTTPHeaderField: "RefreshToken") else {
+                    print("get refresh fail")
+                    return }
+                if statusCode < 300 {
+                    UserManager.setData(value: access, key: .accessToken)
+                    UserManager.setData(value: refresh, key: .refreshToken)
+                }
                 let networkResult = self.judgeStatus(by: statusCode, value)
                 completion(networkResult)
                 
