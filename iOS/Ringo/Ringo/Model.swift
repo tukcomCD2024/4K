@@ -19,6 +19,12 @@ struct SigninDataResponse: Codable {
     let message: String?
 }
 
+struct FriendInfo: Codable {
+    let name: String
+    let language: String
+    let email: String
+}
+
 enum NetworkResult<T> {
     case success(T)
     case requestErr(T)

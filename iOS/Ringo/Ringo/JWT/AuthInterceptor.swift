@@ -19,7 +19,8 @@ final class AuthInterceptor : RequestInterceptor {
             return
         }
         var urlRequest = urlRequest
-        urlRequest.headers.add(.authorization(bearerToken: accessToken))
+        urlRequest.setValue(accessToken, forHTTPHeaderField: "AccessToken")
+        completion(.success(urlRequest))
     }
     func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
         guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 else {
@@ -33,11 +34,11 @@ final class AuthInterceptor : RequestInterceptor {
                 }
                 //let api = API.refreshToken(refreshToken)
                 //let token = try await apiManager.request(api, type: TokenReissueResponse.self) refreshToken 갱신 api 호출 후 결과 받아오기
-                var newAccessToken:String = ""
+//                var newAccessToken:String = ""
                 SigninSercive.shared.refresh(token: refreshToken) { response in
                     switch response {
                     case .success(let data):
-                        newAccessToken = data as! String
+                        print(data)
                     case .requestErr(let err):
                         print(err)
                         return completion(.doNotRetryWithError(error))
@@ -55,7 +56,7 @@ final class AuthInterceptor : RequestInterceptor {
                         return completion(.doNotRetryWithError(error))
                     }
                 }
-                UserManager.setData(value: newAccessToken, key: .accessToken) // 토큰 갱신 코드
+//                UserManager.setData(value: newAccessToken, key: .accessToken) // 토큰 갱신 코드
                 return completion(.retry)
             }
     }

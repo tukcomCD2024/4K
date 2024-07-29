@@ -12,7 +12,7 @@ class ContactsViewController: UIViewController {
     
     let contactsTableViewCell = ContactsTableViewCell.identifier
     
-    var friendsList = [String]()
+    var friendsList = [FriendInfo]()
 
     let searchController = UISearchController()
     var tableView: UITableView!
@@ -103,7 +103,7 @@ extension ContactsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: contactsTableViewCell, for: indexPath) as! ContactsTableViewCell
         
-        cell.name.text = friendsList[indexPath.row]
+        cell.name.text = friendsList[indexPath.row].name
         cell.selectionStyle = .none
         cell.delegate = self
                 
@@ -114,12 +114,13 @@ extension ContactsViewController: UITableViewDataSource {
 extension ContactsViewController {
     
     func loadFriends() {
+        print("load friend request")
         //id ??인 유저의 친구목록
         FriendService.shared.loadFriendsList(email: UserManager.getData(type: String.self, forKey: .email) ?? "") { response in
             switch response {
             case .success(let data):
                     
-                guard let data = data as? [String] else { return }
+                guard let data = data as? [FriendInfo] else { return }
                 if !data.isEmpty {
                     self.friendsList = data
                     self.tableView.reloadData()
@@ -149,7 +150,7 @@ extension ContactsViewController: ContactsTableViewCellDelegate {
     
     func pressedButton() {
         let rowNum = tableView.indexPathForSelectedRow!.row
-        CallService.shared.signalClient.startcall(user: UserManager.getData(type: String.self, forKey: .email)!, target: friendsList[rowNum])
+        CallService.shared.signalClient.startcall(user: UserManager.getData(type: String.self, forKey: .email)!, target: friendsList[rowNum].email)
         UserManager.setData(value: friendsList[rowNum], key: .receiver)
     }
     
