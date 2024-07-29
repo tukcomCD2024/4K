@@ -59,7 +59,7 @@ class ContactsViewController: UIViewController {
         // 네비게이션 Push
 //        self.navigationController?.pushViewController(FriendRequestListViewController(), animated: true)
         // modal
-        present(FriendRequestListViewController(), animated: true)
+        present(UINavigationController(rootViewController: FriendRequestListViewController()), animated: true)
     }
 }
 
