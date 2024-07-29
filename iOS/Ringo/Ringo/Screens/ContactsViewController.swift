@@ -153,7 +153,7 @@ extension ContactsViewController: ContactsTableViewCellDelegate {
     func pressedButton() {
         let rowNum = tableView.indexPathForSelectedRow!.row
         CallService.shared.signalClient.startcall(user: UserManager.getData(type: String.self, forKey: .email)!, target: friendsList[rowNum].email)
-        UserManager.setData(value: friendsList[rowNum], key: .receiver)
+        UserManager.setData(value: friendsList[rowNum].email, key: .receiver)
     }
     
 }
