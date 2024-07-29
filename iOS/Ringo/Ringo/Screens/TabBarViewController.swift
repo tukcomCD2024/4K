@@ -17,6 +17,7 @@ class TabBarViewController: UITabBarController{
         CallService.shared.webRTCClient.delegate = self
         CallService.shared.signalClient.delegate = self
         CallService.shared.signalClient.connect()
+        CallService.shared.signalClient.store(user: UserManager.getData(type: String.self, forKey: .email) ?? "")
         
         tabBar.backgroundColor = .systemGray6
         

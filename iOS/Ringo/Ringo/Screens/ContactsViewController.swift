@@ -27,7 +27,11 @@ class ContactsViewController: UIViewController {
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"), style: .plain, target: self, action: #selector(requestFriend))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(test))
+        
+        if let leftImage = UIImage(systemName: "envelope.badge") {
+            let configImage = leftImage.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.systemRed,.systemBlue]))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: configImage, style: .plain, target: self, action: #selector(test))
+        }
         
         //table
         tableView = UITableView()
@@ -52,9 +56,7 @@ class ContactsViewController: UIViewController {
     }
     
     @objc private func test() {
-        DispatchQueue.global().async {
-            CallService.shared.signalClient.store(user: UserManager.getData(type: String.self, forKey: .email)!)
-        }
+        
     }
 }
 
@@ -145,7 +147,7 @@ extension ContactsViewController {
     }
 }
 
-// MARK: -  Load Friends
+// MARK: -  Cell Delegate
 extension ContactsViewController: ContactsTableViewCellDelegate {
     
     func pressedButton() {
