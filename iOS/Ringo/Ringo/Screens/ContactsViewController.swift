@@ -30,7 +30,7 @@ class ContactsViewController: UIViewController {
         
         if let leftImage = UIImage(systemName: "envelope.badge") {
             let configImage = leftImage.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.systemRed,.systemBlue]))
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: configImage, style: .plain, target: self, action: #selector(test))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: configImage, style: .plain, target: self, action: #selector(requestList))
         }
         
         //table
@@ -55,8 +55,11 @@ class ContactsViewController: UIViewController {
         self.navigationController?.pushViewController(FriendRequestViewController(), animated: true)
     }
     
-    @objc private func test() {
-        
+    @objc private func requestList() {
+        // 네비게이션 Push
+//        self.navigationController?.pushViewController(FriendRequestListViewController(), animated: true)
+        // modal
+        present(FriendRequestListViewController(), animated: true)
     }
 }
 
