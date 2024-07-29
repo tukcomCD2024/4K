@@ -45,6 +45,8 @@
 		94C3E5472C4E26AE00EBF588 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3E5462C4E26AE00EBF588 /* Language.swift */; };
 		94FB0A6B2B858F66005A4915 /* TestSTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */; };
 		94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6C2BAAD64A005A4915 /* TTS.swift */; };
+		94FFD49B2C57BB2800C60F05 /* FriendRequestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49A2C57BB2800C60F05 /* FriendRequestListViewController.swift */; };
+		94FFD49D2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49C2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +86,8 @@
 		94C3E5462C4E26AE00EBF588 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSTTViewController.swift; sourceTree = "<group>"; };
 		94FB0A6C2BAAD64A005A4915 /* TTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
+		94FFD49A2C57BB2800C60F05 /* FriendRequestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestListViewController.swift; sourceTree = "<group>"; };
+		94FFD49C2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,8 @@
 				945603122B6AC07D002F4B33 /* TabBarViewController.swift */,
 				945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */,
 				945603142B6AC22A002F4B33 /* ContactsViewController.swift */,
+				94FFD49A2C57BB2800C60F05 /* FriendRequestListViewController.swift */,
+				94FFD49C2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift */,
 				9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */,
 				945603162B6AC2D3002F4B33 /* RecentsViewController.swift */,
 				945603182B6AC365002F4B33 /* AccountViewController.swift */,
@@ -292,6 +298,7 @@
 				945603212B6D2F06002F4B33 /* Canvas.swift in Sources */,
 				94470A972B717DC300F0A942 /* ConnectionViewController.swift in Sources */,
 				945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */,
+				94FFD49D2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift in Sources */,
 				940C25782B7A899500E069D0 /* RTCStates.swift in Sources */,
 				940C25852B7A89AB00E069D0 /* NativeWebSocket.swift in Sources */,
 				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
@@ -317,6 +324,7 @@
 				940C25722B7A88FB00E069D0 /* Config.swift in Sources */,
 				940C25842B7A89AB00E069D0 /* WebSocketProvider.swift in Sources */,
 				940C25882B7A89AB00E069D0 /* SignalingClient.swift in Sources */,
+				94FFD49B2C57BB2800C60F05 /* FriendRequestListViewController.swift in Sources */,
 				940C25832B7A89AB00E069D0 /* Message.swift in Sources */,
 				940C25862B7A89AB00E069D0 /* StarscreamProvider.swift in Sources */,
 				9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */,
