@@ -10,8 +10,8 @@ import UIKit
 class FriendRequestListViewController: UIViewController {
 
     let friendRequestListTableViewCell = FriendRequestListTableViewCell.identifier
-    var requestsList: [FriendInfo] = [FriendInfo(name:"name",language:"language",email:"email"),
-                                      FriendInfo(name:"name",language:"language",email:"email")]
+    var requestsList: [FriendInfo] = [FriendInfo(name:"name1",language:"language1",email:"email1"),
+                                      FriendInfo(name:"name2",language:"language2",email:"email2")]
     var tableView = UITableView()
     
     override func viewDidLoad() {
@@ -24,9 +24,14 @@ class FriendRequestListViewController: UIViewController {
         view.addSubview(tableView)
     }
     func setUpValue(){
+        navigationItem.title = "Request List"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
         tableView.register(FriendRequestListTableViewCell.self, forCellReuseIdentifier: friendRequestListTableViewCell)
         tableView.dataSource = self
         tableView.delegate = self
+     
+        view.backgroundColor = .gray
     }
     func setConstraints(){
         tableView.snp.makeConstraints { make in
@@ -45,7 +50,16 @@ extension FriendRequestListViewController: UITableViewDataSource {
         
         cell.name.text = requestsList[indexPath.row].name
         cell.selectionStyle = .none
-        cell.delegate = self
+        cell.pressedAcceptBtn = {
+            let index = indexPath.row
+            print("accept btn")
+            print(self.requestsList[index].email)
+        }
+        cell.pressedRejectBtn = {
+            let index = indexPath.row
+            print("reject btn")
+            print(self.requestsList[index].email)
+        }
         
         return cell
     }
@@ -54,16 +68,11 @@ extension FriendRequestListViewController: UITableViewDataSource {
 }
 // MARK: - UITableViewDelegate
 extension FriendRequestListViewController: UITableViewDelegate {
-    
-}
-// MARK: - Cell Delegate
-extension FriendRequestListViewController: FriendRequestListTableViewCellDelegate {
-    func pressedAcceptBtn() {
-        print("accept btn")
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
-    
-    func pressedRejectBtn() {
-        print("reject btn")
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 // MARK: - canvas 이용하기
