@@ -16,6 +16,7 @@ class ContactsViewController: UIViewController {
 
     let searchController = UISearchController()
     var tableView: UITableView!
+    let ifEmptyList = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,12 @@ class ContactsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)
+        
+        ifEmptyList.text = "No friends yet"
+        ifEmptyList.textColor = .systemGray2
+        ifEmptyList.textAlignment = .center
+        ifEmptyList.sizeToFit()
+        tableView.backgroundView = ifEmptyList
         
         setConstraints()
         
@@ -132,12 +139,11 @@ extension ContactsViewController {
                 guard let data = data as? [FriendInfo] else { return }
                 if !data.isEmpty {
                     self.friendsList = data
+                    self.tableView.backgroundView?.isHidden = true
                     self.tableView.reloadData()
                 } else {
-                    let alert = UIAlertController(title: "친구가 없습니다", message: "", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    }
+                    self.tableView.backgroundView?.isHidden = false
+                }
                     
             case .requestErr(let err):
                 print(err)

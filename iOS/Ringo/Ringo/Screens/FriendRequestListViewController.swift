@@ -11,6 +11,7 @@ class FriendRequestListViewController: UIViewController {
 
     let friendRequestListTableViewCell = FriendRequestListTableViewCell.identifier
     var tableView = UITableView()
+    let ifEmptyList = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +32,11 @@ class FriendRequestListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        let back = UILabel()
-        back.text = "No requests"
-        back.textColor = .systemGray2
-        back.textAlignment = .center
-        back.sizeToFit()
-        tableView.backgroundView = back
+        ifEmptyList.text = "No requests"
+        ifEmptyList.textColor = .systemGray2
+        ifEmptyList.textAlignment = .center
+        ifEmptyList.sizeToFit()
+        tableView.backgroundView = ifEmptyList
     }
     func setConstraints(){
         tableView.snp.makeConstraints { make in
