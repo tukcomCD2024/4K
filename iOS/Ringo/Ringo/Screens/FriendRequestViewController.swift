@@ -27,10 +27,10 @@ class FriendRequestViewController: UIViewController {
     func setUpValue() {
         view.backgroundColor = .systemBackground
         view.keyboardLayoutGuide.followsUndockedKeyboard = true
-        tabBarController?.tabBar.isHidden = true
         
         self.navigationItem.title = "Request Friend"
-        self.navigationItem.largeTitleDisplayMode = .always
+        
+        input_friendEamil.becomeFirstResponder()
         
         input_friendEamil.placeholder = "Enter your name"
         input_friendEamil.borderStyle = .roundedRect
@@ -74,35 +74,6 @@ class FriendRequestViewController: UIViewController {
     // 빈 화면 터치 시 키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             view.endEditing(true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        tabBarController?.tabBar.isAppearedWithAnimation()
-    }
-}
-// MARK: - TabBar Animation
-extension UITabBar {
-    func isHiddenWithAnimation() {
-        let orig = self.frame
-        var target = self.frame
-        target.origin.x = target.origin.x - target.size.width
-        UIView.animate(withDuration: 0.2, animations: {
-            self.frame = target
-        }) { (true) in
-            self.isHidden = true
-            self.frame = orig
-        }
-    }
-    func isAppearedWithAnimation() {
-        let orig = self.frame
-        var target = self.frame
-        target.origin.x = target.origin.x - target.size.width
-        self.frame = target
-        self.isHidden = false
-        UIView.animate(withDuration: 0.3, animations: {
-            self.frame = orig
-        })
     }
 }
 // MARK: - 키보드 사라지게 하기

@@ -47,6 +47,7 @@
 		94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6C2BAAD64A005A4915 /* TTS.swift */; };
 		94FFD49B2C57BB2800C60F05 /* FriendRequestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49A2C57BB2800C60F05 /* FriendRequestListViewController.swift */; };
 		94FFD49D2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49C2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift */; };
+		94FFD49F2C58E59B00C60F05 /* FriendRequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49E2C58E59B00C60F05 /* FriendRequestList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		94FB0A6C2BAAD64A005A4915 /* TTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
 		94FFD49A2C57BB2800C60F05 /* FriendRequestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestListViewController.swift; sourceTree = "<group>"; };
 		94FFD49C2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestListTableViewCell.swift; sourceTree = "<group>"; };
+		94FFD49E2C58E59B00C60F05 /* FriendRequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				945CF97A2B67E1CD00396E4E /* AppDelegate.swift */,
 				945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */,
 				94470A922B7163E900F0A942 /* Model.swift */,
+				94FFD49E2C58E59B00C60F05 /* FriendRequestList.swift */,
 				94C3E5462C4E26AE00EBF588 /* Language.swift */,
 				94470A942B71680100F0A942 /* SigninService.swift */,
 				940C25652B74EF4D00E069D0 /* FriendService.swift */,
@@ -305,6 +308,7 @@
 				940C25642B73D20900E069D0 /* ConnectionCollectionViewCell.swift in Sources */,
 				94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */,
 				940C257A2B7A899500E069D0 /* IceCandidate.swift in Sources */,
+				94FFD49F2C58E59B00C60F05 /* FriendRequestList.swift in Sources */,
 				94C3E5412C3398C900EBF588 /* AuthInterceptor.swift in Sources */,
 				945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */,
 				94C3E5452C4DF99200EBF588 /* SignupViewController.swift in Sources */,

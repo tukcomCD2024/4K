@@ -10,8 +10,6 @@ import UIKit
 class FriendRequestListViewController: UIViewController {
 
     let friendRequestListTableViewCell = FriendRequestListTableViewCell.identifier
-    var requestsList: [FriendInfo] = [FriendInfo(name:"name1",language:"language1",email:"email1"),
-                                      FriendInfo(name:"name2",language:"language2",email:"email2")]
     var tableView = UITableView()
     
     override func viewDidLoad() {
@@ -25,46 +23,55 @@ class FriendRequestListViewController: UIViewController {
     }
     func setUpValue(){
         navigationItem.title = "Request List"
-        navigationController?.navigationBar.prefersLargeTitles = false
+//        navigationController?.navigationBar.prefersLargeTitles = false
+        tabBarController?.tabBar.isHidden = true
         
         tableView.register(FriendRequestListTableViewCell.self, forCellReuseIdentifier: friendRequestListTableViewCell)
         tableView.dataSource = self
         tableView.delegate = self
-     
-        view.backgroundColor = .gray
     }
     func setConstraints(){
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isAppearedWithAnimation()
+    }
 }
 // MARK: - UITableViewDataSource
 extension FriendRequestListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        requestsList.count
+        FriendRequestList.shared.getList().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: friendRequestListTableViewCell, for: indexPath) as! FriendRequestListTableViewCell
         
-        cell.name.text = requestsList[indexPath.row].name
+        cell.name.text = FriendRequestList.shared.getList()[indexPath.row].name
         cell.selectionStyle = .none
         cell.pressedAcceptBtn = {
-            let index = indexPath.row
             print("accept btn")
-            print(self.requestsList[index].email)
+            print(FriendRequestList.shared.getList()[indexPath.row].email)
+            self.deleteRow(index: indexPath.row)
         }
         cell.pressedRejectBtn = {
-            let index = indexPath.row
             print("reject btn")
-            print(self.requestsList[index].email)
+            print(FriendRequestList.shared.getList()[indexPath.row].email)
+            self.deleteRow(index: indexPath.row)
         }
         
         return cell
     }
-    
-    
+    func deleteRow(index: Int){
+        FriendRequestList.shared.remove(at: index)
+        tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            print("loading")
+            self.tableView.reloadData()
+        }
+    }
 }
 // MARK: - UITableViewDelegate
 extension FriendRequestListViewController: UITableViewDelegate {
@@ -73,6 +80,30 @@ extension FriendRequestListViewController: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+// MARK: - TabBar Animation
+extension UITabBar {
+    func isHiddenWithAnimation() {
+        let orig = self.frame
+        var target = self.frame
+        target.origin.x = target.origin.x - target.size.width
+        UIView.animate(withDuration: 0.2, animations: {
+            self.frame = target
+        }) { (true) in
+            self.isHidden = true
+            self.frame = orig
+        }
+    }
+    func isAppearedWithAnimation() {
+        let orig = self.frame
+        var target = self.frame
+        target.origin.x = target.origin.x - target.size.width
+        self.frame = target
+        self.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.frame = orig
+        })
     }
 }
 // MARK: - canvas 이용하기

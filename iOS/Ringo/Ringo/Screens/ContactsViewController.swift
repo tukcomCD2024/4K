@@ -26,12 +26,9 @@ class ContactsViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"), style: .plain, target: self, action: #selector(requestFriend))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"), style: .plain, target: self, action: #selector(requestFriend))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "envelope"), style: .plain, target: self, action: #selector(requestList))
         
-        if let leftImage = UIImage(systemName: "envelope.badge") {
-            let configImage = leftImage.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.systemRed,.systemBlue]))
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: configImage, style: .plain, target: self, action: #selector(requestList))
-        }
         
         //table
         tableView = UITableView()
@@ -42,9 +39,15 @@ class ContactsViewController: UIViewController {
         
         setConstraints()
         
-        loadFriends()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadFriends()
+        FriendRequestList.shared.reload()
+        if FriendRequestList.shared.getList().isEmpty {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "envelope")
+        } else { navigationItem.rightBarButtonItem?.image = UIImage(systemName: "envelope.badge")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.systemRed,.systemBlue])) }
+    }
     func setConstraints(){
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
@@ -52,14 +55,15 @@ class ContactsViewController: UIViewController {
     }
     //navigaion rightBtn action
     @objc private func requestFriend(_ sender: UIBarButtonItem) {
-        self.navigationController?.pushViewController(FriendRequestViewController(), animated: true)
+        present(UINavigationController(rootViewController: FriendRequestViewController()), animated: true)
+//        self.navigationController?.pushViewController(FriendRequestViewController(), animated: true)
     }
     
     @objc private func requestList() {
         // 네비게이션 Push
-//        self.navigationController?.pushViewController(FriendRequestListViewController(), animated: true)
+        self.navigationController?.pushViewController(FriendRequestListViewController(), animated: true)
         // modal
-        present(UINavigationController(rootViewController: FriendRequestListViewController()), animated: true)
+//        present(UINavigationController(rootViewController: FriendRequestListViewController()), animated: true)
     }
 }
 
