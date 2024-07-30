@@ -46,6 +46,38 @@ class FriendService {
             }
         }
     }
+    func loadRequestList(email: String, completion: @escaping(NetworkResult<Any>) -> Void)
+    {
+        let url = "https://4kringo.shop:8080/friendship/findByFriendIdAndStatus"
+        
+        let header : HTTPHeaders = [
+            "Content-Type" : "application/json"
+        ]
+        let body : Parameters = [
+            "email" : email
+        ]
+        
+        let dataRequest = AF.request(url,
+                                    method: .post,
+                                    parameters: body,
+                                    encoding: JSONEncoding.default,
+                                    headers: header,
+        interceptor: AuthInterceptor())
+                                    
+        dataRequest.responseData{
+            response in
+            switch response.result {
+            case .success:
+                guard let statusCode = response.response?.statusCode else {return}
+                guard let value = response.value else {return}
+                let networkResult = self.judgeStatusLFL(by: statusCode, value)
+                completion(networkResult)
+                
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
     private func judgeStatusLFL(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         switch statusCode {
         case ..<300 : return isVaildDataLFL(data: data)

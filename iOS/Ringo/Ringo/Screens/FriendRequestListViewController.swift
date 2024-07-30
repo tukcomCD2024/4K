@@ -25,10 +25,18 @@ class FriendRequestListViewController: UIViewController {
         navigationItem.title = "Request List"
 //        navigationController?.navigationBar.prefersLargeTitles = false
         tabBarController?.tabBar.isHidden = true
+        view.backgroundColor = .systemBackground
         
         tableView.register(FriendRequestListTableViewCell.self, forCellReuseIdentifier: friendRequestListTableViewCell)
         tableView.dataSource = self
         tableView.delegate = self
+        
+        let back = UILabel()
+        back.text = "No requests"
+        back.textColor = .systemGray2
+        back.textAlignment = .center
+        back.sizeToFit()
+        tableView.backgroundView = back
     }
     func setConstraints(){
         tableView.snp.makeConstraints { make in
@@ -43,7 +51,12 @@ class FriendRequestListViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension FriendRequestListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        FriendRequestList.shared.getList().count
+        if FriendRequestList.shared.getList().isEmpty {
+            tableView.backgroundView?.isHidden = false
+        } else {
+            tableView.backgroundView?.isHidden = true
+        }
+        return FriendRequestList.shared.getList().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
