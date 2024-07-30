@@ -101,7 +101,7 @@ extension FriendRequestViewController {
                 if data == "{\"message\":\"success\"}" {
                     let alert = UIAlertController(title: "요청을 보냈습니다.", message: nil, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { action in
-                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true)
                     }))
                     self.present(alert, animated: true, completion: nil)
                     print(data)
