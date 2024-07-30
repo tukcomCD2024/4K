@@ -194,6 +194,7 @@
 				945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */,
 				94470A922B7163E900F0A942 /* Model.swift */,
 				94FFD49E2C58E59B00C60F05 /* FriendRequestList.swift */,
+				94C3E5422C351A6A00EBF588 /* UserManager.swift */,
 				94C3E5462C4E26AE00EBF588 /* Language.swift */,
 				94470A942B71680100F0A942 /* SigninService.swift */,
 				940C25652B74EF4D00E069D0 /* FriendService.swift */,
@@ -203,7 +204,6 @@
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
 				945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */,
 				945CF9882B67E1CE00396E4E /* Info.plist */,
-				94C3E5422C351A6A00EBF588 /* UserManager.swift */,
 			);
 			path = Ringo;
 			sourceTree = "<group>";

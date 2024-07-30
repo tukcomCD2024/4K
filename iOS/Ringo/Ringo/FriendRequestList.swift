@@ -26,10 +26,10 @@ class FriendRequestList {
                 guard let data = data as? [FriendInfo] else { return }
                 if !data.isEmpty {
                     self.list = data
-                    print(data)
+                    print(self.list)
                 } else {
                     self.list = data
-                    print(data)
+                    print(self.list)
                 }
                     
             case .requestErr(let err):
@@ -44,5 +44,8 @@ class FriendRequestList {
                 print("dataErr")
             }
         }
+    }
+    func reset(){
+        list = []
     }
 }

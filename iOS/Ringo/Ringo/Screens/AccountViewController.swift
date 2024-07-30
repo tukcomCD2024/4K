@@ -114,6 +114,8 @@ extension AccountViewController {
                 if data == "로그아웃 성공"{
                     self.dismiss(animated: true)
                     CallService.shared.signalClient.forceDisconnect()
+                    UserManager.resetData()
+                    FriendRequestList.shared.reset()
                 } else {
                     let alert = UIAlertController(title: data, message: data, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
