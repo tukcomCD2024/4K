@@ -48,6 +48,7 @@
 		94FFD49B2C57BB2800C60F05 /* FriendRequestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49A2C57BB2800C60F05 /* FriendRequestListViewController.swift */; };
 		94FFD49D2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49C2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift */; };
 		94FFD49F2C58E59B00C60F05 /* FriendRequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49E2C58E59B00C60F05 /* FriendRequestList.swift */; };
+		94FFD4A12C60968100C60F05 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD4A02C60968100C60F05 /* EditProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		94FFD49A2C57BB2800C60F05 /* FriendRequestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestListViewController.swift; sourceTree = "<group>"; };
 		94FFD49C2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestListTableViewCell.swift; sourceTree = "<group>"; };
 		94FFD49E2C58E59B00C60F05 /* FriendRequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestList.swift; sourceTree = "<group>"; };
+		94FFD4A02C60968100C60F05 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */,
 				945603162B6AC2D3002F4B33 /* RecentsViewController.swift */,
 				945603182B6AC365002F4B33 /* AccountViewController.swift */,
+				94FFD4A02C60968100C60F05 /* EditProfileViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				940C25852B7A89AB00E069D0 /* NativeWebSocket.swift in Sources */,
 				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
 				940C25642B73D20900E069D0 /* ConnectionCollectionViewCell.swift in Sources */,
+				94FFD4A12C60968100C60F05 /* EditProfileViewController.swift in Sources */,
 				94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */,
 				940C257A2B7A899500E069D0 /* IceCandidate.swift in Sources */,
 				94FFD49F2C58E59B00C60F05 /* FriendRequestList.swift in Sources */,
