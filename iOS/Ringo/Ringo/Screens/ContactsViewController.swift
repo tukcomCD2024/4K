@@ -51,9 +51,10 @@ class ContactsViewController: UIViewController {
         super.viewWillAppear(animated)
         loadFriends()
         FriendRequestList.shared.reload()
-        if FriendRequestList.shared.getList().isEmpty {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "envelope")
-        } else { navigationItem.rightBarButtonItem?.image = UIImage(systemName: "envelope.badge")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.systemRed,.systemBlue])) }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkRequestList()
     }
     func setConstraints(){
         tableView.snp.makeConstraints { make in
@@ -71,6 +72,12 @@ class ContactsViewController: UIViewController {
         self.navigationController?.pushViewController(FriendRequestListViewController(), animated: true)
         // modal
 //        present(UINavigationController(rootViewController: FriendRequestListViewController()), animated: true)
+    }
+    private func checkRequestList() {
+        print(FriendRequestList.shared.getList())
+        if FriendRequestList.shared.getList().isEmpty {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "envelope")
+        } else { navigationItem.rightBarButtonItem?.image = UIImage(systemName: "envelope.badge")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.systemRed,.systemBlue])) }
     }
 }
 
@@ -130,7 +137,6 @@ extension ContactsViewController: UITableViewDataSource {
 extension ContactsViewController {
     
     func loadFriends() {
-        print("load friend request")
         //id ??인 유저의 친구목록
         FriendService.shared.loadFriendsList(email: UserManager.getData(type: String.self, forKey: .email) ?? "") { response in
             switch response {

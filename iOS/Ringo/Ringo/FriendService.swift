@@ -125,6 +125,70 @@ class FriendService {
             }
         }
     }
+    func acceptRequest(sender: String, receiver: String, completion: @escaping(NetworkResult<Any>) -> Void)
+    {
+        let url = "https://4kringo.shop:8080/friendship/acceptFriendRequestById"
+        
+        let header : HTTPHeaders = ["Content-Type" : "application/json"]
+        let body : Parameters = [
+            "senderEmail" : sender,
+            "receiverEmail" : receiver
+        ]
+        
+        let dataRequest = AF.request(url,
+                                    method: .post,
+                                    parameters: body,
+                                    encoding: JSONEncoding.default,
+                                    headers: header,
+        interceptor: AuthInterceptor())
+                                    
+        dataRequest.responseData{
+            response in
+            switch response.result {
+            case .success:
+                guard let statusCode = response.response?.statusCode else {return}
+                guard let value = response.value else {return}
+                
+                let networkResult = self.judgeStatus(by: statusCode, value)
+                completion(networkResult)
+                
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
+    func rejectRequest(sender: String, receiver: String, completion: @escaping(NetworkResult<Any>) -> Void)
+    {
+        let url = "https://4kringo.shop:8080/friendship/rejectFriendRequestById"
+        
+        let header : HTTPHeaders = ["Content-Type" : "application/json"]
+        let body : Parameters = [
+            "senderEmail" : sender,
+            "receiverEmail" : receiver
+        ]
+        
+        let dataRequest = AF.request(url,
+                                    method: .post,
+                                    parameters: body,
+                                    encoding: JSONEncoding.default,
+                                    headers: header,
+        interceptor: AuthInterceptor())
+                                    
+        dataRequest.responseData{
+            response in
+            switch response.result {
+            case .success:
+                guard let statusCode = response.response?.statusCode else {return}
+                guard let value = response.value else {return}
+                
+                let networkResult = self.judgeStatus(by: statusCode, value)
+                completion(networkResult)
+                
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         print(statusCode)
         switch statusCode {

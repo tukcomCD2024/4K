@@ -9,8 +9,7 @@ import Foundation
 
 class FriendRequestList {
     static let shared = FriendRequestList()
-    private var list: [FriendInfo] = [FriendInfo(name:"name1",language:"language1",email:"email1"),
-                                       FriendInfo(name:"name2",language:"language2",email:"email2")]
+    private var list: [FriendInfo] = []
     func getList() -> [FriendInfo] {
         return list
     }
@@ -22,14 +21,11 @@ class FriendRequestList {
         FriendService.shared.loadRequestList(email: email) { response in
             switch response {
             case .success(let data):
-                    
                 guard let data = data as? [FriendInfo] else { return }
                 if !data.isEmpty {
                     self.list = data
-                    print(self.list)
                 } else {
                     self.list = data
-                    print(self.list)
                 }
                     
             case .requestErr(let err):

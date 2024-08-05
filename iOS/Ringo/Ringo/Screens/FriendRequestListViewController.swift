@@ -66,12 +66,12 @@ extension FriendRequestListViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.pressedAcceptBtn = {
             print("accept btn")
-            print(FriendRequestList.shared.getList()[indexPath.row].email)
+            self.acceptRequest(receiver: FriendRequestList.shared.getList()[indexPath.row].email)
             self.deleteRow(index: indexPath.row)
         }
         cell.pressedRejectBtn = {
             print("reject btn")
-            print(FriendRequestList.shared.getList()[indexPath.row].email)
+            self.rejectRequest(receiver: FriendRequestList.shared.getList()[indexPath.row].email)
             self.deleteRow(index: indexPath.row)
         }
         
@@ -117,6 +117,74 @@ extension UITabBar {
         UIView.animate(withDuration: 0.3, animations: {
             self.frame = orig
         })
+    }
+}
+// MARK: - firend request
+extension FriendRequestListViewController {
+    
+    func acceptRequest(receiver: String) {
+        
+        guard let sender = UserManager.getData(type: String.self, forKey: .email) else { return }
+        
+        FriendService.shared.acceptRequest(sender: sender, receiver: receiver) { response in
+            switch response {
+            case .success(let data):
+                guard let data = data as? String else { return }
+                if data == "{\"message\":\"성공\"}" {
+                    let alert = UIAlertController(title: "요청 수락", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: data, message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    print(data)
+                    }
+                    
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            case .dataErr:
+                print("dataErr")
+            }
+        }
+    }
+    func rejectRequest(receiver: String) {
+        
+        guard let sender = UserManager.getData(type: String.self, forKey: .email) else { return }
+        
+        FriendService.shared.rejectRequest(sender: sender, receiver: receiver) { response in
+            switch response {
+            case .success(let data):
+                guard let data = data as? String else { return }
+                if data == "{\"message\":\"성공\"}" {
+                    let alert = UIAlertController(title: "요청 거절", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: data, message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    print(data)
+                    }
+                    
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            case .dataErr:
+                print("dataErr")
+            }
+        }
     }
 }
 // MARK: - canvas 이용하기
