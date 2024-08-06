@@ -12,7 +12,7 @@ class AccountViewController: UIViewController {
     let mainText = UILabel()
     let userInfo = UIButton()
     let signoutBtn = UIButton()
-    let withdrawal = UIButton()
+    let withdrawalBtn = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class AccountViewController: UIViewController {
         view.addSubview(mainText)
         view.addSubview(userInfo)
         view.addSubview(signoutBtn)
-        view.addSubview(withdrawal)
+        view.addSubview(withdrawalBtn)
     }
     func setUpValue() {
         view.backgroundColor = .secondarySystemBackground
@@ -67,11 +67,12 @@ class AccountViewController: UIViewController {
             btn.addTarget(self, action: #selector(self.onPressSignout(_:)), for: .touchUpInside)
         }
         
-        withdrawal.configuration = UIButton.Configuration.filled()
-        withdrawal.configurationUpdateHandler = { btn in
+        withdrawalBtn.configuration = UIButton.Configuration.filled()
+        withdrawalBtn.configurationUpdateHandler = { btn in
             btn.configuration?.buttonSize = .large
             btn.configuration?.baseBackgroundColor = .systemGray4
             btn.configuration?.title = "Withdrawal"
+            btn.addTarget(self, action: #selector(self.onPressWithdrawal(_:)), for: .touchUpInside)
         }
     }
     func setConstraints() {
@@ -86,21 +87,29 @@ class AccountViewController: UIViewController {
             make.trailing.equalTo(mainText.snp.trailing)
         }
         signoutBtn.snp.makeConstraints { make in
-            make.bottom.equalTo(withdrawal.snp.top).offset(-30)
+            make.bottom.equalTo(withdrawalBtn.snp.top).offset(-30)
             make.leading.equalTo(mainText.snp.leading)
             make.trailing.equalTo(mainText.snp.trailing)
         }
-        withdrawal.snp.makeConstraints { make in
+        withdrawalBtn.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(30)
             make.leading.equalTo(mainText.snp.leading)
             make.trailing.equalTo(mainText.snp.trailing)
         }
     }
+    @objc func onPressUserInfo(_ sender: UIButton) {
+        present(UINavigationController(rootViewController: EditProfileViewController()), animated: true)
+    }
     @objc func onPressSignout(_ sender: UIButton) {
         signout()
     }
-    @objc func onPressUserInfo(_ sender: UIButton) {
-        present(UINavigationController(rootViewController: EditProfileViewController()), animated: true)
+    @objc func onPressWithdrawal(_ sender: UIButton) {
+        let alert = UIAlertController(title: "탈퇴하시겠습니까?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "확인", style: .default){ action in
+            self.withdrawal()
+        })
+        self.present(alert, animated: true, completion: nil)
     }
 }
 // MARK: -  Sign out
@@ -141,7 +150,54 @@ extension AccountViewController {
         }
     }
 }
-
+// MARK: -  Apply
+extension AccountViewController {
+    
+    func withdrawal() {
+            
+        guard let email = UserManager.getData(type: String.self, forKey: .email) else { return }
+        guard let password = UserManager.getData(type: String.self, forKey: .password) else { return }
+        
+        SigninSercive.shared.delete(email: email, password: password) { response in
+            switch response {
+            case .success(let data):
+                    
+                guard let data = data as? SigninDataResponse else {
+                    print(data)
+                    return
+                }
+                if data.status == "success"{
+                    
+                    let alert = UIAlertController(title: "탈퇴하였습니다.", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel){ action in
+                        self.dismiss(animated: true)
+                    })
+                    self.present(alert, animated: true, completion: nil)
+                    CallService.shared.signalClient.forceDisconnect()
+                    UserManager.resetData()
+                    FriendRequestList.shared.reset()
+                    
+                } else {
+                    let alert = UIAlertController(title: data.status, message: data.message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    print(data)
+                    }
+                    
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            case .dataErr:
+                print("dataErr")
+            }
+        }
+    }
+}
 // MARK: - canvas 이용하기
 import SwiftUI
 @available(iOS 13.0.0, *)

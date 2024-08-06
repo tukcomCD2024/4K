@@ -169,6 +169,8 @@ class EditProfileViewController: UIViewController {
         input_language.inputView = pickerLang
         input_language.inputAccessoryView = toolbar
         
+        selectedLang = UserManager.getData(type: String.self, forKey: .language)!
+        
         pickerLang.delegate = self
         pickerLang.dataSource = self
         
@@ -357,12 +359,14 @@ extension EditProfileViewController {
                 }
                 if data.status == "success"{
                     
-                    let alert = UIAlertController(title: data.status, message: data.message, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "변경 성공", style: .cancel){ action in
+                    let alert = UIAlertController(title: "변경되었습니다.", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel){ action in
                         self.dismiss(animated: true)
                     })
                     self.present(alert, animated: true, completion: nil)
                     UserManager.setData(value: newPassword, key: .password)
+                    UserManager.setData(value: name, key: .name)
+                    UserManager.setData(value: languageCode, key: .language)
                     
                 } else {
                     let alert = UIAlertController(title: data.status, message: data.message, preferredStyle: .alert)
