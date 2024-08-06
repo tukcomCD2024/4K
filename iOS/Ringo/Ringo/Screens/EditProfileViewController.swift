@@ -67,6 +67,8 @@ class EditProfileViewController: UIViewController {
         contentView.addSubview(applyBtn)
     }
     func setUpValue(){
+        view.backgroundColor = .systemBackground
+        
         email.text = "E-mail"
         email.font = .preferredFont(forTextStyle: .body)
         
@@ -170,7 +172,7 @@ class EditProfileViewController: UIViewController {
         language.text = "Language"
         language.font = .preferredFont(forTextStyle: .body)
         
-        input_language.text = UserManager.getData(type: String.self, forKey: .language) ?? "language"
+        input_language.text = Language.shared.getLanguageByCode(key: UserManager.getData(type: String.self, forKey: .language)!)
         input_language.borderStyle = .roundedRect
         input_language.delegate = self
         input_language.tintColor = .clear
@@ -185,7 +187,7 @@ class EditProfileViewController: UIViewController {
         
         toolbar.sizeToFit()
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(view.endEditing(_:)))
+        let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(selectLang(_:)))
         toolbar.setItems([space,button], animated: true)
         toolbar.isUserInteractionEnabled = true
         
@@ -289,6 +291,12 @@ class EditProfileViewController: UIViewController {
             make.bottom.equalToSuperview().inset(30)
         }
     }
+    @objc func selectLang(_ sender: UIButton) {
+        if input_language.text?.isEmpty ?? false {
+            pickerView(pickerLang, didSelectRow: 0, inComponent: 0)
+        }
+        input_language.resignFirstResponder()
+    }
     func isSamePasswd(_ first: UITextField, _ second: UITextField) -> Bool {
         if(first.text == second.text) {
             return true
@@ -320,7 +328,7 @@ class EditProfileViewController: UIViewController {
         editBtn.isSelected.toggle()
     }
     @objc func onPressApplyBtn(_ sender: UIButton){
-        
+        apply()
     }
 }
 // MARK: - 키보드 사라지게 하기
@@ -347,6 +355,55 @@ extension EditProfileViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         let languages = Language.shared.getList()
         input_language.text = Language.shared.getLanguageByCode(key: languages[row])
         selectedLang = languages[row]
+    }
+}
+// MARK: -  Apply
+extension EditProfileViewController {
+    
+    func apply() {
+            
+        guard let email = UserManager.getData(type: String.self, forKey: .email) else { return }
+        guard let password = UserManager.getData(type: String.self, forKey: .password) else { return }
+        guard let newPassword = input_passwd.text else { return }
+        guard let name = input_name.text else { return }
+        guard let languageCode = selectedLang else { return }
+        
+        SigninSercive.shared.update(email: email, password: password, newPassword: newPassword, name: name, languageCode: languageCode) { response in
+            switch response {
+            case .success(let data):
+                    
+                guard let data = data as? SigninDataResponse else {
+                    print(data)
+                    return
+                }
+                if data.status == "success"{
+                    
+                    let alert = UIAlertController(title: data.status, message: data.message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "변경 성공", style: .cancel){ action in
+                        self.dismiss(animated: true)
+                    })
+                    self.present(alert, animated: true, completion: nil)
+                    UserManager.setData(value: newPassword, key: .password)
+                    
+                } else {
+                    let alert = UIAlertController(title: data.status, message: data.message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    print(data)
+                    }
+                    
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            case .dataErr:
+                print("dataErr")
+            }
+        }
     }
 }
 // MARK: - canvas 이용하기

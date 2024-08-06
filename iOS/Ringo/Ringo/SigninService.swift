@@ -183,6 +183,48 @@ class SigninSercive {
         }
     }
     
+    func update(email: String, password: String, newPassword: String, name: String, languageCode: String, completion: @escaping(NetworkResult<Any>) -> Void)
+    {
+        let url = "https://4kringo.shop:8080/member/update" //통신할 API 주소
+        
+        //HTTP Headers : 요청 헤더
+        let header : HTTPHeaders = ["Content-Type" : "application/json"]
+        
+        //요청 바디
+        let body : Parameters = [
+            "email" : email,
+            "password" : password,
+            "newPassword" : newPassword,
+            "name" : name,
+            "language" : languageCode
+        ]
+        
+        //요청서 //Request 생성
+        //통신할 주소, HTTP메소드, 요청방식, 인코딩방식, 요청헤더
+        let dataRequest = AF.request(url,
+                                    method: .post,
+                                    parameters: body,
+                                    encoding: JSONEncoding.default,
+                                    headers: header,
+                                    interceptor: AuthInterceptor())
+                                    
+        //request 시작 ,responseData를 호출하면서 데이터 통신 시작
+        dataRequest.responseData{
+            response in //데이터 통신의 결과가 response에 담기게 된다
+            switch response.result {
+            case .success: //데이터 통신이 성공한 경우에
+                guard let statusCode = response.response?.statusCode else {return}
+                guard let value = response.value else {return}
+                let networkResult = self.judgeStatus(by: statusCode, value)
+                completion(networkResult)
+                
+                
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
+    
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         print(statusCode) //디버그
         switch statusCode {

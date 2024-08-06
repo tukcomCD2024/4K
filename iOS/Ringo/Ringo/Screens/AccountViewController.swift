@@ -53,9 +53,10 @@ class AccountViewController: UIViewController {
             btn.contentHorizontalAlignment = .leading
             btn.configuration?.contentInsets = .init(top: 30, leading: 20, bottom: 20, trailing: 20)
             btn.configuration?.titlePadding = 10
-//            btn.configuration?.buttonSize = .large
             
             btn.tintColor = .tertiarySystemBackground
+            
+            btn.addTarget(self, action: #selector(self.onPressUserInfo(_:)), for: .touchUpInside)
         }
         
         signoutBtn.configuration = UIButton.Configuration.filled()
@@ -97,6 +98,9 @@ class AccountViewController: UIViewController {
     }
     @objc func onPressSignout(_ sender: UIButton) {
         signout()
+    }
+    @objc func onPressUserInfo(_ sender: UIButton) {
+        present(EditProfileViewController(), animated: true)
     }
 }
 // MARK: -  Sign out
