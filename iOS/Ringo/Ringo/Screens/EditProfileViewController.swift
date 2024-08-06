@@ -12,7 +12,6 @@ class EditProfileViewController: UIViewController {
     let scrollView = UIScrollView()
     let contentView = UIView()
     let email = UILabel()
-    let input_email = UITextField()
     let passwd = UILabel()
     let input_passwd = UITextField()
     var showBtn = UIButton()
@@ -45,7 +44,6 @@ class EditProfileViewController: UIViewController {
         scrollView.addSubview(contentView)
         
         contentView.addSubview(email)
-        contentView.addSubview(input_email)
         
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(passwd)
@@ -69,20 +67,8 @@ class EditProfileViewController: UIViewController {
     func setUpValue(){
         view.backgroundColor = .systemBackground
         
-        email.text = "E-mail"
-        email.font = .preferredFont(forTextStyle: .body)
-        
-        input_email.text = UserManager.getData(type: String.self, forKey: .email) ?? "email"
-        input_email.borderStyle = .roundedRect
-        input_email.keyboardType = .emailAddress
-        input_email.autocapitalizationType = .none
-        input_email.autocorrectionType = .no
-        input_email.spellCheckingType = .no
-        input_email.clearButtonMode = .whileEditing
-        input_email.backgroundColor = .systemGray6
-        input_email.delegate = self
-//        input_email.addTarget(self, action: #selector(checkEmail(_:)), for: .editingDidEnd)
-        input_email.isEnabled = false
+        email.text = UserManager.getData(type: String.self, forKey: .email) ?? "E-mail"
+        email.font = .preferredFont(forTextStyle: .largeTitle)
         
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -200,7 +186,6 @@ class EditProfileViewController: UIViewController {
             case .selected:
                 btn.configuration?.title = "Editing..."
                 btn.configuration?.baseBackgroundColor = .systemBlue.withAlphaComponent(0.7)
-                self.input_email.isEnabled = true
                 self.input_passwd.isEnabled = true
                 self.input_cfpw.isEnabled = true
                 self.input_name.isEnabled = true
@@ -208,7 +193,6 @@ class EditProfileViewController: UIViewController {
                 self.applyBtn.isEnabled = false
             default:
                 btn.configuration?.title = "Edit"
-                self.input_email.isEnabled = false
                 self.input_passwd.isEnabled = false
                 self.input_cfpw.isEnabled = false
                 self.input_name.isEnabled = false
@@ -235,18 +219,12 @@ class EditProfileViewController: UIViewController {
         }
         email.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(30)
-            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(20)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
-        }
-        input_email.snp.makeConstraints { make in
-            make.top.equalTo(email.snp.bottom).offset(10)
-            make.leading.equalTo(email.snp.leading)
-            make.trailing.equalTo(email.snp.trailing)
+            make.centerX.equalTo(contentView.snp.centerX)
         }
         stackView.snp.makeConstraints { make in
-            make.top.equalTo(input_email.snp.bottom).offset(30)
-            make.leading.equalTo(input_email.snp.leading)
-            make.trailing.equalTo(input_email.snp.trailing)
+            make.top.equalTo(email.snp.bottom).offset(30)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(20)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
         }
         input_passwd.snp.makeConstraints { make in
             make.trailing.equalTo(stackView.snp.trailing)
@@ -318,7 +296,7 @@ class EditProfileViewController: UIViewController {
         }
     }
     func checkAll() {
-        if !(input_email.text?.isEmpty ?? true) && !(input_passwd.text?.isEmpty ?? true) && boolConfirm && !(input_name.text?.isEmpty ?? true) &&  !(input_language.text?.isEmpty ?? true) {
+        if !(input_passwd.text?.isEmpty ?? true) && boolConfirm && !(input_name.text?.isEmpty ?? true) &&  !(input_language.text?.isEmpty ?? true) {
             applyBtn.isEnabled = true
         } else {
             applyBtn.isEnabled = false
