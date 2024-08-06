@@ -31,6 +31,7 @@ class EditProfileViewController: UIViewController {
     let editBtn = UIButton()
     let applyBtn = UIButton()
     
+    var boolConfirm: Bool = false
     var selectedLang: String?
     
     override func viewDidLoad() {
@@ -188,12 +189,30 @@ class EditProfileViewController: UIViewController {
         toolbar.setItems([space,button], animated: true)
         toolbar.isUserInteractionEnabled = true
         
-        editBtn.configuration = UIButton.Configuration.filled()
+        editBtn.configuration = UIButton.Configuration.tinted()
         editBtn.configurationUpdateHandler = { btn in
-            btn.configuration?.title = "Edit"
             btn.configuration?.buttonSize = .large
             btn.configuration?.baseBackgroundColor = .systemBlue
             btn.addTarget(self, action: #selector(self.onPressEditBtn(_:)), for: .touchUpInside)
+            switch btn.state {
+            case .selected:
+                btn.configuration?.title = "Editing..."
+                btn.configuration?.baseBackgroundColor = .systemBlue.withAlphaComponent(0.7)
+                self.input_email.isEnabled = true
+                self.input_passwd.isEnabled = true
+                self.input_cfpw.isEnabled = true
+                self.input_name.isEnabled = true
+                self.input_language.isEnabled = true
+                self.applyBtn.isEnabled = false
+            default:
+                btn.configuration?.title = "Edit"
+                self.input_email.isEnabled = false
+                self.input_passwd.isEnabled = false
+                self.input_cfpw.isEnabled = false
+                self.input_name.isEnabled = false
+                self.input_language.isEnabled = false
+                self.checkAll()
+            }
         }
         applyBtn.configuration = UIButton.Configuration.filled()
         applyBtn.configurationUpdateHandler = { btn in
@@ -281,15 +300,24 @@ class EditProfileViewController: UIViewController {
         if isSamePasswd(input_passwd, input_cfpw){
             input_cfpw.layer.borderColor = UIColor.clear.cgColor
             error2.isHidden = true
+            boolConfirm = true
         } else {
             input_cfpw.layer.borderWidth = 1
             input_cfpw.layer.cornerRadius = 5
             input_cfpw.layer.borderColor = UIColor.systemRed.cgColor
             error2.isHidden = false
+            boolConfirm = false
+        }
+    }
+    func checkAll() {
+        if !(input_email.text?.isEmpty ?? true) && !(input_passwd.text?.isEmpty ?? true) && boolConfirm && !(input_name.text?.isEmpty ?? true) &&  !(input_language.text?.isEmpty ?? true) {
+            applyBtn.isEnabled = true
+        } else {
+            applyBtn.isEnabled = false
         }
     }
     @objc func onPressEditBtn(_ sender: UIButton){
-        
+        editBtn.isSelected.toggle()
     }
     @objc func onPressApplyBtn(_ sender: UIButton){
         
