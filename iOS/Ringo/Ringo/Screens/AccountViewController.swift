@@ -100,7 +100,7 @@ class AccountViewController: UIViewController {
         signout()
     }
     @objc func onPressUserInfo(_ sender: UIButton) {
-        present(EditProfileViewController(), animated: true)
+        present(UINavigationController(rootViewController: EditProfileViewController()), animated: true)
     }
 }
 // MARK: -  Sign out

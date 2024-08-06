@@ -66,6 +66,7 @@ class EditProfileViewController: UIViewController {
     }
     func setUpValue(){
         view.backgroundColor = .systemBackground
+        navigationItem.title = "Profile"
         
         email.text = UserManager.getData(type: String.self, forKey: .email) ?? "E-mail"
         email.font = .preferredFont(forTextStyle: .largeTitle)
@@ -218,11 +219,11 @@ class EditProfileViewController: UIViewController {
             make.centerX.top.bottom.equalToSuperview()
         }
         email.snp.makeConstraints { make in
-            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(30)
+            make.top.equalTo(contentView.safeAreaLayoutGuide).offset(40)
             make.centerX.equalTo(contentView.snp.centerX)
         }
         stackView.snp.makeConstraints { make in
-            make.top.equalTo(email.snp.bottom).offset(30)
+            make.top.equalTo(email.snp.bottom).offset(40)
             make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(20)
             make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
         }
