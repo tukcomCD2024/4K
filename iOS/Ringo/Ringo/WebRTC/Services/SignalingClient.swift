@@ -14,8 +14,8 @@ protocol SignalClientDelegate: AnyObject {
     func signalClientDidDisconnect(_ signalClient: SignalingClient)
     func signalClientDidForceDisconnect(_ signalClient: SignalingClient)
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, sender: String)
-    func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate, sender: String)
-    func signalClient(_ signalClient: SignalingClient, didReceiveCallResponse response: String, sender: String)
+    func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate)
+    func signalClient(_ signalClient: SignalingClient, didReceiveCallResponse response: String)
     func signalClient(_ signalClient: SignalingClient, didReceiveTranslation msg: String)
 }
 
@@ -145,7 +145,7 @@ extension SignalingClient: WebSocketProviderDelegate {
         case .call_response:
             debugPrint("call_response")
 //            debugPrint(message)
-            self.delegate?.signalClient(self, didReceiveCallResponse: message.dataString(), sender: message.name!)
+            self.delegate?.signalClient(self, didReceiveCallResponse: message.dataString())
         case .offer_received,.answer_received:
             debugPrint("received")
 //            debugPrint(message)
@@ -160,7 +160,7 @@ extension SignalingClient: WebSocketProviderDelegate {
 //            debugPrint(message)
             switch message.data {
             case .candidate(let iceCandidate):
-                self.delegate?.signalClient(self, didReceiveCandidate: iceCandidate.rtcIceCandidate, sender: message.name!)
+                self.delegate?.signalClient(self, didReceiveCandidate: iceCandidate.rtcIceCandidate)
             default:
                 print("????")
             }

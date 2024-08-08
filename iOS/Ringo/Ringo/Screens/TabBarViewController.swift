@@ -53,6 +53,7 @@ extension TabBarViewController: SignalClientDelegate {
                 let alert = UIAlertController(title: "Call", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Refuse", style: .destructive, handler: nil))
                 alert.addAction(UIAlertAction(title: "Accept", style: .default, handler: { action in
+                    UserManager.setData(value: sender, key: .receiver)
                     self.acceptCall(sender: sender)
                 }))
                 self.present(alert, animated: true, completion: nil)
@@ -60,19 +61,18 @@ extension TabBarViewController: SignalClientDelegate {
         }
     }
     
-    func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate, sender: String) {
+    func signalClient(_ signalClient: SignalingClient, didReceiveCandidate candidate: RTCIceCandidate) {
         CallService.shared.webRTCClient.set(remoteCandidate: candidate) { error in
             print("Received remote candidate : \(candidate)")
         }
     }
     
-    func signalClient(_ signalClient: SignalingClient, didReceiveCallResponse response: String, sender: String) {
+    func signalClient(_ signalClient: SignalingClient, didReceiveCallResponse response: String) {
         if response == "user is ready for call" {
             CallService.shared.webRTCClient.offer { (sdp) in
-                var message = Message(type: .create_offer, name: UserManager.getData(type: String.self, forKey: .email)!, target: sender)
+                var message = Message(type: .create_offer, name: UserManager.getData(type: String.self, forKey: .email)!, target: UserManager.getData(type: String.self, forKey: .receiver)!)
                 message.data = .sdp(SessionDescription(from: sdp))
                 CallService.shared.signalClient.send(message: message)
-                UserManager.setData(value: sender, key: .receiver)
             }
             DispatchQueue.main.async { [self] in
                 let connectionVC = ConnectionViewController()
