@@ -20,6 +20,7 @@
 		940C25872B7A89AB00E069D0 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25812B7A89AB00E069D0 /* WebRTCClient.swift */; };
 		940C25882B7A89AB00E069D0 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25822B7A89AB00E069D0 /* SignalingClient.swift */; };
 		940C258A2B7A8FA900E069D0 /* CallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25892B7A8FA900E069D0 /* CallService.swift */; };
+		941C657E2C69D5BB002BA61E /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941C657D2C69D5BB002BA61E /* ConnectingView.swift */; };
 		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
 		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
 		94470A902B710CE500F0A942 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8F2B710CE500F0A942 /* WebRTC */; };
@@ -65,6 +66,7 @@
 		940C25812B7A89AB00E069D0 /* WebRTCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
 		940C25822B7A89AB00E069D0 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		940C25892B7A8FA900E069D0 /* CallService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallService.swift; sourceTree = "<group>"; };
+		941C657D2C69D5BB002BA61E /* ConnectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingView.swift; sourceTree = "<group>"; };
 		94470A922B7163E900F0A942 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		94470A942B71680100F0A942 /* SigninService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninService.swift; sourceTree = "<group>"; };
 		94470A962B717DC300F0A942 /* ConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			children = (
 				940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */,
 				94470A962B717DC300F0A942 /* ConnectionViewController.swift */,
+				941C657D2C69D5BB002BA61E /* ConnectingView.swift */,
 				945CF97E2B67E1CD00396E4E /* ViewController.swift */,
 				94C3E5442C4DF99200EBF588 /* SignupViewController.swift */,
 				945603122B6AC07D002F4B33 /* TabBarViewController.swift */,
@@ -312,6 +315,7 @@
 				94FFD4A12C60968100C60F05 /* EditProfileViewController.swift in Sources */,
 				94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */,
 				940C257A2B7A899500E069D0 /* IceCandidate.swift in Sources */,
+				941C657E2C69D5BB002BA61E /* ConnectingView.swift in Sources */,
 				94FFD49F2C58E59B00C60F05 /* FriendRequestList.swift in Sources */,
 				94C3E5412C3398C900EBF588 /* AuthInterceptor.swift in Sources */,
 				945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */,

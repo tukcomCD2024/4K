@@ -19,4 +19,7 @@ class CallService {
         self.signalClient = SignalingClient(webSocket: NativeWebSocket(url: self.config.signalingServerUrl))
         self.webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
     }
+    func refresh() {
+        self.webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
+    }
 }

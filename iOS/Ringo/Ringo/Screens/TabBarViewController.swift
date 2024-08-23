@@ -11,6 +11,8 @@ import WebRTC
 
 class TabBarViewController: UITabBarController{
     
+    var connectionVC: ConnectionViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,14 +51,16 @@ extension TabBarViewController: SignalClientDelegate {
     func signalClient(_ signalClient: SignalingClient, didReceiveRemoteSdp sdp: RTCSessionDescription, sender: String) {
         print("Received remote sdp")
         CallService.shared.webRTCClient.set(remoteSdp: sdp) { (error) in
-            DispatchQueue.main.async {
-                let alert = UIAlertController(title: "Call", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Refuse", style: .destructive, handler: nil))
-                alert.addAction(UIAlertAction(title: "Accept", style: .default, handler: { action in
-                    UserManager.setData(value: sender, key: .receiver)
-                    self.acceptCall(sender: sender)
-                }))
-                self.present(alert, animated: true, completion: nil)
+            if sdp.type == .offer {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Call", message: sender, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Refuse", style: .destructive, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Accept", style: .default, handler: { action in
+                        UserManager.setData(value: sender, key: .receiver)
+                        self.acceptCall(sender: sender)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -74,10 +78,8 @@ extension TabBarViewController: SignalClientDelegate {
                 message.data = .sdp(SessionDescription(from: sdp))
                 CallService.shared.signalClient.send(message: message)
             }
-            DispatchQueue.main.async { [self] in
-                let connectionVC = ConnectionViewController()
-                connectionVC.modalPresentationStyle = .fullScreen
-                present(connectionVC, animated: true,completion: nil)
+            DispatchQueue.main.async {
+                ConnectingView.shared.show()
             }
         } else {
             debugPrint("response message")
@@ -96,9 +98,6 @@ extension TabBarViewController: SignalClientDelegate {
             CallService.shared.signalClient.send(message: message)
 //            CallService.shared.signalClient.send(sdp: localSdp)
         }
-        let connectionVC = ConnectionViewController()
-        connectionVC.modalPresentationStyle = .fullScreen
-        self.present(connectionVC, animated: true,completion: nil)
     }
     
 }
@@ -114,8 +113,26 @@ extension TabBarViewController: WebRTCClientDelegate {
     
     func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
         print("change connection state : \(state)")
+        switch state {
+        case .connected:
+            DispatchQueue.main.async { [self] in
+                let connectionVC = ConnectionViewController()
+                connectionVC.modalPresentationStyle = .fullScreen
+                self.connectionVC = connectionVC
+                self.present(connectionVC, animated: true,completion: nil)
+            }
+        case .disconnected,.failed,.closed:
+            DispatchQueue.main.async {
+                ConnectingView.shared.hide()
+                CallService.shared.refresh()
+                self.connectionVC?.dismiss(animated: true)
+            }
+        default: break
+//            DispatchQueue.main.async {
+//                self.loading.isLoading = false
+//            }
+        }
     }
-    
     func webRTCClient(_ client: WebRTCClient, didReceiveData data: Data) {
         DispatchQueue.main.async {
             let message = String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)"
