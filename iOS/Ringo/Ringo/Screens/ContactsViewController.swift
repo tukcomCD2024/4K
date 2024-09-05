@@ -12,21 +12,24 @@ class ContactsViewController: UIViewController {
     
     let contactsTableViewCell = ContactsTableViewCell.identifier
     
-    var randomNames = [String]()
+    var friendsList = [FriendInfo]()
 
     let searchController = UISearchController()
     var tableView: UITableView!
+    let ifEmptyList = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         
         //navigation
         self.navigationItem.title = "Contacts"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"), style: .plain, target: self, action: #selector(requestFriend))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(test))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"), style: .plain, target: self, action: #selector(requestFriend))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "envelope"), style: .plain, target: self, action: #selector(requestList))
+        
         
         //table
         tableView = UITableView()
@@ -35,11 +38,24 @@ class ContactsViewController: UIViewController {
         tableView.dataSource = self
         self.view.addSubview(tableView)
         
+        ifEmptyList.text = "No friends yet"
+        ifEmptyList.textColor = .systemGray2
+        ifEmptyList.textAlignment = .center
+        ifEmptyList.sizeToFit()
+        tableView.backgroundView = ifEmptyList
+        
         setConstraints()
         
-        loadFriends()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadFriends()
+        FriendRequestList.shared.reload()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkRequestList()
+    }
     func setConstraints(){
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
@@ -47,13 +63,21 @@ class ContactsViewController: UIViewController {
     }
     //navigaion rightBtn action
     @objc private func requestFriend(_ sender: UIBarButtonItem) {
-        self.navigationController?.pushViewController(FriendRequestViewController(), animated: true)
+        present(UINavigationController(rootViewController: FriendRequestViewController()), animated: true)
+//        self.navigationController?.pushViewController(FriendRequestViewController(), animated: true)
     }
     
-    @objc private func test() {
-        DispatchQueue.global().async {
-            CallService.shared.signalClient.store(id: "rkdwltjr@naver.com")
-        }
+    @objc private func requestList() {
+        // 네비게이션 Push
+        self.navigationController?.pushViewController(FriendRequestListViewController(), animated: true)
+        // modal
+//        present(UINavigationController(rootViewController: FriendRequestListViewController()), animated: true)
+    }
+    private func checkRequestList() {
+        print(FriendRequestList.shared.getList())
+        if FriendRequestList.shared.getList().isEmpty {
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "envelope")
+        } else { navigationItem.rightBarButtonItem?.image = UIImage(systemName: "envelope.badge")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(paletteColors: [.systemRed,.systemBlue])) }
     }
 }
 
@@ -96,13 +120,13 @@ extension ContactsViewController: UITableViewDelegate {
 extension ContactsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return randomNames.count
+        return friendsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: contactsTableViewCell, for: indexPath) as! ContactsTableViewCell
         
-        cell.name.text = randomNames[indexPath.row]
+        cell.name.text = friendsList[indexPath.row].name
         cell.selectionStyle = .none
         cell.delegate = self
                 
@@ -114,19 +138,18 @@ extension ContactsViewController {
     
     func loadFriends() {
         //id ??인 유저의 친구목록
-        FriendService.shared.loadFriendsList(userId: 8) { response in
+        FriendService.shared.loadFriendsList(email: UserManager.getData(type: String.self, forKey: .email) ?? "") { response in
             switch response {
             case .success(let data):
                     
-                guard let data = data as? [String] else { return }
+                guard let data = data as? [FriendInfo] else { return }
                 if !data.isEmpty {
-                    self.randomNames = data
+                    self.friendsList = data
+                    self.tableView.backgroundView?.isHidden = true
                     self.tableView.reloadData()
                 } else {
-                    let alert = UIAlertController(title: "친구가 없습니다", message: "", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    }
+                    self.tableView.backgroundView?.isHidden = false
+                }
                     
             case .requestErr(let err):
                 print(err)
@@ -136,16 +159,20 @@ extension ContactsViewController {
                 print("serverErr")
             case .networkFail:
                 print("networkFail")
+            case .dataErr:
+                print("dataErr")
             }
         }
     }
 }
 
-// MARK: -  Load Friends
+// MARK: -  Cell Delegate
 extension ContactsViewController: ContactsTableViewCellDelegate {
     
     func pressedButton() {
-        CallService.shared.signalClient.startcall(id: "8", target: "10")
+        let rowNum = tableView.indexPathForSelectedRow!.row
+        CallService.shared.signalClient.startcall(user: UserManager.getData(type: String.self, forKey: .email)!, target: friendsList[rowNum].email)
+        UserManager.setData(value: friendsList[rowNum].email, key: .receiver)
     }
     
 }

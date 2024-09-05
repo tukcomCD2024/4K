@@ -23,5 +23,7 @@
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Need Mic Access</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Need Camera Access</string>
 </dict>
 </plist>
