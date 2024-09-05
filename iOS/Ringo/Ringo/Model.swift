@@ -8,16 +8,21 @@
 import Foundation
 
 struct SigninData: Codable {
-    let id: Int
-    let eamil: String
-    let jwtToken: String
+    let language: String
+    let accessToken: String
     let refreshToken: String
 }
 
 struct SigninDataResponse: Codable {
+    let status: String
     let data: SigninData?
-    let message: String
-    let result: String
+    let message: String?
+}
+
+struct FriendInfo: Codable {
+    let name: String
+    let language: String
+    let email: String
 }
 
 enum NetworkResult<T> {
@@ -26,4 +31,5 @@ enum NetworkResult<T> {
     case pathErr
     case serverErr
     case networkFail
+    case dataErr
 }

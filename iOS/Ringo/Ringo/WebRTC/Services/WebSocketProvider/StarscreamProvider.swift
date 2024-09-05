@@ -30,6 +30,10 @@ class StarscreamWebSocket: WebSocketProvider {
     func send(string: String) {
         self.socket.write(string: string)
     }
+    
+    func forceDisconnect() {
+        self.socket.forceDisconnect()
+    }
 }
 
 extension StarscreamWebSocket: Starscream.WebSocketDelegate {

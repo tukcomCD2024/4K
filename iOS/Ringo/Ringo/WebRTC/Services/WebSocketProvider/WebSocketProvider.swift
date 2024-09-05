@@ -13,10 +13,12 @@ protocol WebSocketProvider: AnyObject {
     func connect()
     func send(data: Data)
     func send(string: String)
+    func forceDisconnect()
 }
 
 protocol WebSocketProviderDelegate: AnyObject {
     func webSocketDidConnect(_ webSocket: WebSocketProvider)
     func webSocketDidDisconnect(_ webSocket: WebSocketProvider)
+    func webSocketDidForceDisconnect(_ webSocket: WebSocketProvider)
     func webSocket(_ webSocket: WebSocketProvider, didReceiveData data: Data)
 }

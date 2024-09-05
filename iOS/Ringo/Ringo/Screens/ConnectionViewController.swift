@@ -21,7 +21,9 @@ class ConnectionViewController: UIViewController {
     let translateBtn = UIButton()
     let hangUpBtn = UIButton()
     
-    let randomNames = ["example"]
+    var Names = ["example"]
+    
+    private lazy var videoVC = VideoViewController(webRTCClient: CallService.shared.webRTCClient)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,23 +76,41 @@ class ConnectionViewController: UIViewController {
         
         let imageSize = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 25))
         
-        muteBtn.backgroundColor = .white.withAlphaComponent(0.16)
-        muteBtn.tintColor = .white
         muteBtn.configuration = .plain()
         muteBtn.setImage(UIImage(systemName: "mic.slash.fill",withConfiguration: imageSize), for: .normal)
         muteBtn.clipsToBounds = true
         muteBtn.invalidateIntrinsicContentSize()
         muteBtn.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 25, bottom: 25, trailing: 25)
         muteBtn.layer.cornerRadius = 40
+        muteBtn.configurationUpdateHandler = { btn in
+            switch btn.state {
+                case .selected:
+                    btn.tintColor = .black
+                    btn.backgroundColor = .white
+                default:
+                    btn.tintColor = .white
+                    btn.backgroundColor = .white.withAlphaComponent(0.16)
+            }
+        }
+        muteBtn.addTarget(self, action: #selector(pressedMuteBtn), for: .touchUpInside)
         
-        speakerBtn.backgroundColor = .white.withAlphaComponent(0.16)
-        speakerBtn.tintColor = .white
         speakerBtn.configuration = .plain()
         speakerBtn.setImage(UIImage(systemName: "speaker.wave.3.fill",withConfiguration: imageSize), for: .normal)
         speakerBtn.clipsToBounds = true
         speakerBtn.invalidateIntrinsicContentSize()
         speakerBtn.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 15, bottom: 25, trailing: 15)
         speakerBtn.layer.cornerRadius = 40
+        speakerBtn.configurationUpdateHandler = { btn in
+            switch btn.state {
+                case .selected:
+                    btn.tintColor = .black
+                    btn.backgroundColor = .white
+                default:
+                    btn.tintColor = .white
+                    btn.backgroundColor = .white.withAlphaComponent(0.16)
+            }
+        }
+        speakerBtn.addTarget(self, action: #selector(pressedSpeakerBtn), for: .touchUpInside)
         
         translateBtn.backgroundColor = .white.withAlphaComponent(0.16)
         translateBtn.tintColor = .white
@@ -134,39 +154,106 @@ class ConnectionViewController: UIViewController {
         
     }
     
+    @objc func pressedMuteBtn() {
+        switch self.muteBtn.state {
+        case .selected:
+            muteBtn.isSelected.toggle()
+            CallService.shared.webRTCClient.unmuteAudio()
+        default:
+            muteBtn.isSelected.toggle()
+            CallService.shared.webRTCClient.muteAudio()
+        }
+    }
+    
+    @objc func pressedSpeakerBtn() {
+        switch self.speakerBtn.state {
+        case .selected:
+            speakerBtn.isSelected.toggle()
+            CallService.shared.webRTCClient.speakerOff()
+        default:
+            speakerBtn.isSelected.toggle()
+            CallService.shared.webRTCClient.speakerOn()
+        }
+    }
+    
     @objc func hangUpBtnAction() {
         CallService.shared.webRTCClient.endCall()
         dismiss(animated: true)
     }
     
     @objc func pressedTransBtn() {
-        let sttVC = TestSTTViewController()
+        let sttVC = STTViewController.shared
+        sttVC.reinit(lang: UserManager.getData(type: String.self, forKey: .language)!)
         sttVC.modalPresentationStyle = .automatic
         present(sttVC, animated: true,completion: nil)
     }
+    func setName(name:String){
+        Names.removeAll()
+        Names.append(name)
+    }
+    func showAlertGoToSetting() {
+        let alertController = UIAlertController(
+          title: "현재 카메라 사용에 대한 접근 권한이 없습니다.",
+          message: "설정 > {앱 이름}탭에서 접근을 활성화 할 수 있습니다.",
+          preferredStyle: .alert
+        )
+        let cancelAlert = UIAlertAction(
+          title: "취소",
+          style: .cancel
+        ) { _ in
+            alertController.dismiss(animated: true, completion: nil)
+          }
+        let goToSettingAlert = UIAlertAction(
+          title: "설정으로 이동하기",
+          style: .default) { _ in
+            guard
+              let settingURL = URL(string: UIApplication.openSettingsURLString),
+              UIApplication.shared.canOpenURL(settingURL)
+            else { return }
+            UIApplication.shared.open(settingURL, options: [:])
+          }
+        [cancelAlert, goToSettingAlert]
+          .forEach(alertController.addAction(_:))
+        DispatchQueue.main.async {
+          self.present(alertController, animated: true) // must be used from main thread only
+        }
+      }
 
 }
 //MARK: - CollectionViewDelegate
 extension ConnectionViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        AVCaptureDevice.requestAccess(for: .video) { isAuthorized in
+            guard isAuthorized else {
+                self.showAlertGoToSetting() // 밑에서 계속 구현
+                return
+            }
+            CallService.shared.webRTCClient.showVideo()
+            DispatchQueue.main.async {
+                let videoVC = self.videoVC
+                //        videoVC.modalPresentationStyle = .fullScreen
+                self.present(videoVC, animated: true)
+            }
+        }
+    }
 }
 //MARK: - CollectionViewDataSource
 extension ConnectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return randomNames.count
+        return Names.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: connectionCollectionViewCell, for: indexPath) as! ConnectionCollectionViewCell
-        cell.nameLabel.text = randomNames[indexPath.row]
+        cell.nameLabel.text = Names[indexPath.row]
         
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //6개까지 커버
         var cellWidth = 300
-        switch randomNames.count {
+        switch Names.count {
         case 5...:
             cellWidth = Int((collectionView.frame.width - (40 * 2) - 20)/2)
             return CGSize(width: cellWidth, height: Int((collectionView.frame.height - (60 * 2))/3))
@@ -176,7 +263,7 @@ extension ConnectionViewController: UICollectionViewDataSource {
             return CGSize(width: cellWidth, height: cellWidth)
         default:
             cellWidth = Int((collectionView.frame.width - (40 * 2)))
-            if randomNames.count == 1 {
+            if Names.count == 1 {
                 collectionView.contentInset.top = ((collectionView.frame.height/2) - 40 - CGFloat(cellWidth/4))
             } else {
                 collectionView.contentInset.top = ((collectionView.frame.height/2) - 50 - CGFloat(cellWidth/2))
@@ -214,6 +301,7 @@ extension ConnectionViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - canvas 이용하기
 import SwiftUI
+import AVFoundation
 @available(iOS 13.0.0, *)
 struct ConnectionViewPreview: PreviewProvider {
     static var previews: some View {

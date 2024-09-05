@@ -43,17 +43,19 @@ class ViewController: UIViewController {
         view.addSubview(signupBtn)
         view.addSubview(email)
         view.addSubview(input_email)
+        
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(passwd)
+        stackView.addArrangedSubview(input_passwd)
+        stackView.addArrangedSubview(error)
         view.addSubview(forgotPwBtn)
+        
         view.addSubview(signinBtn)
         view.addSubview(Text4)
         view.addSubview(google)
         view.addSubview(apple)
         view.addSubview(facebook)
         
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(passwd)
-        stackView.addArrangedSubview(input_passwd)
-        stackView.addArrangedSubview(error)
     }
     
     func setUpValue() {
@@ -64,7 +66,7 @@ class ViewController: UIViewController {
         Text1.text = "Sign in"
         Text1.font = .preferredFont(forTextStyle: .title1)
         
-        Text2.text = "If you don't have an account register \nYou can"
+        Text2.text = "If you don't have an account register"
         Text2.font = .preferredFont(forTextStyle: .body)
         
         Text3.text = "You can"
@@ -74,19 +76,23 @@ class ViewController: UIViewController {
         signupBtn.setTitleColor(.systemBlue, for: .normal)
         signupBtn.titleLabel?.font = .systemFont(ofSize: 18)
         signupBtn.setTitleColor(.systemBlue.withAlphaComponent(0.5), for: .highlighted)
+        signupBtn.addTarget(self, action: #selector(onPressSignup(_:)), for: .touchUpInside)
         
         email.text = "E-mail"
         email.font = .preferredFont(forTextStyle: .body)
         
         input_email.placeholder = "Enter your email"
         input_email.borderStyle = .roundedRect
-        input_email.layer.borderWidth = 1.5
-        input_email.layer.borderColor = UIColor(hexCode: "E2E8F0").cgColor
-        input_email.layer.cornerRadius = 5
+//        input_email.layer.borderWidth = 1.5
+//        input_email.layer.borderColor = UIColor(hexCode: "E2E8F0").cgColor
+//        input_email.layer.cornerRadius = 5
         input_email.keyboardType = .emailAddress
         input_email.autocapitalizationType = .none
         input_email.autocorrectionType = .no
         input_email.spellCheckingType = .no
+        input_email.clearButtonMode = .unlessEditing
+        input_email.backgroundColor = .systemGray6
+        input_email.delegate = self
         
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -121,8 +127,9 @@ class ViewController: UIViewController {
         input_passwd.delegate = self
         input_passwd.autocorrectionType = .no
         input_passwd.spellCheckingType = .no
+        input_passwd.backgroundColor = .systemGray6
         
-        error.layer.isHidden = true
+        error.isHidden = true
         error.setTitle(" Incorrect password. Please check your password.", for: .normal)
         error.setTitleColor(.red, for: .normal)
         error.titleLabel?.font = .systemFont(ofSize: 13)
@@ -227,7 +234,14 @@ class ViewController: UIViewController {
     // 빈 화면 터치 시 키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             view.endEditing(true)
-        }
+    }
+    
+    @objc func onPressSignup(_ sender: UIButton) {
+        let signupVC = SignupViewController()
+        signupVC.modalPresentationStyle = .fullScreen
+        signupVC.modalTransitionStyle = .crossDissolve
+        present(signupVC, animated: true)
+    }
     
     @objc func onPressSignin(_ sender: UIButton) {
         login()
@@ -269,15 +283,23 @@ extension ViewController {
     func login() {
             
         guard let email = input_email.text else { return }
-        guard let passward = input_passwd.text else { return }
+        guard let password = input_passwd.text else { return }
         
-        SigninSercive.shared.login(email: email, password: passward) { response in
+        SigninSercive.shared.login(email: email, password: password) { response in
             switch response {
             case .success(let data):
                     
-                guard let data = data as? String else { return }
-                if data == "success"{
-//                    UserDefaults.standard.set(data.data?.jwtToken, forKey: "jwtToken")
+                guard let data = data as? SigninDataResponse else { return }
+                if data.status == "success"{
+                    
+                    UserManager.setData(value: email, key: .email)
+                    UserManager.setData(value: password, key: .password)
+                    UserManager.setData(value: data.data?.language, key: .language)
+                    UserManager.setData(value: data.data?.accessToken, key: .accessToken)
+                    UserManager.setData(value: data.data?.refreshToken, key: .refreshToken)
+                    self.input_email.text = ""
+                    self.input_passwd.text = ""
+                    
                     let nav = UINavigationController()
                     nav.modalPresentationStyle = .fullScreen
                     
@@ -288,7 +310,13 @@ extension ViewController {
                     nav.viewControllers = [controller]
                     self.present(nav, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(title: data, message: "", preferredStyle: .alert)
+                    
+                    self.input_passwd.layer.borderWidth = 1
+                    self.input_passwd.layer.cornerRadius = 5
+                    self.input_passwd.layer.borderColor = UIColor.systemRed.cgColor
+                    self.error.isHidden = false
+                    
+                    let alert = UIAlertController(title: data.status, message: data.message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
             //            alert.addAction(UIAlertAction(title: "DEFAULT", style: .default, handler: nil))
             //            alert.addAction(UIAlertAction(title: "DESTRUCTIVE", style: .destructive, handler: nil))
@@ -305,14 +333,23 @@ extension ViewController {
                 print("serverErr")
             case .networkFail:
                 print("networkFail")
+            case .dataErr:
+                print("dataErr")
             }
         }
     }
 }
-// MARK:
+// MARK: - 키보드 사라지게 하기
 extension ViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == input_passwd && !error.isHidden {
+            error.isHidden = true
+            input_passwd.layer.borderColor = UIColor.clear.cgColor
+        }
         return true
     }
 }
