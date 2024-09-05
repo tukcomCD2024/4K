@@ -1,5 +1,5 @@
 //
-//  TestSTTViewController.swift
+//  STTViewController.swift
 //  Ringo
 //
 //  Created by 강진혁 on 2/21/24.
@@ -9,9 +9,11 @@ import UIKit
 import SnapKit
 import Speech
 
-class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
+class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
 
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))!
+    static let shared = STTViewController()
+    
+    private var speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en"))!
     
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     
@@ -20,6 +22,7 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
     private let audioEngine = AVAudioEngine()
     
     var textView = UITextView()
+    var textView2 = UITextView()
     
     var recordButton = UIButton()
     
@@ -33,6 +36,7 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     func setUpView() {
         view.addSubview(textView)
+        view.addSubview(textView2)
         view.addSubview(recordButton)
     }
     
@@ -40,7 +44,16 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         view.backgroundColor = .systemBackground
         
-        textView.font = .systemFont(ofSize: 30)
+        textView.font = .systemFont(ofSize: 20)
+        textView.layer.cornerRadius = 25
+        textView.backgroundColor = .secondarySystemFill
+        textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        
+        textView2.textColor = .white
+        textView2.font = .systemFont(ofSize: 20)
+        textView2.layer.cornerRadius = 25
+        textView2.backgroundColor = .systemBlue
+        textView2.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
         recordButton.configuration = .plain()
         recordButton.isEnabled = false
@@ -51,10 +64,16 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     func setConstraints() {
         textView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalTo(view.safeAreaLayoutGuide)
-            make.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(recordButton.snp.top)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(120)
+            make.bottom.equalTo(view.snp.centerY).offset(-35)
+        }
+        textView2.snp.makeConstraints { make in
+            make.top.equalTo(textView.snp.bottom).offset(20)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(120)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.bottom.equalTo(recordButton.snp.top).offset(-20)
         }
         recordButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(30)
@@ -127,7 +146,7 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
             
             if let result = result {
                 // Update the text view with the results.
-                self.textView.text = result.bestTranscription.formattedString
+                self.textView2.text = result.bestTranscription.formattedString
                 isFinal = result.isFinal
                 debugPrint(result.bestTranscription.formattedString)
                 if result.speechRecognitionMetadata != nil {
@@ -161,7 +180,8 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
         try audioEngine.start()
         
         // Let the user know to start talking.
-        textView.text = "(말해보세요)"
+        textView.text = "..."
+        textView2.text = "..."
     }
     
     // MARK: SFSpeechRecognizerDelegate
@@ -169,7 +189,7 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
     public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
             recordButton.isEnabled = true
-            recordButton.setTitle("말하기", for: [])
+            recordButton.setTitle("Translate start", for: [])
         } else {
             recordButton.isEnabled = false
             recordButton.setTitle("Recognition Not Available", for: .disabled)
@@ -187,11 +207,15 @@ class TestSTTViewController: UIViewController, SFSpeechRecognizerDelegate {
         } else {
             do {
                 try startRecording()
-                recordButton.setTitle("그만 말하기", for: [])
+                recordButton.setTitle("Translate stop", for: [])
             } catch {
                 recordButton.setTitle("Recording Not Available", for: [])
             }
         }
+    }
+    
+    func reinit(lang: String){
+        speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: lang))!
     }
     
 }
@@ -200,6 +224,6 @@ import SwiftUI
 @available(iOS 13.0.0, *)
 struct TestSTTViewPreview: PreviewProvider {
     static var previews: some View {
-        TestSTTViewController().toPreview()
+        STTViewController().toPreview()
     }
 }

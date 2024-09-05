@@ -182,7 +182,7 @@ class ConnectionViewController: UIViewController {
     }
     
     @objc func pressedTransBtn() {
-        let sttVC = TestSTTViewController.shared
+        let sttVC = STTViewController.shared
         sttVC.reinit(lang: UserManager.getData(type: String.self, forKey: .language)!)
         sttVC.modalPresentationStyle = .automatic
         present(sttVC, animated: true,completion: nil)

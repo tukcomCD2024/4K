@@ -90,7 +90,7 @@ extension TabBarViewController: SignalClientDelegate {
     
     func signalClient(_ signalClient: SignalingClient, didReceiveTranslation msg: String) {
         DispatchQueue.main.async {
-            TestSTTViewController.shared.textView.text = msg
+            STTViewController.shared.textView.text = msg
         }
         TTS.shared.play(msg, UserManager.getData(type: String.self, forKey: .language)!)
     }
