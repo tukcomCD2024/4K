@@ -79,6 +79,7 @@ extension TabBarViewController: SignalClientDelegate {
                 CallService.shared.signalClient.send(message: message)
             }
             DispatchQueue.main.async {
+                ConnectingView.shared.setName(name: UserManager.getData(type: String.self, forKey: .receiver)!)
                 ConnectingView.shared.show()
             }
         } else {
@@ -88,6 +89,9 @@ extension TabBarViewController: SignalClientDelegate {
     }
     
     func signalClient(_ signalClient: SignalingClient, didReceiveTranslation msg: String) {
+        DispatchQueue.main.async {
+            TestSTTViewController.shared.textView.text = msg
+        }
         TTS.shared.play(msg, UserManager.getData(type: String.self, forKey: .language)!)
     }
     
@@ -117,6 +121,7 @@ extension TabBarViewController: WebRTCClientDelegate {
         case .connected:
             DispatchQueue.main.async { [self] in
                 let connectionVC = ConnectionViewController()
+                connectionVC.setName(name: UserManager.getData(type: String.self, forKey: .receiver)!)
                 connectionVC.modalPresentationStyle = .fullScreen
                 self.connectionVC = connectionVC
                 self.present(connectionVC, animated: true,completion: nil)

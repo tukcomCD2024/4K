@@ -20,6 +20,7 @@
 		940C25872B7A89AB00E069D0 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25812B7A89AB00E069D0 /* WebRTCClient.swift */; };
 		940C25882B7A89AB00E069D0 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25822B7A89AB00E069D0 /* SignalingClient.swift */; };
 		940C258A2B7A8FA900E069D0 /* CallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25892B7A8FA900E069D0 /* CallService.swift */; };
+		9410C9402C87067A00B006A7 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C93F2C87067A00B006A7 /* VideoViewController.swift */; };
 		941C657E2C69D5BB002BA61E /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941C657D2C69D5BB002BA61E /* ConnectingView.swift */; };
 		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
 		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
@@ -44,7 +45,7 @@
 		94C3E5432C351A6A00EBF588 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3E5422C351A6A00EBF588 /* UserManager.swift */; };
 		94C3E5452C4DF99200EBF588 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3E5442C4DF99200EBF588 /* SignupViewController.swift */; };
 		94C3E5472C4E26AE00EBF588 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C3E5462C4E26AE00EBF588 /* Language.swift */; };
-		94FB0A6B2B858F66005A4915 /* TestSTTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */; };
+		94FB0A6B2B858F66005A4915 /* STTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6A2B858F66005A4915 /* STTViewController.swift */; };
 		94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FB0A6C2BAAD64A005A4915 /* TTS.swift */; };
 		94FFD49B2C57BB2800C60F05 /* FriendRequestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49A2C57BB2800C60F05 /* FriendRequestListViewController.swift */; };
 		94FFD49D2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FFD49C2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift */; };
@@ -66,6 +67,7 @@
 		940C25812B7A89AB00E069D0 /* WebRTCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
 		940C25822B7A89AB00E069D0 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		940C25892B7A8FA900E069D0 /* CallService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallService.swift; sourceTree = "<group>"; };
+		9410C93F2C87067A00B006A7 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		941C657D2C69D5BB002BA61E /* ConnectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingView.swift; sourceTree = "<group>"; };
 		94470A922B7163E900F0A942 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		94470A942B71680100F0A942 /* SigninService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninService.swift; sourceTree = "<group>"; };
@@ -88,7 +90,7 @@
 		94C3E5422C351A6A00EBF588 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		94C3E5442C4DF99200EBF588 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		94C3E5462C4E26AE00EBF588 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
-		94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSTTViewController.swift; sourceTree = "<group>"; };
+		94FB0A6A2B858F66005A4915 /* STTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STTViewController.swift; sourceTree = "<group>"; };
 		94FB0A6C2BAAD64A005A4915 /* TTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
 		94FFD49A2C57BB2800C60F05 /* FriendRequestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestListViewController.swift; sourceTree = "<group>"; };
 		94FFD49C2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestListTableViewCell.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */,
 				94470A962B717DC300F0A942 /* ConnectionViewController.swift */,
+				9410C93F2C87067A00B006A7 /* VideoViewController.swift */,
 				941C657D2C69D5BB002BA61E /* ConnectingView.swift */,
 				945CF97E2B67E1CD00396E4E /* ViewController.swift */,
 				94C3E5442C4DF99200EBF588 /* SignupViewController.swift */,
@@ -204,7 +207,7 @@
 				94C3E5462C4E26AE00EBF588 /* Language.swift */,
 				94470A942B71680100F0A942 /* SigninService.swift */,
 				940C25652B74EF4D00E069D0 /* FriendService.swift */,
-				94FB0A6A2B858F66005A4915 /* TestSTTViewController.swift */,
+				94FB0A6A2B858F66005A4915 /* STTViewController.swift */,
 				94FB0A6C2BAAD64A005A4915 /* TTS.swift */,
 				945603202B6D2F06002F4B33 /* Canvas.swift */,
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
@@ -325,9 +328,10 @@
 				945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */,
 				945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */,
 				940C25872B7A89AB00E069D0 /* WebRTCClient.swift in Sources */,
-				94FB0A6B2B858F66005A4915 /* TestSTTViewController.swift in Sources */,
+				94FB0A6B2B858F66005A4915 /* STTViewController.swift in Sources */,
 				945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */,
 				945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */,
+				9410C9402C87067A00B006A7 /* VideoViewController.swift in Sources */,
 				94C3E5432C351A6A00EBF588 /* UserManager.swift in Sources */,
 				94470A932B7163E900F0A942 /* Model.swift in Sources */,
 				940C25662B74EF4D00E069D0 /* FriendService.swift in Sources */,

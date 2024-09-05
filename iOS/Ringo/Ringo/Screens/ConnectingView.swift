@@ -103,4 +103,7 @@ final class ConnectingView: UIView {
         self.removeFromSuperview()
         completion()
       }
+    func setName(name:String){
+        self.name.text = name
+    }
 }
