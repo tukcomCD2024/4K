@@ -88,11 +88,13 @@ extension TabBarViewController: SignalClientDelegate {
         }
     }
     
-    func signalClient(_ signalClient: SignalingClient, didReceiveTranslation msg: String) {
-        DispatchQueue.main.async {
-            STTViewController.shared.textView.text = msg
+    func signalClient(_ signalClient: SignalingClient, didReceiveTranslation msg: String, language code: String) {
+        if code == UserManager.getData(type: String.self, forKey: .language) {
+            DispatchQueue.main.async {
+                STTViewController.shared.textView.text = msg
+            }
         }
-        TTS.shared.play(msg, UserManager.getData(type: String.self, forKey: .language)!)
+        TTS.shared.play(msg, code)
     }
     
     func acceptCall(sender: String) {
