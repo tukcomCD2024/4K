@@ -44,9 +44,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onVoice(data: ByteArray?, size: Int) {
-            byteArray = data?.let { byteArray.plus(it) }!!
-            Log.e("kya", "***" + byteArray.toString())
-            transcribeRecording(byteArray)
+            data?.let {
+                byteArray += it
+                Log.e("kya", "***" + byteArray.toString())
+                transcribeRecording(byteArray)
+            }
         }
 
         override fun onVoiceEnd() {
@@ -110,9 +112,9 @@ class MainActivity : AppCompatActivity() {
     private fun displayTranscription(transcription: String) {
         runOnUiThread {
             textView.text = transcription
-            //startVoiceRecorder()
-            //stopVoiceRecorder()
-            //startButton.text = "Start"
+            startVoiceRecorder()
+            stopVoiceRecorder()
+            startButton.text = "Start"
         }
     }
 

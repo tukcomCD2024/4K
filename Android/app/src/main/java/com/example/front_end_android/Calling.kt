@@ -313,20 +313,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 }*/
                 textToSpeech = TextToSpeech(this) { status ->
                     if (status == TextToSpeech.SUCCESS) {
-                        var result: Int? = null
-                        if(message.target.toString().trim() == "ko"){
-                            result = textToSpeech.setLanguage(Locale.KOREAN)
-                        }else if(message.target.toString().trim() == "en"){
-                            result = textToSpeech.setLanguage(Locale.US)
-                        }else if(message.target.toString().trim() == "zh-CN"){
-                            result = textToSpeech.setLanguage(Locale.SIMPLIFIED_CHINESE)
-                        }else if(message.target.toString().trim() == "de"){
-                            result = textToSpeech.setLanguage(Locale.GERMANY)
-                        }else if(message.target.toString().trim() == "es"){
-                            result = textToSpeech.setLanguage(Locale("es", "ES"))
-                        }else if(message.target.toString().trim() == "fr"){
-                            result = textToSpeech.setLanguage(Locale.FRANCE)
-                        }
+                        val result: Int = setTTSLanguage(message)
                         //val result = textToSpeech.setLanguage(Locale.US)
                         if (result == TextToSpeech.LANG_MISSING_DATA
                             || result == TextToSpeech.LANG_NOT_SUPPORTED
@@ -350,6 +337,24 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                     startListening()
                 }*/
             }
+        }
+    }
+
+    private fun setTTSLanguage(message: MessageModel): Int {
+        return if(message.target.toString().trim() == "ko"){
+            textToSpeech.setLanguage(Locale.KOREAN)
+        }else if(message.target.toString().trim() == "en"){
+            textToSpeech.setLanguage(Locale.US)
+        }else if(message.target.toString().trim() == "zh-CN"){
+            textToSpeech.setLanguage(Locale.SIMPLIFIED_CHINESE)
+        }else if(message.target.toString().trim() == "de"){
+            textToSpeech.setLanguage(Locale.GERMANY)
+        }else if(message.target.toString().trim() == "es"){
+            textToSpeech.setLanguage(Locale("es", "ES"))
+        }else if(message.target.toString().trim() == "fr"){
+            textToSpeech.setLanguage(Locale.FRANCE)
+        }else{
+            TextToSpeech.LANG_NOT_SUPPORTED
         }
     }
 
@@ -378,9 +383,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             //binding.tvState.text = "이제 말씀하세요!"
         }
         // 말하기 시작했을 때 호출
-        override fun onBeginningOfSpeech() {
-            //binding.tvState.text = "잘 듣고 있어요."
-        }
+        override fun onBeginningOfSpeech() {}
         // 입력받는 소리의 크기를 알려줌
         override fun onRmsChanged(rmsdB: Float) {}
         // 말을 시작하고 인식이 된 단어를 buffer에 담음
