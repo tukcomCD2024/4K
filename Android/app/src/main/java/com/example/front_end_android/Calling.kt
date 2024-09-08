@@ -1,5 +1,6 @@
 package com.example.front_end_android
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.media.AudioManager
 import android.os.Bundle
@@ -9,6 +10,8 @@ import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
+import android.widget.ScrollView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.front_end_android.databinding.ActivityCallingBinding
@@ -45,6 +48,9 @@ class Calling : AppCompatActivity(), NewMessageInterface {
 
     private lateinit var audioManager: AudioManager
 
+    //private lateinit var translationSubtitlesLinearLayout:LinearLayout
+    //private lateinit var translationSubtitlesScrollView:ScrollView
+    //private lateinit var messageContainer: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +83,14 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             finish()
         }
 
+        binding.translationSubtitleBackTxt.setOnClickListener {
+            endTranslationSubtitles()
+        }
+
+        binding.translationSubtitleImg.setOnClickListener {
+            endTranslationSubtitles()
+        }
+
 
         // RecognizerIntent 생성
         recognitionIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -94,22 +108,31 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 binding.translateBackground.setBackgroundResource(R.drawable.mute2white)
                 binding.translateImg.setImageResource(R.drawable.translate_black)
                 rtcClient?.deleteAudioTrack()
-
-                //rtcClient?.deleteLocalStream()
-                //rtcClient?.reConnectLocalStream(true)
+                AlertDialog.Builder(this)
+                    .setTitle("Translation Subtitles")
+                    .setMessage("Are you sure you want to use translation subtitles?")
+                    .setPositiveButton("yes") { dialog, which ->
+                        startTranslationSubtitles()
+                    }
+                    .setNegativeButton("no", null)
+                    .show()
                 startListening()
             }else{
-                isTranslateMode = false
-                binding.translateBackground.setBackgroundResource(R.drawable.mute2)
-                binding.translateImg.setImageResource(R.drawable.translate)
-                stopListening()
-                rtcClient?.addAudioTrack()
-
-                //rtcClient?.deleteLocalStream()
-                //rtcClient?.reConnectLocalStream(false)
+                AlertDialog.Builder(this)
+                    .setTitle("Translation Call")
+                    .setMessage("Do you want to end the translation call?")
+                    .setPositiveButton("yes") { dialog, which ->
+                        isTranslateMode = false
+                        binding.translateBackground.setBackgroundResource(R.drawable.mute2)
+                        binding.translateImg.setImageResource(R.drawable.translate)
+                        stopListening()
+                        rtcClient?.addAudioTrack()
+                    }
+                    .setNegativeButton("no"){ dialog, which ->
+                        startTranslationSubtitles()
+                    }
+                    .show()
             }
-            //val intent = Intent(this@Calling, TestActivity::class.java)
-            //startActivity(intent)
         }
 
     }
@@ -117,6 +140,10 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     private fun init(){
         userName = MyApplication.preferences.getString("email",".")
         targetName = MyApplication.preferences.getString("targetName",".")
+
+        //translationSubtitlesScrollView = ScrollView(this@Calling)
+        //translationSubtitlesLinearLayout = LinearLayout(this@Calling)
+        //translationSubtitlesLinearLayout.orientation = LinearLayout.VERTICAL
 
         binding.nicknameInit.text = targetName
 
@@ -430,7 +457,8 @@ class Calling : AppCompatActivity(), NewMessageInterface {
             for (i in matches!!.indices) {
                 stt_message = matches[i]
             }
-            binding.sttTestTxtview.text = stt_message
+
+            addTranslationSubtitlesSTT(stt_message)
 
             socketRepository?.sendMessageToSocket(
                 MessageModel("stt_message",userName,targetName,stt_message)
@@ -448,6 +476,38 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         override fun onPartialResults(partialResults: Bundle) {}
         // 향후 이벤트를 추가하기 위해 예약
         override fun onEvent(eventType: Int, params: Bundle) {}
+    }
+
+    private fun startTranslationSubtitles(){
+        binding.translationSubtitleImg.visibility = View.VISIBLE
+        binding.translationSubtitleBackTxt.visibility = View.VISIBLE
+        binding.translationSubtitleNameTxt.visibility = View.VISIBLE
+        binding.translationSubtitleScrollView.visibility = View.VISIBLE
+    }
+
+    private fun endTranslationSubtitles(){
+        binding.translationSubtitleImg.visibility = View.GONE
+        binding.translationSubtitleBackTxt.visibility = View.GONE
+        binding.translationSubtitleNameTxt.visibility = View.GONE
+        binding.translationSubtitleScrollView.visibility = View.GONE
+    }
+
+    private fun addTranslationSubtitlesSTT(STTMessage: String) {
+        val textView = TextView(this@Calling).apply {
+            text = STTMessage
+            textSize = 16f
+            // 여기에 메시지 스타일을 추가할 수 있습니다 (예: 패딩, 배경색 등)
+        }
+
+        binding.messageContainer.addView(textView)
+
+        binding.translationSubtitleScrollView.post {
+            binding.translationSubtitleScrollView.fullScroll(ScrollView.FOCUS_DOWN)
+        }
+    }
+
+    private fun addTranslationSubtitlesTTS(TTSMessage: String){
+
     }
 
 }

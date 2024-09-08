@@ -237,5 +237,15 @@
         translate
     </string>
 
+    <!--TranslationSubtitles-->
+
+    <string name="translateTargetName">
+        Name
+    </string>
+
+    <string name="back">
+        back
+    </string>
+
 
 </resources>
