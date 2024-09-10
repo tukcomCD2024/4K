@@ -22,6 +22,7 @@
 		940C258A2B7A8FA900E069D0 /* CallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25892B7A8FA900E069D0 /* CallService.swift */; };
 		9410C9402C87067A00B006A7 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C93F2C87067A00B006A7 /* VideoViewController.swift */; };
 		9410C9442C90468E00B006A7 /* CallingBell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9410C9432C90468E00B006A7 /* CallingBell.mp3 */; };
+		9410C9462C90580800B006A7 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C9452C90580800B006A7 /* Canvas.swift */; };
 		941C657E2C69D5BB002BA61E /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941C657D2C69D5BB002BA61E /* ConnectingView.swift */; };
 		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
 		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
@@ -34,7 +35,6 @@
 		945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603162B6AC2D3002F4B33 /* RecentsViewController.swift */; };
 		945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603182B6AC365002F4B33 /* AccountViewController.swift */; };
 		9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */; };
-		945603212B6D2F06002F4B33 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603202B6D2F06002F4B33 /* Canvas.swift */; };
 		945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */; };
 		945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97A2B67E1CD00396E4E /* AppDelegate.swift */; };
 		945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */; };
@@ -70,6 +70,7 @@
 		940C25892B7A8FA900E069D0 /* CallService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallService.swift; sourceTree = "<group>"; };
 		9410C93F2C87067A00B006A7 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9410C9432C90468E00B006A7 /* CallingBell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CallingBell.mp3; sourceTree = "<group>"; };
+		9410C9452C90580800B006A7 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
 		941C657D2C69D5BB002BA61E /* ConnectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingView.swift; sourceTree = "<group>"; };
 		94470A922B7163E900F0A942 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		94470A942B71680100F0A942 /* SigninService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninService.swift; sourceTree = "<group>"; };
@@ -79,7 +80,6 @@
 		945603162B6AC2D3002F4B33 /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
 		945603182B6AC365002F4B33 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestViewController.swift; sourceTree = "<group>"; };
-		945603202B6D2F06002F4B33 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
 		945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		945CF9772B67E1CD00396E4E /* Ringo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ringo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		945CF97A2B67E1CD00396E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -176,6 +176,7 @@
 		94470A912B71157C00F0A942 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				94FB0A6A2B858F66005A4915 /* STTViewController.swift */,
 				940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */,
 				94470A962B717DC300F0A942 /* ConnectionViewController.swift */,
 				9410C93F2C87067A00B006A7 /* VideoViewController.swift */,
@@ -226,9 +227,8 @@
 				94C3E5462C4E26AE00EBF588 /* Language.swift */,
 				94470A942B71680100F0A942 /* SigninService.swift */,
 				940C25652B74EF4D00E069D0 /* FriendService.swift */,
-				94FB0A6A2B858F66005A4915 /* STTViewController.swift */,
 				94FB0A6C2BAAD64A005A4915 /* TTS.swift */,
-				945603202B6D2F06002F4B33 /* Canvas.swift */,
+				9410C9452C90580800B006A7 /* Canvas.swift */,
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
 				945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */,
 				945CF9882B67E1CE00396E4E /* Info.plist */,
@@ -327,7 +327,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				945603212B6D2F06002F4B33 /* Canvas.swift in Sources */,
 				94470A972B717DC300F0A942 /* ConnectionViewController.swift in Sources */,
 				945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */,
 				94FFD49D2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift in Sources */,
@@ -335,6 +334,7 @@
 				940C25852B7A89AB00E069D0 /* NativeWebSocket.swift in Sources */,
 				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
 				940C25642B73D20900E069D0 /* ConnectionCollectionViewCell.swift in Sources */,
+				9410C9462C90580800B006A7 /* Canvas.swift in Sources */,
 				94FFD4A12C60968100C60F05 /* EditProfileViewController.swift in Sources */,
 				94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */,
 				940C257A2B7A899500E069D0 /* IceCandidate.swift in Sources */,
