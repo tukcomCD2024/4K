@@ -2,6 +2,7 @@ package com.example.front_end_android
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.media.AudioManager
 import android.os.Bundle
 import android.speech.RecognitionListener
@@ -9,11 +10,14 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.front_end_android.databinding.ActivityCallingBinding
 import com.example.front_end_android.models.IceCandidateModel
 import com.example.front_end_android.models.MessageModel
@@ -21,6 +25,7 @@ import com.example.front_end_android.util.NewMessageInterface
 import com.example.front_end_android.util.PeerConnectionObserver
 import com.example.front_end_android.util.RTCAudioManager
 import com.google.gson.Gson
+import org.intellij.lang.annotations.Language
 import org.webrtc.IceCandidate
 import org.webrtc.MediaStream
 import org.webrtc.SessionDescription
@@ -95,7 +100,6 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         // RecognizerIntent 생성
         recognitionIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         recognitionIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName)    // 여분의 키
-        // 실제로는 언어 설정에 내가 설정한 언어가 들어가야함
         val sttLanguage = MyApplication.preferences.getString("SttLanguage","ko-KR")
         recognitionIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, sttLanguage)         // 언어 설정
         // 새 SpeechRecognizer 를 만드는 팩토리 메서드
@@ -347,8 +351,12 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                         ) {
                             Toast.makeText(this, "Language is not supported", Toast.LENGTH_LONG).show()
                         } else {
-                            binding.sttTestTxtview.text = message.target.toString()
+                            //binding.sttTestTxtview.text = message.target.toString()
                             //audioManager.mode = AudioManager.MODE_IN_CALL
+                            val Language = MyApplication.preferences.getString("SttLanguage","ko-KR")
+                            if(Language == getLocalLanguage(message.target.toString().trim())){
+                                addTranslationSubtitlesTTS(message.data.toString().trim())
+                            }
 
                             textToSpeech.speak(
                                 message.data.toString().trim(),
@@ -365,6 +373,23 @@ class Calling : AppCompatActivity(), NewMessageInterface {
                 }*/
             }
         }
+    }
+
+    private fun getLocalLanguage(language:String):String{
+        if(language == "ko"){
+            return "ko-KR"
+        }else if(language == "en"){
+            return "en-US"
+        }else if(language == "zh-CN"){
+            return "zh-CN"
+        }else if(language == "de"){
+            return "de-DE"
+        }else if(language == "es"){
+            return "es-ES"
+        }else if(language == "fr"){
+            return "fr-FR"
+        }
+        return "ko-KR"
     }
 
     private fun setTTSLanguage(message: MessageModel): Int {
@@ -483,6 +508,7 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         binding.translationSubtitleBackTxt.visibility = View.VISIBLE
         binding.translationSubtitleNameTxt.visibility = View.VISIBLE
         binding.translationSubtitleScrollView.visibility = View.VISIBLE
+        binding.root.setBackgroundColor(Color.WHITE)
     }
 
     private fun endTranslationSubtitles(){
@@ -490,16 +516,38 @@ class Calling : AppCompatActivity(), NewMessageInterface {
         binding.translationSubtitleBackTxt.visibility = View.GONE
         binding.translationSubtitleNameTxt.visibility = View.GONE
         binding.translationSubtitleScrollView.visibility = View.GONE
+        binding.root.setBackgroundResource(R.drawable.calling_background)
     }
 
     private fun addTranslationSubtitlesSTT(STTMessage: String) {
         val textView = TextView(this@Calling).apply {
             text = STTMessage
-            textSize = 16f
-            // 여기에 메시지 스타일을 추가할 수 있습니다 (예: 패딩, 배경색 등)
+            textSize = 20f
+            setTextColor(Color.WHITE)
+
+            // Drawable 배경 (말풍선 모양)
+            background = ContextCompat.getDrawable(this@Calling, R.drawable.chat_bubble_background_blue)
+
+            setPadding(32, 24, 32, 24) // 패딩을 늘려서 텍스트와 배경 사이 여백 확보
+            gravity = Gravity.START // 왼쪽 정렬
+
+            // 텍스트가 여러 줄로 표시되도록 설정
+            setSingleLine(false)
+
+            // 최소/최대 폭 설정 (필요에 따라 조정 가능)
+            maxWidth = 800  // 메시지 최대 너비
+            minWidth = 200  // 메시지 최소 너비
         }
 
-        binding.messageContainer.addView(textView)
+        val layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,  // 텍스트에 맞게 높이 조정
+            LinearLayout.LayoutParams.WRAP_CONTENT   // 텍스트에 맞게 너비 조정
+        ).apply {
+            gravity = Gravity.END // 오른쪽 정렬
+            setMargins(16, 16, 16, 16) // 메시지 간격 추가
+        }
+
+        binding.messageContainer.addView(textView, layoutParams)
 
         binding.translationSubtitleScrollView.post {
             binding.translationSubtitleScrollView.fullScroll(ScrollView.FOCUS_DOWN)
@@ -507,7 +555,38 @@ class Calling : AppCompatActivity(), NewMessageInterface {
     }
 
     private fun addTranslationSubtitlesTTS(TTSMessage: String){
+        val textView = TextView(this@Calling).apply {
+            text = TTSMessage
+            textSize = 20f
+            setTextColor(Color.BLACK)
 
+            // Drawable 배경 (말풍선 모양)
+            background = ContextCompat.getDrawable(this@Calling, R.drawable.chat_bubble_background_gray)
+
+            setPadding(32, 24, 32, 24) // 패딩을 늘려서 텍스트와 배경 사이 여백 확보
+            gravity = Gravity.START // 왼쪽 정렬
+
+            // 텍스트가 여러 줄로 표시되도록 설정
+            setSingleLine(false)
+
+            // 최소/최대 폭 설정 (필요에 따라 조정 가능)
+            maxWidth = 800  // 메시지 최대 너비
+            minWidth = 200  // 메시지 최소 너비
+        }
+
+        val layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,  // 텍스트에 맞게 높이 조정
+            LinearLayout.LayoutParams.WRAP_CONTENT   // 텍스트에 맞게 너비 조정
+        ).apply {
+            gravity = Gravity.START // 오른쪽 정렬
+            setMargins(16, 16, 16, 16) // 메시지 간격 추가
+        }
+
+        binding.messageContainer.addView(textView, layoutParams)
+
+        binding.translationSubtitleScrollView.post {
+            binding.translationSubtitleScrollView.fullScroll(ScrollView.FOCUS_DOWN)
+        }
     }
 
 }
