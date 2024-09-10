@@ -52,12 +52,18 @@ extension TabBarViewController: SignalClientDelegate {
         print("Received remote sdp")
         CallService.shared.webRTCClient.set(remoteSdp: sdp) { (error) in
             if sdp.type == .offer {
+                CallService.shared.speakerOn()
+                CallService.shared.playSound("CallingBell")
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Call", message: sender, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Refuse", style: .destructive, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Refuse", style: .destructive, handler: { action in
+                        CallService.shared.player?.stop()
+                        CallService.shared.speakerOff()
+                    }))
                     alert.addAction(UIAlertAction(title: "Accept", style: .default, handler: { action in
                         UserManager.setData(value: sender, key: .receiver)
                         self.acceptCall(sender: sender)
+                        CallService.shared.speakerOff()
                     }))
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -78,6 +84,7 @@ extension TabBarViewController: SignalClientDelegate {
                 message.data = .sdp(SessionDescription(from: sdp))
                 CallService.shared.signalClient.send(message: message)
             }
+            CallService.shared.playSound("CallingBell")
             DispatchQueue.main.async {
                 ConnectingView.shared.setName(name: UserManager.getData(type: String.self, forKey: .receiver)!)
                 ConnectingView.shared.show()
@@ -121,6 +128,7 @@ extension TabBarViewController: WebRTCClientDelegate {
         print("change connection state : \(state)")
         switch state {
         case .connected:
+            CallService.shared.player?.stop()
             DispatchQueue.main.async { [self] in
                 let connectionVC = ConnectionViewController()
                 connectionVC.setName(name: UserManager.getData(type: String.self, forKey: .receiver)!)

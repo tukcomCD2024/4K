@@ -183,9 +183,10 @@ class ConnectionViewController: UIViewController {
     
     @objc func pressedTransBtn() {
         let sttVC = STTViewController.shared
-        sttVC.reinit(lang: UserManager.getData(type: String.self, forKey: .language)!)
-        sttVC.modalPresentationStyle = .automatic
+        sttVC.reinit(lang: UserManager.getData(type: String.self, forKey: .language)!, callerName: Names.first!)
+        sttVC.modalPresentationStyle = .fullScreen
         present(sttVC, animated: true,completion: nil)
+//        present(UINavigationController(rootViewController: sttVC), animated: true)
     }
     func setName(name:String){
         Names.removeAll()
@@ -229,6 +230,8 @@ extension ConnectionViewController: UICollectionViewDelegate {
                 return
             }
             CallService.shared.webRTCClient.showVideo()
+            CallService.shared.webRTCClient.speakerOn()
+            self.speakerBtn.isSelected.toggle()
             DispatchQueue.main.async {
                 let videoVC = self.videoVC
                 //        videoVC.modalPresentationStyle = .fullScreen

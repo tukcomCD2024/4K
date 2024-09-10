@@ -21,6 +21,7 @@
 		940C25882B7A89AB00E069D0 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25822B7A89AB00E069D0 /* SignalingClient.swift */; };
 		940C258A2B7A8FA900E069D0 /* CallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25892B7A8FA900E069D0 /* CallService.swift */; };
 		9410C9402C87067A00B006A7 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C93F2C87067A00B006A7 /* VideoViewController.swift */; };
+		9410C9442C90468E00B006A7 /* CallingBell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9410C9432C90468E00B006A7 /* CallingBell.mp3 */; };
 		941C657E2C69D5BB002BA61E /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941C657D2C69D5BB002BA61E /* ConnectingView.swift */; };
 		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
 		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
@@ -68,6 +69,7 @@
 		940C25822B7A89AB00E069D0 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		940C25892B7A8FA900E069D0 /* CallService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallService.swift; sourceTree = "<group>"; };
 		9410C93F2C87067A00B006A7 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		9410C9432C90468E00B006A7 /* CallingBell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CallingBell.mp3; sourceTree = "<group>"; };
 		941C657D2C69D5BB002BA61E /* ConnectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingView.swift; sourceTree = "<group>"; };
 		94470A922B7163E900F0A942 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		94470A942B71680100F0A942 /* SigninService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninService.swift; sourceTree = "<group>"; };
@@ -155,6 +157,22 @@
 			path = WebSocketProvider;
 			sourceTree = "<group>";
 		};
+		9410C9412C90463E00B006A7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				9410C9422C90466300B006A7 /* Sound */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		9410C9422C90466300B006A7 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				9410C9432C90468E00B006A7 /* CallingBell.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		94470A912B71157C00F0A942 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +214,7 @@
 		945CF9792B67E1CD00396E4E /* Ringo */ = {
 			isa = PBXGroup;
 			children = (
+				9410C9412C90463E00B006A7 /* Resource */,
 				94C3E53F2C3397FF00EBF588 /* JWT */,
 				940C256A2B79EC5700E069D0 /* WebRTC */,
 				94470A912B71157C00F0A942 /* Screens */,
@@ -295,6 +314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9410C9442C90468E00B006A7 /* CallingBell.mp3 in Resources */,
 				945CF9872B67E1CE00396E4E /* LaunchScreen.storyboard in Resources */,
 				945CF9842B67E1CE00396E4E /* Assets.xcassets in Resources */,
 			);
