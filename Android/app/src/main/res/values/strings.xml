@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">front-end_android</string>
+    <string name="app_name">Ringo</string>
 
     <!-- Activity_Login -->
     <string name="sign_in">
