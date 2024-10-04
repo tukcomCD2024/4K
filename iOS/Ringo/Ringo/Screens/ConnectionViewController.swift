@@ -155,24 +155,22 @@ class ConnectionViewController: UIViewController {
     }
     
     @objc func pressedMuteBtn() {
+        muteBtn.isSelected.toggle()
         switch self.muteBtn.state {
         case .selected:
-            muteBtn.isSelected.toggle()
-            CallService.shared.webRTCClient.unmuteAudio()
-        default:
-            muteBtn.isSelected.toggle()
             CallService.shared.webRTCClient.muteAudio()
+        default:
+            CallService.shared.webRTCClient.unmuteAudio()
         }
     }
     
     @objc func pressedSpeakerBtn() {
+        speakerBtn.isSelected.toggle()
         switch self.speakerBtn.state {
         case .selected:
-            speakerBtn.isSelected.toggle()
-            CallService.shared.webRTCClient.speakerOff()
-        default:
-            speakerBtn.isSelected.toggle()
             CallService.shared.webRTCClient.speakerOn()
+        default:
+            CallService.shared.webRTCClient.speakerOff()
         }
     }
     
@@ -182,6 +180,16 @@ class ConnectionViewController: UIViewController {
     }
     
     @objc func pressedTransBtn() {
+//        switch self.translateBtn.state {
+//        case .selected:
+//            translateBtn.isSelected.toggle()
+//            debugPrint("stt stop")
+//            stt.stop()
+//        default:
+//            translateBtn.isSelected.toggle()
+//            debugPrint("stt start")
+//            stt.start()
+//        }
         let sttVC = STTViewController.shared
         sttVC.reinit(lang: UserManager.getData(type: String.self, forKey: .language)!, callerName: Names.first!)
         sttVC.modalPresentationStyle = .fullScreen

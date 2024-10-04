@@ -17,7 +17,8 @@ class SigninSercive {
     
     func login(email: String, password: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/member/login" //통신할 API 주소
+//        let url = "https://4kringo.shop:8080/member/login" //통신할 API 주소
+        let url = "http://192.168.21.187:7800/member/login" //통신할 API 주소
         
         //HTTP Headers : 요청 헤더
         let header : HTTPHeaders = ["Content-Type" : "application/json"]
@@ -61,7 +62,8 @@ class SigninSercive {
     
     func refresh(token: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/member/reissue" //통신할 API 주소
+//        let url = "https://4kringo.shop:8080/member/reissue" //통신할 API 주소
+        let url = "http://192.168.21.187:7800/member/reissue" //통신할 API 주소
         
         //HTTP Headers : 요청 헤더
         let header : HTTPHeaders = [
@@ -109,7 +111,8 @@ class SigninSercive {
     
     func signup(email: String, password: String, name: String, languageCode: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/member/signup" //통신할 API 주소
+//        let url = "https://4kringo.shop:8080/member/signup" //통신할 API 주소
+        let url = "http://192.168.21.187:7800/member/signup" //통신할 API 주소
         
         //HTTP Headers : 요청 헤더
         let header : HTTPHeaders = ["Content-Type" : "application/json"]
@@ -149,7 +152,8 @@ class SigninSercive {
     
     func signout(refreshToken: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/member/logout" //통신할 API 주소
+//        let url = "https://4kringo.shop:8080/member/logout" //통신할 API 주소
+        let url = "http://192.168.21.187:7800/member/logout" //통신할 API 주소
         
         //HTTP Headers : 요청 헤더
         let header : HTTPHeaders = [
@@ -185,7 +189,8 @@ class SigninSercive {
     
     func update(email: String, password: String, newPassword: String, name: String, languageCode: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/member/update" //통신할 API 주소
+//        let url = "https://4kringo.shop:8080/member/update" //통신할 API 주소
+        let url = "http://192.168.21.187:7800/member/update" //통신할 API 주소
         
         //HTTP Headers : 요청 헤더
         let header : HTTPHeaders = ["Content-Type" : "application/json"]
@@ -227,7 +232,8 @@ class SigninSercive {
     
     func delete(email: String, password: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/member/delete" //통신할 API 주소
+//        let url = "https://4kringo.shop:8080/member/delete" //통신할 API 주소
+        let url = "http://192.168.21.187:7800/member/delete" //통신할 API 주소
         
         //HTTP Headers : 요청 헤더
         let header : HTTPHeaders = ["Content-Type" : "application/json"]

@@ -23,6 +23,7 @@
 		9410C9402C87067A00B006A7 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C93F2C87067A00B006A7 /* VideoViewController.swift */; };
 		9410C9442C90468E00B006A7 /* CallingBell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9410C9432C90468E00B006A7 /* CallingBell.mp3 */; };
 		9410C9462C90580800B006A7 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C9452C90580800B006A7 /* Canvas.swift */; };
+		9410C9482C9934BA00B006A7 /* STT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C9472C9934BA00B006A7 /* STT.swift */; };
 		941C657E2C69D5BB002BA61E /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941C657D2C69D5BB002BA61E /* ConnectingView.swift */; };
 		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
 		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
@@ -71,6 +72,7 @@
 		9410C93F2C87067A00B006A7 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9410C9432C90468E00B006A7 /* CallingBell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CallingBell.mp3; sourceTree = "<group>"; };
 		9410C9452C90580800B006A7 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		9410C9472C9934BA00B006A7 /* STT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STT.swift; sourceTree = "<group>"; };
 		941C657D2C69D5BB002BA61E /* ConnectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingView.swift; sourceTree = "<group>"; };
 		94470A922B7163E900F0A942 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		94470A942B71680100F0A942 /* SigninService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninService.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				94470A942B71680100F0A942 /* SigninService.swift */,
 				940C25652B74EF4D00E069D0 /* FriendService.swift */,
 				94FB0A6C2BAAD64A005A4915 /* TTS.swift */,
+				9410C9472C9934BA00B006A7 /* STT.swift */,
 				9410C9452C90580800B006A7 /* Canvas.swift */,
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
 				945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */,
@@ -351,6 +354,7 @@
 				94FB0A6B2B858F66005A4915 /* STTViewController.swift in Sources */,
 				945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */,
 				945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */,
+				9410C9482C9934BA00B006A7 /* STT.swift in Sources */,
 				9410C9402C87067A00B006A7 /* VideoViewController.swift in Sources */,
 				94C3E5432C351A6A00EBF588 /* UserManager.swift in Sources */,
 				94470A932B7163E900F0A942 /* Model.swift in Sources */,
@@ -525,7 +529,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tukcomCD2024.Ringo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -560,7 +564,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tukcomCD2024.Ringo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

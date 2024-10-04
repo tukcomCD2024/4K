@@ -124,9 +124,9 @@ class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
                     DispatchQueue.global().async {
                         do {
                             try self.startRecording()
-                            self.textView2.text = "Translate start"
+                            debugPrint("Translate start")
                         } catch {
-                            self.textView2.text = "Recognition Not Available"
+                            debugPrint("Recognition Not Available")
                         }
                     }
                 case .denied:
@@ -213,10 +213,6 @@ class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         audioEngine.prepare()
         try audioEngine.start()
-        
-        // Let the user know to start talking.
-        textView.text = "..."
-        textView2.text = "..."
     }
     
     // MARK: SFSpeechRecognizerDelegate
