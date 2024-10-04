@@ -21,6 +21,9 @@
 		940C25882B7A89AB00E069D0 /* SignalingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25822B7A89AB00E069D0 /* SignalingClient.swift */; };
 		940C258A2B7A8FA900E069D0 /* CallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940C25892B7A8FA900E069D0 /* CallService.swift */; };
 		9410C9402C87067A00B006A7 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C93F2C87067A00B006A7 /* VideoViewController.swift */; };
+		9410C9442C90468E00B006A7 /* CallingBell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9410C9432C90468E00B006A7 /* CallingBell.mp3 */; };
+		9410C9462C90580800B006A7 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C9452C90580800B006A7 /* Canvas.swift */; };
+		9410C9482C9934BA00B006A7 /* STT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9410C9472C9934BA00B006A7 /* STT.swift */; };
 		941C657E2C69D5BB002BA61E /* ConnectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941C657D2C69D5BB002BA61E /* ConnectingView.swift */; };
 		94470A8A2B71050700F0A942 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A892B71050700F0A942 /* Alamofire */; };
 		94470A8D2B710A3100F0A942 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 94470A8C2B710A3100F0A942 /* Starscream */; };
@@ -33,7 +36,6 @@
 		945603172B6AC2D3002F4B33 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603162B6AC2D3002F4B33 /* RecentsViewController.swift */; };
 		945603192B6AC365002F4B33 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603182B6AC365002F4B33 /* AccountViewController.swift */; };
 		9456031D2B6BF44A002F4B33 /* FriendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */; };
-		945603212B6D2F06002F4B33 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603202B6D2F06002F4B33 /* Canvas.swift */; };
 		945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */; };
 		945CF97B2B67E1CD00396E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97A2B67E1CD00396E4E /* AppDelegate.swift */; };
 		945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945CF97C2B67E1CD00396E4E /* SceneDelegate.swift */; };
@@ -68,6 +70,9 @@
 		940C25822B7A89AB00E069D0 /* SignalingClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingClient.swift; sourceTree = "<group>"; };
 		940C25892B7A8FA900E069D0 /* CallService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallService.swift; sourceTree = "<group>"; };
 		9410C93F2C87067A00B006A7 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		9410C9432C90468E00B006A7 /* CallingBell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CallingBell.mp3; sourceTree = "<group>"; };
+		9410C9452C90580800B006A7 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		9410C9472C9934BA00B006A7 /* STT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STT.swift; sourceTree = "<group>"; };
 		941C657D2C69D5BB002BA61E /* ConnectingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingView.swift; sourceTree = "<group>"; };
 		94470A922B7163E900F0A942 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		94470A942B71680100F0A942 /* SigninService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninService.swift; sourceTree = "<group>"; };
@@ -77,7 +82,6 @@
 		945603162B6AC2D3002F4B33 /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
 		945603182B6AC365002F4B33 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		9456031C2B6BF44A002F4B33 /* FriendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestViewController.swift; sourceTree = "<group>"; };
-		945603202B6D2F06002F4B33 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
 		945603222B6D31D9002F4B33 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		945CF9772B67E1CD00396E4E /* Ringo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ringo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		945CF97A2B67E1CD00396E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,9 +159,26 @@
 			path = WebSocketProvider;
 			sourceTree = "<group>";
 		};
+		9410C9412C90463E00B006A7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				9410C9422C90466300B006A7 /* Sound */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		9410C9422C90466300B006A7 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				9410C9432C90468E00B006A7 /* CallingBell.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		94470A912B71157C00F0A942 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				94FB0A6A2B858F66005A4915 /* STTViewController.swift */,
 				940C25632B73D20900E069D0 /* ConnectionCollectionViewCell.swift */,
 				94470A962B717DC300F0A942 /* ConnectionViewController.swift */,
 				9410C93F2C87067A00B006A7 /* VideoViewController.swift */,
@@ -196,6 +217,7 @@
 		945CF9792B67E1CD00396E4E /* Ringo */ = {
 			isa = PBXGroup;
 			children = (
+				9410C9412C90463E00B006A7 /* Resource */,
 				94C3E53F2C3397FF00EBF588 /* JWT */,
 				940C256A2B79EC5700E069D0 /* WebRTC */,
 				94470A912B71157C00F0A942 /* Screens */,
@@ -207,9 +229,9 @@
 				94C3E5462C4E26AE00EBF588 /* Language.swift */,
 				94470A942B71680100F0A942 /* SigninService.swift */,
 				940C25652B74EF4D00E069D0 /* FriendService.swift */,
-				94FB0A6A2B858F66005A4915 /* STTViewController.swift */,
 				94FB0A6C2BAAD64A005A4915 /* TTS.swift */,
-				945603202B6D2F06002F4B33 /* Canvas.swift */,
+				9410C9472C9934BA00B006A7 /* STT.swift */,
+				9410C9452C90580800B006A7 /* Canvas.swift */,
 				945CF9832B67E1CE00396E4E /* Assets.xcassets */,
 				945CF9852B67E1CE00396E4E /* LaunchScreen.storyboard */,
 				945CF9882B67E1CE00396E4E /* Info.plist */,
@@ -295,6 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9410C9442C90468E00B006A7 /* CallingBell.mp3 in Resources */,
 				945CF9872B67E1CE00396E4E /* LaunchScreen.storyboard in Resources */,
 				945CF9842B67E1CE00396E4E /* Assets.xcassets in Resources */,
 			);
@@ -307,7 +330,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				945603212B6D2F06002F4B33 /* Canvas.swift in Sources */,
 				94470A972B717DC300F0A942 /* ConnectionViewController.swift in Sources */,
 				945603132B6AC07D002F4B33 /* TabBarViewController.swift in Sources */,
 				94FFD49D2C57BB7C00C60F05 /* FriendRequestListTableViewCell.swift in Sources */,
@@ -315,6 +337,7 @@
 				940C25852B7A89AB00E069D0 /* NativeWebSocket.swift in Sources */,
 				945CF97F2B67E1CD00396E4E /* ViewController.swift in Sources */,
 				940C25642B73D20900E069D0 /* ConnectionCollectionViewCell.swift in Sources */,
+				9410C9462C90580800B006A7 /* Canvas.swift in Sources */,
 				94FFD4A12C60968100C60F05 /* EditProfileViewController.swift in Sources */,
 				94FB0A6D2BAAD64A005A4915 /* TTS.swift in Sources */,
 				940C257A2B7A899500E069D0 /* IceCandidate.swift in Sources */,
@@ -331,6 +354,7 @@
 				94FB0A6B2B858F66005A4915 /* STTViewController.swift in Sources */,
 				945603232B6D31D9002F4B33 /* ContactsTableViewCell.swift in Sources */,
 				945CF97D2B67E1CD00396E4E /* SceneDelegate.swift in Sources */,
+				9410C9482C9934BA00B006A7 /* STT.swift in Sources */,
 				9410C9402C87067A00B006A7 /* VideoViewController.swift in Sources */,
 				94C3E5432C351A6A00EBF588 /* UserManager.swift in Sources */,
 				94470A932B7163E900F0A942 /* Model.swift in Sources */,
@@ -486,12 +510,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L2MRZPUQGZ;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = L2MRZPUQGZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ringo/Info.plist;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for use device's mic";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need Camera Access";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need Mic Access";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition will be used to determine which words you speak into the device's microphone.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -501,9 +529,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tukcomCD2024.Ringo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = dev_Ringo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -515,12 +545,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L2MRZPUQGZ;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = L2MRZPUQGZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Ringo/Info.plist;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for use device's mic";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need Camera Access";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need Mic Access";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Speech recognition will be used to determine which words you speak into the device's microphone.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -530,9 +564,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tukcomCD2024.Ringo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = appstore_Ringo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

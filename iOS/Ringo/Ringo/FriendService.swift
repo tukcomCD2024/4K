@@ -16,7 +16,8 @@ class FriendService {
     
     func loadFriendsList(email: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/friendship/findByUserIdAndStatusOrFriendIdAndStatus"
+//        let url = "https://4kringo.shop:8080/friendship/findByUserIdAndStatusOrFriendIdAndStatus"
+        let url = "http://192.168.21.187:7800/friendship/findByUserIdAndStatusOrFriendIdAndStatus"
         
         let header : HTTPHeaders = [
             "Content-Type" : "application/json"
@@ -48,7 +49,8 @@ class FriendService {
     }
     func loadRequestList(email: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/friendship/findByFriendIdAndStatus"
+//        let url = "https://4kringo.shop:8080/friendship/findByFriendIdAndStatus"
+        let url = "http://192.168.21.187:7800/friendship/findByFriendIdAndStatus"
         
         let header : HTTPHeaders = [
             "Content-Type" : "application/json"
@@ -95,7 +97,8 @@ class FriendService {
     
     func sendFriendRequest(sender: String, receiver: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/friendship/sendFriendRequest"
+//        let url = "https://4kringo.shop:8080/friendship/sendFriendRequest"
+        let url = "http://192.168.21.187:7800/friendship/sendFriendRequest"
         
         let header : HTTPHeaders = ["Content-Type" : "application/json"]
         let body : Parameters = [
@@ -127,7 +130,8 @@ class FriendService {
     }
     func acceptRequest(sender: String, receiver: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/friendship/acceptFriendRequestById"
+//        let url = "https://4kringo.shop:8080/friendship/acceptFriendRequestById"
+        let url = "http://192.168.21.187:7800/friendship/acceptFriendRequestById"
         
         let header : HTTPHeaders = ["Content-Type" : "application/json"]
         let body : Parameters = [
@@ -159,7 +163,8 @@ class FriendService {
     }
     func rejectRequest(sender: String, receiver: String, completion: @escaping(NetworkResult<Any>) -> Void)
     {
-        let url = "https://4kringo.shop:8080/friendship/rejectFriendRequestById"
+//        let url = "https://4kringo.shop:8080/friendship/rejectFriendRequestById"
+        let url = "http://192.168.21.187:7800/friendship/rejectFriendRequestById"
         
         let header : HTTPHeaders = ["Content-Type" : "application/json"]
         let body : Parameters = [

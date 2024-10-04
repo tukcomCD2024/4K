@@ -21,10 +21,11 @@ class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private let audioEngine = AVAudioEngine()
     
-    var textView = UITextView()
-    var textView2 = UITextView()
-    
-    var recordButton = UIButton()
+    let backBtn = UIButton()
+    let name = UILabel()
+    let textView = UITextView()
+    let textView2 = UITextView()
+//    let recordButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +36,27 @@ class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     func setUpView() {
+        view.addSubview(backBtn)
+        view.addSubview(name)
         view.addSubview(textView)
         view.addSubview(textView2)
-        view.addSubview(recordButton)
+//        view.addSubview(recordButton)
     }
     
     func setUpValue() {
         
         view.backgroundColor = .systemBackground
+        
+        backBtn.configuration = UIButton.Configuration.plain()
+        backBtn.configurationUpdateHandler = { btn in
+            btn.configuration?.image = .init(systemName: "chevron.backward")
+            btn.configuration?.title = "Back"
+            btn.configuration?.baseBackgroundColor = .systemBlue
+            btn.addTarget(self, action: #selector(self.backButtonTapped), for: .touchUpInside)
+        }
+
+        name.text = "Name"
+        name.font = .systemFont(ofSize: 20)
         
         textView.font = .systemFont(ofSize: 20)
         textView.layer.cornerRadius = 25
@@ -55,30 +69,41 @@ class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
         textView2.backgroundColor = .systemBlue
         textView2.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
-        recordButton.configuration = .plain()
-        recordButton.isEnabled = false
-        recordButton.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
-        recordButton.setTitle("말하기", for: .disabled)
-        recordButton.titleLabel?.font = .systemFont(ofSize: 50)
+//        recordButton.configuration = .plain()
+//        recordButton.isEnabled = false
+//        recordButton.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
+//        recordButton.setTitle("말하기", for: .disabled)
+//        recordButton.titleLabel?.font = .systemFont(ofSize: 50)
     }
     
     func setConstraints() {
-        textView.snp.makeConstraints { make in
+        
+        backBtn.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.height.equalToSuperview().multipliedBy(0.03)
+        }
+        name.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(backBtn.snp.centerY)
+        }
+        textView.snp.makeConstraints { make in
+            make.top.equalTo(backBtn.snp.bottom).offset(20)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.trailing.equalTo(view.safeAreaLayoutGuide).inset(120)
-            make.bottom.equalTo(view.snp.centerY).offset(-35)
+            make.bottom.equalTo(view.snp.centerY).offset(15)
         }
         textView2.snp.makeConstraints { make in
             make.top.equalTo(textView.snp.bottom).offset(20)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(120)
             make.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.bottom.equalTo(recordButton.snp.top).offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
-        recordButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(30)
-            make.centerX.equalTo(view.center.x)
-        }
+//        recordButton.snp.makeConstraints { make in
+//            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(30)
+//            make.centerX.equalTo(view.center.x)
+//        }
     }
     
     override public func viewDidAppear(_ animated: Bool) {
@@ -95,21 +120,31 @@ class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
             OperationQueue.main.addOperation {
                 switch authStatus {
                 case .authorized:
-                        self.recordButton.isEnabled = true
+//                        self.recordButton.isEnabled = true
+                    DispatchQueue.global().async {
+                        do {
+                            try self.startRecording()
+                            debugPrint("Translate start")
+                        } catch {
+                            debugPrint("Recognition Not Available")
+                        }
+                    }
                 case .denied:
-                    self.recordButton.isEnabled = false
-                    self.recordButton.setTitle("User denied access to speech recognition", for: .disabled)
+//                    self.recordButton.isEnabled = false
+//                    self.recordButton.setTitle("User denied access to speech recognition", for: .disabled)
+                    self.textView2.text = "User denied access to speech recognition"
                     
                 case .restricted:
-                    self.recordButton.isEnabled = false
-                    self.recordButton.setTitle("Speech recognition restricted on this device", for: .disabled)
-                    
+//                    self.recordButton.isEnabled = false
+//                    self.recordButton.setTitle("Speech recognition restricted on this device", for: .disabled)
+                    self.textView2.text = "Speech recognition restricted on this device"
                 case .notDetermined:
-                    self.recordButton.isEnabled = false
-                    self.recordButton.setTitle("Speech recognition not yet authorized", for: .disabled)
-                    
+//                    self.recordButton.isEnabled = false
+//                    self.recordButton.setTitle("Speech recognition not yet authorized", for: .disabled)
+                    self.textView2.text = "Speech recognition not yet authorized"
                 default:
-                    self.recordButton.isEnabled = false
+//                    self.recordButton.isEnabled = false
+                    break
                 }
             }
         }
@@ -165,8 +200,8 @@ class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
                 
-                self.recordButton.isEnabled = true
-                self.recordButton.setTitle("말하기", for: [])
+//                self.recordButton.isEnabled = true
+//                self.recordButton.setTitle("말하기", for: [])
             }
         }
 
@@ -178,21 +213,19 @@ class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         audioEngine.prepare()
         try audioEngine.start()
-        
-        // Let the user know to start talking.
-        textView.text = "..."
-        textView2.text = "..."
     }
     
     // MARK: SFSpeechRecognizerDelegate
     
     public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
-            recordButton.isEnabled = true
-            recordButton.setTitle("Translate start", for: [])
+//            recordButton.isEnabled = true
+//            recordButton.setTitle("Translate start", for: [])
+            self.textView2.text = "Translate start"
         } else {
-            recordButton.isEnabled = false
-            recordButton.setTitle("Recognition Not Available", for: .disabled)
+//            recordButton.isEnabled = false
+//            recordButton.setTitle("Recognition Not Available", for: .disabled)
+            self.textView2.text = "Recognition Not Available"
         }
     }
     
@@ -202,22 +235,28 @@ class STTViewController: UIViewController, SFSpeechRecognizerDelegate {
         if audioEngine.isRunning {
             audioEngine.stop()
             recognitionRequest?.endAudio()
-            recordButton.isEnabled = false
-            recordButton.setTitle("Stopping", for: .disabled)
+//            recordButton.isEnabled = false
+//            recordButton.setTitle("Stopping", for: .disabled)
         } else {
             do {
                 try startRecording()
-                recordButton.setTitle("Translate stop", for: [])
+//                recordButton.setTitle("Translate stop", for: [])
             } catch {
-                recordButton.setTitle("Recording Not Available", for: [])
+//                recordButton.setTitle("Recording Not Available", for: [])
             }
         }
     }
     
-    func reinit(lang: String){
+    func reinit(lang: String, callerName: String){
         speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: lang))!
+        name.text = callerName
     }
     
+    @objc func backButtonTapped(){
+        audioEngine.stop()
+        recognitionRequest?.endAudio()
+        dismiss(animated: true)
+    }
 }
 // MARK: - canvas 이용하기
 import SwiftUI

@@ -10,9 +10,9 @@ import Foundation
 import WebRTC
 
 // Set this to the machine's address which runs the signaling server. Do not use 'localhost' or '127.0.0.1'
-//fileprivate let defaultSignalingServerUrl = URL(string: "ws://localhost:8080/signal")!
+fileprivate let defaultSignalingServerUrl = URL(string: "ws://192.168.21.187:7800/signal")!
 //fileprivate let defaultSignalingServerUrl = URL(string: "ws://192.168.0.7:7080/signal")!
-fileprivate let defaultSignalingServerUrl = URL(string: "wss://4kringo.shop:8080/signal")!
+//fileprivate let defaultSignalingServerUrl = URL(string: "wss://4kringo.shop:8080/signal")!
 
 // We use Google's public stun servers. For production apps you should deploy your own stun/turn servers.
 fileprivate let stunServers = ["stun:stun.l.google.com:19302",

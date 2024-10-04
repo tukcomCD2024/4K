@@ -75,6 +75,7 @@ final class ConnectingView: UIView {
     
     @objc func onPressHangUpBtn(_ sender: UIButton) {
         CallService.shared.webRTCClient.endCall()
+        CallService.shared.player?.stop()
     }
     
     required init?(coder: NSCoder) {

@@ -20,10 +20,9 @@
 		</dict>
 	</dict>
 	<key>UIBackgroundModes</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Need Mic Access</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Need Camera Access</string>
+	<array>
+		<string>audio</string>
+		<string>voip</string>
+	</array>
 </dict>
 </plist>

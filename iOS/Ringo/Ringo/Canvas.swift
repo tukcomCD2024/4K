@@ -2,9 +2,8 @@
 //  Canvas.swift
 //  Ringo
 //
-//  Created by 강진혁 on 2/2/24.
+//  Created by 강진혁 on 9/10/24.
 //
-
 // canvas 이용하기
 import SwiftUI
 
